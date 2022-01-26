@@ -16,12 +16,11 @@ import os
 import re
 import numpy as np
 import pydub
-import json
 from math import floor, ceil
 from pydub import AudioSegment
+import librosa
 
 #import subprocess
-#import librosa
 #import logging
 from libMyTTS import *
 
@@ -29,7 +28,7 @@ from libMyTTS import *
 
 
 def play_segment_text(idx, song, segments, text, speed):
-    if i < len(text):
+    if idx < len(text):
         print(f"{{{speakers[i]}}} {text[i]}")
     play_segment(idx, song, segments, speed)
 
@@ -47,6 +46,7 @@ def load_textfile(filename):
     text = []
     speakers = []
     speaker_id_pattern = re.compile(r'{(\w+)}')
+    current_speaker = "unknown"
     with open(filename, 'r') as f:
         for l in f.readlines():
             l = l.strip()
@@ -67,7 +67,7 @@ def load_textfile(filename):
 if __name__ == "__main__":
     PLAYER = get_player_name()
     
-    rep, filename = os.path.split(sys.argv[1])
+    rep, filename = os.path.split(os.path.abspath(sys.argv[1]))
     recording_id = filename.split(os.path.extsep)[0]
     recording_id = recording_id.replace('&', '_')
     print(recording_id)
@@ -79,11 +79,13 @@ if __name__ == "__main__":
     
     text = []
     speakers = []
-    current_speaker = "unknown"
-    speaker_id_pattern = re.compile(r'{(\w+)}')
-    if os.path.exists(text_filename):
-        text, speakers = load_textfile(text_filename)
-        textfile_mtime = os.path.getmtime(text_filename)
+    #current_speaker = "unknown"
+    #speaker_id_pattern = re.compile(r'{(\w+)}')
+    if not os.path.exists(text_filename):
+        open(text_filename, 'a').close()
+    text, speakers = load_textfile(text_filename)
+    textfile_mtime = os.path.getmtime(text_filename)
+    
     
     segments = []
     if os.path.exists(split_filename):
