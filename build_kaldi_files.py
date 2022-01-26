@@ -6,7 +6,8 @@
  Last modified: 26-01-2022
  
  TODO:
-    Detect abbreviation and add them to lexicon
+    Detect and prompt for capitalized names
+    Detect and prompt hyphenated words
 """
 
 

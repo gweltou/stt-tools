@@ -6,7 +6,7 @@
  Author:        Gweltaz Duval-Guennoc
  Last modified: 26-01-2022
  
- Common functions for TTS data parsing and cleaning
+ Common functions for audio file playback
 
 """
 
