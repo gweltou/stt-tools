@@ -20,6 +20,8 @@ from libMyTTS import *
 
 
 acronym_filename = "acronym_lexicon.txt"
+capitalised_filename = "capitalised.txt"
+joined_filname = "joined.txt"
 
 
 speakers_gender = {
@@ -33,7 +35,7 @@ speakers_gender = {
     'jean-mari_ollivier': 'm',
 }
     
-punctuation = (',', '.', ';', '?', '!', ':', '«', '»', '"', '”', '(', ')', '…', '–', '/')
+
 
 w2f = {
     'a'     :   'A',
@@ -232,6 +234,7 @@ def parse_data(rep):
             cleaned_line = cleaned_line.replace('’', "'")
             cleaned_line = cleaned_line.replace('ʼ', "'")
             cleaned_line = cleaned_line.replace('-', ' ')   # Split words like "sav-heol"
+            cleaned_line = cleaned_line.replace('/', ' ')
             cleaned_line = cleaned_line.strip()
             if cleaned_line:
                 speaker_ids.append(speaker_id)

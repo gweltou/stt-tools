@@ -6,7 +6,7 @@
  Author:        Gweltaz Duval-Guennoc
  Last modified: 26-01-2022
  
- Common functions for audio file playback
+ Common functions for audio file playback and data parsing
 
 """
 
@@ -17,6 +17,37 @@ from pydub import AudioSegment
 from pydub.utils import get_player_name
 from tempfile import NamedTemporaryFile
 import subprocess
+
+
+
+punctuation = (',', '.', ';', '?', '!', ':', '«', '»', '"', '”', '(', ')', '…', '–', '/')
+
+
+
+def filter_out(text, symbols):
+    new_text = ""
+    for l in text:
+        if not l in symbols: new_text += l
+    return ' '.join(new_text.split()) # Prevent multi spaces
+
+
+
+def tokenize(line):
+    line = filter_out(line.lower(), punctuation)
+    line = line.replace('‘', "'")
+    line = line.replace('’', "'")
+    line = line.replace('ʼ', "'")
+    line = line.replace('-', ' ')   # Split words like "sav-heol"
+    line = line.replace('/', ' ')
+    tokens = []
+    for t in line.split():
+        if t.startswith("'"):
+            tokens.append(t[1:])
+        elif t.endswith("'"):
+            tokens.append(t[:-1])
+        else:
+            tokens.append(t) 
+    return tokens
 
 
 
@@ -33,6 +64,7 @@ def load_segments(filename):
     return segments
 
 
+
 def play_segment(i, song, segments, speed):
     start = int(segments[i][0])
     stop = int(segments[i][1])
@@ -45,6 +77,7 @@ def get_audiofile_info(filename):
     r = subprocess.check_output(['ffprobe', '-hide_banner', '-v', 'panic', '-show_streams', '-of', 'json', filename])
     r = json.loads(r)
     return r['streams'][0]
+
 
     
 def play_with_ffplay(seg, speed=1.0):

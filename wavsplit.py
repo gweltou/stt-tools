@@ -4,24 +4,23 @@
 
 """
  Author:        Gweltaz Duval-Guennoc
- Last modified: 26-01-2022
+ Last modified: 27-01-2022
  
  TODO:
-    
+    Add hunspell support
 """
 
 
 import sys
 import os
 import re
-import numpy as np
+#import numpy as np
 import pydub
 from math import floor, ceil
 from pydub import AudioSegment
 import librosa
-
-#import subprocess
-#import logging
+from colorama import Fore
+import hunspell # https://www.systutorials.com/docs/linux/man/4-hunspell/
 from libMyTTS import *
 
 
@@ -76,22 +75,18 @@ if __name__ == "__main__":
     split_filename = os.path.join(rep, os.path.extsep.join((recording_id, 'split')))
     text_filename = os.path.join(rep, os.path.extsep.join((recording_id, 'txt')))
     
-    
-    text = []
-    speakers = []
-    #current_speaker = "unknown"
-    #speaker_id_pattern = re.compile(r'{(\w+)}')
+    # Create text file if it doesn't exist
     if not os.path.exists(text_filename):
         open(text_filename, 'a').close()
+    text = []
+    speakers = []
     text, speakers = load_textfile(text_filename)
     textfile_mtime = os.path.getmtime(text_filename)
-    
     
     segments = []
     if os.path.exists(split_filename):
         print("split file exists")
         segments = load_segments(split_filename)
-            
     else:
         fileinfo = get_audiofile_info(sys.argv[1])
         #print(fileinfo)
@@ -158,7 +153,14 @@ if __name__ == "__main__":
             print("segments joined")
         elif x == 's':  # Save split data to disk
             save_segments(segments, split_filename) 
-        elif x == 'r':  # Reload text file
-            pass
+        elif x == 'h':  # Help
+            print(". or 'r'\tPlay current segment")
+            print("+ or 'n'\tGo to next segment and play")
+            print("- or 'p'\tGo back to previous segment and play")
+            print("*\tSpeed playback up")
+            print("*\tSlow playback down")
+            print("'d'\tDelete current segment")
+            print("'j'\tJoin current segment with previous one")
+            print("'q'\tQuit")
         elif x == 'q':
             running = False
