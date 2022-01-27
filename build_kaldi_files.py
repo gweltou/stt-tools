@@ -43,6 +43,7 @@ w2f = {
     'an'    :   'AN N',
     'b'     :   'B',
     'd'     :   'D',
+    'c'     :   'K',        # viCtor
     'ch'    :   'CH',       # CHomm
     "c'h"   :   'X',
     #'.c.'   :   'S E',      # al lizherenn 'C'
