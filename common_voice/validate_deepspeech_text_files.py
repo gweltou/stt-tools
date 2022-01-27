@@ -9,11 +9,12 @@
 
 
 import sys
+sys.path.append('..') # To import libMyTTS
+
 import os
 import re
 from colorama import Fore
-import hunspell # https://www.systutorials.com/docs/linux/man/4-hunspell/
-from libMyTTS import *
+import libMyTTS
 
 
 
@@ -29,12 +30,14 @@ def get_text_files(root):
 
 
 if __name__ == "__main__":
-
-    hs = hunspell.HunSpell('br_FR.dic', 'br_FR.aff')
+    hs = libMyTTS.get_dict()
+    corrected = libMyTTS.get_corrected()
+    capitalised = libMyTTS.get_capitalised()
     
     textfiles = get_text_files(sys.argv[1])
     speaker_id_pattern = re.compile(r'{([-\w]+)}')
     
+    num_errors = 0
     for file in textfiles:
         with open(file, 'r') as f:
             for line in f.readlines():
@@ -44,8 +47,26 @@ if __name__ == "__main__":
                     start, end = speaker_id_match.span()
                     line = line[:start] + line[end:]
                 if line.strip():
-                    print(line.strip())
-                    tokens = tokenize(line)
-                    tokens =  [Fore.RED + t + Fore.RESET if not hs.spell(t) and not hs.spell(t.capitalize()) else t for t in tokens]
-                    print("  -->", ' '.join(tokens))
+                    spell_error = False
+                    tokens = []
+                    first = True
+                    for token in libMyTTS.tokenize(line):
+                        if token in corrected:
+                            tokens.append(corrected[token])
+                            continue
+                        # Check for hyphenated words
+                        
+                        if token in capitalised:
+                            tokens.append(token.capitalize())
+                            continue
+                        if not hs.spell(token):
+                            spell_error = True
+                            tokens.append(Fore.RED + token + Fore.RESET)
+                        else:
+                            tokens.append(token)
+                    if spell_error:
+                        num_errors += 1
+                        print(' '.join(tokens), f"[{line.strip()}]")
+                        
+    print(f"{num_errors} lines with spelling errors")
             

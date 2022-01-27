@@ -96,6 +96,7 @@ w2f = {
     'v'     :   'V',
     'v.'    :   'O',        # beV
     'w'     :   'W',
+    'y'     :   'I',        # pennsYlvania
     'ya'    :   'IA',       # YAouank
     'ye'    :   'IE',       # YEzh
     'yo'    :   'IO',       # YOd

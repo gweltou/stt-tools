@@ -11,16 +11,56 @@
 """
 
 
+import os
 import json
 from pydub import AudioSegment
 #from pydub.playback import play
 from pydub.utils import get_player_name
 from tempfile import NamedTemporaryFile
 import subprocess
+import hunspell # https://www.systutorials.com/docs/linux/man/4-hunspell/
+
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+
+HS_DIC_PATH = os.path.join(ROOT, os.path.join("hunspell-dictionary", "br_FR.dic"))
+HS_AFF_PATH = os.path.join(ROOT, os.path.join("hunspell-dictionary", "br_FR.aff"))
+HS_ADD_PATH= os.path.join(ROOT, os.path.join("hunspell-dictionary", "add.txt"))
+
+CORRECTED_PATH = os.path.join(ROOT, "corrected.txt")
+CAPITALIZED_PATH = os.path.join(ROOT, "capitalised.txt")
+JOINED_PATH = os.path.join(ROOT, "joined.txt")
+
+
+punctuation = (',', '.', ';', '?', '!', ':', '«', '»', '"', '”', '“', '(', ')', '…', '–')
 
 
 
-punctuation = (',', '.', ';', '?', '!', ':', '«', '»', '"', '”', '(', ')', '…', '–', '/')
+def get_dict():
+    hs = hunspell.HunSpell(HS_DIC_PATH, HS_AFF_PATH)
+    with open(HS_ADD_PATH, 'r') as f:
+        for w in f.readlines():
+            hs.add(w.strip())
+    return hs
+
+
+
+def get_corrected():
+    corrected = dict()
+    with open(CORRECTED_PATH, 'r') as f:
+        for l in f.readlines():
+            k, v = l.strip().split('\t')
+            corrected[k] = v
+    return corrected
+
+
+
+def get_capitalised():
+    capitalised = set()
+    with open(CAPITALIZED_PATH, 'r') as f:
+        for l in f.readlines():
+            capitalised.add(l.strip().split()[0].lower())
+    return capitalised
 
 
 
