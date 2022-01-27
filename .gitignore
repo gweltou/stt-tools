@@ -1,4 +1,4 @@
 __pycache__/
 venv-hunspell/
 data/
-common_voice/cv-corpus*/
+common_voice/cv-corpus*
