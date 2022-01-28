@@ -1,133 +1,187 @@
-Frañs
-Roazhon
-Kemper
-Vincent V EN S AN
-Bollore
-Beatles B I T EU L S
-Boston  B OH S T OH N
-Einstein
-Amerika
-Yann
-Youenn
-Nolwenn
-Maran
-Gwenole
-Mary
-Ernest  EH R N EH S T
-Douarnenez
-Israel
-Katell
-Indez
-Gwenc'hlan
-Merc'her
-Anna
-Bleuenn
-Liza
-Vega
-Sandra
-Elena
-Mumbai  M OU M B A I
-Maela
-Enora
-Verc'her
-Lizig
-Kerzu
-Orion   O R I ON
-Vrest
-Goulven
-Fañch
-Arvorig
-Blouvagor
-Jezuz
-Daniel D A N I EH L
 Alamagn
-Pleskob
-Ronan
 Alaska
-Siberia
-Olier
-Youna
-Tangi
-Yuna
-C'hwevrer
-Nedeleg
-Georgia
-Dominikan
-Veurzh
-Pêr
-Mael
-Oriant
-Salem
-Sul
-Emile   E M I L
-Microsoft   M I K R O S OH F T
-Herve
-Sheila  CH EH I L A
-Breizh
-Kalifornia
-Weltaz
-Gweltaz
-Plouzane
-Keraotred
-Naoned
-John    D J OH N
-Smith   S M I S
-Brasparzh
-Bear
-Gauguin G O G EN
-Morwenna
-Sina
-Italia
-Gwener
-Maodez
-Breizh-Veur
-Karaez
-Lannuon
-Londrez
-Karaez
-Plougêr
-Erwan
-Pariz
-Andrew  AN N D R OU
-Rouantelezh-Unanet
-Barbara
-Kemperle
-Pleuwigner
-Bennsylvania
-Voustoer
-Fulup
-Katalonia
-New York    N I OU I OH R K
-York
-Yannig
-Loeiz
-Meurzh
-Wengamp
-Viami
-Dailymotion D EY L I M O CH EU N
-Obama
-Landerne
-Rusia
-Florida
-Montroulez
-Gwengolo
-Washington  W A CH I N G T OH N
+Afrika
+Lisbon
+Suez
 Alpoù
-Kergelenn
-C'hrist
-Chennai
-Gerne
-Perou
-Europa
-Ebrel
-Toulon  T OU L ON
-Gemper
+Amerika
 Amy
-Gwennael
-Chicago CH I K A G O
+Andrew  AN N D R OU
+Anna
 Aostralia
+Arvorig
+Celsius S EH L S I U S
+Artika
+Atlantel
+Azia
+Barbara
+Bear
+Beatles B I T EU L S
+Bennsylvania
+Bleuenn
+Blouvagor
+Bollore
+Boston  B OH S T OH N
+Brasparzh
+Breizh
+Breizh-Veur
+Brest
+Chennai
+Chicago CH I K A G O
+Chili
+Eiffel  E F EH L
+Kambodjia
+Kmer
+Montego
+Bagan
+Japan
+Japaned
+Vandela
+Wangari
+Genya
+Kenya
+Myriam
+Berlin
+Gilbert J I L B EH R
+Pretoria
+Frederik
+Virmaned
+Roma
+Indiz
+Alexandra   A L EH K S AN D R A
+Nobel
+Walter
+Angela  AN N J E L A
+Oliver  O L I V EU R
+Nelson  N EH L S OH N
+Mandela
+Birmania
+Ejipt
+Virmania
+Xavier  G Z A V I E
+Himalaya
+Bouda
+Boudaoù
+Angkor
+Ananda
+Mandalay    M AN N D A L EH
+Vandalay    V AN N D A L EH
+C'hrist
+C'hwevrer
+Dailymotion D EY L I M O CH EU N
+Daniel D A N I EH L
+Dominikan
+Douarnenez
+Ebrel
+Einstein
+Elena
+Emile   E M I L
+Enora
+Eost
+Ernest  EH R N EH S T
+Erwan
+Europa
+Fañch
+Florida
+Frañs
+Fulup
+Gauguin G O G EN
+Gemper
+Georgia
+Gerne
 Google  G OU G EU L
+Goulven
+Gweltaz
+Gwenc'hlan
+Gwener
+Gwengolo
+Gwennael
+Gwenole
+Herve
+Indez
+Israel
+Italia
 Jakez
-Yaou
-Paul    P OH L
+Jezuz
+John    D J OH N
+Kalifornia
+Kanada
+Karaez
+Karaez
+Katalonia
+Katell
+Kemper
+Kemperle
+Keraotred
+Kergelenn
+Kerzu
+Kolombia
+Landerne
+Lannuon
 Lena
+Liza
+Lizig
+Loeiz
+Londrez
+Mael
+Maela
+Maodez
+Maran
+Mariana
+Mary
+Merc'her
+Meurzh
+Microsoft   M I K R O S OH F T
+Montroulez
+Morwenna
+Mumbai  M OU M B A I
+Naoned
+Napoleon
+Nedeleg
+New York    N I OU I OH R K
+Nolwenn
+Obama
+Olier
+Oriant
+Orion   O R I ON
+Pariz
+Paul    P OH L
+Pêr
+Perou
+Pleskob
+Pleuwigner
+Plougêr
+Plouzane
+Pompei
+Roazhon
+Ronan
+Rouantelezh-Unanet
+Rusia
+Salem
+Sandra
+Sheila  CH EH I L A
+Siberia
+Sina
+Smith   S M I S
+Sul
+Tangi
+Toulon  T OU L ON
+Vega
+Verc'her
+Veurzh
+Viami
+Victor	V I K T OH R
+Vincent V EN S AN
+Voustoer
+Vrest
+Washington  W A CH I N G T OH N
+Weltaz
+Wengamp
+Yann
+Yannig
+Yaou
+York
+Youenn
+Youna
+Yuna
+Yves	I V

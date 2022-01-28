@@ -28,7 +28,7 @@ from libMyTTS import *
 
 def play_segment_text(idx, song, segments, text, speed):
     if idx < len(text):
-        print(f"{{{speakers[i]}}} {text[i]}")
+        print(f"{{{speakers[idx]}}} {text[idx]}")
     play_segment(idx, song, segments, speed)
 
 

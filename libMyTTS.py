@@ -56,6 +56,9 @@ def get_corrected():
 
 
 def get_capitalised():
+    """
+        Returns a set of lower case names (that should be capitalized)
+    """
     capitalised = set()
     with open(CAPITALIZED_PATH, 'r') as f:
         for l in f.readlines():
