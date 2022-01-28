@@ -27,6 +27,7 @@ Bollore
 Boston  B OH S T OH N
 Brasparzh
 Breizh
+Vreizh
 Breizh-Veur
 Brest
 Chennai
@@ -34,8 +35,10 @@ Chicago CH I K A G O
 Chili
 Eiffel  E F EH L
 Kambodjia
+Kerlouan
 Kmer
 Montego
+Annaig
 Maiwenn
 Bagan
 Bretoned
@@ -110,6 +113,7 @@ Israel
 Italia
 Komborn
 Kankaven
+Kerampuilh
 Mari
 Jakez
 Jezuz
@@ -121,6 +125,7 @@ Karaez
 Katalonia
 Katell
 Kemper
+Kemperiz
 Kemperle
 Keraotred
 Kergelenn

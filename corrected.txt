@@ -10,7 +10,7 @@ peseut	peseurt
 techout	tec'hout
 diàr	diwar
 c'whi	c'hwi
-mille	mil
+mille 	mil 
 chwi	c'hwi
 ac'hanoch	ac'hanoc'h
 télégramme	telegram
@@ -60,6 +60,9 @@ chigago	chicago
 siezhvet	seizhvet
 c'homlec'h	chomlec'h
 neizhañ	neizhiañ
+choulz 	 c'houlz
+choant 	c'hoant 
+founnus	fonnus
 be'h	bec'h
 pa'z	p'az
 pa'n	p'an
@@ -70,3 +73,4 @@ ne'z	n'ez
 ma'm	m'am
 me'm	m'em
 me 'm eus	me'm eus
+ 'm eus	 m'eus

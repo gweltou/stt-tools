@@ -9,7 +9,7 @@
 
 
 import sys
-sys.path.append('..') # To import libMyTTS
+#sys.path.append('..') # To import libMyTTS
 
 import os
 import re
@@ -29,49 +29,33 @@ def get_text_files(root):
 
 
 if __name__ == "__main__":
-    hs = libMyTTS.hs_dict
+    #hs = libMyTTS.hs_dict
     
     textfiles = get_text_files(sys.argv[1])
     
     num_errors = 0
     for file in textfiles:
         with open(file, 'r') as f:
+            num_line = 0
             for line in f.readlines():
+                num_line += 1
                 # Remove speaker tag
-                speaker_id_match = SPEAKER_ID_PATTERN.search(line)
+                speaker_id_match = libMySTT.SPEAKER_ID_PATTERN.search(line)
                 if speaker_id_match:
                     speaker_id = speaker_id_match[1]
                     start, end = speaker_id_match.span()
                     line = line[:start] + line[end:]
+                
+                line = line.strip()
+                if not line:
+                    continue
+                if line.startswith('#'):
+                    continue
                     
-                line = line.strip().lower()
-                if line:
-                    # Replace text according to "corrected" dictionary
-                    for faulty in libMyTTS.corrected.keys():
-                        if faulty in line:
-                            line = line.replace(faulty, libMyTTS.corrected[faulty])
-                    spell_error = False
-                    tokens = []
-                    first = True
-                    for token in libMyTTS.tokenize(line):
-                        # Ignore black listed words
-                        if token.startswith('*'):
-                            tokens.append(token)
-                            continue
+                corrected, errors = libMySTT.get_corrected_sentence(line)
+                num_errors += errors
+                if errors:
+                    print(f"[{num_line}] {corrected} [{line.strip()}]")
                         
-                        # Check for hyphenated words
-                        
-                        if token in libMyTTS.capitalized:
-                            tokens.append(token.capitalize())
-                            continue
-                        if not hs.spell(token):
-                            spell_error = True
-                            tokens.append(Fore.RED + token + Fore.RESET)
-                        else:
-                            tokens.append(token)
-                    if spell_error:
-                        num_errors += 1
-                        print(' '.join(tokens), f"[{line.strip()}]")
-                        
-    print(f"{num_errors} lines with spelling errors")
+    print(f"{num_errors} spelling mistakes")
             

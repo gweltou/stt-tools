@@ -56,7 +56,7 @@ def get_corrected():
     corrected_sentence = dict()
     with open(CORRECTED_PATH, 'r') as f:
         for l in f.readlines():
-            k, v = l.strip().split('\t')
+            k, v = l.replace('\n', '').split('\t')
             if ' ' in k:
                 corrected_sentence[k] = v
             else:
@@ -115,10 +115,13 @@ def get_corrected_sentence(sentence):
     """
     #corrected = get_corrected()
     #capitalized = get_capitalized()
+    sentence = sentence.strip().lower()
+    if not sentence:
+        return ''
     
     for mistake in corrected_sentence.keys():
         if mistake in sentence:
-            sentence = sentence.replace(mistake, corrected[mistake])
+            sentence = sentence.replace(mistake, corrected_sentence[mistake])
     
     spell_error = False
     num_errors = 0
