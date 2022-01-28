@@ -13,7 +13,6 @@ sys.path.append('..') # To import libMyTTS
 
 import os
 import re
-from colorama import Fore
 import libMySTT
 
 
@@ -30,19 +29,16 @@ def get_text_files(root):
 
 
 if __name__ == "__main__":
-    hs = libMyTTS.get_dict()
-    corrected = libMyTTS.get_corrected()
-    capitalised = libMyTTS.get_capitalised()
+    hs = libMyTTS.hs_dict
     
     textfiles = get_text_files(sys.argv[1])
-    speaker_id_pattern = re.compile(r'{([-\w]+)}')
     
     num_errors = 0
     for file in textfiles:
         with open(file, 'r') as f:
             for line in f.readlines():
                 # Remove speaker tag
-                speaker_id_match = speaker_id_pattern.search(line)
+                speaker_id_match = SPEAKER_ID_PATTERN.search(line)
                 if speaker_id_match:
                     speaker_id = speaker_id_match[1]
                     start, end = speaker_id_match.span()
@@ -51,9 +47,9 @@ if __name__ == "__main__":
                 line = line.strip().lower()
                 if line:
                     # Replace text according to "corrected" dictionary
-                    for faulty in corrected.keys():
+                    for faulty in libMyTTS.corrected.keys():
                         if faulty in line:
-                            line = line.replace(faulty, corrected[faulty])
+                            line = line.replace(faulty, libMyTTS.corrected[faulty])
                     spell_error = False
                     tokens = []
                     first = True
@@ -62,12 +58,10 @@ if __name__ == "__main__":
                         if token.startswith('*'):
                             tokens.append(token)
                             continue
-                        #if token in corrected:
-                        #    tokens.append(corrected[token])
-                        #    continue
+                        
                         # Check for hyphenated words
                         
-                        if token in capitalised:
+                        if token in libMyTTS.capitalized:
                             tokens.append(token.capitalize())
                             continue
                         if not hs.spell(token):

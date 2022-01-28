@@ -100,6 +100,7 @@ Goulven
 Gweltaz
 Gwenc'hlan
 Gwener
+Gwened
 Gwengolo
 Gwennael
 Gwenole
@@ -107,6 +108,9 @@ Herve
 Indez
 Israel
 Italia
+Komborn
+Kankaven
+Mari
 Jakez
 Jezuz
 John    D J OH N
@@ -133,6 +137,11 @@ Mael
 Maela
 Maodez
 Maran
+Iwerzhon
+Skos
+Saoz
+Kembreiz
+Kembre
 Iwerzhoniz
 Mariana
 Mary
@@ -140,6 +149,8 @@ Merc'her
 Meurzh
 Microsoft   M I K R O S OH F T
 Montroulez
+Okitania
+Tolosa
 Morwenna
 Mumbai  M OU M B A I
 Naoned
@@ -175,13 +186,33 @@ Sul
 Tangi
 Toulon  T OU L ON
 Vega
+Keragan
+Belgia  B EH L J I A
+Facebook    F EY S B OU K
+Natacha
+Londrez
+Barcelona   B A R S E L O N A
+Tolstoy T OH L S T OH I
 Verc'her
 Veurzh
 Viami
 Victor	V I K T OH R
+Kyoto
+Abel
+Saozon
+Provañs
+Vretoned
+Plouider
+Nicolas	N I K O L A
+Frank
 Vincent V EN S AN
 Voustoer
 Vrest
+Arya
+Rio
+Oural
+Skosiz
+Breizhiz
 Washington  W A CH I N G T OH N
 Weltaz
 Wengamp

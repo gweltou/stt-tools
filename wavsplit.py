@@ -14,13 +14,9 @@
 import sys
 import os
 import re
-#import numpy as np
-import pydub
 from math import floor, ceil
 from pydub import AudioSegment
 import librosa
-from colorama import Fore
-import hunspell # https://www.systutorials.com/docs/linux/man/4-hunspell/
 from libMySTT import *
 
 
@@ -28,8 +24,11 @@ from libMySTT import *
 
 def play_segment_text(idx, song, segments, text, speed):
     if idx < len(text):
-        print(f"{{{speakers[idx]}}} {text[idx]}")
+        corrected, _ = get_corrected_sentence(text[idx])
+        print(f"{{{speakers[idx]}}} {corrected}")
+        print(f"[{text[idx]}]")
     play_segment(idx, song, segments, speed)
+
 
 
 def save_segments(segments, filename):
@@ -39,6 +38,7 @@ def save_segments(segments, filename):
             stop =  int(s[1])
             f.write(f"{start} {stop}\n")
     print('segment file saved')
+
 
 
 def load_textfile(filename):
@@ -88,9 +88,8 @@ if __name__ == "__main__":
         segments = load_segments(split_filename)
     else:
         fileinfo = get_audiofile_info(sys.argv[1])
-        #print(fileinfo)
-        for s in ["codec_name", "channels", "sample_rate", "bits_per_sample"]:
-            print(f"{s}: {fileinfo[s]}")
+        #for s in ["codec_name", "channels", "sample_rate", "bits_per_sample"]:
+        #    print(f"{s}: {fileinfo[s]}")
         
         # Convert to 16kHz mono wav if needed
         if fileinfo["channels"] != 1 or fileinfo["sample_rate"] != "16000" or \
@@ -101,12 +100,14 @@ if __name__ == "__main__":
         
         print("spliting wave file")
         y, sr = librosa.load(wav_filename)
-        segments = [(floor(1000*start/sr), ceil(1000*stop/sr)) \
+        
+        # We need to forward a bit after stop
+        # Librosa.effects.split returns start and stop in samples number
+        segments = [(floor(1000*start/sr), ceil(1000*(stop+8000)/sr)) \
                      for start, stop in librosa.effects.split(y, frame_length=8000, top_db=39)]
         save_segments(segments, split_filename)
-        
-##    for s in segments:
-##        print(round(s[0]/1000, 2), round(s[1]/1000, 2) )
+    
+    
     print(f"{len(segments)} segments")
     
     

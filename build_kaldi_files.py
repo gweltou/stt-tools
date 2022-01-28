@@ -164,7 +164,7 @@ def is_acronym(word):
     if len(word) < 2:
         return False
     for letter in word:
-        if letter.islower():
+        if not letter.isdecimal() and letter.islower():
             return False
     return True
 

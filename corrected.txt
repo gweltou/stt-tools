@@ -48,6 +48,7 @@ dishoñjal	disoñjal
 tonnenn	tonenn
 kaondaonet	kondaonet
 unnan	unan
+kantvet	kantved
 gouvezet	gouezet
 c'houzhout	c'houzout
 diagnostics	diagnostiks
@@ -58,6 +59,7 @@ hirie	hiriv
 chigago	chicago
 siezhvet	seizhvet
 c'homlec'h	chomlec'h
+neizhañ	neizhiañ
 be'h	bec'h
 pa'z	p'az
 pa'n	p'an

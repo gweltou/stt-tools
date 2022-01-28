@@ -20,6 +20,8 @@ from pydub.utils import get_player_name
 from tempfile import NamedTemporaryFile
 import subprocess
 import hunspell # https://www.systutorials.com/docs/linux/man/4-hunspell/
+from colorama import Fore
+
 
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -29,14 +31,13 @@ HS_AFF_PATH = os.path.join(ROOT, os.path.join("hunspell-dictionary", "br_FR.aff"
 HS_ADD_PATH= os.path.join(ROOT, os.path.join("hunspell-dictionary", "add.txt"))
 
 CORRECTED_PATH = os.path.join(ROOT, "corrected.txt")
-CAPITALIZED_PATH = os.path.join(ROOT, "capitalised.txt")
+CAPITALIZED_PATH = os.path.join(ROOT, "capitalized.txt")
 JOINED_PATH = os.path.join(ROOT, "joined.txt")
 
-SPEAKER_ID_PATTERN = re.compile(r'{(\w+)}')
+SPEAKER_ID_PATTERN = re.compile(r'{([-\'\w]+)}')
 
 
 punctuation = (',', '.', ';', '?', '!', ':', '«', '»', '"', '”', '“', '(', ')', '…', '–')
-
 
 
 def get_dict():
@@ -46,27 +47,37 @@ def get_dict():
             hs.add(w.strip())
     return hs
 
+hs_dict = get_dict()
+
 
 
 def get_corrected():
     corrected = dict()
+    corrected_sentence = dict()
     with open(CORRECTED_PATH, 'r') as f:
         for l in f.readlines():
             k, v = l.strip().split('\t')
-            corrected[k] = v
-    return corrected
+            if ' ' in k:
+                corrected_sentence[k] = v
+            else:
+                corrected[k] = v
+    return corrected, corrected_sentence
+
+corrected, corrected_sentence = get_corrected()
 
 
 
-def get_capitalised():
+def get_capitalized():
     """
         Returns a set of lower case names (that should be capitalized)
     """
-    capitalised = set()
+    capitalized = set()
     with open(CAPITALIZED_PATH, 'r') as f:
         for l in f.readlines():
-            capitalised.add(l.strip().split()[0].lower())
-    return capitalised
+            capitalized.add(l.strip().split()[0].lower())
+    return capitalized
+
+capitalized = get_capitalized()
 
 
 
@@ -95,6 +106,51 @@ def tokenize(line):
             tokens.append(t) 
     return tokens
 
+
+
+def get_corrected_sentence(sentence):
+    """
+        Return a string which is the corrected sentence
+        and the number of spelling mistakes in sentence
+    """
+    #corrected = get_corrected()
+    #capitalized = get_capitalized()
+    
+    for mistake in corrected_sentence.keys():
+        if mistake in sentence:
+            sentence = sentence.replace(mistake, corrected[mistake])
+    
+    spell_error = False
+    num_errors = 0
+    tokens = []
+    for token in tokenize(sentence):
+        # Ignore black listed words
+        if token.startswith('*'):
+            tokens.append(token)
+        
+        elif token.isdigit():
+            spell_error = True
+            tokens.append(Fore.RED + token + Fore.RESET)
+        
+        elif token in corrected:
+            token = corrected[token]
+            
+        # Check for hyphenated words
+        
+        elif token in capitalized:
+            tokens.append(token.capitalize())
+        
+        elif not hs_dict.spell(token):
+            spell_error = True
+            tokens.append(Fore.RED + token + Fore.RESET)
+        
+        else:
+            tokens.append(token)
+        
+        if spell_error:
+            num_errors += 1
+        
+    return ' '.join(tokens), num_errors
 
 
 def load_segments(filename):
