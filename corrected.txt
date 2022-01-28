@@ -41,6 +41,7 @@ stañk	stank
 avañtur	avantur
 seitekved	seitekvet
 ugentved	ugentvet
+hanterkantved	hanterkantvet
 awalc'h	a-walc'h
 marmoused	marmouzed
 dishoñjal	disoñjal
@@ -48,7 +49,22 @@ tonnenn	tonenn
 kaondaonet	kondaonet
 unnan	unan
 gouvezet	gouezet
+c'houzhout	c'houzout
+diagnostics	diagnostiks
 yaouankik	yaouankig
+marc'hatmatoc'h	marc'hadmatoc'h
 gante	ganto
 hirie	hiriv
+chigago	chicago
 siezhvet	seizhvet
+c'homlec'h	chomlec'h
+be'h	bec'h
+pa'z	p'az
+pa'n	p'an
+pa'm	p'am
+na'm	n'am
+ne'm	n'em
+ne'z	n'ez
+ma'm	m'am
+me'm	m'em
+me 'm eus	me'm eus

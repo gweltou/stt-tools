@@ -41,12 +41,19 @@ if __name__ == "__main__":
     for file in textfiles:
         with open(file, 'r') as f:
             for line in f.readlines():
+                # Remove speaker tag
                 speaker_id_match = speaker_id_pattern.search(line)
                 if speaker_id_match:
                     speaker_id = speaker_id_match[1]
                     start, end = speaker_id_match.span()
                     line = line[:start] + line[end:]
-                if line.strip():
+                    
+                line = line.strip().lower()
+                if line:
+                    # Replace text according to "corrected" dictionary
+                    for faulty in corrected.keys():
+                        if faulty in line:
+                            line = line.replace(faulty, corrected[faulty])
                     spell_error = False
                     tokens = []
                     first = True
@@ -55,9 +62,9 @@ if __name__ == "__main__":
                         if token.startswith('*'):
                             tokens.append(token)
                             continue
-                        if token in corrected:
-                            tokens.append(corrected[token])
-                            continue
+                        #if token in corrected:
+                        #    tokens.append(corrected[token])
+                        #    continue
                         # Check for hyphenated words
                         
                         if token in capitalised:

@@ -16,6 +16,9 @@ Atlantel
 Azia
 Barbara
 Bear
+Simone  S I M OH N
+Vichel  V I CH EH L
+Michel  M I CH EH L
 Beatles B I T EU L S
 Bennsylvania
 Bleuenn
@@ -33,8 +36,11 @@ Eiffel  E F EH L
 Kambodjia
 Kmer
 Montego
+Maiwenn
 Bagan
+Bretoned
 Japan
+Janedig
 Japaned
 Vandela
 Wangari
@@ -127,6 +133,7 @@ Mael
 Maela
 Maodez
 Maran
+Iwerzhoniz
 Mariana
 Mary
 Merc'her
@@ -157,6 +164,7 @@ Roazhon
 Ronan
 Rouantelezh-Unanet
 Rusia
+Bourdel
 Salem
 Sandra
 Sheila  CH EH I L A
