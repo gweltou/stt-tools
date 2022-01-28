@@ -21,7 +21,7 @@ from pydub import AudioSegment
 import librosa
 from colorama import Fore
 import hunspell # https://www.systutorials.com/docs/linux/man/4-hunspell/
-from libMyTTS import *
+from libMySTT import *
 
 
 
@@ -44,13 +44,12 @@ def save_segments(segments, filename):
 def load_textfile(filename):
     text = []
     speakers = []
-    speaker_id_pattern = re.compile(r'{(\w+)}')
     current_speaker = "unknown"
     with open(filename, 'r') as f:
         for l in f.readlines():
             l = l.strip()
             if l and not l.startswith('#'):
-                speaker_id_match = speaker_id_pattern.search(l)
+                speaker_id_match = SPEAKER_ID_PATTERN.search(l)
                 if speaker_id_match:
                     current_speaker = speaker_id_match[1]
                     start, end = speaker_id_match.span()
@@ -93,11 +92,11 @@ if __name__ == "__main__":
         for s in ["codec_name", "channels", "sample_rate", "bits_per_sample"]:
             print(f"{s}: {fileinfo[s]}")
         
+        # Convert to 16kHz mono wav if needed
         if fileinfo["channels"] != 1 or fileinfo["sample_rate"] != "16000" or \
            fileinfo["bits_per_sample"] != 16:
             print(f"converting {sys.argv[1]}...")
-            # ffmpeg -i in.mp3 -acodec pcm_s16le -ac 1 -ar 16000 out.wav
-            subprocess.call(["ffmpeg", "-i", sys.argv[1], "-acodec", "pcm_s16le", "-ac", "1", "-ar", "16000", wav_filename])
+            convert_to_wav(sys.argv[1], wav_filename);
             print("conversion done")
         
         print("spliting wave file")

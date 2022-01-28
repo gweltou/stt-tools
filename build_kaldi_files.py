@@ -16,7 +16,7 @@ import os
 import numpy as np
 import re
 from math import floor, ceil
-from libMyTTS import *
+from libMySTT import *
 
 
 acronym_filename = "acronym_lexicon.txt"

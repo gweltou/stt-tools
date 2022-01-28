@@ -13,6 +13,7 @@
 
 import os
 import json
+import re
 from pydub import AudioSegment
 #from pydub.playback import play
 from pydub.utils import get_player_name
@@ -30,6 +31,8 @@ HS_ADD_PATH= os.path.join(ROOT, os.path.join("hunspell-dictionary", "add.txt"))
 CORRECTED_PATH = os.path.join(ROOT, "corrected.txt")
 CAPITALIZED_PATH = os.path.join(ROOT, "capitalised.txt")
 JOINED_PATH = os.path.join(ROOT, "joined.txt")
+
+SPEAKER_ID_PATTERN = re.compile(r'{(\w+)}')
 
 
 punctuation = (',', '.', ';', '?', '!', ':', '«', '»', '"', '”', '“', '(', ')', '…', '–')
@@ -131,3 +134,35 @@ def play_with_ffplay(seg, speed=1.0):
             [player, "-nodisp", "-autoexit", "-loglevel", "quiet", "-af", f"atempo={speed}", f.name]
         )
 
+
+
+def convert_to_wav(src, dst):
+    """
+        Convert 16kHz wav
+        Validate filename
+    """
+    dst = dst.replace(' ', '_')
+    dst = dst.replace("'", '')
+    subprocess.call(['ffmpeg', '-v', 'panic',
+                     '-i', src, '-acodec', 'pcm_s16le',
+                     '-ac', '1', '-ar', '16000', dst])
+
+
+def concatenate_audiofiles(file_list, out_filename, remove=True):
+    if len(file_list) <= 1:
+        return
+    
+    file_list_filename = "audiofiles.txt"
+    with open(file_list_filename, 'w') as f:
+        f.write('\n'.join([f"file '{wav}'" for wav in file_list]))
+    
+    subprocess.call(['ffmpeg', #'-v', 'panic',
+                     '-f', 'concat',
+                     '-safe', '0',
+                     '-i', file_list_filename,
+                     '-c', 'copy', out_filename])
+    os.remove(file_list_filename)
+    
+    if remove:
+        for fname in file_list:
+            os.remove(fname)

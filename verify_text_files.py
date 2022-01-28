@@ -14,7 +14,7 @@ sys.path.append('..') # To import libMyTTS
 import os
 import re
 from colorama import Fore
-import libMyTTS
+import libMySTT
 
 
 

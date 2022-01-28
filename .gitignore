@@ -1,4 +1,12 @@
+.gitignore
+
 __pycache__/
 venv-hunspell/
 data/
+
 common_voice/cv-corpus*
+dizale/
+rkb/
+
+sae/b*/
+sae/*.zip

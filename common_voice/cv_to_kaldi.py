@@ -12,6 +12,7 @@ import sys
 import os
 import subprocess
 import json
+import libMySTT
 
 
 DATA_FOLDER = "br"
@@ -20,6 +21,9 @@ CLIPS_FOLDER = os.path.join(DATA_FOLDER, "clips")
 
 
 def get_audiofile_length(filename):
+    """
+        Get audio file length in milliseconds
+    """
     r = subprocess.check_output(['ffprobe', '-hide_banner', '-v', 'panic', '-show_streams', '-of', 'json', filename])
     r = json.loads(r)
     return float(r['streams'][0]['duration'])
@@ -84,10 +88,8 @@ if __name__ == "__main__":
             src = os.path.join(CLIPS_FOLDER, utt[1])
             dst = os.path.join(speaker_folder, wav)
             # Convert to wav
-            subprocess.call(['ffmpeg', '-v', 'panic',
-                             '-i', src, '-acodec', 'pcm_s16le',
-                             '-ac', '1', '-ar', '16000', dst])
-            os.remove(src)
+            convert_to_wav(src, dst)
+            #os.remove(src)
             nt = t + get_audiofile_length(dst)*1000
             segments.append((int(t), int(nt)))
             t = nt
