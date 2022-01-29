@@ -32,6 +32,7 @@ if __name__ == "__main__":
     num_errors = 0
     for file in textfiles:
         with open(file, 'r') as f:
+            print(file)
             num_line = 0
             for line in f.readlines():
                 num_line += 1
@@ -52,6 +53,14 @@ if __name__ == "__main__":
                 num_errors += errors
                 if errors:
                     print(f"[{num_line}] {correction} [{line.strip()}]")
-                        
+        
+        # extract acronyms
+        extracted_acronyms = libMySTT.extract_acronyms(file)
+        with open(libMySTT.ACRONYM_PATH, 'a') as f:
+            for acr, phon in extracted_acronyms:
+                f.write(f"{acr}\t{phon}\n")
+                libMySTT.acronyms.add(acr)
+                num_errors -= 1
+    
     print(f"{num_errors} spelling mistakes")
             

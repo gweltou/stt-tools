@@ -41,6 +41,130 @@ SPEAKER_ID_PATTERN = re.compile(r'{([-\'\w]+)}')
 punctuation = (',', '.', ';', '?', '!', ':', '«', '»', '"', '”', '“', '(', ')', '…', '–')
 
 
+w2f = {
+    'a'     :   'A',
+    'â'     :   'A',        # lÂret
+    'añ'    :   'AN',
+    'an'    :   'AN N',
+    'b'     :   'B',
+    'd'     :   'D',
+    'ch'    :   'CH',       # CHomm
+    "c'h"   :   'X',
+    'd'     :   'D',
+    'e'     :   'E',        # spErEd
+    'ê'     :   'E',        # gÊr
+    'ei'    :   'EY',       # kEIn      # could replace with (EH I) maybe ?
+    'eu'    :   'EU',       # lEUn
+    'eü'    :   'E U',      # EÜrus
+    'er.'   :   'EH R',     # hantER
+    'em'    :   'EH M',     # lEMm
+    'eñ'    :   'EN',       # chEÑch
+    'enn'   :   'EH N',     # lENN
+    "ec'h"  :   'EH X',     # nec'h
+    'f'     :   'F',
+    'g'     :   'G',
+    'gn'    :   'GN',       # miGNon
+    'h'     :   'H',
+    'ha.'   :   'A',
+    'hag.'  :   'A G',
+    'i'     :   'I',
+    'iñ'    :   'I N',      # bIÑs
+    'iñ.'   :   'I',        # debrIÑ
+    'j'     :   'J',        # BeaJiñ
+    'k'     :   'K',
+    'l'     :   'L',
+    'lh'    :   'LH',
+    'll'    :   'L',
+    'm'     :   'M',
+    'mm'    :   'M',
+    'n'     :   'N',
+    'nn'    :   'N',
+    'o'     :   'O',        # nOr
+    'on'    :   'ON N',     # dON
+    'ont.'  :   'ON N',     # mONt
+    'oñ'    :   'ON',       # sOÑjal
+    'ou'    :   'OU',       # dOUr
+    'où.'   :   'OU',       # goulOÙ
+    'or'    :   'OH R',     # dORn      ! dor, goudoriñ
+    'orr'   :   'O R',      # gORRe
+    'p'     :   'P',
+    'r'     :   'R',
+    's'     :   'S',
+    't'     :   'T',
+    'u'     :   'U',        # tUd
+    'uñ'    :   'UN',       # pUÑs
+    'un.'   :   'OE N',     # UN dra
+    'ul.'   :   'OE L',     # UL labous
+    'ur.'   :   'OE R',     # UR vag
+    'v'     :   'V',
+    'v.'    :   'O',        # beV
+    'w'     :   'W',
+    'y'     :   'I',        # pennsYlvania
+    'ya'    :   'IA',       # YAouank
+    'ye'    :   'IE',       # YEzh
+    'yo'    :   'IO',       # YOd
+    'you'   :   'IOU',      # YOUc'hal
+    'z'     :   'Z',
+    'zh'    :   'Z',
+}
+
+acr2f = {
+    'A' :   'A',
+    'B' :   'B E',
+    'C' :   'S E',
+    'D' :   'D E',
+    'E' :   'EU',
+    'F' :   'EH F',
+    'G' :   'J E',
+    'H' :   'A CH',
+    'I' :   'I',
+    'J' :   'J I',
+    'K' :   'K A',
+    'L' :   'EH L',
+    'M' :   'EH M',
+    'N' :   'EH N',
+    'O' :   'O',
+    'P' :   'P E',
+    'Q' :   'K U',
+    'R' :   'EH R',
+    'S' :   'EH S',
+    'T' :   'T E',
+    'U' :   'U',
+    'V' :   'V E',
+    'W' :   'OU E',
+    'X' :   'I K S',
+    
+    'Z' :   'Z EH D',
+}
+
+
+phonemes = set()
+for val in list(w2f.values()) + list(acr2f.values()):
+    for tok in val.split():
+        phonemes.add(tok)
+
+
+
+
+def word2phonetic(word):
+    head = 0
+    phonemes = []
+    word = '.' + word.strip().replace('-', '.') + '.'
+    while head < len(word):
+        for i in (4, 3, 2, 1):
+            token = word[head:head+i].lower()
+            if token in w2f:
+                phonemes.append(w2f[token])
+                head += i-1
+                break
+        head += 1
+    
+    if len(phonemes) == 0:
+        print("ERROR: word2phonetic", word)
+    return phonemes
+
+
+
 def get_hunspell_dict():
     hs = hunspell.HunSpell(HS_DIC_PATH, HS_AFF_PATH)
     with open(HS_ADD_PATH, 'r') as f:
@@ -222,6 +346,65 @@ def get_correction(sentence):
             num_errors += 1
         
     return ' '.join(tokens), num_errors
+
+
+
+def prompt_acronym_phon(w, song, segments, idx):
+    """
+        w: Acronym
+        i: segment number in audiofile (from 'split' file) 
+    """
+    
+    guess = ' '.join([acr2f[l] for l in w])
+    print(f"Phonetic proposition for '{w}' : {guess}")
+    while True:
+        answer = input("Press 'y' to validate, 'l' to listen or write different prononciation: ").strip().upper()
+        if not answer:
+            continue
+        if answer == 'Y':
+            return guess
+        if answer == 'L':
+            play_segment(idx, song, segments, 1.5)
+            continue
+        valid = True
+        for phoneme in answer.split():
+            if phoneme not in phonemes:
+                print("Error : phoneme not in", ' '.join(phonemes))
+                valid = False
+        if valid :
+            return answer
+
+
+
+def extract_acronyms(text_filename):
+    split_filename = text_filename[:-3] + 'split'
+    segments = load_segments(split_filename)
+    
+    wav_filename = text_filename[:-3] + 'wav'
+    song = AudioSegment.from_wav(wav_filename)
+    
+    extracted_acronyms = []
+    
+    with open(text_filename, 'r') as f:
+        sentence_idx = 0
+        for l in f.readlines():
+            if not l.strip():
+                continue
+            if l.startswith('#'):
+                continue
+            
+            for w in tokenize(l):
+                # Remove black-listed words (beggining with '*')
+                if w.startswith('*'):
+                    continue
+                if is_acronym(w):
+                    if not w in acronyms and not w in extracted_acronyms:
+                        phon = prompt_acronym_phon(w, song, segments, sentence_idx)
+                        extracted_acronyms.append((w, phon))
+            sentence_idx += 1
+    
+    return extracted_acronyms
+
 
 
 

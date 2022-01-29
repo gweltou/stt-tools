@@ -3,11 +3,15 @@
 
 
 """
- Author:        Gweltaz Duval-Guennoc
- Last modified: 27-01-2022
- 
- TODO:
-    Add hunspell support
+    File : wavesplit.py
+    
+    
+    Create a split file (time segments) from an audio file
+    Convert audio file to correct format (wav mono 16kHz) if needed
+    UI to listen and align audio segments with sentences in text file
+    
+    
+    Author:        Gweltaz Duval-Guennoc 
 """
 
 
