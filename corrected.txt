@@ -62,8 +62,10 @@ c'homlec'h	chomlec'h
 neizhañ	neizhiañ
 choulz 	 c'houlz
 choant 	c'hoant 
+virgulen	virgulenn
 founnus	fonnus
 huelgoat	Uhelgoad
+arru	erru
 be'h	bec'h
 pa'z	p'az
 pa'n	p'an

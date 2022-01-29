@@ -19,6 +19,8 @@ def get_text_files(root):
     textfiles = []
     for dirpath, dirs, files in os.walk(root):
         for name in files:
+            if name in ["notes.txt"]:
+                continue
             if name.endswith('.txt'):
                 textfiles.append(os.path.join(dirpath, name))
     return textfiles

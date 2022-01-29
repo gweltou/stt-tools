@@ -202,6 +202,10 @@ def get_capitalized_dict():
     capitalized = set()
     with open(CAPITALIZED_PATH, 'r') as f:
         for l in f.readlines():
+            l = l.strip()
+            if l.count(' ') > 2 and not '\t' in l:
+                print("Error in", CAPITALIZED_PATH)
+                print(f'No tabs in line "{l}"')
             capitalized.add(l.strip().split('\t')[0].lower())
     return capitalized
 
