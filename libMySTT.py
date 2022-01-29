@@ -33,6 +33,7 @@ HS_ADD_PATH= os.path.join(ROOT, os.path.join("hunspell-dictionary", "add.txt"))
 CORRECTED_PATH = os.path.join(ROOT, "corrected.txt")
 CAPITALIZED_PATH = os.path.join(ROOT, "capitalized.txt")
 JOINED_PATH = os.path.join(ROOT, "joined.txt")
+ACRONYM_PATH = os.path.join(ROOT, "acronym_lexicon.txt")
 
 SPEAKER_ID_PATTERN = re.compile(r'{([-\'\w]+)}')
 
@@ -40,44 +41,67 @@ SPEAKER_ID_PATTERN = re.compile(r'{([-\'\w]+)}')
 punctuation = (',', '.', ';', '?', '!', ':', '«', '»', '"', '”', '“', '(', ')', '…', '–')
 
 
-def get_dict():
+def get_hunspell_dict():
     hs = hunspell.HunSpell(HS_DIC_PATH, HS_AFF_PATH)
     with open(HS_ADD_PATH, 'r') as f:
         for w in f.readlines():
             hs.add(w.strip())
+    for w in ['euh', 'eba', 'kwa', 'beñ', 'boñ', 'oh']:
+        hs.add(w)
     return hs
 
-hs_dict = get_dict()
+hs_dict = get_hunspell_dict()
 
 
 
-def get_corrected():
+def get_corrected_dict():
     corrected = dict()
     corrected_sentence = dict()
     with open(CORRECTED_PATH, 'r') as f:
         for l in f.readlines():
             k, v = l.replace('\n', '').split('\t')
+            k = k.lower()
             if ' ' in k:
                 corrected_sentence[k] = v
             else:
                 corrected[k] = v
     return corrected, corrected_sentence
 
-corrected, corrected_sentence = get_corrected()
+corrected, corrected_sentence = get_corrected_dict()
 
 
 
-def get_capitalized():
+def get_capitalized_dict():
     """
         Returns a set of lower case names (that should be capitalized)
     """
     capitalized = set()
     with open(CAPITALIZED_PATH, 'r') as f:
         for l in f.readlines():
-            capitalized.add(l.strip().split()[0].lower())
+            capitalized.add(l.strip().split('\t')[0].lower())
     return capitalized
 
-capitalized = get_capitalized()
+capitalized = get_capitalized_dict()
+
+
+
+def get_acronyms_dict():
+    """
+        Acronym are stored in UPPER CASE in dictionary
+    """
+    acronyms = set()
+    if os.path.exists(ACRONYM_PATH):
+        with open(ACRONYM_PATH) as f:
+            for l in f.readlines():
+                if l.startswith('#') or not l: continue
+                acr, *pron = l.split()
+                acronyms.add(acr)
+    else:
+        print("Acronym dictionary not found... creating file")
+        open(ACRONYM_PATH, 'a').close()
+    return acronyms
+
+acronyms = get_acronyms_dict()
 
 
 
@@ -89,15 +113,25 @@ def filter_out(text, symbols):
 
 
 
-def tokenize(line):
-    line = filter_out(line.lower(), punctuation)
-    line = line.replace('‘', "'")
-    line = line.replace('’', "'")
-    line = line.replace('ʼ', "'")
-    line = line.replace('-', ' ')   # Split words like "sav-heol"
-    line = line.replace('/', ' ')
+def is_acronym(word):
+    if len(word) < 2:
+        return False
+    for letter in word:
+        if not letter.isdecimal() and letter.islower():
+            return False
+    return True
+
+
+
+def tokenize(sentence):
+    sentence = filter_out(sentence, punctuation)
+    sentence = sentence.replace('‘', "'")
+    sentence = sentence.replace('’', "'")
+    sentence = sentence.replace('ʼ', "'")
+    sentence = sentence.replace('-', ' ')   # Split words like "sav-heol"
+    sentence = sentence.replace('/', ' ')
     tokens = []
-    for t in line.split():
+    for t in sentence.split():
         if t.startswith("'"):
             tokens.append(t[1:])
         elif t.endswith("'"):
@@ -108,52 +142,87 @@ def tokenize(line):
 
 
 
-def get_corrected_sentence(sentence):
+def get_cleaned_sentence(sentence):
     """
-        Return a string which is the corrected sentence
+        Return a cleaned sentence, proper to put in text files or corpus
+               and a quality score (ratio of black-listed words)
+    """
+    lowered_sentence = sentence.lower()
+    for mistake in corrected_sentence.keys():
+        if mistake in sentence or mistake in lowered_sentence:
+            sentence = sentence.replace(mistake, corrected_sentence[mistake])
+    
+    tokens = []
+    num_blacklisted = 0
+    for token in tokenize(sentence):
+        lowered_token = token.lower()
+        # Ignore black listed words
+        if token.startswith('*'):
+            tokens.append(token[1:])
+            num_blacklisted += 1
+        elif lowered_token in corrected:
+            tokens.append(corrected[lowered_token])
+        elif lowered_token in capitalized:
+            tokens.append(token.capitalize())
+        elif is_acronym(token):
+            tokens.append(token)
+            if not token in acronyms:
+                num_blacklisted += 1
+        else:
+            tokens.append(lowered_token)
+    return ' '.join(tokens), float(num_blacklisted)/len(tokens)
+
+
+
+def get_correction(sentence):
+    """
+        Return a string which is a colored correction of the sentence
         and the number of spelling mistakes in sentence
     """
-    #corrected = get_corrected()
-    #capitalized = get_capitalized()
-    sentence = sentence.strip().lower()
+    
+    sentence = sentence.strip()
     if not sentence:
         return ''
     
+    lowered_sentence = sentence.lower()
     for mistake in corrected_sentence.keys():
-        if mistake in sentence:
+        if mistake in sentence or mistake in lowered_sentence:
             sentence = sentence.replace(mistake, corrected_sentence[mistake])
     
-    spell_error = False
     num_errors = 0
     tokens = []
     for token in tokenize(sentence):
+        spell_error = False
+        lowered_token = token.lower()
         # Ignore black listed words
         if token.startswith('*'):
-            tokens.append(token)
-        
+            tokens.append(Fore.YELLOW + token + Fore.RESET)
         elif token.isdigit():
             spell_error = True
             tokens.append(Fore.RED + token + Fore.RESET)
-        
-        elif token in corrected:
-            token = corrected[token]
+        elif lowered_token in corrected:
+            token = corrected[lowered_token]
             
         # Check for hyphenated words
-        
-        elif token in capitalized:
+        elif is_acronym(token):
+            if token in acronyms:
+                tokens.append(Fore.GREEN + token + Fore.RESET)
+            else:
+                tokens.append(Fore.RED + token + Fore.RESET)
+                spell_error = True
+        elif lowered_token in capitalized:
             tokens.append(token.capitalize())
-        
         elif not hs_dict.spell(token):
             spell_error = True
             tokens.append(Fore.RED + token + Fore.RESET)
-        
         else:
-            tokens.append(token)
+            tokens.append(lowered_token)
         
         if spell_error:
             num_errors += 1
         
     return ' '.join(tokens), num_errors
+
 
 
 def load_segments(filename):

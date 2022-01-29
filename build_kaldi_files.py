@@ -19,10 +19,6 @@ from math import floor, ceil
 from libMySTT import *
 
 
-acronym_filename = "acronym_lexicon.txt"
-capitalised_filename = "capitalised.txt"
-joined_filname = "joined.txt"
-
 
 speakers_gender = {
     'nolwenn_korbell'   : 'f',
@@ -39,14 +35,13 @@ speakers_gender = {
 
 w2f = {
     'a'     :   'A',
+    'â'     :   'A',        # lÂret
     'añ'    :   'AN',
     'an'    :   'AN N',
     'b'     :   'B',
     'd'     :   'D',
-    'c'     :   'K',        # viCtor
     'ch'    :   'CH',       # CHomm
     "c'h"   :   'X',
-    #'.c.'   :   'S E',      # al lizherenn 'C'
     'd'     :   'D',
     'e'     :   'E',        # spErEd
     'ê'     :   'E',        # gÊr
@@ -160,21 +155,6 @@ def word2phonetic(word):
     return phonemes
 
 
-def is_acronym(word):
-    if len(word) < 2:
-        return False
-    for letter in word:
-        if not letter.isdecimal() and letter.islower():
-            return False
-    return True
-
-
-def filter_out(text, symbols):
-    new_text = ""
-    for l in text:
-        if not l in symbols: new_text += l
-    return ' '.join(new_text.split()) # Prevent multi spaces
-
 
 def prompt_acronym_phon(w, wav_filename, i):
     guess = ' '.join([acr2f[l] for l in w])
@@ -218,39 +198,38 @@ def parse_data(rep):
     
     text = []
     speaker_ids = []
-    speaker_id_pattern = re.compile(r'{([-\w]+)}')
     speaker_id = "unnamed"
     with open(text_filename, 'r') as f:
         n_line = 0
         for l in f.readlines():
+            l = l.strip()
             if l.startswith('#'):
                 continue
+            
             # Extract speaker id
-            speaker_id_match = speaker_id_pattern.search(l)
+            speaker_id_match = SPEAKER_ID_PATTERN.search(l)
             if speaker_id_match:
                 speaker_id = speaker_id_match[1]
                 start, end = speaker_id_match.span()
                 l = l[:start] + l[end:]
-            cleaned_line = filter_out(l, punctuation)
-            cleaned_line = cleaned_line.replace('‘', "'")
-            cleaned_line = cleaned_line.replace('’', "'")
-            cleaned_line = cleaned_line.replace('ʼ', "'")
-            cleaned_line = cleaned_line.replace('-', ' ')   # Split words like "sav-heol"
-            cleaned_line = cleaned_line.replace('/', ' ')
-            cleaned_line = cleaned_line.strip()
-            if cleaned_line:
+            
+            tokens = tokenize(l)
+            
+            if tokens:
                 speaker_ids.append(speaker_id)
-                text.append(cleaned_line.replace('*', ''))
-                for w in cleaned_line.split():
-                    # Remove black-listed words (beggining with '*') from lexicon
-                    if not w.startswith('*'):
-                        if is_acronym(w):
-                            if w in acronyms:
-                                acronyms[w][1].append(n_line)
-                            else:
-                                phon = prompt_acronym_phon(w, wav_filename, n_line)
-                                acronyms[w] = [phon, [n_line]]
-                        else: words.add(w)
+                text.append(' '.join(tokens).replace('*', ''))
+                # Add words to lexicon
+                for w in tokens:
+                    # Remove black-listed words (beggining with '*')
+                    if w.startswith('*'):
+                        continue
+                    if is_acronym(w):
+                        if w in acronyms:
+                            acronyms[w][1].append(n_line)
+                        else:
+                            phon = prompt_acronym_phon(w, wav_filename, n_line)
+                            acronyms[w] = [phon, [n_line]]
+                    else: lexicon_words.add(w)
                 n_line += 1
      
     segments_delim = []
@@ -283,7 +262,7 @@ if __name__ == "__main__":
     text = []
     segments = []
     utt2spk = []
-    words = set()
+    lexicon_words = set()
     
     # Parse acronym lexicon
     acronyms = dict()
@@ -379,14 +358,14 @@ if __name__ == "__main__":
             print('lexicon.txt file already exists')
             with open(os.path.join(dict_dir, 'lexicon.txt')) as f:
                 for l in f.readlines()[3:]:
-                    words.add(l.strip().split()[0])
+                    lexicon_words.add(l.strip().split()[0])
     
     
     # Lexicon.txt
     print('building file data/local/dict_nosp/lexicon.txt')
     with open('data/local/dict_nosp/lexicon.txt', 'w') as f:
         f.write(f"!SIL SIL\n<SPOKEN_NOISE> SPN\n<UNK> SPN\n")
-        for w in sorted(words):
+        for w in sorted(lexicon_words):
             f.write(f"{w} {' '.join(word2phonetic(w))}\n")
     
     

@@ -9,8 +9,6 @@
 
 
 import sys
-#sys.path.append('..') # To import libMyTTS
-
 import os
 import re
 import libMySTT
@@ -29,8 +27,6 @@ def get_text_files(root):
 
 
 if __name__ == "__main__":
-    #hs = libMyTTS.hs_dict
-    
     textfiles = get_text_files(sys.argv[1])
     
     num_errors = 0
@@ -42,7 +38,7 @@ if __name__ == "__main__":
                 # Remove speaker tag
                 speaker_id_match = libMySTT.SPEAKER_ID_PATTERN.search(line)
                 if speaker_id_match:
-                    speaker_id = speaker_id_match[1]
+                    #speaker_id = speaker_id_match[1]
                     start, end = speaker_id_match.span()
                     line = line[:start] + line[end:]
                 
@@ -52,10 +48,10 @@ if __name__ == "__main__":
                 if line.startswith('#'):
                     continue
                     
-                corrected, errors = libMySTT.get_corrected_sentence(line)
+                correction, errors = libMySTT.get_correction(line)
                 num_errors += errors
                 if errors:
-                    print(f"[{num_line}] {corrected} [{line.strip()}]")
+                    print(f"[{num_line}] {correction} [{line.strip()}]")
                         
     print(f"{num_errors} spelling mistakes")
             

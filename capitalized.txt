@@ -8,6 +8,8 @@ Amerika
 Amy
 Andrew  AN N D R OU
 Anna
+Mediterane
+Gaza
 Aostralia
 Arvorig
 Celsius S EH L S I U S
@@ -40,9 +42,11 @@ Kmer
 Montego
 Annaig
 Maiwenn
+Meksik
 Bagan
 Bretoned
 Japan
+Garaez
 Janedig
 Japaned
 Vandela
@@ -61,10 +65,12 @@ Alexandra   A L EH K S AN D R A
 Nobel
 Walter
 Angela  AN N J E L A
+Aljeri
 Oliver  O L I V EU R
 Nelson  N EH L S OH N
 Mandela
 Birmania
+Sisjordania
 Ejipt
 Virmania
 Xavier  G Z A V I E
@@ -155,6 +161,13 @@ Meurzh
 Microsoft   M I K R O S OH F T
 Montroulez
 Okitania
+Palestin
+Balestin
+Bethleem	B E T L E EH M
+Palestina
+Balestina
+Pierre	P I EH R
+Sarah	S A R A
 Tolosa
 Morwenna
 Mumbai  M OU M B A I
@@ -178,7 +191,6 @@ Plouzane
 Pompei
 Roazhon
 Ronan
-Rouantelezh-Unanet
 Rusia
 Bourdel
 Salem
@@ -214,10 +226,13 @@ Vincent V EN S AN
 Voustoer
 Vrest
 Arya
+Duval
+Uhelgoad
 Rio
 Oural
 Skosiz
 Breizhiz
+Kreiz Breizh
 Washington  W A CH I N G T OH N
 Weltaz
 Wengamp

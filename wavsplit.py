@@ -24,9 +24,9 @@ from libMySTT import *
 
 def play_segment_text(idx, song, segments, text, speed):
     if idx < len(text):
-        corrected, _ = get_corrected_sentence(text[idx])
-        print(f"{{{speakers[idx]}}} {corrected}")
-        print(f"[{text[idx]}]")
+        correction, _ = get_correction(text[idx])
+        print(f"{{{speakers[idx]}}} {correction}")
+        #print(f"[{text[idx]}]")
     play_segment(idx, song, segments, speed)
 
 
