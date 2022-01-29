@@ -2,8 +2,13 @@
 # -*- coding: utf-8 -*-
 
 """
- Author:        Gweltaz Duval-Guennoc
- Last modified: 28-01-2022
+    File:       verify_text_files.py
+    
+    Check spelling in every text file in folder and subfolders
+    Prompt for new found acronyms
+    
+    
+    Author:     Gweltaz Duval-Guennoc
  
 """
 
@@ -24,7 +29,6 @@ def get_text_files(root):
             if name.endswith('.txt'):
                 textfiles.append(os.path.join(dirpath, name))
     return textfiles
-
     
 
 
@@ -65,4 +69,3 @@ if __name__ == "__main__":
                 num_errors -= 1
     
     print(f"{num_errors} spelling mistakes")
-            

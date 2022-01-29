@@ -38,6 +38,18 @@ ACRONYM_PATH = os.path.join(ROOT, "acronym_lexicon.txt")
 SPEAKER_ID_PATTERN = re.compile(r'{([-\'\w]+)}')
 
 
+verbal_tics = {
+    'euh'   :   'OE',
+    'eba'   :   'E B A',
+    'kwa'   :   'K W A',
+    'beñ'   :   'B EN',
+    'boñ'   :   'B ON',
+    'oh'    :   'O',
+    'ah'    :   'A',
+    'bah'   :   'B A',
+}
+
+
 punctuation = (',', '.', ';', '?', '!', ':', '«', '»', '"', '”', '“', '(', ')', '…', '–')
 
 
@@ -53,14 +65,15 @@ w2f = {
     'd'     :   'D',
     'e'     :   'E',        # spErEd
     'ê'     :   'E',        # gÊr
+    "ec'h"  :   'EH X',     # nec'h
     'ei'    :   'EY',       # kEIn      # could replace with (EH I) maybe ?
-    'eu'    :   'EU',       # lEUn
-    'eü'    :   'E U',      # EÜrus
-    'er.'   :   'EH R',     # hantER
+    'el.'   :   'EH L',     # broadEL
     'em'    :   'EH M',     # lEMm
     'eñ'    :   'EN',       # chEÑch
     'enn'   :   'EH N',     # lENN
-    "ec'h"  :   'EH X',     # nec'h
+    'er.'   :   'EH R',     # hantER
+    'eu'    :   'EU',       # lEUn
+    'eü'    :   'E U',      # EÜrus
     'f'     :   'F',
     'g'     :   'G',
     'gn'    :   'GN',       # miGNon
@@ -89,13 +102,17 @@ w2f = {
     'orr'   :   'O R',      # gORRe
     'p'     :   'P',
     'r'     :   'R',
+    'rr'    :   'R',
     's'     :   'S',
     't'     :   'T',
     'u'     :   'U',        # tUd
     'uñ'    :   'UN',       # pUÑs
-    'un.'   :   'OE N',     # UN dra
-    'ul.'   :   'OE L',     # UL labous
-    'ur.'   :   'OE R',     # UR vag
+    '.un.'  :   'OE N',     # UN dra
+    '.ul.'  :   'OE L',     # UL labous
+    '.ur.'  :   'OE R',     # UR vag
+    "'un."  :   'OE N',     # d'UN
+    "'ur."  :   'OE R',     # d'UR
+    "'ul."  :   'OE L',     # d'UL
     'v'     :   'V',
     'v.'    :   'O',        # beV
     'w'     :   'W',
@@ -139,17 +156,16 @@ acr2f = {
 
 
 phonemes = set()
-for val in list(w2f.values()) + list(acr2f.values()):
+for val in list(w2f.values()) + list(acr2f.values()) + list(verbal_tics.values()):
     for tok in val.split():
         phonemes.add(tok)
-
 
 
 
 def word2phonetic(word):
     head = 0
     phonemes = []
-    word = '.' + word.strip().replace('-', '.') + '.'
+    word = '.' + word.strip().lower().replace('-', '.') + '.'
     while head < len(word):
         for i in (4, 3, 2, 1):
             token = word[head:head+i].lower()
@@ -170,7 +186,7 @@ def get_hunspell_dict():
     with open(HS_ADD_PATH, 'r') as f:
         for w in f.readlines():
             hs.add(w.strip())
-    for w in ['euh', 'eba', 'kwa', 'beñ', 'boñ', 'oh']:
+    for w in verbal_tics:
         hs.add(w)
     return hs
 
@@ -199,14 +215,17 @@ def get_capitalized_dict():
     """
         Returns a set of lower case names (that should be capitalized)
     """
-    capitalized = set()
+    capitalized = dict()
     with open(CAPITALIZED_PATH, 'r') as f:
         for l in f.readlines():
             l = l.strip()
             if l.count(' ') > 2 and not '\t' in l:
                 print("Error in", CAPITALIZED_PATH)
                 print(f'No tabs in line "{l}"')
-            capitalized.add(l.strip().split('\t')[0].lower())
+            w, *pron = l.strip().split('\t')
+            if not pron:
+                pron = word2phonetic(w)
+            capitalized[w.lower()] = pron
     return capitalized
 
 capitalized = get_capitalized_dict()
@@ -215,15 +234,15 @@ capitalized = get_capitalized_dict()
 
 def get_acronyms_dict():
     """
-        Acronym are stored in UPPER CASE in dictionary
+        Acronyms are stored in UPPER CASE in dictionary
     """
-    acronyms = set()
+    acronyms = dict()
     if os.path.exists(ACRONYM_PATH):
         with open(ACRONYM_PATH) as f:
             for l in f.readlines():
                 if l.startswith('#') or not l: continue
                 acr, *pron = l.split()
-                acronyms.add(acr)
+                acronyms[acr] = pron
     else:
         print("Acronym dictionary not found... creating file")
         open(ACRONYM_PATH, 'a').close()
@@ -270,15 +289,18 @@ def tokenize(sentence):
 
 
 
-def get_cleaned_sentence(sentence):
+def get_cleaned_sentence(sentence, remove_bl_marker=False):
     """
         Return a cleaned sentence, proper to put in text files or corpus
-               and a quality score (ratio of black-listed words)
+               and a quality score (ratio of black-listed words, the lower the better)
     """
+    if not sentence:
+        return '', 0
+    
     lowered_sentence = sentence.lower()
     for mistake in corrected_sentence.keys():
         if mistake in sentence or mistake in lowered_sentence:
-            sentence = sentence.replace(mistake, corrected_sentence[mistake])
+            sentence = sentence.replace(mistake, corrected_sentence[mistake]) # Won't work if mistake is capitalized in original sentence
     
     tokens = []
     num_blacklisted = 0
@@ -286,7 +308,10 @@ def get_cleaned_sentence(sentence):
         lowered_token = token.lower()
         # Ignore black listed words
         if token.startswith('*'):
-            tokens.append(token[1:])
+            if remove_bl_marker:
+                tokens.append(token[1:])
+            else:
+                tokens.append(token)
             num_blacklisted += 1
         elif lowered_token in corrected:
             tokens.append(corrected[lowered_token])
@@ -298,6 +323,8 @@ def get_cleaned_sentence(sentence):
                 num_blacklisted += 1
         else:
             tokens.append(lowered_token)
+    if not tokens:
+        return '', 1
     return ' '.join(tokens), float(num_blacklisted)/len(tokens)
 
 

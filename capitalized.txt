@@ -6,12 +6,14 @@ Alamagn
 Alaska
 Alexandra	A L EH K S AN D R A
 Aljeri
+Aljeria
 Alpoù
 Amerika
 Amy
 Ananda
 Andrew	AN N D R OU
 Angela	AN N J E L A
+Anjela
 Angkor
 Anna
 Annaig
@@ -86,7 +88,7 @@ Gerne
 Gilbert	J I L B EH R
 Google	G OU G EU L
 Goulven
-Gweltaz
+Gweltaz	G W EH L T A S
 Gwenc'hlan
 Gwened
 Gwener
@@ -131,6 +133,17 @@ Keraotred
 Kergelenn
 Kerlouan
 Kerzu
+Jeruzalem
+Trump	T R OE M P
+Lun
+Dilun
+Dimeurzh
+Merc'her
+Dimerc'her
+Diriaou
+Sadorn
+Disadorn
+Disul
 Kmer
 Kolombia
 Komborn
@@ -167,6 +180,8 @@ Morwenna
 Mumbai	M OU M B A I
 Myriam
 Naoned
+Rostren
+Groñvel
 Napoleon
 Natacha
 Nedeleg
@@ -244,7 +259,7 @@ Vretoned
 Walter
 Wangari
 Washington	W A CH I N G T OH N
-Weltaz
+Weltaz	W EH L T A S
 Wengamp
 Xavier	G Z A V I E
 Yann

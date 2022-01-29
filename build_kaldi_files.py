@@ -23,44 +23,15 @@ from libMySTT import *
 speakers_gender = {
     'nolwenn_korbell'   : 'f',
     'maryvonne_berthou' : 'f',
-    'maina_audran'  : 'f',
-    'claude_an_du'  : 'f',
-    'roger_an_du'   : 'm',
-    'yann_bijer'    : 'm',
-    'bob_simon'     : 'm',
+    'maina_audran'      : 'f',
+    'claude_an_du'      : 'f',
+    'roger_an_du'       : 'm',
+    'yann_bijer'        : 'm',
+    'bob_simon'         : 'm',
     'jean-mari_ollivier': 'm',
+    'jeannot_flageul'   : 'm',
+    'maelle_ausias'     : 'f',
 }
-    
-
-
-
-
-def prompt_acronym_phon(w, wav_filename, i):
-    """
-        w: Acronym
-        i: segment number in audiofile (from 'split' file) 
-    """
-    guess = ' '.join([acr2f[l] for l in w])
-    print(f"Phonetic proposition for '{w}' : {guess}")
-    while True:
-        answer = input("Press 'y' to validate, 'l' to listen or write different prononciation: ").strip().upper()
-        if not answer:
-            continue
-        if answer == 'Y':
-            return guess
-        if answer == 'L':
-            split_filename = wav_filename[:-3] + 'split'
-            segments = load_segments(split_filename)
-            song = AudioSegment.from_wav(wav_filename)
-            play_segment(i, song, segments, 1.5)
-            continue
-        valid = True
-        for phoneme in answer.split():
-            if phoneme not in phonemes:
-                print("Error : phoneme not in", ' '.join(phonemes))
-                valid = False
-        if valid :
-            return answer
 
 
 
@@ -79,55 +50,77 @@ def parse_data(rep):
     wav_filename = os.path.abspath(os.path.join(rep, recording_id + '.wav'))
     assert os.path.exists(wav_filename), f"ERROR: no wave file found for {recording_id}"
     
+    make_corpus = True
+    corpus_filename = os.path.abspath(os.path.join(rep, recording_id + '.cor'))
+    if os.path.exists(corpus_filename):
+        make_corpus = False
+    
     text = []
     speaker_ids = []
     speaker_id = "unnamed"
     with open(text_filename, 'r') as f:
-        n_line = 0
         for l in f.readlines():
             l = l.strip()
-            if l.startswith('#'):
+            if not l or l.startswith('#'):
                 continue
             
             # Extract speaker id
             speaker_id_match = SPEAKER_ID_PATTERN.search(l)
             if speaker_id_match:
                 speaker_id = speaker_id_match[1]
+                speakers.add(speaker_id)
                 start, end = speaker_id_match.span()
                 l = l[:start] + l[end:]
+                l = l.strip()
             
-            tokens = tokenize(l)
-            
-            if tokens:
+            cleaned = get_cleaned_sentence(l)[0]      
+            if cleaned:
                 speaker_ids.append(speaker_id)
-                text.append(' '.join(tokens).replace('*', ''))
+                text.append(cleaned.replace('*', ''))
                 # Add words to lexicon
-                for w in tokens:
+                for w in cleaned.split():
                     # Remove black-listed words (beggining with '*')
                     if w.startswith('*'):
+                        pass
+                    elif w in verbal_tics:
+                        pass
+                    elif is_acronym(w):
+                        pass
+                    elif w.lower() in capitalized:
+                        pass
+                    else: regular_words.add(w)
+            
+            # Add sentences to corpus
+            if make_corpus:
+                for sentence in l.split('.'):
+                    if not sentence:
                         continue
-                    if is_acronym(w):
-                        if w in acronyms:
-                            acronyms[w][1].append(n_line)
-                        else:
-                            phon = prompt_acronym_phon(w, wav_filename, n_line)
-                            acronyms[w] = [phon, [n_line]]
-                    else: lexicon_words.add(w)
-                n_line += 1
-     
-    segments_delim = []
-    with open(split_filename, 'r') as f:
-        for l in f.readlines():
-            l = l.strip()
-            segments_delim.append(l.split())
+                    tokens = []
+                    cleaned, bl_score = get_cleaned_sentence(sentence)
+                    if not cleaned:
+                        continue
+                    # Reject if to many black-listed words in sentence
+                    if bl_score > 0.2:
+                        print(f"rejected ({bl_score}): {cleaned}")
+                        continue
+                    for t in cleaned.split():
+                        if not t in verbal_tics:
+                            tokens.append(t)
+                    corpus.append(' '.join(tokens).replace('*', ''))
     
-    assert len(text) == len(segments_delim), \
+    if not make_corpus:
+        with open(corpus_filename, 'r') as f:
+            for l in f.readlines():
+                corpus.append(l.strip())
+     
+    segments = load_segments(split_filename)
+    assert len(text) == len(segments), \
         "number of utterances in text file doesn't match number of segments in split file"
 
     segments_data = []
     text_data = []
     utt2spk_data = []
-    for i, s in enumerate(segments_delim):
+    for i, s in enumerate(segments):
         start = int(s[0]) / 1000
         stop = int(s[1]) / 1000
         utterance_id = f"{speaker_ids[i]}-{recording_id}-{floor(100*start):0>7}_{ceil(100*stop):0>7}"
@@ -145,19 +138,9 @@ if __name__ == "__main__":
     text = []
     segments = []
     utt2spk = []
-    lexicon_words = set()
-    
-    # Parse acronym lexicon
-    acronyms = dict()
-    if os.path.exists(acronym_filename):
-        with open(acronym_filename) as f:
-            for l in f.readlines():
-                if l.startswith('#') or not l: continue
-                acr, *pron = l.split()
-                # Each acronym in file is supposed to be unique
-                acronyms[acr] = [' '.join(pron), []]  # First field is phonetic prononciation, second is used to list locations in text file
-    else:
-        print("No acronym lexicon found...")
+    regular_words = set()
+    speakers = set()
+    corpus = []
     
     if os.path.isdir(sys.argv[1]):
         rep = sys.argv[1]
@@ -180,13 +163,7 @@ if __name__ == "__main__":
     else:
         print("Argument should be a directory")
         sys.exit(1)
-    
-    print("acronyms :", ' '.join(acronyms))
-    with open(acronym_filename, 'w') as f:
-        for acr in sorted(acronyms.keys()):
-            f.write(f"{acr}\t{acronyms[acr][0]}\n")
             
-    
     if not os.path.exists('data'):
         os.mkdir('data')
     
@@ -219,8 +196,8 @@ if __name__ == "__main__":
     fname = os.path.join(save_dir, 'spk2gender')
     print(f"building file {fname}")
     with open(fname, 'w') as f:
-        for speaker_id, speaker_gender in sorted(speakers_gender.items()):
-            f.write(f"{speaker_id}\t{speaker_gender}\n")
+        for speaker in sorted(speakers):
+            f.write(f"{speaker}\t{speakers_gender[speaker]}\n")
     
     # Build 'wav.scp'
     fname = os.path.join(save_dir, 'wav.scp')
@@ -232,51 +209,53 @@ if __name__ == "__main__":
     
     if not os.path.exists(os.path.join('data', 'local')):
         os.mkdir(os.path.join('data', 'local'))
-    
     dict_dir = os.path.join('data', 'local', 'dict_nosp')
     if not os.path.exists(dict_dir):
         os.mkdir(dict_dir)
-    else:
-        if os.path.exists(os.path.join(dict_dir, 'lexicon.txt')):
-            print('lexicon.txt file already exists')
-            with open(os.path.join(dict_dir, 'lexicon.txt')) as f:
-                for l in f.readlines()[3:]:
-                    lexicon_words.add(l.strip().split()[0])
-    
     
     # Lexicon.txt
-    print('building file data/local/dict_nosp/lexicon.txt')
-    with open('data/local/dict_nosp/lexicon.txt', 'w') as f:
-        f.write(f"!SIL SIL\n<SPOKEN_NOISE> SPN\n<UNK> SPN\n")
-        for w in sorted(lexicon_words):
-            f.write(f"{w} {' '.join(word2phonetic(w))}\n")
-    
+    lexicon_path = os.path.join(dict_dir, 'lexicon.txt')
+    if os.path.exists(lexicon_path):
+        print('lexicon.txt file already exists')
+        old_lexicon = set()
+        with open(lexicon_path, 'r') as f:
+            for l in f.readlines()[3:]:
+                old_lexicon.add(l.split()[0])
+        with open(lexicon_path, 'a') as f:
+            for w in sorted(regular_words):
+                if w not in old_lexicon:
+                    f.write(f"{w} {' '.join(word2phonetic(w))}\n")
+    else:    
+        print(f"building file {lexicon_path}")
+        with open(lexicon_path, 'w') as f:
+            f.write(f"!SIL SIL\n<SPOKEN_NOISE> SPN\n<UNK> SPN\n")
+            for w in sorted(regular_words):
+                f.write(f"{w} {' '.join(word2phonetic(w))}\n")
+            for w in acronyms:
+                f.write(f"{w} {' '.join(acronyms[w])}\n")
+            for w in capitalized:
+                f.write(f"{w.capitalize()} {' '.join(capitalized[w])}\n")
+            for w in verbal_tics:
+                f.write(f"{w} {verbal_tics[w]}\n")
     
     # nonsilence_phones.txt
-    phones = []
-    for p in w2f.values():
-        phones.extend(p.split())
-    phones = sorted(set(phones))
     print('building file data/local/dict_nosp/nonsilence_phones.txt')
     with open('data/local/dict_nosp/nonsilence_phones.txt', 'w') as f:
-        for p in phones:
+        for p in sorted(phonemes):
             f.write(f'{p}\n')
-    
     
     # silence_phones.txt
     print('building file data/local/dict_nosp/silence_phones.txt')
     with open('data/local/dict_nosp/silence_phones.txt', 'w') as f:
         f.write(f'SIL\noov\nSPN\n')
     
-    
     # optional_silence.txt
     print('building file data/local/dict_nosp/optional_silence.txt')
     with open('data/local/dict_nosp/optional_silence.txt', 'w') as f:
         f.write('SIL\n')
     
-    
     # Copy text corpus
     with open('data/local/corpus.txt', 'a') as f:
-        for l in text:
-            f.write(f"{l[1]}\n")
+        for l in corpus:
+            f.write(f"{l}\n")
     
