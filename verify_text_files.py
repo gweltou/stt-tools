@@ -17,6 +17,7 @@ import sys
 import os
 import re
 import libMySTT
+from colorama import Style
 
 
 
@@ -58,7 +59,8 @@ if __name__ == "__main__":
                 correction, errors = libMySTT.get_correction(line)
                 num_errors += errors
                 if errors:
-                    print(f"[{num_line}] {correction} [{line.strip()}]")
+                    print(f"[{num_line}] {correction}")
+                    print(f"{Style.DIM}[{line.strip()}]{Style.RESET_ALL}")
         
         # extract acronyms
         extracted_acronyms = libMySTT.extract_acronyms(file)

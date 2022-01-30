@@ -77,6 +77,7 @@ def parse_data(rep):
             if cleaned:
                 speaker_ids.append(speaker_id)
                 text.append(cleaned.replace('*', ''))
+                
                 # Add words to lexicon
                 for w in cleaned.split():
                     # Remove black-listed words (beggining with '*')
@@ -95,17 +96,23 @@ def parse_data(rep):
                 for sentence in l.split('.'):
                     if not sentence:
                         continue
-                    tokens = []
                     cleaned, bl_score = get_cleaned_sentence(sentence)
                     if not cleaned:
                         continue
-                    # Reject if to many black-listed words in sentence
+                    # Ignore if to many black-listed words in sentence
                     if bl_score > 0.2:
                         print(f"rejected ({bl_score}): {cleaned}")
                         continue
+                    
+                    tokens = []
                     for t in cleaned.split():
                         if not t in verbal_tics:
                             tokens.append(t)
+                    
+                    # Ignore of sentence is too short
+                    if len(tokens) < 3:
+                        continue
+                    
                     corpus.append(' '.join(tokens).replace('*', ''))
     
     if not make_corpus:

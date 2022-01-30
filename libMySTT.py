@@ -61,7 +61,7 @@ w2f = {
     'b'     :   'B',
     'd'     :   'D',
     'ch'    :   'CH',       # CHomm
-    "c'h"   :   'X',
+    "c'h"   :   'X',        # 
     'd'     :   'D',
     'e'     :   'E',        # spErEd
     'ê'     :   'E',        # gÊr
