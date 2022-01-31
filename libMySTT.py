@@ -34,8 +34,9 @@ CORRECTED_PATH = os.path.join(ROOT, "corrected.txt")
 CAPITALIZED_PATH = os.path.join(ROOT, "capitalized.txt")
 JOINED_PATH = os.path.join(ROOT, "joined.txt")
 ACRONYM_PATH = os.path.join(ROOT, "acronym_lexicon.txt")
+LEXICON_ADD_PATH = os.path.join(ROOT, "lexicon_add.txt")
 
-SPEAKER_ID_PATTERN = re.compile(r'{([-\'\w]+)}')
+SPEAKER_ID_PATTERN = re.compile(r'{([-\w]+)}')
 
 
 verbal_tics = {

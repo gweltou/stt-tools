@@ -46,7 +46,6 @@ Bourdel
 Brasparzh
 Breizh
 Breizhiz
-Breizh-Veur
 Brest
 Bretoned
 Celsius	S EH L S I U S
@@ -118,6 +117,8 @@ Karaez
 Katalonia
 Katell
 Kembre
+Jean	J AN N
+Baptiste	B A T I S T
 Kembreiz
 Kemper
 Kemperiz
@@ -147,13 +148,15 @@ Disul
 Kmer
 Kolombia
 Komborn
-Kreiz Breizh
 Kyoto
 Landerne
 Lannuon
 Lena
 Lisbon
 Liza
+Nairobi
+François	F R AN S O A
+Martin	M A R T EN
 Lizig
 Loeiz
 Londrez
@@ -186,7 +189,6 @@ Napoleon
 Natacha
 Nedeleg
 Nelson	N EH L S OH N
-New York	N I OU I OH R K
 Nicolas	N I K O L A
 Nobel
 Nolwenn

@@ -31,6 +31,12 @@ speakers_gender = {
     'jean-mari_ollivier': 'm',
     'jeannot_flageul'   : 'm',
     'maelle_ausias'     : 'f',
+    'paotr1'            : 'm',
+    'paotr2'            : 'm',
+    'paotr3'            : 'm',
+    'plach1'            : 'f',
+    'plach2'            : 'f',
+    'plach3'            : 'f',
 }
 
 
@@ -44,7 +50,7 @@ def parse_data(rep):
     assert split_filename, f"ERROR: no split file found in {rep}"
     
     recording_id = os.path.split(split_filename)[1].split(os.path.extsep)[0]
-    print(recording_id)
+    print(f"== {recording_id} ==")
     text_filename = os.path.abspath(os.path.join(rep, recording_id + '.txt'))
     assert os.path.exists(text_filename), f"ERROR: no text file found for {recording_id}"
     wav_filename = os.path.abspath(os.path.join(rep, recording_id + '.wav'))
@@ -67,7 +73,11 @@ def parse_data(rep):
             # Extract speaker id
             speaker_id_match = SPEAKER_ID_PATTERN.search(l)
             if speaker_id_match:
-                speaker_id = speaker_id_match[1]
+                speaker_id = speaker_id_match[1].lower()
+                #if speaker_id.startswith("paotr"):
+                #    pass
+                #elif speaker_id.startswith("plach"):
+                #    pass
                 speakers.add(speaker_id)
                 start, end = speaker_id_match.span()
                 l = l[:start] + l[end:]
@@ -130,11 +140,19 @@ def parse_data(rep):
     for i, s in enumerate(segments):
         start = int(s[0]) / 1000
         stop = int(s[1]) / 1000
+        speaker_gender = speakers_gender[speaker_ids[i]]
+        if speaker_gender == 'm':
+            global male_audio_length
+            male_audio_length += stop - start
+        elif speaker_gender == 'f':
+            global female_audio_length
+            female_audio_length += stop - start
         utterance_id = f"{speaker_ids[i]}-{recording_id}-{floor(100*start):0>7}_{ceil(100*stop):0>7}"
         text_data.append((utterance_id, text[i]))
         segments_data.append(f"{utterance_id}\t{recording_id}\t{floor(start*100)/100}\t{ceil(stop*100)/100}\n")
         utt2spk_data.append(f"{utterance_id}\t{speaker_ids[i]}\n")
     
+    print()
     return recording_id, wav_filename, text_data, segments_data, utt2spk_data
 
 
@@ -148,6 +166,8 @@ if __name__ == "__main__":
     regular_words = set()
     speakers = set()
     corpus = []
+    male_audio_length = 0.0
+    female_audio_length = 0.0
     
     if os.path.isdir(sys.argv[1]):
         rep = sys.argv[1]
@@ -238,6 +258,9 @@ if __name__ == "__main__":
             f.write(f"!SIL SIL\n<SPOKEN_NOISE> SPN\n<UNK> SPN\n")
             for w in sorted(regular_words):
                 f.write(f"{w} {' '.join(word2phonetic(w))}\n")
+            with open(LEXICON_ADD_PATH, 'r') as f2:
+                for l in f2.readlines():
+                    f.write(l)
             for w in acronyms:
                 f.write(f"{w} {' '.join(acronyms[w])}\n")
             for w in capitalized:
@@ -266,3 +289,17 @@ if __name__ == "__main__":
         for l in corpus:
             f.write(f"{l}\n")
     
+    print()
+    print("==== STATS ====")
+    total_audio_length = male_audio_length + female_audio_length
+    minutes, seconds = divmod(round(total_audio_length), 60)
+    hours, minutes = divmod(minutes, 60)
+    print(f"- Total audio length:\t{hours} h {minutes}'{seconds}''")
+    minutes, seconds = divmod(round(male_audio_length), 60)
+    hours, minutes = divmod(minutes, 60)
+    pc = round(100*male_audio_length/total_audio_length)
+    print(f"- Male speakers:\t{hours} h {minutes}'{seconds}''\t{pc}%")
+    minutes, seconds = divmod(round(female_audio_length), 60)
+    hours, minutes = divmod(minutes, 60)
+    pc = round(100*female_audio_length/total_audio_length)
+    print(f"- Female speakers:\t{hours} h {minutes}'{seconds}''\t{pc}%")
