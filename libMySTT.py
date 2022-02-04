@@ -33,8 +33,9 @@ HS_ADD_PATH= os.path.join(ROOT, os.path.join("hunspell-dictionary", "add.txt"))
 CORRECTED_PATH = os.path.join(ROOT, "corrected.txt")
 CAPITALIZED_PATH = os.path.join(ROOT, "capitalized.txt")
 JOINED_PATH = os.path.join(ROOT, "joined.txt")
-ACRONYM_PATH = os.path.join(ROOT, "acronym_lexicon.txt")
+ACRONYM_PATH = os.path.join(ROOT, "acronyms.txt")
 LEXICON_ADD_PATH = os.path.join(ROOT, "lexicon_add.txt")
+LEXICON_REPLACE_PATH = os.path.join(ROOT, "lexicon_replace.txt")
 
 SPEAKER_ID_PATTERN = re.compile(r'{([-\w]+)}')
 
@@ -163,7 +164,16 @@ for val in list(w2f.values()) + list(acr2f.values()) + list(verbal_tics.values()
 
 
 
+lexicon = dict()
+with open(LEXICON_REPLACE_PATH, 'r') as f:
+    for l in f.readlines():
+        w, *phon = l.split()
+        lexicon[w] = phon
+
 def word2phonetic(word):
+    if word in lexicon:
+        return lexicon[word]
+    
     head = 0
     phonemes = []
     word = '.' + word.strip().lower().replace('-', '.') + '.'
@@ -468,6 +478,14 @@ def get_audiofile_info(filename):
     return r['streams'][0]
 
 
+
+def get_audiofile_length(filename):
+    """
+        Get audio file length in milliseconds
+    """
+    return float(get_audiofile_info(filename)['duration'])
+
+
     
 def play_with_ffplay(seg, speed=1.0):
     with NamedTemporaryFile("w+b", suffix=".wav") as f:
@@ -499,7 +517,7 @@ def concatenate_audiofiles(file_list, out_filename, remove=True):
     with open(file_list_filename, 'w') as f:
         f.write('\n'.join([f"file '{wav}'" for wav in file_list]))
     
-    subprocess.call(['ffmpeg', #'-v', 'panic',
+    subprocess.call(['ffmpeg', '-v', 'panic',
                      '-f', 'concat',
                      '-safe', '0',
                      '-i', file_list_filename,
