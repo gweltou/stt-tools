@@ -18,8 +18,6 @@ sys.path.append("..")
 from libMySTT import convert_to_wav, concatenate_audiofiles, get_audiofile_length
 
 
-stage = 1
-
 
 # Modify those to add/remove training and test data
 TRAINING_DATA = ["dev.tsv", "train.tsv"]
@@ -31,15 +29,11 @@ if __name__ == "__main__":
     if len(sys.argv) != 3:
         print(f"usage: {sys.argv[0]} FOLDER data_file.tsv")
     
-    if len(sys.argv) == 2 and sys.argv[1].isdigit():
-        stage = int(sys.argv[1])
-    
     tar_file = [f for f in os.listdir() if f.endswith(".tar.gz")][0]
     with tarfile.open(tar_file, 'r') as tar:
         data_folder = tar.getnames()[0]
-    print(data_folder)
     
-    if stage <= 0:
+    if not os.path.exists(data_folder):
         # Untar archive
         tar.extractall()
         #os.system("tar xvf cv-corpus-*-br.tar.gz")
@@ -77,10 +71,10 @@ if __name__ == "__main__":
             print("File not found:", data_file)
         
         speakers = set([l[0] for l in data])
+        print(f"{len(speakers)} speakers found...")
         for speaker in speakers:
             # for each speaker, create a folder an concatenate each of its utterances in one audio file
             print(speaker, end=' ')
-            speakers.remove(speaker)
             
             utterances = [utt for utt in data if utt[0] == speaker]
             
@@ -96,7 +90,10 @@ if __name__ == "__main__":
             speaker_folder = os.path.join(DST_FOLDER, speaker)
             if not os.path.exists(speaker_folder):
                 os.mkdir(speaker_folder)
-                #continue
+            else:
+                # Speaker has already been parsed
+                print('|')
+                continue
             
             audiofiles = []
             text = []
