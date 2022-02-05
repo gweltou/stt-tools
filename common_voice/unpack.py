@@ -2,32 +2,32 @@
 # -*- coding: utf-8 -*-
 
 """
- Author:        Gweltaz Duval-Guennoc
- Last modified: 2-01-2022
+    Author:        Gweltaz Duval-Guennoc
+ 
+    Unpack Mozilla's Common Voice dataset and prepare data
+    to be used for Kaldi framework
  
 """
 
 
 import sys
 import os
-import subprocess
-#import json
 import tarfile
+from pydub import AudioSegment
 
 sys.path.append("..")
-from libMySTT import convert_to_wav, concatenate_audiofiles, get_audiofile_length
+import libMySTT
 
 
 
-# Modify those to add/remove training and test data
-TRAINING_DATA = ["dev.tsv", "train.tsv"]
-TEST_DATA = ["test.tsv"]
-
+spk2gender_file = "spk2gender"
+blacklist_file = "blacklist.txt"
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print(f"usage: {sys.argv[0]} FOLDER data_file.tsv")
+    if len(sys.argv) < 3:
+        print(f"usage: {sys.argv[0]} FOLDER data_file.tsv [data_file2.tsv...]")
+        sys.exit(1)
     
     tar_file = [f for f in os.listdir() if f.endswith(".tar.gz")][0]
     with tarfile.open(tar_file, 'r') as tar:
@@ -38,24 +38,36 @@ if __name__ == "__main__":
         tar.extractall()
         #os.system("tar xvf cv-corpus-*-br.tar.gz")
     
+    speakers_gender = dict()
+    if os.path.exists(spk2gender_file):
+        with open(spk2gender_file, 'r') as f:
+            for l in f.readlines():
+                speaker, gender = l.split()
+                speakers_gender[speaker] = gender
+    else:
+        print("spk2gender file not found")
     
-    #DST_FOLDER = sys.argv[1]
-    DST_FOLDER = "train"
+    blacklisted_speakers = []
+    if os.path.exists(blacklist_file):
+        with open(blacklist_file, 'r') as f:
+            blacklisted_speakers = [l.strip() for l in f.readlines()]
+    else:
+        print("Blacklist file not found")
     
-    #data_files = sys.argv[2]
-    #data_files = TRAINING_DATA + TEST_DATA
+    dest_folder = sys.argv[1]
+    data_files = sys.argv[2:]
+    
     clips_folder = os.path.join(data_folder, "clips")
-    speakers_gender = set()
+    ungendered_speakers = set()
     parsed_audiofiles = set()   # To make sure every utterance is used only once in datasets
     
-    if not os.path.exists(DST_FOLDER):
-        os.mkdir(DST_FOLDER)
+    if not os.path.exists(dest_folder):
+        os.mkdir(dest_folder)
     
-    for data_file in TRAINING_DATA:
+    for data_file in data_files:
         data = []
         cumul_time = 0
         
-        data_file = os.path.join(data_folder, data_file)
         print(data_file)
         if os.path.exists(data_file):
             # client_id, path, sentence, up_votes, down_votes, age, gender, accent
@@ -69,8 +81,11 @@ if __name__ == "__main__":
                     l = f.readline().strip()
         else:
             print("File not found:", data_file)
+            continue
         
         speakers = set([l[0] for l in data])
+        for s in blacklisted_speakers:
+            speakers.discard(s)
         print(f"{len(speakers)} speakers found...")
         for speaker in speakers:
             # for each speaker, create a folder an concatenate each of its utterances in one audio file
@@ -79,15 +94,19 @@ if __name__ == "__main__":
             utterances = [utt for utt in data if utt[0] == speaker]
             
             # Filter out gwenedeg from training data
-            if utterances[0][7] == 'gwenedeg (skipping)':
-                print('gwenedeg')
+            if utterances[0][7] == "gwenedeg":
+                print("gwenedeg (skipping)")
                 continue
             
-            if utterances[0][6] in ('female', 'male'):
+            if speaker in speakers_gender:
+                print(f'[{speakers_gender[speaker]}]', end=' ')
+            elif utterances[0][6] in ('female', 'male'):
                 print(f'[{utterances[0][6][0]}]', end=' ')
-                speakers_gender.add((speaker, utterances[0][6][0]))
+                speakers_gender[speaker] = utterances[0][6][0]
+            else:
+                ungendered_speakers.add(speaker)
             
-            speaker_folder = os.path.join(DST_FOLDER, speaker)
+            speaker_folder = os.path.join(dest_folder, speaker)
             if not os.path.exists(speaker_folder):
                 os.mkdir(speaker_folder)
             else:
@@ -110,14 +129,15 @@ if __name__ == "__main__":
                 dst = os.path.join(speaker_folder, wav)
                 # Convert to wav
                 if not os.path.exists(dst):
-                    convert_to_wav(src, dst)
+                    libMySTT.convert_to_wav(src, dst)
                 #os.remove(src)
-                nt = t + get_audiofile_length(dst)*1000
+                nt = t + libMySTT.get_audiofile_length(dst)*1000
                 segments.append((int(t), int(nt)))
                 t = nt
                 audiofiles.append(dst)
                 text.append(utt[2])
                 print('.', end='')
+                sys.stdout.flush()
             cumul_time += t
             
             # Text file
@@ -132,14 +152,40 @@ if __name__ == "__main__":
             
             # Concatenate audio files of the same speaker
             out_filename = os.path.join(speaker_folder, speaker+'.wav')
-            if not os.path.exists(out_filename):
-                concatenate_audiofiles(audiofiles, out_filename)
+            if len(audiofiles) == 1:
+                os.rename(audiofiles[0], out_filename)
+            elif not os.path.exists(out_filename):
+                libMySTT.concatenate_audiofiles(audiofiles, out_filename)
             
             print('|')
     
         minutes, seconds = divmod(round(cumul_time/1000), 60)
-        print(f"total clip time kept : {minutes}'{seconds}''")
+        hours, minutes = divmod(minutes, 60)
+        print(f"total clip time kept : {hours}h {minutes}' {seconds}''")
     
-    with open("spk2gender", "w") as f:
-        for sg in speakers_gender:
-            f.write(f"{sg[0]}\t{sg[1]}\n") 
+    
+    for speaker in ungendered_speakers:
+        speaker_folder = os.path.join(dest_folder, speaker)
+        split_file = os.path.join(speaker_folder, speaker+".split")
+        segments = libMySTT.load_segments(split_file)
+        wav_filename = os.path.join(speaker_folder, speaker+'.wav')
+        song = AudioSegment.from_wav(wav_filename)
+        gender = ''
+        i = 0
+        while gender not in ('m', 'f'):
+            libMySTT.play_segment(i, song, segments, 1.0)
+            gender = input(f"{speaker} Male or Female ? ").lower()
+            i = (i+1) % len(segments)
+        speakers_gender[speaker] = gender
+        
+    
+    # spk2gender file
+    previous_speakers = []
+    if os.path.exists(spk2gender_file):
+        with open(spk2gender_file, 'r') as f:
+            previous_speakers = [l.split()[0] for l in f.readlines()]
+    
+    with open(spk2gender_file, 'a') as f:
+        for speaker in speakers_gender:
+            if speaker not in previous_speakers:
+                f.write(f"{speaker}\t{speakers_gender[speaker]}\n") 
