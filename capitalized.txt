@@ -1,36 +1,45 @@
 Abel
+Are
+Kabilia
 Afrika
 Afrikan
 Afrikaned
 Alamagn
 Alaska
 Alexandra	A L EH K S AN D R A
+Alexandre	A L EH K S AN N D R
 Aljeri
 Aljeria
 Alpoù
+Alvarez
+Akitania
 Amerika
 Amy
 Ananda
 Andrew	AN N D R OU
 Angela	AN N J E L A
-Anjela
 Angkor
+Anjela
 Anna
 Annaig
 Aostralia
 Artika
+Korbell K OH R B EH L
 Arvorig
 Arya
 Atlantel
 Azia
+Beethoven	B E T O V OE N
 Bagan
 Balestin
 Balestina
+Baptiste	B A T I S T
 Barbara
 Barcelona	B A R S E L O N A
 Bear
 Beatles	B I T EU L S
 Belgia	B EH L J I A
+Bempont
 Bennsylvania
 Berlin
 Bethleem	B E T L E EH M
@@ -46,33 +55,84 @@ Bourdel
 Brasparzh
 Breizh
 Breizhiz
+Breselien
 Brest
 Bretoned
+Chuck	T CH OE K
 Celsius	S EH L S I U S
 Chennai
+C'henyanad
+Klet
+Kaou
+C'henyaniz
 Chicago	CH I K A G O
 Chili
 C'hrist
 C'hwevrer
 Dailymotion	D EY L I M O CH EU N
 Daniel	D A N I EH L
+Dean	D I N
+Dilun
+Dimerc'her
+Dimeurzh
+Diriaou
+Disadorn
+Deezer	D I Z OE R
+Spotify	S P O T I F A I
+Netflix	N EH T F L I K S
+Suamerikan
+Suamerika
+Disul
 Dominikan
+Donald
 Douarnenez
+Dresden
+Denez
+Abraham A B R A H A M
+Larruen
+Stevenson S T E V EH N S OH N
+Gelted
+Noumea
+Matignon
+Eusa
+Danmark
+Bolivia
+Arno
+Elegoed
+Kaledoniz
+Jura
+Reblochon R EU B L O CH ON
+Geoffrey J O F R E
+Hellfest H EH L F EH S T
+Woodstock W OU D S T OH K
 Duval
+Portland P OH R T L AN N
+Mathias M A T I A S
+Tudwal
+Dudwal
+Lege
+Brieg
+Plerin
+Oregon O R E G ON
 Ebrel
 Eiffel	E F EH L
 Einstein
 Ejipt
 Elena
+Elzas
 Emile	E M I L
 Enora
 Eost
+Eost E S T
 Ernest	EH R N EH S T
 Erwan
 Europa
+Tahiti T A I T I
 Facebook	F EY S B OU K
 Fañch
 Florida
+Françoise	F R AN S O A Z
+François	F R AN S O A
 Frank
 Frañs
 Frederik
@@ -82,11 +142,16 @@ Gauguin	G O G EN
 Gaza
 Gemper
 Genya
+George	J OH R J
+Georges	J OH R J
 Georgia
 Gerne
 Gilbert	J I L B EH R
+Goulc'han
+Kervella
 Google	G OU G EU L
 Goulven
+Groñvel
 Gweltaz	G W EH L T A S
 Gwenc'hlan
 Gwened
@@ -94,8 +159,11 @@ Gwener
 Gwengolo
 Gwennael
 Gwenole
+Gwiskriv
+Harry	A R I
 Herve
 Himalaya
+India
 Indez
 Indiz
 Israel
@@ -104,10 +172,15 @@ Iwerzhon
 Iwerzhoniz
 Jakez
 Janedig
+Jan	J AN
 Japan
 Japaned
+Jean	J AN N
+Jérôme	J E R O M
+Jeruzalem
 Jezuz
 John	D J OH N
+Johnny	D J OH N I
 Kalifornia
 Kambodjia
 Kanada
@@ -117,8 +190,6 @@ Karaez
 Katalonia
 Katell
 Kembre
-Jean	J AN N
-Baptiste	B A T I S T
 Kembreiz
 Kemper
 Kemperiz
@@ -126,25 +197,20 @@ Kemperle
 Kenya
 Kenyanad
 Kenyaniz
-C'henyanad
-C'henyaniz
 Keragan
 Kerampuilh
 Keraotred
 Kergelenn
 Kerlouan
+Gorsika
+Korsika
+Guy G I
+Finland
+Arc'hantina
+Minnesota
+Vande
+Kerne
 Kerzu
-Jeruzalem
-Trump	T R OE M P
-Lun
-Dilun
-Dimeurzh
-Merc'her
-Dimerc'her
-Diriaou
-Sadorn
-Disadorn
-Disul
 Kmer
 Kolombia
 Komborn
@@ -152,25 +218,31 @@ Kyoto
 Landerne
 Lannuon
 Lena
+Leonardo	L E O N A R D O
 Lisbon
 Liza
-Nairobi
-François	F R AN S O A
-Martin	M A R T EN
 Lizig
 Loeiz
 Londrez
-Londrez
+Louis	L OU I
+Luis	L OU I S
+Lun
 Mael
 Maela
 Maiwenn
 Mandalay	M AN N D A L EH
 Mandela
 Maodez
+Here E R E
+Glenmor
+Egin
 Maran
 Mari
 Mariana
+Martin	M A R T EN
 Mary
+Maxime	M A K S I M
+Maya	M A IA
 Mediterane
 Meksik
 Merc'her
@@ -182,9 +254,22 @@ Montroulez
 Morwenna
 Mumbai	M OU M B A I
 Myriam
+Nairobi
+Robert R O B OE R T
+Robert R O B EH R
+Baltimore B A L T I M OH R
+Lou
+Julien J U L I EN
+Goater
+Tintin
+Casterman K A S T EH R M A N
+Christian K R I S T I AN
+Kristian K R I S T I AN
+Loaek
+Balp
+Sebastian
+Meneham
 Naoned
-Rostren
-Groñvel
 Napoleon
 Natacha
 Nedeleg
@@ -196,79 +281,138 @@ Obama
 Okitania
 Olier
 Oliver	O L I V EU R
+Bolonia
 Oriant
 Orion	O R I ON
 Oural
 Palestin
+Langoned
 Palestina
 Pariz
+Bariz
+Pascale	P A S K A L
+Pascal	P A S K A L
+Paskal
 Paul	P OH L
+Pempoull
 Pêr
+Tilos
+Tilosiz
+Egea E J E A
 Perou
 Pierre	P I EH R
 Pleskob
 Pleuwigner
+Ploneiz
 Plougêr
 Plouider
 Plouzane
+Plymouth	P L I M OU S
 Pompei
+Potter	P O T OE R
 Pretoria
 Provañs
 Rio
 Roazhon
 Roma
 Ronan
+Rostren
 Rusia
+Sadorn
 Salem
 Sandra
+Sant
 Saoz
 Saozon
 Sarah	S A R A
 Sheila	CH EH I L A
 Siberia
-Simon	S I M ON
 Simone	S I M OH N
+Simon	S I M ON
 Sina
+Sina CH I N A
 Sisjordania
+Spagn
+David D A V I D
+David D EY V I D
+Luke L U K
+Lucky L U K I
+Titeuf
+Thorgal T OH R G A L
+Jones D J O OU N S
+Tobias
 Skos
 Skosiz
 Smith	S M I S
 Suez
+Segway S EH G OU EH
 Sul
+Bloomberg B L OU M B OE R G
+Suis
 Tangi
+Normandi
+Roger R O J E
+Mark
+Algam
+Jouin J OU EN
+Prod P R OH D
+Mass M A S
+Ropars
+Albert A L B EH R
+Floch F L OH K
+Loig
+Girard J I R A R
+Leborgne L EU B OH R GN
+Guidecca G U I D E K A
+Venezia
+Langoët L AN G O EH T
+Thailand	T A I L AN N D
+Thomas	T O M A
 Tolosa
 Tolstoy	T OH L S T OH I
 Toulon	T OU L ON
+Trevare
+Trump T R OE M P
 Uhelgoad
+Valérie	V A L E R I
 Vandalay	V AN N D A L EH
 Vandela
+Vaxime	V A K S I M
 Vega
 Verc'her
 Veurzh
 Viami
+Stéphanie S T E F A N I
 Vichel	V I CH EH L
 Victor	V I K T OH R
 Vincent	V EN S AN
 Virmaned
 Virmanez
 Virmania
+Marty
+Kanton
+Robotics R O B O T I K S
 Vouda
 Voudaoù
 Voustoer
 Vreizh
+Riou
 Vrest
 Vretoned
 Walter
 Wangari
+Mathilde M A T I L D
 Washington	W A CH I N G T OH N
 Weltaz	W EH L T A S
 Wengamp
 Xavier	G Z A V I E
+Zavier Z A V I E
 Yann
 Yannig
 Yaou
 York
 Youenn
 Youna
+Youtube I OU T U B
 Yuna
 Yves	I V

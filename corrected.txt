@@ -3,6 +3,7 @@ office	ofis
 million	milion
 choari	c'hoari
 àr	war
+àrnezhe	warnezhe
 bezaén	bezañ
 nebuet	nebeut
 france	frañs
@@ -12,6 +13,8 @@ diàr	diwar
 c'whi	c'hwi
 mille 	mil 
 chwi	c'hwi
+marie	Mari
+stéphan	Stefan
 ac'hanoch	ac'hanoc'h
 télégramme	telegram
 nozvat	noz vat
@@ -41,6 +44,7 @@ stañk	stank
 avañtur	avantur
 seitekved	seitekvet
 ugentved	ugentvet
+èl	evel
 hanterkantved	hanterkantvet
 awalc'h	a-walc'h
 marmoused	marmouzed
@@ -78,3 +82,12 @@ ma'm	m'am
 me'm	m'em
 me 'm eus	me'm eus
  'm eus	 m'eus
+%	dregant
+1/2	hanter
+cl	kantilitr
+5	pemp
+6	c'hwec'h
+7	seiz
+8	eizh
+9	nav
+10	dek

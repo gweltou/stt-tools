@@ -7,6 +7,8 @@ a us
 a wechoù
 a walc'h
 a ziwar
+a gleiz
+a zehoù
 
 e barzh
 e pad
@@ -28,6 +30,8 @@ war dro
 war raok
 war c'horre
 
+kemend all
+
 tad kozh
 mamm gozh
 
@@ -40,6 +44,14 @@ Penn ar Bed
 Bro Saoz
 Sant Nazer
 Rouantelezh Unanet
+Stadoù Unanet
 Su Afrikaned
-* se
+Breizh-Izel
+Breizh-Uhel
+Kaledonia-Nevez
+
+* se (!gant se)
 * mañ
+
+Su Azia
+#Deomp 'ta

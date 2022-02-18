@@ -230,10 +230,7 @@ def get_capitalized_dict():
     with open(CAPITALIZED_PATH, 'r') as f:
         for l in f.readlines():
             l = l.strip()
-            if l.count(' ') > 2 and not '\t' in l:
-                print("Error in", CAPITALIZED_PATH)
-                print(f'No tabs in line "{l}"')
-            w, *pron = l.strip().split('\t')
+            w, *pron = l.strip().split()
             if not pron:
                 pron = word2phonetic(w)
             capitalized[w.lower()] = pron
@@ -367,12 +364,12 @@ def get_correction(sentence):
             spell_error = True
             tokens.append(Fore.RED + token + Fore.RESET)
         elif lowered_token in corrected:
-            token = corrected[lowered_token]
+            tokens.append(Fore.GREEN + corrected[lowered_token] + Fore.RESET)
             
         # Check for hyphenated words
         elif is_acronym(token):
             if token in acronyms:
-                tokens.append(Fore.GREEN + token + Fore.RESET)
+                tokens.append(Fore.BLUE + token + Fore.RESET)
             else:
                 tokens.append(Fore.RED + token + Fore.RESET)
                 spell_error = True
