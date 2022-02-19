@@ -84,10 +84,17 @@ me 'm eus	me'm eus
  'm eus	 m'eus
 %	dregant
 1/2	hanter
-cl	kantilitr
+cl	santilitr
 5	pemp
 6	c'hwec'h
 7	seiz
 8	eizh
 9	nav
 10	dek
+20	ugent
+30	tregont
+50	hanter-kant
+100	kant
+150	kant hanter kant
+200	daou c'hant
+300	tri c'hant

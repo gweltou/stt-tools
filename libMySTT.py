@@ -170,6 +170,7 @@ with open(LEXICON_REPLACE_PATH, 'r') as f:
         w, *phon = l.split()
         lexicon[w] = phon
 
+
 def word2phonetic(word):
     if word in lexicon:
         return lexicon[word]
@@ -207,18 +208,18 @@ hs_dict = get_hunspell_dict()
 
 def get_corrected_dict():
     corrected = dict()
-    corrected_sentence = dict()
+    corrected_sentences = dict()
     with open(CORRECTED_PATH, 'r') as f:
         for l in f.readlines():
             k, v = l.replace('\n', '').split('\t')
             k = k.lower()
             if ' ' in k:
-                corrected_sentence[k] = v
+                corrected_sentences[k] = v
             else:
                 corrected[k] = v
-    return corrected, corrected_sentence
+    return corrected, corrected_sentences
 
-corrected, corrected_sentence = get_corrected_dict()
+corrected, corrected_sentences = get_corrected_dict()
 
 
 
@@ -233,7 +234,10 @@ def get_capitalized_dict():
             w, *pron = l.strip().split()
             if not pron:
                 pron = word2phonetic(w)
-            capitalized[w.lower()] = pron
+            if w in capitalized:
+                capitalized[w.lower()] += ' '.join(pron)
+            else:
+                capitalized[w.lower()] = [' '.join(pron)]
     return capitalized
 
 capitalized = get_capitalized_dict()
@@ -250,7 +254,10 @@ def get_acronyms_dict():
             for l in f.readlines():
                 if l.startswith('#') or not l: continue
                 acr, *pron = l.split()
-                acronyms[acr] = pron
+                if acr in acronyms:
+                    acronyms[acr] += ' '.join(pron)
+                else:
+                    acronyms[acr] = [' '.join(pron)]
     else:
         print("Acronym dictionary not found... creating file")
         open(ACRONYM_PATH, 'a').close()
@@ -306,9 +313,9 @@ def get_cleaned_sentence(sentence, remove_bl_marker=False):
         return '', 0
     
     lowered_sentence = sentence.lower()
-    for mistake in corrected_sentence.keys():
+    for mistake in corrected_sentences.keys():
         if mistake in sentence or mistake in lowered_sentence:
-            sentence = sentence.replace(mistake, corrected_sentence[mistake]) # Won't work if mistake is capitalized in original sentence
+            sentence = sentence.replace(mistake, corrected_sentences[mistake]) # Won't work if mistake is capitalized in original sentence
     
     tokens = []
     num_blacklisted = 0
@@ -348,9 +355,9 @@ def get_correction(sentence):
         return ''
     
     lowered_sentence = sentence.lower()
-    for mistake in corrected_sentence.keys():
+    for mistake in corrected_sentences.keys():
         if mistake in sentence or mistake in lowered_sentence:
-            sentence = sentence.replace(mistake, corrected_sentence[mistake])
+            sentence = sentence.replace(mistake, corrected_sentences[mistake])
     
     num_errors = 0
     tokens = []
@@ -360,13 +367,14 @@ def get_correction(sentence):
         # Ignore black listed words
         if token.startswith('*'):
             tokens.append(Fore.YELLOW + token + Fore.RESET)
+        elif lowered_token in corrected:
+            tokens.append(Fore.GREEN + corrected[lowered_token] + Fore.RESET)
         elif token.isdigit():
             spell_error = True
             tokens.append(Fore.RED + token + Fore.RESET)
-        elif lowered_token in corrected:
-            tokens.append(Fore.GREEN + corrected[lowered_token] + Fore.RESET)
             
         # Check for hyphenated words
+        
         elif is_acronym(token):
             if token in acronyms:
                 tokens.append(Fore.BLUE + token + Fore.RESET)

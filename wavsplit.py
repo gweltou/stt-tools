@@ -136,8 +136,16 @@ if __name__ == "__main__":
         elif x == '+' or x == 'n':
             idx = (idx+1) % len(segments)
             play_segment_text(idx, song, segments, text, speed)
+        elif x.startswith('+') and x[1:].isdigit():
+            n = int(x[1:])
+            idx = (idx+n) % len(segments)
+            play_segment_text(idx, song, segments, text, speed)
         elif x == '-' or x == 'p':
             idx -= 1
+            play_segment_text(idx, song, segments, text, speed)
+        elif x.startswith('-') and x[1:].isdigit():
+            n = int(x[1:])
+            idx = (idx-n) % len(segments)
             play_segment_text(idx, song, segments, text, speed)
         elif x == '*':
             speed *= 1.15
@@ -157,12 +165,14 @@ if __name__ == "__main__":
             print("segments joined")
         elif x == 's':  # Save split data to disk
             save_segments(segments, split_filename) 
-        elif x == 'h':  # Help
+        elif x == 'h' or x == '?':  # Help
             print(". or 'r'\tPlay current segment")
             print("+ or 'n'\tGo to next segment and play")
             print("- or 'p'\tGo back to previous segment and play")
+            print("-[n] or +[n]\tGo backward/forward n positions")
             print("*\tSpeed playback up")
             print("*\tSlow playback down")
+            print("'h' or '?'\tShow this help")
             print("'d'\tDelete current segment")
             print("'j'\tJoin current segment with previous one")
             print("'q'\tQuit")
