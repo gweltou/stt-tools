@@ -38,6 +38,9 @@ if __name__ == "__main__":
     
     num_errors = 0
     for file in textfiles:
+        split_filename = file.replace('.txt', '.split')
+        if not os.path.exists(split_filename):
+            continue
         with open(file, 'r') as f:
             print(file)
             num_line = 0
@@ -65,9 +68,9 @@ if __name__ == "__main__":
         # extract acronyms
         extracted_acronyms = libMySTT.extract_acronyms(file)
         with open(libMySTT.ACRONYM_PATH, 'a') as f:
-            for acr, phon in extracted_acronyms:
-                f.write(f"{acr}\t{phon}\n")
-                libMySTT.acronyms.add(acr)
+            for acr in extracted_acronyms:
+                f.write(f"{acr}\t{extracted_acronyms[acr]}\n")
+                libMySTT.acronyms[acr] = extracted_acronyms[acr]
                 num_errors -= 1
     
     print(f"{num_errors} spelling mistakes")

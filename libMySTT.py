@@ -52,7 +52,7 @@ verbal_tics = {
 }
 
 
-punctuation = (',', '.', ';', '?', '!', ':', '«', '»', '"', '”', '“', '(', ')', '…', '–')
+punctuation = (',', '.', ';', '?', '!', ':', '«', '»', '"', '”', '“', '(', ')', '…', '–', '‚')
 
 
 w2f = {
@@ -276,7 +276,7 @@ def filter_out(text, symbols):
 
 
 def is_acronym(word):
-    if len(word) < 2:
+    if len(word) < 2 or word.isdigit():
         return False
     for letter in word:
         if not letter.isdecimal() and letter.islower():
@@ -402,12 +402,14 @@ def prompt_acronym_phon(w, song, segments, idx):
         i: segment number in audiofile (from 'split' file) 
     """
     
-    guess = ' '.join([acr2f[l] for l in w])
+    guess = ' '.join([acr2f[l] for l in w if l in acr2f])
     print(f"Phonetic proposition for '{w}' : {guess}")
     while True:
-        answer = input("Press 'y' to validate, 'l' to listen or write different prononciation: ").strip().upper()
+        answer = input("Press 'y' to validate, 'l' to listen or write different prononciation, 'x' to skip: ").strip().upper()
         if not answer:
             continue
+        if answer == 'X':
+            return None
         if answer == 'Y':
             return guess
         if answer == 'L':
@@ -430,7 +432,7 @@ def extract_acronyms(text_filename):
     wav_filename = text_filename[:-3] + 'wav'
     song = AudioSegment.from_wav(wav_filename)
     
-    extracted_acronyms = []
+    extracted_acronyms = dict()
     
     with open(text_filename, 'r') as f:
         sentence_idx = 0
@@ -447,7 +449,8 @@ def extract_acronyms(text_filename):
                 if is_acronym(w):
                     if not w in acronyms and not w in extracted_acronyms:
                         phon = prompt_acronym_phon(w, song, segments, sentence_idx)
-                        extracted_acronyms.append((w, phon))
+                        if phon:
+                            extracted_acronyms[w] = phon
             sentence_idx += 1
     
     return extracted_acronyms

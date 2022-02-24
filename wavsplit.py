@@ -141,7 +141,7 @@ if __name__ == "__main__":
             idx = (idx+n) % len(segments)
             play_segment_text(idx, song, segments, text, speed)
         elif x == '-' or x == 'p':
-            idx -= 1
+            idx = (idx-1) % len(segments)
             play_segment_text(idx, song, segments, text, speed)
         elif x.startswith('-') and x[1:].isdigit():
             n = int(x[1:])
@@ -153,7 +153,7 @@ if __name__ == "__main__":
         elif x == '/':
             speed *= 0.9
             print("speed=", speed)
-        elif x == 'd':  # Delete segment (by commenting it out)
+        elif x == 'd':  # Delete segment
             del segments[idx]
             idx = max(0, idx-1)
         elif x == 'j' and idx > 0:  # Join this segment with previous segment

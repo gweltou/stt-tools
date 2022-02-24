@@ -83,7 +83,6 @@ me'm	m'em
 me 'm eus	me'm eus
  'm eus	 m'eus
 %	dregant
-1/2	hanter
 cl	santilitr
 5	pemp
 6	c'hwec'h
@@ -94,7 +93,18 @@ cl	santilitr
 20	ugent
 30	tregont
 50	hanter-kant
+60	tri ugent
+70	dek ha tri ugent
+80	pevar ugent
+90	dek ha pevar ugent
 100	kant
 150	kant hanter kant
 200	daou c'hant
 300	tri c'hant
+400	pevar c'hant
+500	pemp kant
+600	c'hwec'h kant
+700	seizh kant
+800	eizh kant
+900	nav c'hant
+1000	mil

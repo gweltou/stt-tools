@@ -31,6 +31,7 @@ speakers_gender = {
     'jean-mari_ollivier': 'm',
     'jeannot_flageul'   : 'm',
     'maelle_ausias'     : 'f',
+    'justine_morvan'    : 'f',
     'paotr1'            : 'm',
     'paotr2'            : 'm',
     'paotr3'            : 'm',

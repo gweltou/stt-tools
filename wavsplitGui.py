@@ -37,7 +37,7 @@ class Pad(tk.Frame):
 
         self.toolbar = tk.Frame(self, bg="#eee")
         self.toolbar.pack(side="top", fill="x")
-
+        
         # this will add Highlight button in the window
         self.bold_btn = tk.Button(self.toolbar, text="Highlight", command=self.highlight_text)
         self.bold_btn.pack(side="left")
@@ -46,12 +46,25 @@ class Pad(tk.Frame):
         self.clear_btn = tk.Button(self.toolbar, text="Clear", command=self.clear)
         self.clear_btn.pack(side="left")
 
-        # adding the text
-        self.canvas = tk.Canvas(self, bg="#eee")
+        pw = tk.PanedWindow(self)
+        pw.pack(side="bottom", fill="both", expand=True)
+        
+        # adding the utterance panel
+        self.canvas = tk.Canvas(pw, bg="#fee")
+        pw.add(self.canvas)
         
         #https://blog.teclado.com/tkinter-scrollable-frames/
         self.scrollable_frame = tk.Frame(self.canvas)
-        self.scrollbar = tk.Scrollbar(self, orient='vertical', command=self.canvas.yview)
+        #self.scrollable_frame.pack(expand=True, fill='both')
+        #pw.add(self.scrollable_frame)
+        #self.scrollbar = tk.Scrollbar(pw, orient='vertical', command=self.canvas.yview)
+        
+        x = self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw", tags=("inner_frame",))
+        #self.canvas.configure(yscrollcommand=self.scrollbar.set)    # Updates scrollbar position
+        
+        self.canvas.bind("<Enter>", self.enableScrollCanvas)
+        self.canvas.bind("<Leave>", self.disableScrollCanvas)
+        self.canvas.bind("<Configure>", self.resize_utterances_panel)
         
         self.scrollable_frame.bind(
             "<Configure>",
@@ -60,21 +73,40 @@ class Pad(tk.Frame):
             )
         )
 
-        self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
-        self.canvas.configure(yscrollcommand=self.scrollbar.set)
-        
-        self.raw_text = tk.Text(self, wrap='word')
+        # Adding raw text panel
+        self.raw_text = tk.Text(pw, wrap='word')
         self.raw_text.insert("end", "Hello world !")
+        pw.add(self.raw_text)
         
-        self.raw_text.pack(side="right", expand=True, fill="both")
-        self.scrollbar.pack(side='right', fill='y')
-        self.canvas.pack(side='left', fill='both')
+        #self.raw_text.pack(side="right", expand=True, fill="both")
+        #self.scrollbar.pack(side='right', fill='both')
+        #self.canvas.pack(side='left', fill='both')
 		
         #configuring a tag called start
         #self.text.tag_configure("hl", background="black", foreground="red")
 
+    
+    def enableScrollCanvas(self, e):
+        self.bind_all("<MouseWheel>", self.scrollCanvas)
+        self.bind_all("<Button-4>", self.scrollCanvas)
+        self.bind_all("<Button-5>", self.scrollCanvas)
+    
+    def disableScrollCanvas(self, e):
+        self.unbind_all("<MouseWheel>")
+        self.unbind_all("<Button-4>")
+        self.unbind_all("<Button-5>")
+    
+    def scrollCanvas(self, e):
+        if e.num == 4:  # Scroll up
+            self.canvas.yview_scroll(-1, "units")
+        elif e.num == 5: # Scroll down
+            self.canvas.yview_scroll(1, "units")
 
 
+    def resize_utterances_panel(self, e):
+        #self.scrollable_frame.config(width=e.width)
+        self.canvas.itemconfigure("inner_frame", width=e.width)
+        
 
 	# method to highlight the selected text
     def highlight_text(self):
@@ -87,9 +119,6 @@ class Pad(tk.Frame):
 	# method to clear all contents from text widget.
     def clear(self):
         self.text.tag_remove("hl", "1.0", "end")
-    
-    
-    
     
     
     def count_total_nb_lines(self, textWidget):
@@ -148,8 +177,6 @@ class Pad(tk.Frame):
     
     
     
-    
-    
     def load_split_file(self, filename):
         text_filename = filename.replace('.split', '.txt')
         
@@ -159,16 +186,14 @@ class Pad(tk.Frame):
         
         text, speakers = load_textfile(text_filename)
         y_offset = 0
-        for line in text:
+        
+        for i, line in enumerate(text):
             line, _ = get_cleaned_sentence(line)
-            t = tk.Text(self.scrollable_frame, wrap='word')
-            t.insert('insert', line)
-            #n_lines = self.count_total_nb_lines(t)
-            t.config(height=2)
-            #t.pack(expand=False, fill='x')
-            t.config(state='disabled') # Read only
-            t.pack(expand=False)
-            t.bind_all("<MouseWheel>", lambda e: print("weel"))
+            utt = UtteranceFrame(self.scrollable_frame)
+            utt.set_text(line)
+            utt.set_number(i, len(text))
+            utt.pack(fill='x')
+            
             #t.place(anchor='nw', x=0, y=y_offset)
             y_offset += 20
         
@@ -182,6 +207,38 @@ class Pad(tk.Frame):
         #self.canvas.pack(side='left')
 
 
+
+class UtteranceFrame(tk.Frame):
+    def __init__(self, parent, *args, **kwargs):
+        tk.Frame.__init__(self, parent, *args, **kwargs)
+        #n_lines = self.count_total_nb_lines(t)
+        
+        upperBar = tk.Frame(self, bg="#aaf")
+        upperBar.pack(side="top", fill="x")
+        
+        self.label = tk.Label(upperBar, text="n/t")
+        self.label.pack(side="left")
+        
+        play_btn = tk.Button(upperBar, text=">", width=1, height=1, command=self.play_segment)
+        play_btn.pack(side="left")
+        
+        self.text = tk.Text(self, wrap='word')
+        self.text.insert('end', "empty text")
+        self.text.config(state='disabled', height=2) # Read only
+        self.text.pack(side="bottom", fill='x')
+    
+    def set_text(self, text):
+        self.text.config(state='normal')
+        self.text.delete('1.0', 'end')
+        self.text.insert('end', text)
+        self.text.config(state='disabled')
+        #self.text.update()
+    
+    def set_number(self, n, total):
+        self.label.config(text = f"{n+1}/{total}")
+    
+    def play_segment(self):
+        pass
 
 
 if __name__ == "__main__":
