@@ -169,6 +169,7 @@ with open(LEXICON_REPLACE_PATH, 'r') as f:
     for l in f.readlines():
         w, *phon = l.split()
         lexicon[w] = phon
+        
 
 
 def word2phonetic(word):
@@ -199,6 +200,8 @@ def get_hunspell_dict():
         for w in f.readlines():
             hs.add(w.strip())
     for w in verbal_tics:
+        hs.add(w)
+    for w in lexicon.keys():
         hs.add(w)
     return hs
 
@@ -250,7 +253,7 @@ def get_acronyms_dict():
     """
     acronyms = dict()
     if os.path.exists(ACRONYM_PATH):
-        with open(ACRONYM_PATH) as f:
+        with open(ACRONYM_PATH, 'r') as f:
             for l in f.readlines():
                 if l.startswith('#') or not l: continue
                 acr, *pron = l.split()
@@ -424,8 +427,19 @@ def prompt_acronym_phon(w, song, segments, idx):
             return answer
 
 
+def extract_acronyms(text):
+    extracted = set()
+    for w in tokenize(text):
+        # Remove black-listed words (beggining with '*')
+        if w.startswith('*'):
+            continue
+        if is_acronym(w):
+            extracted.add(w)
+    
+    return list(extracted)
 
-def extract_acronyms(text_filename):
+
+def extract_acronyms_from_file(text_filename):
     split_filename = text_filename[:-3] + 'split'
     segments = load_segments(split_filename)
     
@@ -442,15 +456,11 @@ def extract_acronyms(text_filename):
             if l.startswith('#'):
                 continue
             
-            for w in tokenize(l):
-                # Remove black-listed words (beggining with '*')
-                if w.startswith('*'):
-                    continue
-                if is_acronym(w):
-                    if not w in acronyms and not w in extracted_acronyms:
-                        phon = prompt_acronym_phon(w, song, segments, sentence_idx)
-                        if phon:
-                            extracted_acronyms[w] = phon
+            for acr in extract_acronyms(l):
+                if not acr in acronyms and not acr in extracted_acronyms:
+                    phon = prompt_acronym_phon(acr, song, segments, sentence_idx)
+                    if phon:
+                        extracted_acronyms[acr] = phon
             sentence_idx += 1
     
     return extracted_acronyms

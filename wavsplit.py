@@ -163,6 +163,21 @@ if __name__ == "__main__":
             idx = max(0, idx-1)
             segments[idx] = (start, end)
             print("segments joined")
+        elif x == 'a':  # Acronym extraction
+            for acr in extract_acronyms(text[idx]):
+                add_pron = ""
+                if acr in acronyms:
+                    while not add_pron in ('a', 'k'):
+                        add_pron = input(f"{acr} already known [{acronyms[acr]}], keep/add ? ('k', 'a') ").strip().lower()
+                    if add_pron == 'k': continue
+                    
+                phon = prompt_acronym_phon(acr, song, segments, idx)
+                if phon:
+                    if add_pron == 'a':
+                        acronyms[acr].append(phon)
+                    else: acronyms[acr] = [phon]
+                    with open(ACRONYM_PATH, 'a') as f:
+                            f.write(f"{acr} {phon}\n")
         elif x == 's':  # Save split data to disk
             save_segments(segments, split_filename) 
         elif x == 'h' or x == '?':  # Help
@@ -171,10 +186,11 @@ if __name__ == "__main__":
             print("- or 'p'\tGo back to previous segment and play")
             print("-[n] or +[n]\tGo backward/forward n positions")
             print("*\tSpeed playback up")
-            print("*\tSlow playback down")
+            print("/\tSlow playback down")
             print("'h' or '?'\tShow this help")
             print("'d'\tDelete current segment")
             print("'j'\tJoin current segment with previous one")
+            print("'a'\tRegister acronym")
             print("'q'\tQuit")
         elif x == 'q':
             running = False

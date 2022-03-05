@@ -65,12 +65,13 @@ if __name__ == "__main__":
                     print(f"[{num_line}] {correction}")
                     print(f"{Style.DIM}[{line.strip()}]{Style.RESET_ALL}")
         
-        # extract acronyms
-        extracted_acronyms = libMySTT.extract_acronyms(file)
-        with open(libMySTT.ACRONYM_PATH, 'a') as f:
-            for acr in extracted_acronyms:
-                f.write(f"{acr}\t{extracted_acronyms[acr]}\n")
-                libMySTT.acronyms[acr] = extracted_acronyms[acr]
-                num_errors -= 1
+            # extract acronyms
+            extracted_acronyms = libMySTT.extract_acronyms_from_file(file)
+            if extracted_acronyms:
+                with open(libMySTT.ACRONYM_PATH, 'a') as f:
+                    for acr in extracted_acronyms:
+                        f.write(f"{acr} {extracted_acronyms[acr]}\n")
+                        libMySTT.acronyms[acr] = extracted_acronyms[acr]
+                        num_errors -= 1
     
     print(f"{num_errors} spelling mistakes")

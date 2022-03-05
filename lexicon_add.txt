@@ -1,5 +1,7 @@
 abalamour B L AN M
+amezeg A M E Z OH K
 anezhe N EH
+anezho N EU
 arc'hant A R G A N T
 barradoù B A R A J OU
 bemdez B EH M D E
@@ -7,51 +9,53 @@ bezañ B E H AN
 bezañ B EY OE
 bloavezhioù B L O A V E CH OU
 buhez B U H E
+c'hoadoù X O A J OU
 chomont CH O M A I N T
 c'hwec'h F EH X
 deoc'h D OH X
 digarez D I G A R E
 emañ M A
 emañ M AN
+gouzout G OU T
+gwin V I N
+heiz H EH I
+hentoù E N CH OU
 hiziv H I R I E
 hiziv H I R I O
-gouzout G OU T
-selaouet CH I L A OU E T
-anezho N EU
-gwin V I N
-to T OU
-romantoù R O M AN N CH OU
-the Z EU
-the Z OE
-hashtag A CH T A G
-heiz H EH I
 ivez I V E
 ivez U W EH
 loen L ON N
-mennozh M E N O
-vi H U
-vioù EU I OU
 maezioù M E CH OU
 marteze M A R S EH
-surk CH U K R
 marteze M A T R EH X
 menez M E N E
-neuze N OE H E
+mennozh M E N O
+netra N I T R A
 neuze N EN N
+neuze N OE H E
 nevez N E V E
 pelec'h P L EH X
 petra P E R A
-sachit CH A CH I T
-amezeg A M E Z OH K
-hentoù E N CH OU
 prenester P R E N E CH EH R
 puhez P U H E
 reont R A I N T
 Roazhon R A ON N
-sonjoù CH ON J OU
+romantoù R O M AN N CH OU
 ruz R U
+sachit CH A CH I T
+selaouet CH I L A OU E T
+sonjoù CH ON J OU
 straedoù S T R E J OU
+surk CH U K R
+vaksin V A K S EN
+wenodenn W E N O J EH N
+gwenodennoù G W E N O J EH N OU
+the Z EU
+the Z OE
+to T OU
 unan OE N
 venez V E N E
 verenn V EH R N
+vi H U
+vioù EU I OU
 vuhez V U H E

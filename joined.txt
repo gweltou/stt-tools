@@ -40,8 +40,10 @@ skol veur
 marc'h houarn
 marc'h du
 
-Penn ar Bed
+Penn-ar-Bed
+Mor-Bihan
 Bro Saoz
+Le Fur
 Sant Nazer
 Rouantelezh Unanet
 Stadoù Unanet
@@ -49,6 +51,7 @@ Su Afrikaned
 Breizh-Izel
 Breizh-Uhel
 Kaledonia-Nevez
+Il-ha-Gwilen
 
 * se (!gant se)
 * mañ

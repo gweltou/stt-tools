@@ -45,6 +45,13 @@ Rename ``model`` folder and copy it in vosk ``model`` subfolder.
 
 Enjoy !
 
+## Data files
+ * corrected.txt
+ * capitalized.txt
+ * acronyms.txt
+ * lexicon_add.txt
+ * lexicon_replace.txt
+
 ## Acknowledgement
 
 ``br_FR.dic`` and ``br_FR.aff`` in ``hunspell-dictionary`` folder from Drouizig hunspell dictionary.
