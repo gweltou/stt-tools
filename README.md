@@ -5,9 +5,10 @@ Split files .split should be in the same folder as its related audio file and te
 
 ## Python packages dependency
 
+ * numpy ($ pip3 install numpy)
  * [Librosa](https://librosa.org/)
  * Pydub
- * Hunspell
+ * Hunspell ($ pip3 install cyhunspell)
  * Colorama
 
 ## Transcription rules
@@ -47,6 +48,10 @@ Enjoy !
 
 ## Data files
  * corrected.txt
+    List of key -> values separated by a tabulation.
+    Two types of corrections, single token substitution or raw text substitution (when a space is present in key).
+    Single token corrections are case insensitive.
+    
  * capitalized.txt
  * acronyms.txt
  * lexicon_add.txt

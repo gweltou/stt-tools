@@ -101,7 +101,7 @@ Christian K R I S T I AN
 Chuck	T CH OE K
 C'hwevrer
 Coop K OH P
-Colyne C O L I N
+Colyne K O L I N
 Coreff K O R EH F
 Dailymotion	D EY L I M O CH EU N
 Dana
@@ -234,6 +234,7 @@ John	D J OH N
 Johnny	D J OH N I
 Jones D J O OU N S
 Jouin J OU EN
+Josephine J O Z E F I N
 Julien J U L I EN
 Jura
 Kabilia
@@ -449,7 +450,10 @@ Robert R O B OE R T
 Robotics R O B O T I K S
 Roger R O J E
 Roma
+Stefan S T E F AN
+Stefan S T E F A N
 Stefani
+Stefano
 Gwilhom
 Skandinavia
 Ronan
@@ -489,30 +493,42 @@ Smith	S M I S
 Spagn
 Spotify	S P O T I F A I
 Stéphanie S T E F A N I
+Murthy M OE R T I
 Stevenson S T E V EH N S OH N
 Stokholm S T O K OH L M
 Stonewall S T O N W OH L
 Suamerika
+Beethoven B E T O V EH N
 Suamerikan
 Suez
 Alphabet A L F A B E T
 Thelo T E L O
 Henaff E N A F
+Larvol
+Astor
 Aostrian
+Guérin G E R EN
 Suis
+Hilton H I L T OH N
+Kuiper
 Mezheven
 Sul
 Floc'h
+Trewineg
 Hawaiianed
 Svedadez
+Texas T E K S A S
 Sveden
 Tahiti T A I T I
+Priya
+Chitra
 Tangi
-Thailand	T A I L AN N D
+Thailand T A I L AN N D
 Thomas	T O M A
 Thorgal T OH R G A L
 Thunberg S EU N B EH R G
 Tibed
+Parantoen
 Tilos
 Tilosiz
 Gwengamp
@@ -536,15 +552,32 @@ Uhelgoad
 Valérie	V A L E R I
 Vandalay	V AN N D A L EH
 Vande
+Herkul
 Vandela
 Vandenberg
 Vaxime	V A K S I M
 Vega
+Seattle S I A T OE L
+Philadelphia F I L A D EH L F I A
+Times T A I M Z
 Venezia
+Gumbakonam G OU M B A K O N A M
+Angeles AN N J EU L EH S
+Indianez
+Los L O S
 Verc'her
 Veurzh
 Viami
 Vichel	V I CH EH L
+Poulidor
+Voynet V O A N EH
+Tara
+Hollsent
+Wisconsin W I S K ON N S I N
+Massachussets M A S A CH U S EH T S
+Ravi
+Barthez B A R T EH Z
+Mala
 Victor	V I K T OH R
 Vincent	V EN S AN
 Virmaned
@@ -566,7 +599,7 @@ Xavier	G Z A V I E
 Yann
 Yannig
 Yaou
-York Y OH R K
+York I OH R K
 Youenn
 Youna
 Youtube I OU T U B

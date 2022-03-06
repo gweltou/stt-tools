@@ -32,6 +32,7 @@ speakers_gender = {
     'jeannot_flageul'   : 'm',
     'maelle_ausias'     : 'f',
     'justine_morvan'    : 'f',
+    'anna_duval-guennoc': 'f',
     'paotr1'            : 'm',
     'paotr2'            : 'm',
     'paotr3'            : 'm',
@@ -39,6 +40,8 @@ speakers_gender = {
     'plach2'            : 'f',
     'plach3'            : 'f',
 }
+
+additional_spk2gender = ["common_voice/spk2gender"]
 
 
 
@@ -75,10 +78,13 @@ def parse_data(rep):
             speaker_id_match = SPEAKER_ID_PATTERN.search(l)
             if speaker_id_match:
                 speaker_id = speaker_id_match[1].lower()
-                #if speaker_id.startswith("paotr"):
-                #    pass
-                #elif speaker_id.startswith("plach"):
-                #    pass
+                if speaker_id not in speakers_gender:
+                    if "paotr" in speaker_id:
+                        speakers_gender[speaker_id] = 'm'
+                    elif "plach" in speaker_id:
+                        speakers_gender[speaker_id] = 'f'
+                    else:
+                        print("unknown gender:", speaker_id)
                 speakers.add(speaker_id)
                 start, end = speaker_id_match.span()
                 l = l[:start] + l[end:]
@@ -112,7 +118,8 @@ def parse_data(rep):
                         continue
                     # Ignore if to many black-listed words in sentence
                     if bl_score > 0.2:
-                        print(f"rejected ({bl_score}): {cleaned}")
+                        correction, _ = get_correction(sentence)
+                        print(f"rejected ({bl_score}): {correction}")
                         continue
                     
                     tokens = []
@@ -133,7 +140,7 @@ def parse_data(rep):
      
     segments = load_segments(split_filename)
     assert len(text) == len(segments), \
-        "number of utterances in text file doesn't match number of segments in split file"
+        f"number of utterances in text file ({len(text)}) doesn't match number of segments in split file ({len(segments)})"
 
     segments_data = []
     text_data = []
@@ -141,13 +148,19 @@ def parse_data(rep):
     for i, s in enumerate(segments):
         start = int(s[0]) / 1000
         stop = int(s[1]) / 1000
-        speaker_gender = speakers_gender[speaker_ids[i]]
+        speaker_gender = 'u'
+        if speaker_ids[i] in speakers_gender:
+            speaker_gender = speakers_gender[speaker_ids[i]]
+        else:
+            print("unknown gender:", speaker_ids[i])
+        
         if speaker_gender == 'm':
             global male_audio_length
             male_audio_length += stop - start
         elif speaker_gender == 'f':
             global female_audio_length
             female_audio_length += stop - start
+            
         utterance_id = f"{speaker_ids[i]}-{recording_id}-{floor(100*start):0>7}_{ceil(100*stop):0>7}"
         text_data.append((utterance_id, text[i]))
         segments_data.append(f"{utterance_id}\t{recording_id}\t{floor(start*100)/100}\t{ceil(stop*100)/100}\n")
@@ -169,6 +182,15 @@ if __name__ == "__main__":
     corpus = []
     male_audio_length = 0.0
     female_audio_length = 0.0
+    
+    # Add external speakers gender
+    for fname in additional_spk2gender:
+        if os.path.exists(fname):
+            print(f"Adding speakers from '{fname}'")
+            with open(fname, 'r') as f:
+                for l in f.readlines():
+                    spk, gender = l.strip().split()
+                    speakers_gender[spk] = gender
     
     if os.path.isdir(sys.argv[1]):
         rep = sys.argv[1]

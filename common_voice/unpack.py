@@ -13,6 +13,7 @@
 import sys
 import os
 import tarfile
+from math import floor, ceil
 from pydub import AudioSegment
 
 sys.path.append("..")
@@ -21,7 +22,15 @@ import libMySTT
 
 
 spk2gender_file = "spk2gender"
-blacklist_file = "blacklist.txt"
+blacklisted_speakers_file = "blacklisted_speakers.txt"
+
+blacklisted_utt = ["Les antiques croyances des peuples amérindiens.",
+                   "Légendes ?",
+                   "gt.",
+                   "Ur b.",
+                   "Olofanted.",
+                   "em bureau.",
+                   "Crèche ?",]
 
 
 if __name__ == "__main__":
@@ -48,11 +57,11 @@ if __name__ == "__main__":
         print("spk2gender file not found")
     
     blacklisted_speakers = []
-    if os.path.exists(blacklist_file):
-        with open(blacklist_file, 'r') as f:
+    if os.path.exists(blacklisted_speakers_file):
+        with open(blacklisted_speakers_file, 'r') as f:
             blacklisted_speakers = [l.strip() for l in f.readlines()]
     else:
-        print("Blacklist file not found")
+        print("Blacklist speaker file not found")
     
     dest_folder = sys.argv[1]
     data_files = sys.argv[2:]
@@ -124,6 +133,9 @@ if __name__ == "__main__":
                 else:
                     parsed_audiofiles.add(utt[1])
                 
+                if utt[2] in blacklisted_utt:
+                    continue
+                
                 wav = utt[1].replace('.mp3', '.wav')
                 src = os.path.join(clips_folder, utt[1])
                 dst = os.path.join(speaker_folder, wav)
@@ -132,7 +144,7 @@ if __name__ == "__main__":
                     libMySTT.convert_to_wav(src, dst)
                 #os.remove(src)
                 nt = t + libMySTT.get_audiofile_length(dst)*1000
-                segments.append((int(t), int(nt)))
+                segments.append((floor(t), ceil(nt) + 200)) # Offset end of segment by a 0.2 second
                 t = nt
                 audiofiles.append(dst)
                 text.append(utt[2])

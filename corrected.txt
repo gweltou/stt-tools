@@ -1,27 +1,64 @@
+# Gwenedeg
+àr	war
+é	o
+éc'h	oc'h
+àrnezhe	warnezhe
+diàr	diwar
+
+
+# Unvaniañ
 nebeud	nebeut
+yaouankik	yaouankig
+kantvet	kantved
+hanterkantved	hanterkantvet
+ugentved	ugentvet
+ty	ti
+moutik	moutig
+
+
+# Fr to Br
 office	ofis
+musique	muzik
+
+
+# Common voice
 million	milion
 choari	c'hoari
-àr	war
-àrnezhe	warnezhe
 bezaén	bezañ
+hanterkanvedenn	hanterkantvedenn
 brezhonek	brezhoneg
 erwann	erwan
 nebuet	nebeut
 france	frañs
 peseut	peseurt
+vitale	vital
 techout	tec'hout
-diàr	diwar
+ne reomp nemer sentiñ	ne reomp nemet sentiñ
+er borioù pell	er broioù pell
+aozadennn	aozadenn
+emcihañs	emichañs
+vrummenn	vrumenn
+skinwell	skinwel
+migon	mignon
+taski	taksi
+ecowatt	eko watt
+c'houlzma	c'houlz ma
+eo be tlakaet	eo bet lakaet
+ao	aotrou
+dim	dimezell
+aeoc'h	aesoc'h
+triugentved	triugentvet
+maoc'h	emaoc'h
+penaoz	penaos
+dilec'hiadennoù	dilerc'hiadennoù
+ac'hanoch	ac'hanoc'h
 c'whi	c'hwi
 mille 	mil 
 chwi	c'hwi
-marie	Mari
-stéphan	Stefan
-philippe	Filip
-ac'hanoch	ac'hanoc'h
-télégramme	telegram
-nozvat	noz vat
-aotroù	aotrou
+ar smic	ar SMIC
+eit	evit
+evt	evit
+vbeethoven	Beethoven
 skriviñ	skrivañ
 warchoazh	warc'hoazh
 llaer	laer
@@ -30,17 +67,54 @@ skzuizh	skuizh
 bernn	benn
 sonedagoù	sonadegoù
 genoc'h	ganeoc'h
-emcihañs	emichañs
-vrummenn	vrumenn
-skinwell	skinwel
-migon	mignon
-taski	taksi
+emezoc ’ h	emezoc'h
+lenann	lenan
+oar ke lenn	oar ket lenn
+choant	c'hoant
+R B I	RBI
+gulennet	goulennet
+klanv	klañv
+enañ	ennañ
+garom	garomp
+neus	n'eus
+meus	m'eus
+M eus	m'eus
+a rpaourkaezh	ar paourkaezh
+½	hanter
+Petr a	petra
+I.V. 	itron Varia 
+dwb	diwar benn
+s.o. 	sellet ouzh 
+Dime Square	*Dime *Square
+Microsoft Corporation	Microsoft *Corporation
+ar Mille-Clubs	ar *Mille *Clubs
+Local Hero	*Local *Hero
+enoet	enoeet
+Alliance Française	*Alliance *Française
+eizvedenn	eizhvedenn
+aluletez	alumetez
+dishoñjal	disoñjal
+tonnenn	tonenn
+kaondaonet	kondaonet
+unnan	unan
+c'houzhout	c'houzout
+Outlook dija	*Outlook dija
+
+
+# Anvioù
+marie	Mari
+stéphan	Stefan
+catherine	Katrin
+philippe	Filip
+
+
+télégramme	telegram
+nozvat	noz vat
+aotroù	aotrou
 jug	chug
 moneizh	moneiz
-c'houzhout	c'houzout
 grenv	greñv
 aman	amañ
-moutik	moutig
 dañvezioù	danvezioù
 dañvez	danvez
 emsalc'h	emzalc'h
@@ -49,20 +123,11 @@ avañtur	avantur
 seitekved	seitekvet
 èl	evel
 gete	gante
-#gante	ganto
+gante	ganto
 gouvezet	gouezet
 awalc'h	a-walc'h
 marmoused	marmouzed
-dishoñjal	disoñjal
-tonnenn	tonenn
-kaondaonet	kondaonet
-unnan	unan
-kantvet	kantved
-hanterkantved	hanterkantvet
-ugentved	ugentvet
-c'houzhout	c'houzout
 diagnostics	diagnostiks
-yaouankik	yaouankig
 marc'hatmatoc'h	marc'hadmatoc'h
 hirie	hiriv
 chigago	chicago
@@ -75,8 +140,7 @@ choant 	c'hoant
 virgulen	virgulenn
 founnus	fonnus
 huelgoat	Uhelgoad
-ty	ti
-musique	muzik
+
 helen	Elen
 hélène	Elen
 arru	erru
@@ -91,12 +155,15 @@ ma'm	m'am
 me'm	m'em
 me 'm eus	me'm eus
  'm eus	 m'eus
+
 bzh	BZH
 www	WWW
 m2	metrad karrez
 %	dregant
 cl	santilitr
 ml	mililitr
+XVIIvet	seitekvet
+XIIvet	daouzekvet
 5	pemp
 6	c'hwec'h
 7	seizh
@@ -151,5 +218,5 @@ ml	mililitr
 2018	daou vil triwec'h
 2019	daou vil naontek
 2020	daou vil ugent
-2021	daou vil un warn-ugent
-2024	daou vil pevar warn-ugent
+2021	daou vil un warn ugent
+2024	daou vil pevar warn ugent

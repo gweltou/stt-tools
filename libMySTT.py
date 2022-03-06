@@ -214,12 +214,16 @@ def get_corrected_dict():
     corrected_sentences = dict()
     with open(CORRECTED_PATH, 'r') as f:
         for l in f.readlines():
+            #l = l.strip()
+            if not l.strip() or l.startswith('#'):
+                continue
             k, v = l.replace('\n', '').split('\t')
-            k = k.lower()
+            v = v.replace('-', ' ')
+            #k = k.lower()
             if ' ' in k:
                 corrected_sentences[k] = v
             else:
-                corrected[k] = v
+                corrected[k.lower()] = v
     return corrected, corrected_sentences
 
 corrected, corrected_sentences = get_corrected_dict()
@@ -451,13 +455,27 @@ def extract_acronyms_from_file(text_filename):
     with open(text_filename, 'r') as f:
         sentence_idx = 0
         for l in f.readlines():
-            if not l.strip():
+            l = l.strip()
+            if not l:
                 continue
             if l.startswith('#'):
                 continue
             
+            l, _ = get_cleaned_sentence(l)
+            
+            speaker_id_match = SPEAKER_ID_PATTERN.search(l)
+            if speaker_id_match:
+                current_speaker = speaker_id_match[1]
+                start, end = speaker_id_match.span()
+                l = l[:start] + l[end:]
+            l = l.strip()
+            if not l:   # In case the speaker pattern is the only text on the line
+                continue
+            
             for acr in extract_acronyms(l):
                 if not acr in acronyms and not acr in extracted_acronyms:
+                    print(sentence_idx)
+                    
                     phon = prompt_acronym_phon(acr, song, segments, sentence_idx)
                     if phon:
                         extracted_acronyms[acr] = phon
