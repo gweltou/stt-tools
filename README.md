@@ -55,7 +55,13 @@ Enjoy !
  * capitalized.txt
  * acronyms.txt
  * lexicon_add.txt
+    Store additional regional pronouciations for breton words
  * lexicon_replace.txt
+    Replace phonetics for words in lexicon (foreign words for instance)
+
+## TODO
+ * Retrain with long utterances only dataset
+ * try reduce the size of the model (number of hidden layer) as well as the number of epochs
 
 ## Acknowledgement
 

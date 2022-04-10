@@ -29,7 +29,9 @@ from libMySTT import *
 def play_segment_text(idx, song, segments, text, speed):
     if idx < len(text):
         correction, _ = get_correction(text[idx])
-        print(f"{{{speakers[idx]}}} {correction}")
+        start = round(segments[idx][0] / 1000.0, 1)
+        stop = round(segments[idx][1] / 1000.0, 1)
+        print(f"[{start}:{stop}] {{{speakers[idx]}}} {correction}")
         #print(f"[{text[idx]}]")
     play_segment(idx, song, segments, speed)
 
@@ -113,6 +115,13 @@ if __name__ == "__main__":
     
     
     print(f"{len(segments)} segments")
+    short_utterances = []
+    for i, (start, stop) in enumerate(segments):
+        l = round((stop-start)/1000.0, 1)
+        if l < 1.3:
+            short_utterances.append(i+1)
+    if short_utterances:
+        print("Short utterances:", short_utterances)
     
     
     song = AudioSegment.from_wav(wav_filename)
