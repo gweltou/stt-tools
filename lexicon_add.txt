@@ -43,9 +43,11 @@ reont R A I N T
 romantoù R O M AN N CH OU
 ruz R U
 sachit CH A CH I T
+selaouit CH I L A OU I T
 selaouet CH I L A OU E T
 sonjoù CH ON J OU
 straedoù S T R E J OU
+pradoù P R A J OU
 surk CH U K R
 vaksin V A K S EN
 wenodenn W E N O J EH N
@@ -59,3 +61,5 @@ verenn V EH R N
 vi H U
 vioù EU I OU
 vuhez V U H E
+krampouezh K R AN M P OU Z
+zae H A E

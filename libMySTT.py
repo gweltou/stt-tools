@@ -49,6 +49,7 @@ verbal_tics = {
     'oh'    :   'O',
     'ah'    :   'A',
     'bah'   :   'B A',
+    'feñ'   :   'F EN',
 }
 
 
