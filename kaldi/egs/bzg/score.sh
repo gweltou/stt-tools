@@ -7,3 +7,6 @@ echo "****** decode_fmllr.sh ******"
     steps/decode_fmllr.sh --nj $nj --cmd "$decode_cmd" \
                           exp/tri3b/graph_tgsmall data/test \
                           exp/tri3b/decode_tgsmall_test
+
+
+steps/scoring/score_kaldi_cer.sh
