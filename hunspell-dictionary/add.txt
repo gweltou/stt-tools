@@ -26,6 +26,7 @@ potiron
 youc'hou
 bandemiezh
 pandemiezh
+pandemi
 industriel
 pesto
 botiron

@@ -16,10 +16,12 @@ Alexandre	A L EH K S AN N D R
 Algam
 Aljeri
 Aljeria
+Auguste O G U S T
 Alpoù
 Alre
 Altai
 Alvarez
+Arzhur
 Gonidec G O N I D EH K
 Amerika
 Amerindian
@@ -70,6 +72,7 @@ Berry
 Bethleem	B E T L E EH M
 Birmaned
 Birmania
+Brigitte B R I J I T
 Bleuenn
 Bloomberg B L OU M B OE R G
 Blouvagor
@@ -88,7 +91,10 @@ Breizhiz
 Breselien
 Brest
 Bretoned
+Paolig
 Brieg
+Conan K O N AN
+Conanec K O N AN N E K
 Casterman K A S T EH R M A N
 Celsius	S EH L S I U S
 Chennai
@@ -98,11 +104,13 @@ Chicago	CH I K A G O
 Chili
 C'hrist
 Christian K R I S T I AN
+Faoued
 Chuck	T CH OE K
 C'hwevrer
 Coop K OH P
 Colyne K O L I N
 Coreff K O R EH F
+Corre K OH R
 Dailymotion	D EY L I M O CH EU N
 Dana
 Daniel	D A N I EH L
@@ -112,6 +120,9 @@ David D A V I D
 David D EY V I D
 Dean	D I N
 Deezer	D I Z OE R
+Disneyland D I S N E L AN D
+Dinarzh D I N A R Z
+Dinarzh D I N A R
 Denez
 Denis D EU N I
 Denisova
@@ -123,6 +134,7 @@ Disadorn
 Disul
 Dominikan
 Donald
+Alain A L EN
 Douarnenez
 Dresden
 Dudwal
@@ -155,14 +167,16 @@ Fañch
 Finland
 Floch F L OH K
 Florida
-Françoise	F R AN S O A Z
-François	F R AN S O A
+Françoise F R AN S O A Z
+François F R AN S O A
+Francine F R AN S I N
 Frank
 Frañs
 Frederik
 Cuba K U B A
 Detroit D I T R OH I T
 Fulup
+Fustec F U S T EH K
 Gwilhoù
 Garaez
 Gauguin	G O G EN
@@ -185,6 +199,8 @@ Google	G OU G EU L
 Gorsika
 Goulc'han
 Goulven
+Goulwena
+Gourin
 Greta
 Groñvel
 Guegan G E G AN N
@@ -201,6 +217,8 @@ Gwennael
 Gwenole
 Gwerledan
 Gwernig
+Skrigneg
+Skrigneg S K R I GN A K
 Gwiskriv
 Jay D J EY
 Liger
@@ -225,11 +243,14 @@ Janedig
 Janeiro D J A N E R O
 Jan	J AN
 Japan
+Morvan M OH R V AN
+Plusquellec P L U S K E L EH K
 Japaned
 James D J EY M S
 Jean	J AN N
 Jérôme	J E R O M
 Jeruzalem
+Poñvel
 Jezuz
 John	D J OH N
 Johnny	D J OH N I
@@ -277,6 +298,7 @@ Klet
 Kmer
 Kolombia
 Komborn
+Leclerc L EU K L EH R
 Korbell K OH R B EH L
 Korsika
 Krist
@@ -290,12 +312,15 @@ Langoned
 Lannuon
 Laponia
 Larruen
+Laure L OH R
+Laurence L O R AN S
 Leborgne L EU B OH R GN
 Lege
 Lena
 Leninsk
 Leonardo	L E O N A R D O
 Lestevennog
+Guillemot G I M O
 Lisbon
 Liza
 Lizig
@@ -337,7 +362,9 @@ Marty
 Mary
 Mass M A S
 Marsilha
+Marcel M A R S EH L
 Mathias M A T I A S
+Mathieu M A T I EU
 Mathilde M A T I L D
 Matignon
 Maxime	M A K S I M
@@ -406,8 +433,10 @@ Plistin
 Ploneiz
 Plougêr
 Plougouskant
+Plougonven
 Plouider
 Plouzane
+Eric E R I K
 Plymouth	P L I M OU S
 Pompei
 Portland P OH R T L AN N
@@ -436,9 +465,11 @@ Semmelweis Z E M EH L V A I S
 Pasteur P A S T EU R
 Reblochon R EU B L O CH ON
 Riksdag
+Melioneg
 Rio
 Riou
 Riwal
+Marchand M A R CH AN
 Kermareg
 Evelyne E V EU L I N
 Pellen P E L EH N
@@ -446,6 +477,8 @@ Roazhon
 Aostria
 Brusel B R U S EH L
 Vienna
+Vorgium V OH R J I OU M
+Vorgium V O R G I OU M
 Roazhon R A ON N
 Robert R O B EH R
 Robert R O B OE R T
@@ -456,14 +489,20 @@ Stefan S T E F AN
 Stefan S T E F A N
 Stefani
 Stefano
+Troadec T R O A D E K
+Charlie CH A R L I
+Grall
 Gwilhom
 Skandinavia
 Ronan
+Hirrien
 Ropars
 Rostren
 Rusia
 Sadorn
 Saint S EN
+Pichon
+Myrtille
 Madiran
 Salem
 Sandra
@@ -486,12 +525,14 @@ Sirian
 Gangnam
 Apple A P OE L
 Lilo
+Filipin
 Toronto T O R ON T O
 Brelidi
 Sisjordania
 Skos
 Skosiz
 Smith	S M I S
+Duaod
 Spagn
 Spotify	S P O T I F A I
 Stéphanie S T E F A N I
@@ -537,6 +578,7 @@ Gwengamp
 Tintin
 Tita
 Titeuf
+Eugénie EU J E N I
 Prigent P R I J AN
 Tobias
 Tolosa
@@ -572,6 +614,10 @@ Veurzh
 Viami
 Vichel	V I CH EH L
 Poulidor
+Poullaouen
+Voullaouen
+Marthe M A R T
+Jezequel J E Z E K EH L
 Voynet V O A N EH
 Tara
 Hollsent

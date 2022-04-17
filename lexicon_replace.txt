@@ -2,6 +2,7 @@ ball B O L
 cookie K OU K I
 cookies K OU K I Z
 expo E K S P O
+fashion F A CH OE N
 hardcore A R D K OH R
 hashtag A CH T A G
 house H A OU S
@@ -38,3 +39,5 @@ elixir E L I K S I R
 open O P EH N
 forum F O R OH M
 basketball B A S K EH T B O L
+kuñv K U
+guñv G U

@@ -53,6 +53,7 @@ Enjoy !
     Single token corrections are case insensitive.
     
  * capitalized.txt
+    List of single words followed by phonemes
  * acronyms.txt
  * lexicon_add.txt
     Store additional regional pronouciations for breton words

@@ -4,7 +4,6 @@
 
 """
  Author:        Gweltaz Duval-Guennoc
- Last modified: 26-01-2022
  
  Common functions for audio file playback and data parsing
 
@@ -45,9 +44,11 @@ verbal_tics = {
     'eba'   :   'E B A',
     'kwa'   :   'K W A',
     'beñ'   :   'B EN',
+    'heñ'   :   'EN',
+    'ebeñ'  :   'E B EN',
     'boñ'   :   'B ON',
-    'oh'    :   'O',
-    'ah'    :   'A',
+    #'oh'    :   'O',
+    #'ah'    :   'A',
     'bah'   :   'B A',
     'feñ'   :   'F EN',
 }

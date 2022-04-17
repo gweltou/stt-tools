@@ -22,6 +22,7 @@ musique	muzik
 
 
 # Common voice
+c'hoazhin	c'hoarzhin
 million	milion
 choari	c'hoari
 bezaén	bezañ
