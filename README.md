@@ -30,7 +30,9 @@ Run script ``wavesplit.py audiofile.wav`` on each audiofile in datasets to gener
 
 Run script ``verify_text_files.py dataset/`` on each dataset folder to quickly check spelling mistakes and register acronyms.
 
-Divide datasets in ``train`` and ``test`` sets.
+Those three first step need to be done only once per audio file. The following steps can be done every time you train a new model.
+
+Create a ``corpus`` folder and inside it, divide datasets in ``train`` and ``test`` sets in their respective folders.
 
 Run script ``build_kaldi_files.py folder/`` on ``train`` and ``test`` folders.
 

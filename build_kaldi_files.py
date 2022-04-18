@@ -26,19 +26,33 @@ spk2gender_files = ["spk2gender.txt", "common_voice/spk2gender"]
 
 
 
-def parse_data(rep):
-    split_filename = ""
+def parse_rep(rep):
+    split_files = []
     for filename in os.listdir(rep):
         if filename.lower().endswith('.split'):
-            split_filename = os.path.join(rep, filename)
-            break
-    assert split_filename, f"ERROR: no split file found in {rep}"
+            split_files.append(os.path.join(rep, filename))
     
-    recording_id = os.path.split(split_filename)[1].split(os.path.extsep)[0]
+    wavscp = []
+    text = []
+    segments = []
+    utt2spk = []
+    
+    for f in split_files:
+        recording_id, wav_filename, text_data, segments_data, utt2spk_data = parse_data(f)
+        wavscp.append((recording_id, os.path.abspath(wav_filename)))
+        text.extend(text_data)
+        segments.extend(segments_data)
+        utt2spk.extend(utt2spk_data)
+    
+    return wavscp, text, segments, utt2spk
+    
+
+def parse_data(split_filename):
+    recording_id = os.path.basename(split_filename).split(os.path.extsep)[0]
     print(f"== {recording_id} ==")
-    text_filename = os.path.abspath(os.path.join(rep, recording_id + '.txt'))
+    text_filename = split_filename.replace('.split', '.txt')
     assert os.path.exists(text_filename), f"ERROR: no text file found for {recording_id}"
-    wav_filename = os.path.abspath(os.path.join(rep, recording_id + '.wav'))
+    wav_filename = split_filename.replace('.split', '.wav')
     assert os.path.exists(wav_filename), f"ERROR: no wave file found for {recording_id}"
     
     make_corpus = True
@@ -100,7 +114,7 @@ def parse_data(rep):
                     # Ignore if to many black-listed words in sentence
                     if bl_score > 0.2:
                         correction, _ = get_correction(sentence)
-                        print(f"rejected ({bl_score}): {correction}")
+                        #print(f"rejected ({bl_score}): {correction}")
                         continue
                     
                     tokens = []
@@ -179,8 +193,8 @@ if __name__ == "__main__":
         for filename in os.listdir(rep):
             filename = os.path.join(rep, filename)
             if os.path.isdir(filename):
-                recording_id, wav_filename, text_data, segments_data, utt2spk_data = parse_data(filename)
-                wavscp.append((recording_id, os.path.abspath(wav_filename)))
+                wavscp_data, text_data, segments_data, utt2spk_data = parse_rep(filename)
+                wavscp.extend(wavscp_data)
                 text.extend(text_data)
                 segments.extend(segments_data)
                 utt2spk.extend(utt2spk_data)
