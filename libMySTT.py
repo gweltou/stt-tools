@@ -25,8 +25,8 @@ from colorama import Fore
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
-HS_DIC_PATH = os.path.join(ROOT, os.path.join("hunspell-dictionary", "br_FR.dic"))
-HS_AFF_PATH = os.path.join(ROOT, os.path.join("hunspell-dictionary", "br_FR.aff"))
+HS_DIC_PATH = os.path.join(ROOT, os.path.join("hunspell-dictionary", "br_FR"))
+#HS_AFF_PATH = os.path.join(ROOT, os.path.join("hunspell-dictionary", "br_FR.aff"))
 HS_ADD_PATH= os.path.join(ROOT, os.path.join("hunspell-dictionary", "add.txt"))
 
 CORRECTED_PATH = os.path.join(ROOT, "corrected.txt")
@@ -41,16 +41,17 @@ SPEAKER_ID_PATTERN = re.compile(r'{([-\w]+)}')
 
 verbal_tics = {
     'euh'   :   'OE',
-    'eba'   :   'E B A',
-    'kwa'   :   'K W A',
     'beñ'   :   'B EN',
-    'heñ'   :   'EN',
+    'eba'   :   'E B A',
     'ebeñ'  :   'E B EN',
+    'kwa'   :   'K W A',
+    'heñ'   :   'EN',
     'boñ'   :   'B ON',
-    #'oh'    :   'O',
-    #'ah'    :   'A',
     'bah'   :   'B A',
     'feñ'   :   'F EN',
+    'tieñ'  :   'T I EN',
+    #'oh'    :   'O',
+    #'ah'    :   'A',
 }
 
 

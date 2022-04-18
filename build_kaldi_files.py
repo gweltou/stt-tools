@@ -20,28 +20,9 @@ from libMySTT import *
 
 
 
-speakers_gender = {
-    'nolwenn_korbell'   : 'f',
-    'maryvonne_berthou' : 'f',
-    'maina_audran'      : 'f',
-    'claude_an_du'      : 'f',
-    'roger_an_du'       : 'm',
-    'yann_bijer'        : 'm',
-    'bob_simon'         : 'm',
-    'jean-mari_ollivier': 'm',
-    'jeannot_flageul'   : 'm',
-    'maelle_ausias'     : 'f',
-    'justine_morvan'    : 'f',
-    'anna_duval-guennoc': 'f',
-    'paotr1'            : 'm',
-    'paotr2'            : 'm',
-    'paotr3'            : 'm',
-    'plach1'            : 'f',
-    'plach2'            : 'f',
-    'plach3'            : 'f',
-}
 
-additional_spk2gender = ["common_voice/spk2gender"]
+
+spk2gender_files = ["spk2gender.txt", "common_voice/spk2gender"]
 
 
 
@@ -180,11 +161,12 @@ if __name__ == "__main__":
     regular_words = set()
     speakers = set()
     corpus = []
+    speakers_gender = {}
     male_audio_length = 0.0
     female_audio_length = 0.0
     
     # Add external speakers gender
-    for fname in additional_spk2gender:
+    for fname in spk2gender_files:
         if os.path.exists(fname):
             print(f"Adding speakers from '{fname}'")
             with open(fname, 'r') as f:
