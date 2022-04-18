@@ -49,16 +49,16 @@ Rename ``model`` folder and copy it in vosk ``model`` subfolder.
 Enjoy !
 
 ## Data files
- * corrected.txt
-    List of key -> values separated by a tabulation.
-    Two types of corrections, single token substitution or raw text substitution (when a space is present in key).
+ * ``corrected.txt`` \
+    List of key -> values separated by a tabulation.\
+    Two types of corrections, single token substitution or raw text substitution (when a space is present in key).\
     Keys of single token are case insensitive but corrections must be capitalized when appropriate.
- * capitalized.txt
+ * ``capitalized.txt``\
     List of single words followed by phonemes
- * acronyms.txt
- * lexicon_add.txt
+ * ``acronyms.txt``
+ * ``lexicon_add.txt``\
     Store additional regional pronouciations for breton words
- * lexicon_replace.txt
+ * ``lexicon_replace.txt``\
     Replace phonetics for words in lexicon (foreign words for instance)
 
 ## TODO
