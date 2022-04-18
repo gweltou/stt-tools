@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
 
-# Change this location to somewhere where you want to put the data.
-data=./corpus/
-
 
 echo "running path.sh"
 . ./path.sh
 echo "running cmd.sh"
 . ./cmd.sh
 
-nj=1       # number of parallel jobs - 1 is perfect for such a small dataset
+nj=2       # number of parallel jobs - 1 is perfect for such a small dataset
 lm_order=3 # language model order (n-gram quantity) - 1 is enough for digits grammar
 stage=$1
 
@@ -26,7 +23,6 @@ if [ $stage -eq -1 ]; then
     
     # Removing previously created data (from last run.sh execution)
     rm -rf exp mfcc data
-    #rm -rf exp mfcc data/train/spk2utt data/train/cmvn.scp data/train/feats.scp data/train/split1 data/test/spk2utt data/test/cmvn.scp data/test/feats.scp data/test/split1 data/local/lang data/lang data/local/tmp data/local/dict/lexiconp.txt
     
     
     # Needs to be prepared by hand (or using self written scripts):
@@ -36,8 +32,9 @@ if [ $stage -eq -1 ]; then
     # text        [<uterranceID> <text_transcription>]
     # utt2spk     [<uterranceID> <speakerID>]
     # corpus.txt  [<text_transcription>]
-    python3 build_kaldi_files.py corpus/train || exit 1
-    python3 build_kaldi_files.py corpus/test || exit 1
+   
+    #python3 build_kaldi_files.py corpus/train || exit 1
+    #python3 build_kaldi_files.py corpus/test || exit 1
 fi
 
 if [ $stage -ge 0 ]; then
@@ -138,7 +135,7 @@ if [ $stage -ge 4 ]; then
     echo "===== MONO DECODING ====="
     echo
     utils/mkgraph.sh --mono data/lang_nosp exp/mono exp/mono/graph || exit 1
-    steps/decode.sh --config conf/decode.config --nj $nj --cmd "$decode_cmd" exp/mono/graph data/test exp/mono/decode
+    #steps/decode.sh --config conf/decode.config --nj $nj --cmd "$decode_cmd" exp/mono/graph data/test exp/mono/decode
     echo
     echo "===== MONO ALIGNMENT ====="
     echo
@@ -156,7 +153,7 @@ if [ $stage -ge 5 ]; then
     echo "===== TRI1 (first triphone pass) DECODING ====="
     echo
     utils/mkgraph.sh data/lang_nosp exp/tri1 exp/tri1/graph || exit 1
-    steps/decode.sh --config conf/decode.config --nj $nj --cmd "$decode_cmd" exp/tri1/graph data/test exp/tri1/decode
+    #steps/decode.sh --config conf/decode.config --nj $nj --cmd "$decode_cmd" exp/tri1/graph data/test exp/tri1/decode
     echo
     echo "===== TRI1 ALIGNMENT ====="
     echo

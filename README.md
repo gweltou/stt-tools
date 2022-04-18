@@ -52,8 +52,7 @@ Enjoy !
  * corrected.txt
     List of key -> values separated by a tabulation.
     Two types of corrections, single token substitution or raw text substitution (when a space is present in key).
-    Single token corrections are case insensitive.
-    
+    Keys of single token are case insensitive but corrections must be capitalized when appropriate.
  * capitalized.txt
     List of single words followed by phonemes
  * acronyms.txt

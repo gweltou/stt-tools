@@ -28,9 +28,9 @@ choari	c'hoari
 bezaén	bezañ
 hanterkanvedenn	hanterkantvedenn
 brezhonek	brezhoneg
-erwann	erwan
+erwann	Erwan
 nebuet	nebeut
-france	frañs
+france	Frañs
 peseut	peseurt
 vitale	vital
 techout	tec'hout
