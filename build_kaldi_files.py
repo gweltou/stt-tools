@@ -199,7 +199,7 @@ if __name__ == "__main__":
                 segments.extend(segments_data)
                 utt2spk.extend(utt2spk_data)
             elif filename.endswith('.split'):   # Folder with a single data item
-                recording_id, wav_filename, text_data, segments_data, utt2spk_data = parse_data(rep)
+                recording_id, wav_filename, text_data, segments_data, utt2spk_data = parse_data(filename)
                 wavscp.append((recording_id, os.path.abspath(wav_filename)))
                 text.extend(text_data)
                 segments.extend(segments_data)
