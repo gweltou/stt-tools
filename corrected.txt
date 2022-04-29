@@ -141,6 +141,7 @@ choant 	c'hoant
 virgulen	virgulenn
 founnus	fonnus
 huelgoat	Uhelgoad
+kambodjia	Kambodja
 
 helen	Elen
 hélène	Elen
@@ -163,8 +164,11 @@ m2	metrad karrez
 %	dregant
 cl	santilitr
 ml	mililitr
+
+Vvet	pempvet
 XVIIvet	seitekvet
 XIIvet	daouzekvet
+
 5	pemp
 6	c'hwec'h
 7	seizh

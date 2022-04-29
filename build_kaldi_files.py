@@ -1,13 +1,12 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+
 """
- Author:        Gweltaz Duval-Guennoc
- Last modified: 26-01-2022
+ Build necessary kaldi files to train an ASR model from audio an textual data
  
- TODO:
-    Detect and prompt for capitalized names
-    Detect and prompt hyphenated words
+ Author:  Gweltaz Duval-Guennoc
+ 
 """
 
 
@@ -17,7 +16,6 @@ import numpy as np
 import re
 from math import floor, ceil
 from libMySTT import *
-
 
 
 
@@ -73,13 +71,18 @@ def parse_data(split_filename):
             speaker_id_match = SPEAKER_ID_PATTERN.search(l)
             if speaker_id_match:
                 speaker_id = speaker_id_match[1].lower()
+                speaker_gen = speaker_id_match[2]
                 if speaker_id not in speakers_gender:
                     if "paotr" in speaker_id:
                         speakers_gender[speaker_id] = 'm'
                     elif "plach" in speaker_id:
                         speakers_gender[speaker_id] = 'f'
                     else:
-                        print("unknown gender:", speaker_id)
+                        speakers_gender[speaker_id] = speaker_gen
+                else:
+                    if not speakers_gender[speaker_id] and speaker_gen:
+                        speakers_gender[speaker_id] = speaker_gen.lower()
+                
                 speakers.add(speaker_id)
                 start, end = speaker_id_match.span()
                 l = l[:start] + l[end:]
@@ -108,30 +111,26 @@ def parse_data(split_filename):
                 for sentence in l.split('.'):
                     if not sentence:
                         continue
-                    cleaned, bl_score = get_cleaned_sentence(sentence)
+                    cleaned, bl_score = get_cleaned_sentence(sentence, rm_bl_marker=True, rm_verbal_ticks=True)
                     if not cleaned:
                         continue
                     # Ignore if to many black-listed words in sentence
                     if bl_score > 0.2:
-                        correction, _ = get_correction(sentence)
+                        #correction, _ = get_correction(sentence)
                         #print(f"rejected ({bl_score}): {correction}")
                         continue
                     
-                    tokens = []
-                    for t in cleaned.split():
-                        if not t in verbal_tics:
-                            tokens.append(t)
-                    
                     # Ignore of sentence is too short
-                    if len(tokens) < 3:
+                    if cleaned.count(' ') < 3:
+                        print("lexicon skip:", cleaned)
                         continue
                     
-                    corpus.append(' '.join(tokens).replace('*', ''))
+                    corpus.add(cleaned)
     
     if not make_corpus:
         with open(corpus_filename, 'r') as f:
             for l in f.readlines():
-                corpus.append(l.strip())
+                corpus.add(l.strip())
      
     segments = load_segments(split_filename)
     assert len(text) == len(segments), \
@@ -174,7 +173,7 @@ if __name__ == "__main__":
     utt2spk = []
     regular_words = set()
     speakers = set()
-    corpus = []
+    corpus = set()
     speakers_gender = {}
     male_audio_length = 0.0
     female_audio_length = 0.0
@@ -213,11 +212,27 @@ if __name__ == "__main__":
     if not os.path.exists('data'):
         os.mkdir('data')
     
+    if not os.path.exists(os.path.join('data', 'local')):
+        os.mkdir(os.path.join('data', 'local'))
+        
+        # First time running this script so external text corpus will be added
+        print("parsing and copying external corpus")
+        with open('corpus/wiki_corpus.txt', 'r') as fr:
+            with open('data/local/corpus.txt', 'w') as fw:
+                for sentence in fr.readlines():
+                    cleaned = get_cleaned_sentence(sentence)[0]
+                    regular_words.update(cleaned.split())
+                    fw.write(cleaned + '\n')
+        
+    dict_dir = os.path.join('data', 'local', 'dict_nosp')
+    if not os.path.exists(dict_dir):
+        os.mkdir(dict_dir)
+    
     save_dir = os.path.join('data', os.path.split(os.path.normpath(rep))[1])
     #save_dir = os.path.abspath(save_dir)
-    
     if not os.path.exists(save_dir):
         os.mkdir(save_dir)
+        
     
     # Build 'text' file
     fname = os.path.join(save_dir, 'text')
@@ -252,13 +267,6 @@ if __name__ == "__main__":
         for rec_id, wav_filename in wavscp:
             f.write(f"{rec_id}\t{wav_filename}\n")
     
-    
-    if not os.path.exists(os.path.join('data', 'local')):
-        os.mkdir(os.path.join('data', 'local'))
-    dict_dir = os.path.join('data', 'local', 'dict_nosp')
-    if not os.path.exists(dict_dir):
-        os.mkdir(dict_dir)
-    
     # Lexicon.txt
     lexicon_path = os.path.join(dict_dir, 'lexicon.txt')
     if os.path.exists(lexicon_path):
@@ -267,9 +275,14 @@ if __name__ == "__main__":
         with open(lexicon_path, 'r') as f:
             for l in f.readlines()[3:]:
                 old_lexicon.add(l.split()[0])
+        add_lexicon = set()
+        with open(LEXICON_ADD_PATH, 'r') as f:
+            for l in f.readlines():
+                add_lexicon.add(l.split()[0])
         with open(lexicon_path, 'a') as f:
             for w in sorted(regular_words):
-                if w not in old_lexicon:
+                if w not in old_lexicon or w in add_lexicon:
+                    # XXX: words from LEXICON_ADD will prevent same words with different pronunciation to be added here
                     f.write(f"{w} {' '.join(word2phonetic(w))}\n")
     else:    
         print(f"building file {lexicon_path}")

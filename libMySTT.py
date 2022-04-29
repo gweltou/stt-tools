@@ -3,9 +3,9 @@
 
 
 """
- Author:        Gweltaz Duval-Guennoc
- 
  Common functions for audio file playback and data parsing
+ 
+ Author:  Gweltaz Duval-Guennoc
 
 """
 
@@ -36,7 +36,7 @@ ACRONYM_PATH = os.path.join(ROOT, "acronyms.txt")
 LEXICON_ADD_PATH = os.path.join(ROOT, "lexicon_add.txt")
 LEXICON_REPLACE_PATH = os.path.join(ROOT, "lexicon_replace.txt")
 
-SPEAKER_ID_PATTERN = re.compile(r'{([-\w]+)}')
+SPEAKER_ID_PATTERN = re.compile(r'{([-\w]+):*([mf])*}')
 
 
 verbal_tics = {
@@ -57,6 +57,8 @@ verbal_tics = {
 
 punctuation = (',', '.', ';', '?', '!', ':', '«', '»', '"', '”', '“', '(', ')', '…', '–', '‚')
 
+valid_chars = "aâbcdeêfghijklmnñoprstuüùûvwyz'- "
+
 
 w2f = {
     'a'     :   'A',
@@ -68,10 +70,13 @@ w2f = {
     'ch'    :   'CH',       # CHomm
     "c'h"   :   'X',        # 
     'd'     :   'D',
+    ".d'"   :   'D',        # D'ar
+    ".d'h"  :   'D',        # D'Hon
     'e'     :   'E',        # spErEd
     'ê'     :   'E',        # gÊr
     "ec'h"  :   'EH X',     # nec'h
     'ei'    :   'EY',       # kEIn      # could replace with (EH I) maybe ?
+    'eiñ'   :   'EY',       # savetEIÑ
     'el.'   :   'EH L',     # broadEL
     'em'    :   'EH M',     # lEMm
     'eñ'    :   'EN',       # chEÑch
@@ -95,21 +100,29 @@ w2f = {
     'll'    :   'L',
     'm'     :   'M',
     'mm'    :   'M',
+    ".m'"   :   'M',        # M'eo
+    ".m'h"  :   'M',        # M'Ho
     'n'     :   'N',
     'nn'    :   'N',
+    ".n'"   :   'N',        # N'eo
+    ".n'h"  :   'N',        # N'Heller
     'o'     :   'O',        # nOr
     'on'    :   'ON N',     # dON
     'ont.'  :   'ON N',     # mONt
     'oñ'    :   'ON',       # sOÑjal
     'ou'    :   'OU',       # dOUr
-    'où.'   :   'OU',       # goulOÙ
+    'oû'    :   'OU',       # gOÛt (kerneveg)
+    'où'    :   'OU',       # goulOÙ
     'or'    :   'OH R',     # dORn      ! dor, goudoriñ
     'orr'   :   'O R',      # gORRe
     'p'     :   'P',
+    ".p'"   :   'P',        # P'edo
+    ".p'h"  :   'P',        # P'He
     'r'     :   'R',
     'rr'    :   'R',
     's'     :   'S',
     't'     :   'T',
+    'û'     :   'U',        # Ûioù (kerneveg)
     'u'     :   'U',        # tUd
     'uñ'    :   'UN',       # pUÑs
     '.un.'  :   'OE N',     # UN dra
@@ -183,16 +196,18 @@ def word2phonetic(word):
     phonemes = []
     word = '.' + word.strip().lower().replace('-', '.') + '.'
     while head < len(word):
+        parsed = False
         for i in (4, 3, 2, 1):
             token = word[head:head+i].lower()
             if token in w2f:
                 phonemes.append(w2f[token])
                 head += i-1
+                parsed = True
                 break
         head += 1
-    
-    if len(phonemes) == 0:
-        print("ERROR: word2phonetic", word)
+        if not parsed and token != '.':
+            print("ERROR: word2phonetic", word)
+     
     return phonemes
 
 
@@ -315,7 +330,7 @@ def tokenize(sentence):
 
 
 
-def get_cleaned_sentence(sentence, remove_bl_marker=False):
+def get_cleaned_sentence(sentence, rm_bl_marker=False, rm_verbal_ticks=False):
     """
         Return a cleaned sentence, proper to put in text files or corpus
                and a quality score (ratio of black-listed words, the lower the better)
@@ -334,11 +349,13 @@ def get_cleaned_sentence(sentence, remove_bl_marker=False):
         lowered_token = token.lower()
         # Ignore black listed words
         if token.startswith('*'):
-            if remove_bl_marker:
+            if rm_bl_marker:
                 tokens.append(token[1:])
             else:
                 tokens.append(token)
             num_blacklisted += 1
+        elif rm_verbal_ticks and lowered_token in verbal_tics:
+            pass
         elif lowered_token in corrected:
             tokens.append(corrected[lowered_token])
         elif lowered_token in capitalized:
@@ -469,7 +486,7 @@ def extract_acronyms_from_file(text_filename):
             
             speaker_id_match = SPEAKER_ID_PATTERN.search(l)
             if speaker_id_match:
-                current_speaker = speaker_id_match[1]
+                #current_speaker = speaker_id_match[1]
                 start, end = speaker_id_match.span()
                 l = l[:start] + l[end:]
             l = l.strip()
