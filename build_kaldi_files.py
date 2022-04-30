@@ -278,13 +278,13 @@ if __name__ == "__main__":
         with open(lexicon_path, 'r') as f:
             for l in f.readlines()[3:]:
                 old_lexicon.add(l.split()[0])
-        add_lexicon = set()
-        with open(LEXICON_ADD_PATH, 'r') as f:
-            for l in f.readlines():
-                add_lexicon.add(l.split()[0])
+        #add_lexicon = set()
+        #with open(LEXICON_ADD_PATH, 'r') as f:
+        #    for l in f.readlines():
+        #        add_lexicon.add(l.split()[0])
         with open(lexicon_path, 'a') as f:
             for w in sorted(regular_words):
-                if w not in old_lexicon or w in add_lexicon:
+                if w not in old_lexicon:
                     f.write(f"{w} {' '.join(word2phonetic(w))}\n")
     else:    
         print(f"building file {lexicon_path}")
@@ -292,9 +292,9 @@ if __name__ == "__main__":
             f.write(f"!SIL SIL\n<SPOKEN_NOISE> SPN\n<UNK> SPN\n")
             for w in sorted(regular_words):
                 f.write(f"{w} {' '.join(word2phonetic(w))}\n")
-            with open(LEXICON_ADD_PATH, 'r') as f2:
-                for l in f2.readlines():
-                    f.write(l)
+            #with open(LEXICON_ADD_PATH, 'r') as f2:
+            #    for l in f2.readlines():
+            #        f.write(l)
             for w in acronyms:
                 f.write(f"{w} {' '.join(acronyms[w])}\n")
             for w in capitalized:
