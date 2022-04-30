@@ -122,7 +122,7 @@ def parse_data(split_filename):
                     
                     # Ignore of sentence is too short
                     if cleaned.count(' ') < 3:
-                        print("lexicon skip:", cleaned)
+                        print("corpus skip:", cleaned)
                         continue
                     
                     corpus.add(cleaned)
@@ -220,8 +220,11 @@ if __name__ == "__main__":
         with open('corpus/wiki_corpus.txt', 'r') as fr:
             with open('data/local/corpus.txt', 'w') as fw:
                 for sentence in fr.readlines():
-                    cleaned = get_cleaned_sentence(sentence)[0]
-                    regular_words.update(cleaned.split())
+                    cleaned = get_cleaned_sentence(sentence)[0].lower()
+                    for word in cleaned.split():
+                        if word not in capitalized:
+                            #XXX: pb with accronyms in wikipedia corpus
+                            regular_words.add(word)
                     fw.write(cleaned + '\n')
         
     dict_dir = os.path.join('data', 'local', 'dict_nosp')
@@ -282,7 +285,6 @@ if __name__ == "__main__":
         with open(lexicon_path, 'a') as f:
             for w in sorted(regular_words):
                 if w not in old_lexicon or w in add_lexicon:
-                    # XXX: words from LEXICON_ADD will prevent same words with different pronunciation to be added here
                     f.write(f"{w} {' '.join(word2phonetic(w))}\n")
     else:    
         print(f"building file {lexicon_path}")

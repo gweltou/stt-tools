@@ -3,10 +3,12 @@
 
 import os
 import json
+import re
 from libMySTT import filter_out, punctuation, valid_chars, hs_dict
 
 dumps_dir = os.path.join("wikipedia_corpus", "dumps")
 
+#RE_PATTERN = re.compile(r'{([-\w]+):*([mf])*}')
 
 
 def contains_numbers(s):
@@ -14,6 +16,7 @@ def contains_numbers(s):
         if n in s:
             return True
     return False
+
 
 def split_line(s):
     if '. ' in s:
@@ -51,6 +54,7 @@ for a in articles:
                 keepers.add(sentence)
 
 print(len(keepers))
+
 
 
 if __name__ == "__main__":
