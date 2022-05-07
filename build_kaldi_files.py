@@ -7,6 +7,9 @@
  
  Author:  Gweltaz Duval-Guennoc
  
+ Notes: data from lexicon_add.txt must be added manually to lexicon after executing
+        this script on train and test datasets.
+ 
 """
 
 
@@ -222,7 +225,7 @@ if __name__ == "__main__":
                 for sentence in fr.readlines():
                     cleaned = get_cleaned_sentence(sentence)[0].lower()
                     for word in cleaned.split():
-                        if word not in capitalized:
+                        if word.lower() not in capitalized:
                             #XXX: pb with accronyms in wikipedia corpus
                             regular_words.add(word)
                     fw.write(cleaned + '\n')

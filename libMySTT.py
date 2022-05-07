@@ -122,6 +122,7 @@ w2f = {
     'rr'    :   'R',
     's'     :   'S',
     't'     :   'T',
+#    ".t'"   :   'T',        # T'eus
     'û'     :   'U',        # Ûioù (kerneveg)
     'u'     :   'U',        # tUd
     'uñ'    :   'UN',       # pUÑs
@@ -206,7 +207,7 @@ def word2phonetic(word):
                 break
         head += 1
         if not parsed and token != '.':
-            print("ERROR: word2phonetic", word)
+            print("ERROR: word2phonetic", word, phonemes)
      
     return phonemes
 
