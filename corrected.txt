@@ -14,6 +14,7 @@ hanterkantved	hanterkantvet
 ugentved	ugentvet
 ty	ti
 moutik	moutig
+stokholm	Stockholm
 
 
 # Fr to Br

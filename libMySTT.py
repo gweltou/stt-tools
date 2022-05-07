@@ -69,9 +69,6 @@ w2f = {
     'd'     :   'D',
     'ch'    :   'CH',       # CHomm
     "c'h"   :   'X',        # 
-    'd'     :   'D',
-    ".d'"   :   'D',        # D'ar
-    ".d'h"  :   'D',        # D'Hon
     'e'     :   'E',        # spErEd
     'ê'     :   'E',        # gÊr
     "ec'h"  :   'EH X',     # nec'h
@@ -100,13 +97,10 @@ w2f = {
     'll'    :   'L',
     'm'     :   'M',
     'mm'    :   'M',
-    ".m'"   :   'M',        # M'eo
-    ".m'h"  :   'M',        # M'Ho
     'n'     :   'N',
     'nn'    :   'N',
-    ".n'"   :   'N',        # N'eo
-    ".n'h"  :   'N',        # N'Heller
     'o'     :   'O',        # nOr
+    'ô'     :   'O',        # kornôg
     'on'    :   'ON N',     # dON
     'ont.'  :   'ON N',     # mONt
     'oñ'    :   'ON',       # sOÑjal
@@ -116,13 +110,11 @@ w2f = {
     'or'    :   'OH R',     # dORn      ! dor, goudoriñ
     'orr'   :   'O R',      # gORRe
     'p'     :   'P',
-    ".p'"   :   'P',        # P'edo
     ".p'h"  :   'P',        # P'He
     'r'     :   'R',
     'rr'    :   'R',
     's'     :   'S',
     't'     :   'T',
-#    ".t'"   :   'T',        # T'eus
     'û'     :   'U',        # Ûioù (kerneveg)
     'u'     :   'U',        # tUd
     'uñ'    :   'UN',       # pUÑs
@@ -196,6 +188,7 @@ def word2phonetic(word):
     head = 0
     phonemes = []
     word = '.' + word.strip().lower().replace('-', '.') + '.'
+    error = False
     while head < len(word):
         parsed = False
         for i in (4, 3, 2, 1):
@@ -206,9 +199,12 @@ def word2phonetic(word):
                 parsed = True
                 break
         head += 1
-        if not parsed and token != '.':
-            print("ERROR: word2phonetic", word, phonemes)
-     
+        if not parsed and token not in ('.', "'"):
+            error = True
+    
+    if error:
+        print("ERROR: word2phonetic", word, ' '.join(phonemes))
+    
     return phonemes
 
 
