@@ -4,7 +4,8 @@
 import os
 import json
 import re
-from libMySTT import filter_out, punctuation, valid_chars, hs_dict
+from libMySTT import filter_out, punctuation, valid_chars, hs_dict, capitalized, is_acronym, acronyms
+
 
 dumps_dir = os.path.join("wikipedia_corpus", "dumps")
 
@@ -37,6 +38,9 @@ for filename in os.listdir(dumps_dir):
             
 
 keepers = set()
+acronym_words = set()
+capitalized_words = set()
+santou = set()
 
 for a in articles:
     for line in a["text"].split('\n'):
@@ -46,7 +50,20 @@ for a in articles:
             valid = True
             if len(words) <= 3:
                 continue
+            first_word = True
+            sant = False
             for w in words:
+                if sant:
+                    santou.add(w)
+                    sant = False
+                elif w == "Sant":
+                    sant = True
+                
+                if is_acronym(w) and w not in acronyms:
+                    acronym_words.add(w)
+                elif not first_word and w.istitle() and w.isalpha() and w not in capitalized:
+                    capitalized_words.add(w)
+                first_word = False
                 if not hs_dict.spell(w) or contains_numbers(w):
                     valid = False
                     break
@@ -69,3 +86,13 @@ if __name__ == "__main__":
                 pass
             else:
                 f.write(sentence + '\n')
+    
+    with open("wiki_acronyms.txt", 'w') as f:
+        for a in sorted(acronym_words):
+            f.write(a + '\n')
+    with open("wiki_capitalized.txt", 'w') as f:
+        for w in sorted(capitalized_words):
+            f.write(w + '\n')
+    with open("wiki_sant.txt", 'w') as f:
+        for w in sorted(santou):
+            f.write(w + '\n')

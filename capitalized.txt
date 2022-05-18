@@ -9,11 +9,13 @@ Akitania
 Alain A L EN
 Alamagn
 Alaska
+Allah A L L A
 Albert A L B EH R
 Albus
 Alexandra	A L EH K S AN D R A
 Alexandre	A L EH K S AN N D R
 Algam
+Alix A L I K S
 Aljeri
 Aljeria
 Alphabet A L F A B E T
@@ -332,6 +334,8 @@ Kerlouan
 Kermareg
 Kernaskledenn
 Kerne
+Gourenez
+Kraozon
 Kerouac K E R OU A K
 Kervella
 Kerzu
@@ -354,8 +358,24 @@ Landerne
 Landreger
 Lange   L AN J
 Langoët L AN G O EH T
+Langleiz
 Langoned
+Langristin
+Langroez
+Lanhouarne
 Lannuon
+Lannarvili
+Lanneanoù
+Lannedern
+Lanneur
+Lanneured
+Lanneven
+Lannevez
+Lannig
+Lannildud
+Lanniliz
+Lanninon
+Lanniron
 Laponia
 Larruen
 Larvol
@@ -369,6 +389,7 @@ Lena
 Leninsk
 Leonardo	L E O N A R D O
 Lestevennog
+Liberia
 Liger
 Lilo
 Lisbon
@@ -512,11 +533,64 @@ Pleuwigner
 Plistin
 Ploneiz
 Plougêr
-Plougonven
-Plougouskant
-Plouider
 Plouzane
+Plouan
+Plouared
+Plouarzhel
+Ploubêr
+Ploudiern
+Ploudon
+Ploue
+Plouedern
+Ploueg
+Plouenan
+Ploueskad
+Ploufragan
+Plougadvan
+Plouganoù
+Plougastell
+Plougastelliz
+Plougerne
+Plougernevel
+Plougin
+Plougonvelen
+Plougonven
+Plougonveur
+Plougonwaz
+Plougouloum
+Plougouskant
+Plougouvelen
+Plougoñ
+Plougraz
+Plouha
+Plouharnel
+Plouhern
+Plouider
+Plouigno
+Plouilio
+Plouizi
+Plouneour
+Plounerin
+Plourin
+Plourivoù
+Plouvagor
+Plouvalae
+Plouvien
+Plouvorn
+Plouyann
+Plouzelambr
+Plouzeniel
+Plouziri
+Ploveilh
+Ploveren
+Ploveur
+Plozeved
+Pluvergad
+Plufur
+Pluguen
+Pluhernin
 Plusquellec P L U S K E L EH K
+Pluskelleg
 Plymouth	P L I M OU S
 Polonia
 Pompei
@@ -524,7 +598,9 @@ Poñvel
 Portland P OH R T L AN N
 Potter	P O T OE R
 Poulidor
+Poullann
 Poullaouen
+Poulloger
 Pretoria
 Prigent P R I J AN
 Priya

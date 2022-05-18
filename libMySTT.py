@@ -269,7 +269,7 @@ capitalized = get_capitalized_dict()
 
 def get_acronyms_dict():
     """
-        Acronyms are stored in UPPER CASE in dictionary
+        Acronyms are stored in UPPERCASE in dictionary
     """
     acronyms = dict()
     if os.path.exists(ACRONYM_PATH):
@@ -299,12 +299,16 @@ def filter_out(text, symbols):
 
 
 def is_acronym(word):
-    if len(word) < 2 or word.isdigit():
+    if len(word) < 2:
         return False
-    for letter in word:
-        if not letter.isdecimal() and letter.islower():
+    valid = False
+    for l in word:
+        if l in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+            valid = True
+            continue
+        if l not in "-0123456789":
             return False
-    return True
+    return valid
 
 
 
@@ -503,7 +507,6 @@ def extract_acronyms_from_file(text_filename):
 
 
 
-
 def load_segments(filename):
     segments = []
     with open(filename, 'r') as f:
@@ -563,6 +566,7 @@ def convert_to_wav(src, dst):
                      '-ac', '1', '-ar', '16000', dst])
 
 
+
 def concatenate_audiofiles(file_list, out_filename, remove=True):
     if len(file_list) <= 1:
         return
@@ -581,3 +585,16 @@ def concatenate_audiofiles(file_list, out_filename, remove=True):
     if remove:
         for fname in file_list:
             os.remove(fname)
+
+
+
+def list_files_with_extension(ext, rep, recursive=True):
+    file_list = []
+    if os.path.isdir(rep):
+        for filename in os.listdir(rep):
+            filename = os.path.join(rep, filename)
+            if os.path.isdir(filename) and recursive:
+                file_list.extend(list_files_with_extension(ext, filename))
+            elif os.path.splitext(filename)[1] == ext:
+                file_list.append(filename)
+    return file_list

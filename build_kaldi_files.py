@@ -220,10 +220,10 @@ if __name__ == "__main__":
         
         # First time running this script so external text corpus will be added
         print("parsing and copying external corpus")
-        with open('corpus/wiki_corpus.txt', 'r') as fr:
-            with open('data/local/corpus.txt', 'w') as fw:
+        with open('data/local/corpus.txt', 'w') as fw:
+            with open('corpus/wiki_corpus.txt', 'r') as fr:
                 for sentence in fr.readlines():
-                    cleaned = get_cleaned_sentence(sentence)[0].lower()
+                    cleaned = get_cleaned_sentence(sentence)[0]
                     for word in cleaned.split():
                         if word.lower() not in capitalized:
                             #XXX: pb with accronyms in wikipedia corpus
