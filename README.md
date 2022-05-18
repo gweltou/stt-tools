@@ -19,7 +19,7 @@ Numerals should be written in all letters
 Acronyms should be written in capital letters with no dots or dashes
 (E.g. UNESCO, COP21)
 
-Regional forms should be kept if their pronouciation is far from the "standard" form
+Regional forms should be kept if their pronouciation is far from the "standard" form (but that's open to awkward an unending debates)
 (E.g. "meump bet/on eus bet", "nege/an hini eo", "lâret/lavaret")
  
 ## Workflow
@@ -40,11 +40,11 @@ Copy generated ``data`` folder in your Kaldi recipe folder.
 
 Run ``run.sh`` script in kaldi recipe folder.
 
-Cry, wishing you had a GPU, while waiting for dozens of hours.
+Cry, wishing you had a GPU, while waiting for the model to finish its training (more than a hundred hours in my case).
 
 When training is finally done, run script ``copy_final_result.sh`` to copy necessary files in ``model`` folder.
 
-Rename ``model`` folder and copy it in vosk ``model`` subfolder.
+Rename ``model`` folder to your liking and copy it in vosk ``model`` subfolder.
 
 Enjoy !
 
@@ -56,15 +56,15 @@ Enjoy !
  * ``capitalized.txt``\
     List of single words followed by phonemes
  * ``acronyms.txt``
+    List of acronyms (in capital letters) followed by phonemes
  * ``lexicon_add.txt``\
     Store additional regional pronouciations for breton words
  * ``lexicon_replace.txt``\
     Replace phonetics for words in lexicon (foreign words for instance)
 
 ## TODO
- * Retrain with long utterances only dataset
- * try reduce the size of the model (number of hidden layer) as well as the number of epochs
+ * Try reducing the size of the model (number of hidden layer) as well as the number of epochs
 
 ## Acknowledgement
 
-``br_FR.dic`` and ``br_FR.aff`` in ``hunspell-dictionary`` folder from Drouizig hunspell dictionary.
+``br_FR.dic`` and ``br_FR.aff`` in ``hunspell-dictionary`` folder, from [An Drouizig](http://www.drouizig.org/index.php/br/) hunspell dictionary.
