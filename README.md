@@ -5,21 +5,23 @@ Split files .split should be in the same folder as its related audio file and te
 
 ## Python packages dependency
 
- * numpy ($ pip3 install numpy)
+ * numpy \
+   ``pip3 install numpy``
  * [Librosa](https://librosa.org/)
  * Pydub
- * Hunspell ($ pip3 install cyhunspell)
+ * Hunspell \
+   ``pip3 install cyhunspell``
  * Colorama
 
 ## Transcription rules
 
-Numerals should be written in all letters
+Numerals should be written in all letters \
 (E.g. "1942" --> "mil nav c'hant daou ha daou ugent")
 
-Acronyms should be written in capital letters with no dots or dashes
+Acronyms should be written in capital letters with no dots or dashes \
 (E.g. UNESCO, COP21)
 
-Regional forms should be kept if their pronouciation is far from the "standard" form (but that's open to awkward an unending debates)
+Regional forms should be kept if their pronouciation is far from the "standard" form (but that's open to awkward an unending debates) \
 (E.g. "meump bet/on eus bet", "nege/an hini eo", "lâret/lavaret")
  
 ## Workflow
@@ -55,7 +57,7 @@ Enjoy !
     Keys of single token are case insensitive but corrections must be capitalized when appropriate.
  * ``capitalized.txt``\
     List of single words followed by phonemes
- * ``acronyms.txt``
+ * ``acronyms.txt``\
     List of acronyms (in capital letters) followed by phonemes
  * ``lexicon_add.txt``\
     Store additional regional pronouciations for breton words
