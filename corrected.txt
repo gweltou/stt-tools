@@ -108,6 +108,7 @@ marie	Mari
 stéphan	Stefan
 catherine	Katrin
 philippe	Filip
+christian	Kristian
 
 
 télégramme	telegram

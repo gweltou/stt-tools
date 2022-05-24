@@ -1,11 +1,13 @@
 abalamour B L AN M
+aet E D
 amezeg A M E Z OH K
 anezhe N EH
 anezho N EU
 arc'hant A R G A N T
-aet E D
+aze A E
 barradoù B A R A J OU
 bemdez B EH M D E
+betra B E R
 bezañ B E H AN
 bezañ B EY OE
 bloavezhioù B L O A V E CH OU
@@ -13,13 +15,16 @@ buhez B U H E
 c'hoadoù X O A J OU
 chomont CH O M A I N T
 c'hwec'h F EH X
-deuet D EU T
+debret D R E B E T
 deoc'h D OH X
+deuet D EU T
+devezhioù D EH R V E CH OU
 digarez D I G A R E
 emañ M A
 emañ M AN
 eo E
 gouzout G OU T
+gwenodennoù G W E N O J EH N OU
 gwin V I N
 heiz H EH I
 hentoù E N CH OU
@@ -27,6 +32,10 @@ hiziv H I R I E
 hiziv H I R I O
 ivez I V E
 ivez U W EH
+krampouezh K R AN M P OU Z
+kreñv K R EN ON
+lazhet L A X E T
+lazhañ L A X AN
 le L EU
 loen L ON N
 maezioù M E CH OU
@@ -34,35 +43,39 @@ marteze M A R S EH
 marteze M A T R EH X
 menez M E N E
 mennozh M E N O
+n'eo N E
 netra N I T R A
 neuze N EN N
 neuze N OE H E
 nevez N E V E
 pelec'h P L EH X
 petra P E R A
+petra P E R
+pradoù P R A J OU
 prenester P R E N E CH EH R
 puhez P U H E
 reont R A I N T
 romantoù R O M AN N CH OU
 ruz R U
 sachit CH A CH I T
-selaouit CH I L A OU I T
 selaouet CH I L A OU E T
-sonjoù CH ON J OU
+selaouent CH I L A OU EH N T
+selaouit CH I L A OU I T
+serrit S A R I T
+soñjoù CH ON J OU
 straedoù S T R E J OU
-pradoù P R A J OU
-surk CH U K R
-vaksin V A K S EN
-wenodenn W E N O J EH N
-gwenodennoù G W E N O J EH N OU
+sukr CH U K R
 the Z EU
 the Z OE
 to T OU
 unan OE N
+vaksin V A K S EN
 venez V E N E
 verenn V EH R N
 vi H U
 vioù EU I OU
 vuhez V U H E
-krampouezh K R AN M P OU Z
+welet V E L E T
+wenodenn W E N O J EH N
+wirionez V I R I ON E
 zae H A E

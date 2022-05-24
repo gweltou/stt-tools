@@ -143,8 +143,8 @@ def parse_data(split_filename):
     text_data = []
     utt2spk_data = []
     for i, s in enumerate(segments):
-        start = int(s[0]) / 1000
-        stop = int(s[1]) / 1000
+        start = s[0] / 1000
+        stop = s[1] / 1000
         speaker_gender = 'u'
         if speaker_ids[i] in speakers_gender:
             speaker_gender = speakers_gender[speaker_ids[i]]

@@ -115,7 +115,6 @@ Chicago	CH I K A G O
 Chili
 Chitra
 C'hrist
-Christian K R I S T I AN
 Chuck	T CH OE K
 C'hwevrer
 Colyne K O L I N
@@ -182,6 +181,7 @@ Ernest	EH R N EH S T
 Erwan
 Eugénie EU J E N I
 Europa
+Europiz
 Eusa
 Evelyne E V EU L I N
 Facebook	F EY S B OU K
@@ -205,6 +205,7 @@ Garaez
 Gauguin	G O G EN
 Gaza
 Gelted
+Gembre
 Gemper
 Genver
 Genya
@@ -237,6 +238,7 @@ Guirec G I R E K
 Gumbakonam G OU M B A K O N A M
 Guy G I
 Gwaien
+Gwegan
 Gweltaz	G W EH L T A S
 Gwenc'hlan
 Gwened
@@ -264,6 +266,7 @@ Himalaya
 Hirrien
 Hollsent
 Hong ON G
+Icare I K A R
 Ifig
 Indez
 India
@@ -272,12 +275,14 @@ Indiz
 Iran
 Isabelle I Z A B EH L
 Islam
+Isis I Z I S
 Israel
 Italia
 Iwan
 Iwerzhon
 Iwerzhoniz
 Iwi
+Izold
 Jack D J A K
 Jakez
 James D J EY M S
@@ -340,6 +345,7 @@ Kerouac K E R OU A K
 Kervella
 Kerzu
 Klet
+Kleopatra
 Kmer
 Kolombia
 Komborn
@@ -353,6 +359,7 @@ Kristian K R I S T I AN
 Kubrick K U B R I K
 Kuiper
 Kyoto
+Lampedusa L AN M P E D OU S A
 Lancelot L AN S L O
 Landerne
 Landreger
@@ -415,6 +422,8 @@ Lula L OU L A
 Lun
 Luzon
 Lyon L I ON
+Mahama
+Mahomet
 Macron M A K R ON
 Madiran
 Mae
@@ -506,6 +515,7 @@ Oregon O R E G ON
 Oriant
 Orion	O R I ON
 Oural
+Osiris O Z I R I S
 Owen O W EH N
 Palestin
 Palestina
@@ -607,6 +617,7 @@ Priya
 Prod P R OH D
 Provañs
 Qigong CH I K ON G
+Ramses
 Ravi
 Reblochon R EU B L O CH ON
 Riksdag
@@ -623,6 +634,7 @@ Roma
 Romaned
 Ronan
 Ropars
+Rosetta R O Z E T A
 Rostren
 Rusia
 Sadorn
@@ -668,6 +680,7 @@ Stéphanie S T E F A N I
 Stevenson S T E V EH N S OH N
 Stockholm S T O K OH L M
 Stonewall S T O N W OH L
+Strasbourg S T R A S B OU R
 Suamerika
 Suamerikan
 Suez

@@ -24,6 +24,8 @@ import librosa
 from libMySTT import *
 
 
+RESIZE_PATTERN = re.compile(r"([s|e])([-|\+])(\d+)")
+
 
 
 def play_segment_text(idx, song, segments, text, speed):
@@ -88,22 +90,18 @@ if __name__ == "__main__":
     text, speakers = load_textfile(text_filename)
     textfile_mtime = os.path.getmtime(text_filename)
     
+    fileinfo = get_audiofile_info(sys.argv[1])
+    # Convert to 16kHz mono wav if needed
+    if fileinfo["channels"] != 1 or fileinfo["sample_rate"] != "16000" or fileinfo["bits_per_sample"] != 16:
+        print(f"converting {sys.argv[1]}...")
+        convert_to_wav(sys.argv[1], wav_filename);
+        print("conversion done")
+    
     segments = []
     if os.path.exists(split_filename):
         print("split file exists")
         segments = load_segments(split_filename)
     else:
-        fileinfo = get_audiofile_info(sys.argv[1])
-        #for s in ["codec_name", "channels", "sample_rate", "bits_per_sample"]:
-        #    print(f"{s}: {fileinfo[s]}")
-        
-        # Convert to 16kHz mono wav if needed
-        if fileinfo["channels"] != 1 or fileinfo["sample_rate"] != "16000" or \
-           fileinfo["bits_per_sample"] != 16:
-            print(f"converting {sys.argv[1]}...")
-            convert_to_wav(sys.argv[1], wav_filename);
-            print("conversion done")
-        
         print("spliting wave file")
         y, sr = librosa.load(wav_filename)
         
@@ -131,13 +129,22 @@ if __name__ == "__main__":
     speed = 1
     while running:
         x = input(f"{idx+1}> ")
+        resize_match = RESIZE_PATTERN.match(x)
         
         # Reload text file if it's been modified
         mtime = os.path.getmtime(text_filename)
         if mtime > textfile_mtime:
             text, speakers = load_textfile(text_filename)
         
-        if x.isnumeric():
+        if resize_match:
+            pos = resize_match.groups()[0]
+            start, stop = segments[idx]
+            delay = int(resize_match.groups()[1] + resize_match.groups()[2])
+            if pos == 's':
+                segments[idx] = (start + delay, stop)
+            elif pos == 'e':
+                segments[idx] = (start, stop + delay)
+        elif x.isnumeric():
             idx = (int(x)-1) % len(segments)
             play_segment_text(idx, song, segments, text, speed)
         elif x == '.' or x == 'r':

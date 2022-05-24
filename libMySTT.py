@@ -77,6 +77,7 @@ w2f = {
     'el.'   :   'EH L',     # broadEL
     'em'    :   'EH M',     # lEMm
     'eñ'    :   'EN',       # chEÑch
+    'en.'   :   'EH N',     # meriEN
     'enn'   :   'EH N',     # lENN
     'er.'   :   'EH R',     # hantER
     'eu'    :   'EU',       # lEUn
@@ -453,6 +454,7 @@ def prompt_acronym_phon(w, song, segments, idx):
             return answer
 
 
+
 def extract_acronyms(text):
     extracted = set()
     for w in tokenize(text):
@@ -463,6 +465,7 @@ def extract_acronyms(text):
             extracted.add(w)
     
     return list(extracted)
+
 
 
 def extract_acronyms_from_file(text_filename):
@@ -559,8 +562,11 @@ def convert_to_wav(src, dst):
         Convert 16kHz wav
         Validate filename
     """
-    dst = dst.replace(' ', '_')
-    dst = dst.replace("'", '')
+    print(f"converting {src} to {dst}...")
+    rep, filename = os.path.split(dst)
+    filename = filename.replace(' ', '_')
+    filename = filename.replace("'", '')
+    dst = os.path.join(rep, filename)
     subprocess.call(['ffmpeg', '-v', 'panic',
                      '-i', src, '-acodec', 'pcm_s16le',
                      '-ac', '1', '-ar', '16000', dst])
