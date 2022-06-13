@@ -17,6 +17,8 @@ moutik	moutig
 stokholm	Stockholm
 anezhe	anezho
 hirie	hiriv
+goût	gouzout
+evid	evit
 
 
 # Fr to Br
@@ -53,6 +55,7 @@ dim	dimezell
 aeoc'h	aesoc'h
 triugentved	triugentvet
 maoc'h	emaoc'h
+maomp	emaomp
 penaoz	penaos
 dilec'hiadennoù	dilerc'hiadennoù
 ac'hanoch	ac'hanoc'h
@@ -115,6 +118,8 @@ helen	Elen
 hélène	Elen
 huelgoat	Uhelgoad
 kambodjia	Kambodja
+émile	Emil
+maría	Maria
 
 
 télégramme	telegram
@@ -136,6 +141,7 @@ gete	gante
 #gante	ganto
 gouvezet	gouezet
 awalc'h	a-walc'h
+araok	a-raok
 marmoused	marmouzed
 diagnostics	diagnostiks
 marc'hatmatoc'h	marc'hadmatoc'h
@@ -150,7 +156,10 @@ virgulen	virgulenn
 founnus	fonnus
 vit	evit
 vidon	evidon
-
+dishenvel	disheñvel
+adkemmeret	adkemeret
+gwann	gwan
+laret	lâret
 
 arru	erru
 be'h	bec'h
@@ -174,10 +183,30 @@ m2	metrad karrez
 %	dregant
 cl	santilitr
 ml	mililitr
+cm	santimetr
+km	kilometr
 
+II	daou
+III	tri
+IV	pevar
+VI	c'hwec'h
+VII	seizh
+VIII	eizh
+IX	nav
+XVII	seizh
+
+1añ	kentañ
+IVe	pevare
 Vvet	pempvet
-XVIIvet	seitekvet
+VIvet	c'hwec'hvet
+VIIvet	seizhvet
+VIIIvet	eizhvet
+IXvet	navet
+Xvet	dekvet
 XIIvet	daouzekvet
+XVIIvet	seitekvet
+XVIIIvet	triwec'hvet
+XXvet	ugentvet
 
 5	pemp
 6	c'hwec'h
@@ -188,13 +217,16 @@ XIIvet	daouzekvet
 11	unnek
 12	daouzek
 13	trizek
+14	pevarzek
 15	pemzek
 16	c'hwezek
 17	seitek
 18	triwec'h
 19	naontek
 20	ugent
+21	un warn ugent
 23	tri warn ugent
+29	nav warn ugent
 30	tregont
 40	daou ugent
 50	hanter-kant
@@ -215,25 +247,58 @@ XIIvet	daouzekvet
 700	seizh kant
 800	eizh kant
 900	nav c'hant
+000	mil
 1000	mil
+1780	mil seizh kant pevar ugent
+1788	mil seizh kant eizh ha pevar ugent
+1792	mil seizh kant daouzek ha pevar ugent
+1793	mil seizh kant trizek ha pevar ugent
+1808	mil eizh kant eizh
+1822	mil eizh kant daou warn ugent
+1829	mil eizh kant nav warn ugent
+1839	mil eizh kant nav ha tregont
 1840	mil eizh kant daou ugent
 1846	mil eizh kant c'hwec'h ha daou ugent
+1861	mil eizh kant un ha tri ugent
+1870	mil eizh kant dek ha tri ugent
 1905	mil nav c'hant pemp
 1907	mil nav c'hant seizh
 1910	mil nav c'hant dek
+1912	mil nav c'hant daouzek
 1913	mil nav c'hant trizek
 1916	mil nav c'hant c'hwezek
+1917	mil nav c'hant seitek
 1920	mil nav c'hant ugent
+1930	mil nav c'hant tregont
+1936	mil nav c'hant c'hwec'h ha tregont
+1940	mil nav c'hant daou ugent
+1943	mil nav c'hant tri ha daou ugent
+1945	mil nav c'hant pemp ha daou ugent
+1950	mil nav c'hant hanter kant
+1956	mil nav c'hant c'hwec'h hag hanter kant
+1960	mil nav c'hant tri ugent
 1968	mil nav c'hant eizh ha tri ugent
 1970	mil nav c'hant dek ha tri ugent
+1975	mil nav c'hant pemzek ha tri ugent
+1976	mil nav c'hant c'hwezek ha tri ugent
+1980	mil nav c'hant pevar ugent
+1984	mil nav c'hant pevar ha pevar ugent
+1990	mil nav c'hant dek ha pevar ugent
 1991	mil nav c'hant unnek ha pevar ugent
+1994	mil nav c'hant pevarzek ha pevar ugent
 1995	mil nav c'hant pemzek ha pevar ugent
+1996	mil nav c'hant c'hwezek ha pevar ugent
+1999	mil nav c'hant naontek ha pevar ugent
 2000	daou vil
+2001	daou vil unan
 2003	daou vil tri
 2005	daou vil pemp
 2006	daou vil c'hwec'h
 2007	daou vil seizh
 2008	daou vil eizh
+2009	daou vil nav
+2010	daou vil dek
+2011	daou vil unnek
 2012	daou vil daouzek
 2015	daou vil pemzek
 2016	daou vil c'hwezek

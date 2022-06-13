@@ -8,6 +8,7 @@ Adrien A D R I EN
 Afrika
 Afrikan
 Afrikaned
+Afrikaniz
 Agapit
 Akitania
 Alain A L EN
@@ -47,12 +48,14 @@ Angkor
 Anjela
 Anna
 Annaig
+Antoine AN T O A N
 Aostralia
 Aostria
 Aostrian
 Apple A P OE L
 Arc'hantina
 Are
+Armenia
 Arno
 Arnold A R N OH L D
 Artika
@@ -107,18 +110,18 @@ Birmania
 Blanchet B L AN CH EH
 Bleaz
 Bleuenn
-Bloom B L OU M
 Bloomberg B L OU M B OE R G
+Bloom B L OU M
 Blouvagor
 Bolivia
 Bollore
 Bolonia
 Bolsonaro
+Borgn
 Boston	B OH S T OH N
 Bouda
 Boudaoù
 Bourdel
-Borgn
 Brasparzh
 Brazil
 Breizh
@@ -137,8 +140,11 @@ Bruno
 Brusel B R U S EH L
 Bulgaria
 Buriana
+Carolina K A R O L I N A
+Caroline K A R O L I N
 Casterman K A S T EH R M A N
 Celsius	S EH L S I U S
+C'hallaoued
 Charleston CH A R L E S T OH N
 Charlez
 Charlie CH A R L I
@@ -187,7 +193,8 @@ Dinarzh D I N A R
 Dinarzh D I N A R Z
 Diriaou
 Disadorn
-Disneyland D I S N E L AN D
+Disney D I S N EH
+Disneyland D I S N EH L AN D
 Disul
 Divi
 Dizant
@@ -244,9 +251,9 @@ Facebook	F EY S B OU K
 Fañch
 Faoued
 Fezwezhen
-Fili
 Filiber
 Filiberzh
+Filip
 Filipin
 Finland
 Finnian
@@ -258,6 +265,7 @@ Flouran
 Follan
 Fragan
 Francine F R AN S I N
+Francisco F R AN S I S K O
 Françoise F R AN S O A Z
 François F R AN S O A
 Frank
@@ -346,6 +354,7 @@ Indez
 India
 Indianez
 Indiz
+Irak
 Iran
 Isabelle I Z A B EH L
 Isis I Z I S
@@ -368,6 +377,7 @@ Japaned
 Jaurès J O R EH S
 Jay D J EY
 Jean	J AN N
+Jeanne J A N
 Jérôme	J E R O M
 Jersey D J OE R S EH
 Jeruzalem
@@ -400,12 +410,14 @@ Karnoed
 Kastellin
 Katalonia
 Katell
+Katrin
 Kembre
 Kembreiz
 Kemerovo
 Kemper
 Kemperiz
 Kemperle
+Kennedy K E N E D I
 Kenya
 Kenyanad
 Kenyaniz
@@ -471,6 +483,7 @@ Leborgne L EU B OH R GN
 Leclerc L EU K L EH R
 Lege
 Lena
+Lenin
 Leninsk
 Leonardo	L E O N A R D O
 Lestevennog
@@ -502,6 +515,7 @@ Luzon
 Lyon L I ON
 Macron M A K R ON
 Madiran
+Madrid
 Mae
 Mael
 Maela
@@ -523,6 +537,7 @@ Marchand M A R CH AN
 Mari
 Maria
 Mariana
+Marilyn M A R I L I N
 Mark
 Marsilha
 Marthe M A R T
@@ -530,15 +545,15 @@ Martin M A R T EN
 Martin M A R T I N
 Marty
 Mary
-Master M A S T OE R
 Massachussets M A S A CH U S EH T S
 Mass M A S
+Master M A S T OE R
 Mathias M A T I A S
 Mathieu M A T I EU
 Mathilde M A T I L D
 Matignon
-Max M A K S
 Maxime	M A K S I M
+Max M A K S
 Maya	M A IA
 Mec'hiko
 Mediterane
@@ -730,12 +745,14 @@ Saozon
 Sapiens S A P I EN S
 Sarah	S A R A
 Sardinia
+Saturn
 Schwarzenegger CH W A R Z E N E G EH R
 Seattle S I A T OE L
 Sebastian
 Segway S EH G OU EH
 Semmelweis Z E M EH L V A I S
 Sevilla S E V I LH A
+Shakespeare CH EY K S P I R
 Sheila	CH EH I L A
 Siberia
 Silva
@@ -743,6 +760,7 @@ Simone	S I M OH N
 Simon	S I M ON
 Sina
 Sina CH I N A
+Siria
 Sirian
 Sisjordania
 Skandinavia
@@ -820,6 +838,7 @@ Tudu
 Tudwal
 Tugdual
 Turio
+Turkia
 Uhelgoad
 Ukraina
 Urfol
@@ -896,6 +915,7 @@ Yud
 Yudikael
 Yuna
 Yves	I V
+Yvette I V EH T
 Zavier Z A V I E
 Zola
 Zoue

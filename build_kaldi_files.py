@@ -225,8 +225,13 @@ if __name__ == "__main__":
                 for sentence in fr.readlines():
                     cleaned = get_cleaned_sentence(sentence)[0]
                     for word in cleaned.split():
-                        if word.lower() not in capitalized:
-                            #XXX: pb with accronyms in wikipedia corpus
+                        if word.lower() in regular_words:
+                            pass
+                        elif word.lower() in capitalized:
+                            pass
+                        elif is_acronym(word) and word in acronyms:
+                            pass
+                        else:
                             regular_words.add(word)
                     fw.write(cleaned + '\n')
         
@@ -281,29 +286,32 @@ if __name__ == "__main__":
         with open(lexicon_path, 'r') as f:
             for l in f.readlines()[3:]:
                 old_lexicon.add(l.split()[0])
-        #add_lexicon = set()
-        #with open(LEXICON_ADD_PATH, 'r') as f:
-        #    for l in f.readlines():
-        #        add_lexicon.add(l.split()[0])
         with open(lexicon_path, 'a') as f:
             for w in sorted(regular_words):
-                if w not in old_lexicon:
+                if not w in old_lexicon:
                     f.write(f"{w} {' '.join(word2phonetic(w))}\n")
     else:    
         print(f"building file {lexicon_path}")
-        with open(lexicon_path, 'w') as f:
-            f.write(f"!SIL SIL\n<SPOKEN_NOISE> SPN\n<UNK> SPN\n")
-            for w in sorted(regular_words):
-                f.write(f"{w} {' '.join(word2phonetic(w))}\n")
-            #with open(LEXICON_ADD_PATH, 'r') as f2:
-            #    for l in f2.readlines():
-            #        f.write(l)
-            for w in acronyms:
-                f.write(f"{w} {' '.join(acronyms[w])}\n")
-            for w in capitalized:
-                f.write(f"{w.capitalize()} {' '.join(capitalized[w])}\n")
-            for w in verbal_tics:
-                f.write(f"{w} {verbal_tics[w]}\n")
+        lexicon = []
+        for w in sorted(regular_words):
+            lexicon.append(f"{w} {' '.join(word2phonetic(w))}")
+        with open(LEXICON_ADD_PATH, 'r') as f_in:
+            for l in f_in.readlines():
+                lexicon.append(l.strip())
+        for w in acronyms:
+            for pron in acronyms[w]:
+                lexicon.append(f"{w} {pron}")
+        for w in capitalized:
+            for pron in capitalized[w]:
+                lexicon.append(f"{w.capitalize()} {pron}")
+        for w in verbal_tics:
+            lexicon.append(f"{w} {verbal_tics[w]}")
+        
+        with open(lexicon_path, 'w') as f_out:
+            f_out.write(f"!SIL SIL\n<SPOKEN_NOISE> SPN\n<UNK> SPN\n")
+            for line in lexicon:
+                f_out.write(line + '\n')
+            
     
     # nonsilence_phones.txt
     print('building file data/local/dict_nosp/nonsilence_phones.txt')

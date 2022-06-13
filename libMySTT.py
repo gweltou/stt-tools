@@ -180,17 +180,17 @@ for val in list(w2f.values()) + list(acr2f.values()) + list(verbal_tics.values()
 
 
 
-lexicon = dict()
+lexicon_rep = dict()
 with open(LEXICON_REPLACE_PATH, 'r') as f:
     for l in f.readlines():
         w, *phon = l.split()
-        lexicon[w] = phon
+        lexicon_rep[w] = phon
         
 
 
 def word2phonetic(word):
-    if word in lexicon:
-        return lexicon[word]
+    if word in lexicon_rep:
+        return lexicon_rep[word]
     
     head = 0
     phonemes = []
@@ -224,7 +224,7 @@ def get_hunspell_dict():
             hs.add(w.strip())
     for w in verbal_tics:
         hs.add(w)
-    for w in lexicon.keys():
+    for w in lexicon_rep.keys():
         hs.add(w)
     return hs
 
@@ -235,6 +235,8 @@ hs_dict = get_hunspell_dict()
 def get_corrected_dict():
     corrected = dict()
     corrected_sentences = dict()
+    corrected_sentences["&ltbr&gt"] = "" # Special rule for sentences comming from wikipedia
+    
     with open(CORRECTED_PATH, 'r') as f:
         for l in f.readlines():
             #l = l.strip()
@@ -264,8 +266,8 @@ def get_capitalized_dict():
             w, *pron = l.strip().split()
             if not pron:
                 pron = word2phonetic(w)
-            if w in capitalized:
-                capitalized[w.lower()] += ' '.join(pron)
+            if w.lower() in capitalized:
+                capitalized[w.lower()].append(' '.join(pron))
             else:
                 capitalized[w.lower()] = [' '.join(pron)]
     return capitalized
@@ -279,13 +281,16 @@ def get_acronyms_dict():
         Acronyms are stored in UPPERCASE in dictionary
     """
     acronyms = dict()
+    for l in "BDFGHIJKLMPQRSTUVWXZ":
+        acronyms[l] = [acr2f[l]]
+    
     if os.path.exists(ACRONYM_PATH):
         with open(ACRONYM_PATH, 'r') as f:
             for l in f.readlines():
                 if l.startswith('#') or not l: continue
                 acr, *pron = l.split()
                 if acr in acronyms:
-                    acronyms[acr] += ' '.join(pron)
+                    acronyms[acr].append(' '.join(pron))
                 else:
                     acronyms[acr] = [' '.join(pron)]
     else:
@@ -326,6 +331,7 @@ def tokenize(sentence):
     sentence = sentence.replace('ʼ', "'")
     sentence = sentence.replace('-', ' ')   # Split words like "sav-heol"
     sentence = sentence.replace('/', ' ')
+    sentence = sentence.replace('|', ' ')
     tokens = []
     for t in sentence.split():
         if t.startswith("'"):

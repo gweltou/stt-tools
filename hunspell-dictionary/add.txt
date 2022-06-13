@@ -17,10 +17,11 @@ botiron
 bourrapl
 bratikourez
 bruzuniñ
+c'hameraioù
 c'henfinañ
-chips
 c'henitervez
 c'henrneveureg
+chips
 c'hoc'h
 c'hoñferañs
 c'hoñferañsoù
@@ -35,8 +36,8 @@ diñsad
 disleksek
 disleksiezh
 dismantrus
-divigoù
 diventelezh
+divigoù
 doktorez
 doneier
 dregant
@@ -48,7 +49,9 @@ enepspierezh
 energetek
 epidemiezhioù
 fablab
+fenotip
 figez
+flodad
 fosil
 fotovoltaek
 gapitalouriezh
@@ -69,13 +72,17 @@ homofobek
 immunizet
 industriel
 industriezh
+ionoù
+isspesad
+isspesadoù
+itrikerezh
 kakaouetez
 kantilitrad
 kardio
 kenfinañ
 kenfinet
-kentaidi
 kenrneveureg
+kentaidi
 kigezat
 klaviadiñ
 klaviadoù
@@ -92,6 +99,8 @@ mojennerezh
 nac'helour
 naouek
 nevezadus
+nukleotid
+orgasm
 pagailh
 pandemi
 pandemiezh
@@ -104,6 +113,7 @@ peurreizh
 pleustroù
 poellgomzer
 poellgomzerioù
+poellgomzoù
 potiron
 pratikourezed
 pretierezh
@@ -123,6 +133,7 @@ skript
 strategiezhioù
 strikt
 stummadurezh
+tabletennoù
 tempo
 termenaduriñ
 termeniñ

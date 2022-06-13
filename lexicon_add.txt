@@ -3,9 +3,9 @@ aet E D
 amezeg A M E Z OH K
 anezhañ N EN
 anezhi N EH I
+anezho N E
 anezho N EH
 anezho N EU
-anezho N E
 arc'hant A R G A N T
 aze A E
 barradoù B A R A J OU
@@ -36,10 +36,12 @@ emaout M A OU T
 eñ E ON
 eo E
 evel V EH L
-evit V I T
-evit E W I T
-evidon V I D ON N
 evidoc'h V I D OH X
+evidon V I D ON N
+evit E W I T
+evit V I T
+evito V I T E
+evito V I T O
 ezhomm E M
 gallout G A L
 gouezet G OU I E T
@@ -64,14 +66,15 @@ marteze M A R S EH
 marteze M A T R EH X
 menez M E N E
 mennozh M E N O
+nemetken M E K E N
 n'eo N E
 netra N I T R A
-nemetken M E K E N
 neuze N EN N
 neuze N OE H E
 neuze N OE N
 nevez N E V E
 oa O E
+ober H O R
 ouzont O A R ON N T
 pelec'h P L EH X
 petra P E R
