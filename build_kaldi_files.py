@@ -330,9 +330,12 @@ if __name__ == "__main__":
         f.write('SIL\n')
     
     # Copy text corpus
-    with open('data/local/corpus.txt', 'a') as f:
+    with open('data/local/corpus.txt', 'r') as f_in:
+        for line in f_in.readlines():
+            corpus.add(line.strip())
+    with open('data/local/corpus.txt', 'w') as f_out:
         for l in corpus:
-            f.write(f"{l}\n")
+            f_out.write(f"{l}\n")
     
     print()
     print("==== STATS ====")
