@@ -1,16 +1,23 @@
+Aaron A R OH N
 Abel
 Abraham A B R A H A M
 Ada
+Adamnan
+Adrian
 Adrien A D R I EN
 Afrika
 Afrikan
 Afrikaned
+Agapit
 Akitania
 Alain A L EN
 Alamagn
+Alan
+Alar
 Alaska
-Allah A L L A
+Alban
 Albert A L B EH R
+Albin A L B EN
 Albus
 Alexandra	A L EH K S AN D R A
 Alexandre	A L EH K S AN N D R
@@ -18,6 +25,7 @@ Algam
 Alix A L I K S
 Aljeri
 Aljeria
+Allah A L L A
 Alphabet A L F A B E T
 Alpoù
 Alre
@@ -25,6 +33,7 @@ Altai
 Alvarez
 Ambre AN B R
 Amerika
+Amerikaned
 Amerindian
 Amily
 Amy
@@ -55,8 +64,10 @@ Astor
 Atlantel
 Auguste O G U S T
 Avatar
+Avran
 Azia
 Bagan
+Baglan
 Balestin
 Balestina
 Bali
@@ -66,22 +77,37 @@ Baptiste	B A T I S T
 Barbara
 Barcelona	B A R S E L O N A
 Bariz
+Bartalame
 Barthez B A R T EH Z
+Bastian
+Batolome
 Baudu B O D U
+Bavon
 Bear
 Beatles	B I T EU L S
 Beethoven B E T O V EH N
-Beethoven	B E T O V OE N
+Beethoven B E T O V OE N
 Belgia	B EH L J I A
 Bempont
+Benead
+Benean
 Bennsylvania
+Berin
 Berlin
-Berry
+Bernez
+Berry B E R I
+Berteleme
 Bethleem	B E T L E EH M
+Beuno
+Beuzeg
+Bieuzi
+Bikenig
 Birmaned
 Birmania
 Blanchet B L AN CH EH
+Bleaz
 Bleuenn
+Bloom B L OU M
 Bloomberg B L OU M B OE R G
 Blouvagor
 Bolivia
@@ -92,28 +118,38 @@ Boston	B OH S T OH N
 Bouda
 Boudaoù
 Bourdel
+Borgn
 Brasparzh
 Brazil
 Breizh
 Breizhiz
 Brelidi
+Brendan
 Breselien
 Brest
 Bretoned
+Brezhoweb B R E Z O W EH B
+Briag
 Brieg
 Brigitte B R I J I T
+Brizh
 Bruno
 Brusel B R U S EH L
 Bulgaria
+Buriana
 Casterman K A S T EH R M A N
 Celsius	S EH L S I U S
+Charleston CH A R L E S T OH N
+Charlez
 Charlie CH A R L I
 Chennai
 C'henyanad
 C'henyaniz
 Chicago	CH I K A G O
 Chili
+C'hireg
 Chitra
+C'hlaoda
 C'hrist
 Chuck	T CH OE K
 C'hwevrer
@@ -124,7 +160,9 @@ Coop K OH P
 Coreff K O R EH F
 Corre K OH R
 Cuba K U B A
+Dagan
 Dailymotion	D EY L I M O CH EU N
+Dalton
 Dana
 Daniel	D A N I EH L
 Danmark
@@ -136,7 +174,12 @@ Deezer	D I Z OE R
 Denez
 Denis D EU N I
 Denisova
+Derc'hen
 Detroit D I T R OH I T
+Dewi
+Diboan
+Dider
+Didier D I D I E
 Dilun
 Dimerc'her
 Dimeurzh
@@ -146,39 +189,52 @@ Diriaou
 Disadorn
 Disneyland D I S N E L AN D
 Disul
+Divi
+Dizant
+Dominig
 Dominikan
+Dona
 Donald
+Dostoievsky D O S T O IE V S K I
 Douarnabad
 Douarnenez
 Doue
 Dreger
+Dren
+Drenwal
 Dresden
+Drezouarn
 Duaod
 Dudwal
 Duval
 Ebrel
+Edern
 Edouarzh
+Efesos
+Eflamm
 Eflamm
 Egea E J E A
 Egin
+Eginer
 Eiffel	E F EH L
 Einstein
 Ejipt
 Elegoed
 Elen
 Elena
+Eligius
 Elzas
 Emile	E M I L
 Emma
 Emmanuel E M A N U EH L
 Enora
-Eost
 Eost E S T
 Erell
 Eric E R I K
 Erle EH R L E
 Ernest	EH R N EH S T
 Erwan
+Etien
 Eugénie EU J E N I
 Europa
 Europiz
@@ -187,21 +243,35 @@ Evelyne E V EU L I N
 Facebook	F EY S B OU K
 Fañch
 Faoued
+Fezwezhen
+Fili
+Filiber
+Filiberzh
 Filipin
 Finland
+Finnian
 Floc'h
 Floch F L OH K
+Florian
 Florida
+Flouran
+Follan
+Fragan
 Francine F R AN S I N
 Françoise F R AN S O A Z
 François F R AN S O A
 Frank
 Frañs
+Frañsez
 Frederik
 Fulup
 Fustec F U S T EH K
+Gabriel
+Gall
 Gangnam
+Gaoter
 Garaez
+Garmon
 Gauguin	G O G EN
 Gaza
 Gelted
@@ -216,16 +286,19 @@ Georgia
 Gerne
 Gilbert	J I L B EH R
 Girard J I R A R
+Girolamo
+Giza
 Glenmor
 Goater
 Gonidec G O N I D EH K
-Gonide G O N I D EH K
 Google	G OU G EU L
 Gorsika
+Gouenou
 Gouere
 Goulc'han
 Goulven
 Goulwena
+Gourenez
 Gourin
 Grall
 Greta
@@ -266,6 +339,7 @@ Himalaya
 Hirrien
 Hollsent
 Hong ON G
+Hugues U G
 Icare I K A R
 Ifig
 Indez
@@ -274,8 +348,8 @@ Indianez
 Indiz
 Iran
 Isabelle I Z A B EH L
-Islam
 Isis I Z I S
+Islam
 Israel
 Italia
 Iwan
@@ -295,10 +369,13 @@ Jaurès J O R EH S
 Jay D J EY
 Jean	J AN N
 Jérôme	J E R O M
+Jersey D J OE R S EH
 Jeruzalem
 Jezequel J E Z E K EH L
 Jezuz
+Jezuz J E Z U
 Jinping J I N P I N G
+Jodhpur J O D P OU R
 John	D J OH N
 Johnny	D J OH N I
 Jones D J O OU N S
@@ -308,6 +385,7 @@ Jouin J OU EN
 Julien J U L I EN
 Jura
 Kabilia
+Kaero
 Kaledoniz
 Kalifornia
 Kambodja
@@ -339,13 +417,12 @@ Kerlouan
 Kermareg
 Kernaskledenn
 Kerne
-Gourenez
-Kraozon
 Kerouac K E R OU A K
 Kervella
 Kerzu
-Klet
+Kipling
 Kleopatra
+Klet
 Kmer
 Kolombia
 Komborn
@@ -354,6 +431,7 @@ Kongo
 Korbell K OH R B EH L
 Korea
 Korsika
+Kraozon
 Krist
 Kristian K R I S T I AN
 Kubrick K U B R I K
@@ -364,13 +442,12 @@ Lancelot L AN S L O
 Landerne
 Landreger
 Lange   L AN J
-Langoët L AN G O EH T
 Langleiz
+Langoët L AN G O EH T
 Langoned
 Langristin
 Langroez
 Lanhouarne
-Lannuon
 Lannarvili
 Lanneanoù
 Lannedern
@@ -383,6 +460,7 @@ Lannildud
 Lanniliz
 Lanninon
 Lanniron
+Lannuon
 Laponia
 Larruen
 Larvol
@@ -422,8 +500,6 @@ Lula L OU L A
 Lun
 Luzon
 Lyon L I ON
-Mahama
-Mahomet
 Macron M A K R ON
 Madiran
 Mae
@@ -431,6 +507,8 @@ Mael
 Maela
 Maeleg
 Magalli M A G A L I
+Mahama
+Mahomet
 Maiwenn
 Mala
 Malawi
@@ -448,17 +526,18 @@ Mariana
 Mark
 Marsilha
 Marthe M A R T
-Martin	M A R T EN
 Martin M A R T EN
 Martin M A R T I N
 Marty
 Mary
+Master M A S T OE R
 Massachussets M A S A CH U S EH T S
 Mass M A S
 Mathias M A T I A S
 Mathieu M A T I EU
 Mathilde M A T I L D
 Matignon
+Max M A K S
 Maxime	M A K S I M
 Maya	M A IA
 Mec'hiko
@@ -505,6 +584,7 @@ Nolwenn
 Normandi
 Norvegadez
 Noumea
+Nubia N OU B YA
 Obama
 Okitania
 Olier
@@ -514,11 +594,12 @@ Onyx O N I K S
 Oregon O R E G ON
 Oriant
 Orion	O R I ON
-Oural
 Osiris O Z I R I S
+Oural
 Owen O W EH N
 Palestin
 Palestina
+Paol
 Paolig
 Paraguay P A R A G OU EH
 Parantoen
@@ -528,9 +609,10 @@ Pascal	P A S K A L
 Paskal
 Pasteur P A S T EU R
 Paulo P O L O
-Paul	P OH L
+Paul P OH L
 Pellen P E L EH N
 Pempoull
+Penelope P E N E L OH P
 Pêr
 Perou
 Persia
@@ -542,8 +624,6 @@ Pleskob
 Pleuwigner
 Plistin
 Ploneiz
-Plougêr
-Plouzane
 Plouan
 Plouared
 Plouarzhel
@@ -560,9 +640,11 @@ Plougadvan
 Plouganoù
 Plougastell
 Plougastelliz
+Plougêr
 Plougerne
 Plougernevel
 Plougin
+Plougoñ
 Plougonvelen
 Plougonven
 Plougonveur
@@ -570,7 +652,6 @@ Plougonwaz
 Plougouloum
 Plougouskant
 Plougouvelen
-Plougoñ
 Plougraz
 Plouha
 Plouharnel
@@ -588,6 +669,7 @@ Plouvalae
 Plouvien
 Plouvorn
 Plouyann
+Plouzane
 Plouzelambr
 Plouzeniel
 Plouziri
@@ -595,12 +677,12 @@ Ploveilh
 Ploveren
 Ploveur
 Plozeved
-Pluvergad
 Plufur
 Pluguen
 Pluhernin
-Plusquellec P L U S K E L EH K
 Pluskelleg
+Plusquellec P L U S K E L EH K
+Pluvergad
 Plymouth	P L I M OU S
 Polonia
 Pompei
@@ -611,6 +693,7 @@ Poulidor
 Poullann
 Poullaouen
 Poulloger
+Praha
 Pretoria
 Prigent P R I J AN
 Priya
@@ -641,7 +724,6 @@ Sadorn
 Saint S EN
 Salem
 Sandra
-Sant
 São S A O
 Saoz
 Saozon
@@ -669,6 +751,7 @@ Skosiz
 Skrigneg
 Skrigneg S K R I GN A K
 Smith	S M I S
+Soudan
 Spagn
 Spotify	S P O T I F A I
 Stanley S T A N L EH
@@ -677,10 +760,12 @@ Stefano
 Stefan S T E F A N
 Stefan S T E F AN
 Stéphanie S T E F A N I
-Stevenson S T E V EH N S OH N
+Stephen S T I V OE N
+Stevenson S T I V EH N S OH N
 Stockholm S T O K OH L M
 Stonewall S T O N W OH L
 Strasbourg S T R A S B OU R
+Stumdi
 Suamerika
 Suamerikan
 Suez
@@ -694,7 +779,12 @@ Tanzania
 Tara
 Tébéo T E B E O
 TébéSud T E B E S U D
+Tegoneg
+Teilo
+Telo
+Tenenan
 Terminator
+Tewdrig
 Texas T E K S A S
 Thailand T A I L AN N D
 Thelo T E L O
@@ -709,30 +799,46 @@ Tintin
 Tita
 Titanic T I T A N I K
 Titeuf
+Titus
 Tobias
 Tokyo
 Tolosa
 Tolstoy	T OH L S T OH I
+Tomaz
+Tomos
 Toronto T O R ON T O
 Toulon	T OU L ON
+Tremen
 Trevare
+Treveur
 Trewineg
 Tristan
 Troadec T R O A D E K
+Tropetz
 Trump T R OE M P
 Tudu
 Tudwal
+Tugdual
+Turio
 Uhelgoad
 Ukraina
+Urfol
+Urlo
+Vadeg
+Vadezour
+Valerian
 Valérie	V A L E R I
 Valo
 Vandalay	V AN N D A L EH
 Vande
 Vandela
 Vandenberg
+Vaodez
 Vari
 Varia
+Varzhin
 Vaxime	V A K S I M
+Vazhev
 Vega
 Venezia
 Verc'her
@@ -741,10 +847,15 @@ Viami
 Vichel	V I CH EH L
 Victor	V I K T OH R
 Vienna
+Vikael
 Vincent	V EN S AN
+Vio
 Virmaned
 Virmanez
 Virmania
+Visant
+Vitus
+Volon
 Vorgium V OH R J I OU M
 Vorgium V O R G I OU M
 Voris
@@ -756,12 +867,17 @@ Voynet V O A N EH
 Vreizh
 Vrest
 Vretoned
+Walfridus
 Walter
 Wangari
 Washington	W A CH I N G T OH N
 Weltaz	W EH L T A S
+Weneg
 Wengamp
+Wenole
+Wenvael
 Whanganui   W AN N G A N OU I
+Winog
 Wisconsin W I S K ON N S I N
 Woodstock W OU D S T OH K
 Xavier	G Z A V I E
@@ -769,12 +885,17 @@ Xi CH I
 Yann
 Yannig
 Yaou
+Yerom
+Yezel
 Yoran
 York I OH R K
 Youenn
 Youna
 Youtube I OU T U B
+Yud
+Yudikael
 Yuna
 Yves	I V
 Zavier Z A V I E
+Zola
 Zoue

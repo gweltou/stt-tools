@@ -15,6 +15,8 @@ ugentved	ugentvet
 ty	ti
 moutik	moutig
 stokholm	Stockholm
+anezhe	anezho
+hirie	hiriv
 
 
 # Fr to Br
@@ -22,7 +24,7 @@ office	ofis
 musique	muzik
 
 
-# Common voice
+# Fazioù Common voice
 c'hoazhin	c'hoarzhin
 million	milion
 choari	c'hoari
@@ -109,6 +111,10 @@ stéphan	Stefan
 catherine	Katrin
 philippe	Filip
 christian	Kristian
+helen	Elen
+hélène	Elen
+huelgoat	Uhelgoad
+kambodjia	Kambodja
 
 
 télégramme	telegram
@@ -125,14 +131,14 @@ stañk	stank
 avañtur	avantur
 seitekved	seitekvet
 èl	evel
+vel	evel
 gete	gante
-gante	ganto
+#gante	ganto
 gouvezet	gouezet
 awalc'h	a-walc'h
 marmoused	marmouzed
 diagnostics	diagnostiks
 marc'hatmatoc'h	marc'hadmatoc'h
-hirie	hiriv
 chigago	chicago
 toud	tout
 siezhvet	seizhvet
@@ -142,11 +148,10 @@ choulz 	 c'houlz
 choant 	c'hoant 
 virgulen	virgulenn
 founnus	fonnus
-huelgoat	Uhelgoad
-kambodjia	Kambodja
+vit	evit
+vidon	evidon
 
-helen	Elen
-hélène	Elen
+
 arru	erru
 be'h	bec'h
 pa'z	p'az
@@ -157,8 +162,11 @@ ne'm	n'em
 ne'z	n'ez
 ma'm	m'am
 me'm	m'em
-me 'm eus	me'm eus
+#me 'm eus	me'm eus
  'm eus	 m'eus
+ 'm oa	 m'oa
+'moa 	m'oa 
+ 'noa 	 n'oa 
 
 bzh	BZH
 www	WWW
@@ -178,11 +186,15 @@ XIIvet	daouzekvet
 9	nav
 10	dek
 11	unnek
+12	daouzek
 13	trizek
 15	pemzek
+16	c'hwezek
+17	seitek
 18	triwec'h
 19	naontek
 20	ugent
+23	tri warn ugent
 30	tregont
 40	daou ugent
 50	hanter-kant
@@ -211,9 +223,13 @@ XIIvet	daouzekvet
 1910	mil nav c'hant dek
 1913	mil nav c'hant trizek
 1916	mil nav c'hant c'hwezek
+1920	mil nav c'hant ugent
 1968	mil nav c'hant eizh ha tri ugent
+1970	mil nav c'hant dek ha tri ugent
 1991	mil nav c'hant unnek ha pevar ugent
+1995	mil nav c'hant pemzek ha pevar ugent
 2000	daou vil
+2003	daou vil tri
 2005	daou vil pemp
 2006	daou vil c'hwec'h
 2007	daou vil seizh

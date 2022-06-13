@@ -41,6 +41,7 @@ SPEAKER_ID_PATTERN = re.compile(r'{([-\w]+):*([mf])*}')
 
 verbal_tics = {
     'euh'   :   'OE',
+    'euhm'  :   'OE M',
     'beñ'   :   'B EN',
     'eba'   :   'E B A',
     'ebeñ'  :   'E B EN',
@@ -50,6 +51,8 @@ verbal_tics = {
     'bah'   :   'B A',
     'feñ'   :   'F EN',
     'tieñ'  :   'T I EN',
+    'alors' :   'A L OH R',
+    'allez' :   'A L E',
     #'oh'    :   'O',
     #'ah'    :   'A',
 }
@@ -75,6 +78,7 @@ w2f = {
     'ei'    :   'EY',       # kEIn      # could replace with (EH I) maybe ?
     'eiñ'   :   'EY',       # savetEIÑ
     'el.'   :   'EH L',     # broadEL
+    'ell'   :   'EH L',
     'em'    :   'EH M',     # lEMm
     'eñ'    :   'EN',       # chEÑch
     'en.'   :   'EH N',     # meriEN
@@ -82,6 +86,7 @@ w2f = {
     'er.'   :   'EH R',     # hantER
     'eu'    :   'EU',       # lEUn
     'eü'    :   'E U',      # EÜrus
+    'euñv'  :   'EN',       # stEUÑV
     'f'     :   'F',
     'g'     :   'G',
     'gn'    :   'GN',       # miGNon
@@ -127,6 +132,7 @@ w2f = {
     "'ul."  :   'OE L',     # d'UL
     'v'     :   'V',
     'v.'    :   'O',        # beV
+    'vr.'   :   'OH R',     # kaVR, loVR
     'w'     :   'W',
     'y'     :   'I',        # pennsYlvania
     'ya'    :   'IA',       # YAouank
@@ -397,6 +403,8 @@ def get_correction(sentence):
         # Ignore black listed words
         if token.startswith('*'):
             tokens.append(Fore.YELLOW + token + Fore.RESET)
+        elif lowered_token in verbal_tics:
+            tokens.append(Fore.YELLOW + token + Fore.RESET)
         elif lowered_token in corrected:
             tokens.append(Fore.GREEN + corrected[lowered_token] + Fore.RESET)
         elif token.isdigit():
@@ -435,7 +443,7 @@ def prompt_acronym_phon(w, song, segments, idx):
     guess = ' '.join([acr2f[l] for l in w if l in acr2f])
     print(f"Phonetic proposition for '{w}' : {guess}")
     while True:
-        answer = input("Press 'y' to validate, 'l' to listen or write different prononciation, 'x' to skip: ").strip().upper()
+        answer = input("Press 'y' to validate, 'l' to listen, 'x' to skip or write a different prononciation: ").strip().upper()
         if not answer:
             continue
         if answer == 'X':
@@ -564,8 +572,6 @@ def convert_to_wav(src, dst):
     """
     print(f"converting {src} to {dst}...")
     rep, filename = os.path.split(dst)
-    filename = filename.replace(' ', '_')
-    filename = filename.replace("'", '')
     dst = os.path.join(rep, filename)
     subprocess.call(['ffmpeg', '-v', 'panic',
                      '-i', src, '-acodec', 'pcm_s16le',

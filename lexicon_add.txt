@@ -1,8 +1,11 @@
 abalamour B L AN M
 aet E D
 amezeg A M E Z OH K
-anezhe N EH
+anezhañ N EN
+anezhi N EH I
+anezho N EH
 anezho N EU
+anezho N E
 arc'hant A R G A N T
 aze A E
 barradoù B A R A J OU
@@ -10,6 +13,7 @@ bemdez B EH M D E
 betra B E R
 bezañ B E H AN
 bezañ B EY OE
+bez B E
 bloavezhioù B L O A V E CH OU
 buhez B U H E
 c'hoadoù X O A J OU
@@ -18,11 +22,27 @@ c'hwec'h F EH X
 debret D R E B E T
 deoc'h D OH X
 deuet D EU T
+devezh D EH R V E Z
 devezhioù D EH R V E CH OU
 digarez D I G A R E
+d'ober D OH R
+d'oe D O E
 emañ M A
 emañ M AN
+emaoc'h M A O X
+emaomp M A ON M P
+emaon M A ON N
+emaout M A OU T
+eñ E ON
 eo E
+evel V EH L
+evit V I T
+evit E W I T
+evidon V I D ON N
+evidoc'h V I D OH X
+ezhomm E M
+gallout G A L
+gouezet G OU I E T
 gouzout G OU T
 gwenodennoù G W E N O J EH N OU
 gwin V I N
@@ -34,23 +54,28 @@ ivez I V E
 ivez U W EH
 krampouezh K R AN M P OU Z
 kreñv K R EN ON
-lazhet L A X E T
 lazhañ L A X AN
+lazhet L A X E T
 le L EU
 loen L ON N
 maezioù M E CH OU
+ma M EU
 marteze M A R S EH
 marteze M A T R EH X
 menez M E N E
 mennozh M E N O
 n'eo N E
 netra N I T R A
+nemetken M E K E N
 neuze N EN N
 neuze N OE H E
+neuze N OE N
 nevez N E V E
+oa O E
+ouzont O A R ON N T
 pelec'h P L EH X
-petra P E R A
 petra P E R
+petra P E R A
 pradoù P R A J OU
 prenester P R E N E CH EH R
 puhez P U H E
@@ -58,8 +83,8 @@ reont R A I N T
 romantoù R O M AN N CH OU
 ruz R U
 sachit CH A CH I T
-selaouet CH I L A OU E T
 selaouent CH I L A OU EH N T
+selaouet CH I L A OU E T
 selaouit CH I L A OU I T
 serrit S A R I T
 soñjoù CH ON J OU
@@ -72,10 +97,15 @@ unan OE N
 vaksin V A K S EN
 venez V E N E
 verenn V EH R N
+vezhomp V EH M P
 vi H U
+vije V I CH E
 vioù EU I OU
 vuhez V U H E
+walc'h W A L A X
+war V A R
 welet V E L E T
 wenodenn W E N O J EH N
 wirionez V I R I ON E
+yeo G E O
 zae H A E

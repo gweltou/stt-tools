@@ -20,6 +20,7 @@ import os
 import re
 from math import floor, ceil
 from pydub import AudioSegment
+from pydub.silence import detect_nonsilent
 import librosa
 from libMySTT import *
 
@@ -76,6 +77,8 @@ if __name__ == "__main__":
     rep, filename = os.path.split(os.path.abspath(sys.argv[1]))
     recording_id = filename.split(os.path.extsep)[0]
     recording_id = recording_id.replace('&', '_')
+    recording_id = recording_id.replace(' ', '_')
+    recording_id = recording_id.replace("'", '')
     print(recording_id)
     
     wav_filename = os.path.join(rep, os.path.extsep.join((recording_id, 'wav')))
@@ -97,6 +100,8 @@ if __name__ == "__main__":
         convert_to_wav(sys.argv[1], wav_filename);
         print("conversion done")
     
+    song = AudioSegment.from_wav(wav_filename)
+    
     segments = []
     if os.path.exists(split_filename):
         print("split file exists")
@@ -104,11 +109,23 @@ if __name__ == "__main__":
     else:
         print("spliting wave file")
         y, sr = librosa.load(wav_filename)
-        
+        print("file loaded")
+        silence_min_len = 400
         # We need to forward a bit after stop
         # Librosa.effects.split returns start and stop in samples number
-        segments = [(floor(1000*start/sr), ceil(1000*(stop+8000)/sr)) \
-                     for start, stop in librosa.effects.split(y, frame_length=8000, top_db=39)]
+        #segments = [(floor(1000*start/sr), ceil(1000*(stop+8000)/sr)) \
+        #             for start, stop in librosa.effects.split(y, frame_length=8000, top_db=39)]
+        
+        # Using pydub instead
+        segments = detect_nonsilent(song, min_silence_len=silence_min_len, silence_thresh=-62)
+        
+        # Including silences in segments
+        if len(segments) >= 2:
+            segments[0] = (segments[0][0], segments[0][1] + silence_min_len)
+            segments[-1] = (segments[-1][0] - silence_min_len, segments[-1][1])
+            for i in range(1, len(segments)-1):
+                segments[i] = (segments[i][0] - silence_min_len, segments[i][1] + silence_min_len)
+        
         save_segments(segments, split_filename)
     
     
@@ -122,11 +139,10 @@ if __name__ == "__main__":
         print("Short utterances:", short_utterances)
     
     
-    song = AudioSegment.from_wav(wav_filename)
-    
     running = True
     idx = 0
     speed = 1
+    segments_undo = []
     while running:
         x = input(f"{idx+1}> ")
         resize_match = RESIZE_PATTERN.match(x)
@@ -137,6 +153,7 @@ if __name__ == "__main__":
             text, speakers = load_textfile(text_filename)
         
         if resize_match:
+            segments_undo = segments[:]
             pos = resize_match.groups()[0]
             start, stop = segments[idx]
             delay = int(resize_match.groups()[1] + resize_match.groups()[2])
@@ -170,9 +187,12 @@ if __name__ == "__main__":
             speed *= 0.9
             print("speed=", speed)
         elif x == 'd':  # Delete segment
+            segments_undo = segments[:]
             del segments[idx]
             idx = max(0, idx-1)
+            #play_segment_text(idx, song, segments, text, speed)
         elif x == 'j' and idx > 0:  # Join this segment with previous segment
+            segments_undo = segments[:]
             start = segments[idx-1][0]
             end = segments[idx][1]
             del segments[idx]
@@ -194,18 +214,23 @@ if __name__ == "__main__":
                     else: acronyms[acr] = [phon]
                     with open(ACRONYM_PATH, 'a') as f:
                             f.write(f"{acr} {phon}\n")
+        elif x == 'z':  # Undo
+            print("Undone")
+            segments = segments_undo
         elif x == 's':  # Save split data to disk
             save_segments(segments, split_filename) 
         elif x == 'h' or x == '?':  # Help
+            print("'h' or '?'\tShow this help")
             print(". or 'r'\tPlay current segment")
             print("+ or 'n'\tGo to next segment and play")
             print("- or 'p'\tGo back to previous segment and play")
             print("-[n] or +[n]\tGo backward/forward n positions")
             print("*\tSpeed playback up")
             print("/\tSlow playback down")
-            print("'h' or '?'\tShow this help")
             print("'d'\tDelete current segment")
             print("'j'\tJoin current segment with previous one")
+            print("[s/e][+/-]millisecs\tedit segment (ex: e+500, add 500ms to end)")
+            print("'z'\tUndo previous segment modification")
             print("'a'\tRegister acronym")
             print("'q'\tQuit")
         elif x == 'q':

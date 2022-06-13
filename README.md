@@ -66,6 +66,8 @@ Enjoy !
 
 ## TODO
  * Try reducing the size of the model (number of hidden layer) as well as the number of epochs
+ * Phonemes "YE N", "YOU" for plural markers rather than "I E N", "I OU" ?
+ * Phoneme "GW" rather than "G OU" ?
 
 ## Acknowledgement
 
