@@ -114,7 +114,7 @@ if __name__ == "__main__":
     for a in articles:
         for line in a["text"].split('\n'):
             for sentence in split_line(line):
-                sentence = filter_out(sentence, punctuation)
+                sentence = filter_out(sentence, punctuation + '*')
                 words = sentence.split()
                 if len(words) <= 3:
                     continue
