@@ -16,7 +16,7 @@ Alamagn
 Alan
 Alar
 Alaska
-Alban
+Alban A L B AN
 Albert A L B EH R
 Albin A L B EN
 Albus
@@ -35,8 +35,10 @@ Alvarez
 Ambre AN B R
 Amerika
 Amerikaned
+Amerikanez
 Amerindian
 Amily
+Amman A M A N
 Amy
 Ananda
 Andalouzia
@@ -76,9 +78,9 @@ Balestina
 Bali
 Balp
 Baltimore B A L T I M OH R
-Baptiste	B A T I S T
+Baptiste B A T I S T
 Barbara
-Barcelona	B A R S E L O N A
+Barcelona B A R S E L O N A
 Bariz
 Bartalame
 Barthez B A R T EH Z
@@ -100,7 +102,7 @@ Berlin
 Bernez
 Berry B E R I
 Berteleme
-Bethleem	B E T L E EH M
+Bethleem B E T L E EH M
 Beuno
 Beuzeg
 Bieuzi
@@ -114,11 +116,11 @@ Bloomberg B L OU M B OE R G
 Bloom B L OU M
 Blouvagor
 Bolivia
-Bollore
+Bollore B O L O R E
 Bolonia
 Bolsonaro
 Borgn
-Boston	B OH S T OH N
+Boston B OH S T OH N
 Bouda
 Boudaoù
 Bourdel
@@ -157,7 +159,7 @@ C'hireg
 Chitra
 C'hlaoda
 C'hrist
-Chuck	T CH OE K
+Chuck T CH OE K
 C'hwevrer
 Colyne K O L I N
 Conanec K O N AN N E K
@@ -170,7 +172,7 @@ Dagan
 Dailymotion	D EY L I M O CH EU N
 Dalton
 Dana
-Daniel	D A N I EH L
+Daniel D A N I EH L
 Danmark
 Dastumedia
 David D A V I D
@@ -219,19 +221,19 @@ Edern
 Edouarzh
 Efesos
 Eflamm
-Eflamm
 Egea E J E A
 Egin
 Eginer
-Eiffel	E F EH L
+Eiffel E F EH L
 Einstein
 Ejipt
 Elegoed
-Elen
+Elen E L EH N
 Elena
 Eligius
 Elzas
-Emile	E M I L
+Emile E M I L
+Emilie E M I L I
 Emma
 Emmanuel E M A N U EH L
 Enora
@@ -239,15 +241,15 @@ Eost E S T
 Erell
 Eric E R I K
 Erle EH R L E
-Ernest	EH R N EH S T
-Erwan
+Ernest EH R N EH S T
+Erwan EH R W AN N
 Etien
 Eugénie EU J E N I
 Europa
 Europiz
 Eusa
 Evelyne E V EU L I N
-Facebook	F EY S B OU K
+Facebook F EY S B OU K
 Fañch
 Faoued
 Fezwezhen
@@ -271,6 +273,7 @@ François F R AN S O A
 Frank
 Frañs
 Frañsez
+Frañsis
 Frederik
 Fulup
 Fustec F U S T EH K
@@ -288,7 +291,7 @@ Gemper
 Genver
 Genya
 Geoffrey J O F R E
-George	J OH R J
+George J OH R J
 Georges	J OH R J
 Georgia
 Gerne
@@ -299,7 +302,7 @@ Giza
 Glenmor
 Goater
 Gonidec G O N I D EH K
-Google	G OU G EU L
+Google G OU G EU L
 Gorsika
 Gouenou
 Gouere
@@ -334,7 +337,7 @@ Gwilhom
 Gwilhoù
 Gwiskriv
 Gwizien
-Harry	A R I
+Harry A R I
 Hawaiianed
 Hellfest H EH L F EH S T
 Henaff E N A F
@@ -376,7 +379,7 @@ Japan
 Japaned
 Jaurès J O R EH S
 Jay D J EY
-Jean	J AN N
+Jean J AN N
 Jeanne J A N
 Jérôme	J E R O M
 Jersey D J OE R S EH
@@ -386,8 +389,8 @@ Jezuz
 Jezuz J E Z U
 Jinping J I N P I N G
 Jodhpur J O D P OU R
-John	D J OH N
-Johnny	D J OH N I
+John D J OH N
+Johnny D J OH N I
 Jones D J O OU N S
 Jorjia
 Josephine J O Z E F I N
@@ -451,6 +454,7 @@ Kuiper
 Kyoto
 Lampedusa L AN M P E D OU S A
 Lancelot L AN S L O
+Landelo
 Landerne
 Landreger
 Lange   L AN J
@@ -485,7 +489,7 @@ Lege
 Lena
 Lenin
 Leninsk
-Leonardo	L E O N A R D O
+Leonardo L E O N A R D O
 Lestevennog
 Liberia
 Liger
@@ -526,9 +530,10 @@ Mahomet
 Maiwenn
 Mala
 Malawi
+Malgeneg
 Malo
 Manche M AN CH
-Mandalay	M AN N D A L EH
+Mandalay M AN N D A L EH
 Mandela
 Maodez
 Maran
@@ -554,7 +559,7 @@ Mathilde M A T I L D
 Matignon
 Maxime	M A K S I M
 Max M A K S
-Maya	M A IA
+Maya M A IA
 Mec'hiko
 Mediterane
 Meksik
@@ -564,7 +569,7 @@ Merc'her
 Meurzh
 Mezheven
 Michel	M I CH EH L
-Microsoft	M I K R O S OH F T
+Microsoft M I K R O S OH F T
 Minnesota
 Miossec M I O S EH K
 Missouri M I S OU R I
@@ -599,16 +604,16 @@ Nolwenn
 Normandi
 Norvegadez
 Noumea
-Nubia N OU B YA
+Nubia N OU B I A
 Obama
 Okitania
 Olier
-Oliver	O L I V EU R
-Ollivier
+Oliver O L I V EU R
+Ollivier O L I V I E
 Onyx O N I K S
 Oregon O R E G ON
 Oriant
-Orion	O R I ON
+Orion O R I ON
 Osiris O Z I R I S
 Oural
 Owen O W EH N
@@ -620,7 +625,7 @@ Paraguay P A R A G OU EH
 Parantoen
 Pariz
 Pascale	P A S K A L
-Pascal	P A S K A L
+Pascal P A S K A L
 Paskal
 Pasteur P A S T EU R
 Paulo P O L O
@@ -633,12 +638,14 @@ Perou
 Persia
 Philadelphia F I L A D EH L F I A
 Pichon
-Pierre	P I EH R
+Pierre P I EH R
 Plerin
+Plevin
 Pleskob
 Pleuwigner
 Plistin
 Ploneiz
+Plonevez
 Plouan
 Plouared
 Plouarzhel
@@ -698,12 +705,12 @@ Pluhernin
 Pluskelleg
 Plusquellec P L U S K E L EH K
 Pluvergad
-Plymouth	P L I M OU S
+Plymouth P L I M OU S
 Polonia
 Pompei
 Poñvel
 Portland P OH R T L AN N
-Potter	P O T OE R
+Potter P O T OE R
 Poulidor
 Poullann
 Poullaouen
@@ -743,7 +750,7 @@ São S A O
 Saoz
 Saozon
 Sapiens S A P I EN S
-Sarah	S A R A
+Sarah S A R A
 Sardinia
 Saturn
 Schwarzenegger CH W A R Z E N E G EH R
@@ -757,7 +764,7 @@ Sheila	CH EH I L A
 Siberia
 Silva
 Simone	S I M OH N
-Simon	S I M ON
+Simon S I M ON
 Sina
 Sina CH I N A
 Siria
@@ -768,7 +775,7 @@ Skos
 Skosiz
 Skrigneg
 Skrigneg S K R I GN A K
-Smith	S M I S
+Smith S M I S
 Soudan
 Spagn
 Spotify	S P O T I F A I
@@ -848,7 +855,7 @@ Vadezour
 Valerian
 Valérie	V A L E R I
 Valo
-Vandalay	V AN N D A L EH
+Vandalay V AN N D A L EH
 Vande
 Vandela
 Vandenberg
@@ -863,8 +870,8 @@ Venezia
 Verc'her
 Veurzh
 Viami
-Vichel	V I CH EH L
-Victor	V I K T OH R
+Vichel V I CH EH L
+Victor V I K T OH R
 Vienna
 Vikael
 Vincent	V EN S AN
@@ -890,12 +897,12 @@ Walfridus
 Walter
 Wangari
 Washington	W A CH I N G T OH N
-Weltaz	W EH L T A S
+Weltaz W EH L T A S
 Weneg
 Wengamp
 Wenole
 Wenvael
-Whanganui   W AN N G A N OU I
+Whanganui W AN N G A N OU I
 Winog
 Wisconsin W I S K ON N S I N
 Woodstock W OU D S T OH K
@@ -914,7 +921,7 @@ Youtube I OU T U B
 Yud
 Yudikael
 Yuna
-Yves	I V
+Yves I V
 Yvette I V EH T
 Zavier Z A V I E
 Zola

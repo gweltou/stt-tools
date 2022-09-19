@@ -572,12 +572,13 @@ def play_with_ffplay(seg, speed=1.0):
 
 
 
-def convert_to_wav(src, dst):
+def convert_to_wav(src, dst, verbose=True):
     """
         Convert 16kHz wav
         Validate filename
     """
-    print(f"converting {src} to {dst}...")
+    if verbose:
+        print(f"converting {src} to {dst}...")
     rep, filename = os.path.split(dst)
     dst = os.path.join(rep, filename)
     subprocess.call(['ffmpeg', '-v', 'panic',

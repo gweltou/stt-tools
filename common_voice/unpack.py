@@ -26,26 +26,34 @@ blacklisted_speakers_file = "blacklisted_speakers.txt"
 
 blacklisted_utt = ["Les antiques croyances des peuples amérindiens.",
                    "Légendes ?",
+                   "L'antique relijion des Celtes.",
                    "gt.",
                    "Ur b.",
+                   "Viva Patata !",
                    "Olofanted.",
                    "em bureau.",
-                   "Crèche ?",]
+                   "Crèche ?",
+                   "Il sera à même de vous le dire.",
+                   "Il sera plus à même de vous le dire.",
+                   "E-men emañ ar Mille-Clubs, ar fest-noz, ar stad ?",
+                   "Ar roadennoù klokañ a gaver evit Breizh eo re an enklask Étude de l’histoire familiale kaset da benn gant an EBSSA* e 1999 (dielfennet pizh eo ar sifroù-se en danevell-mañ).",
+                   "melladoù L.310-2, L.310-5, R.310-8, R.310-9 hag R310-19 eus kod ar c’henwerzh ha melladoù R.321-1 hag R.321-9 eus ar c’hod kastizel.",
+                   ]
 
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
-        print(f"usage: {sys.argv[0]} FOLDER data_file.tsv [data_file2.tsv...]")
+        print(f"usage: {sys.argv[0]} data_file.tsv [data_file2.tsv...] FOLDER")
         sys.exit(1)
     
     tar_file = [f for f in os.listdir() if f.endswith(".tar.gz")][0]
     with tarfile.open(tar_file, 'r') as tar:
         data_folder = tar.getnames()[0]
-    
-    if not os.path.exists(data_folder):
-        # Untar archive
-        tar.extractall()
-        #os.system("tar xvf cv-corpus-*-br.tar.gz")
+        
+        if not os.path.exists(data_folder):
+            # Untar archive
+            tar.extractall()
+            #os.system("tar xvf cv-corpus-*-br.tar.gz")
     
     speakers_gender = dict()
     if os.path.exists(spk2gender_file):
@@ -59,12 +67,12 @@ if __name__ == "__main__":
     blacklisted_speakers = []
     if os.path.exists(blacklisted_speakers_file):
         with open(blacklisted_speakers_file, 'r') as f:
-            blacklisted_speakers = [l.strip() for l in f.readlines()]
+            blacklisted_speakers = [l.split()[0] for l in f.readlines() if not l.startswith('#')]
     else:
         print("Blacklist speaker file not found")
     
-    dest_folder = sys.argv[1]
-    data_files = sys.argv[2:]
+    dest_folder = sys.argv[-1]
+    data_files = sys.argv[1:-1]
     
     clips_folder = os.path.join(data_folder, "clips")
     ungendered_speakers = set()
@@ -72,6 +80,9 @@ if __name__ == "__main__":
     
     if not os.path.exists(dest_folder):
         os.mkdir(dest_folder)
+    
+    if not os.path.exists("discarded"):
+        os.mkdir("discarded")
     
     for data_file in data_files:
         data = []
@@ -93,29 +104,39 @@ if __name__ == "__main__":
             continue
         
         speakers = set([l[0] for l in data])
-        for s in blacklisted_speakers:
-            speakers.discard(s)
-        print(f"{len(speakers)} speakers found...")
+        #for s in blacklisted_speakers:
+        #    if s in speakers:
+        #        speakers.discard(s)
+        #        print("Discared speaker", s)
+        print(f"{len(speakers)-len(blacklisted_speakers)} speakers found ({len(blacklisted_speakers)} dicarded)...")
         for speaker in speakers:
             # for each speaker, create a folder an concatenate each of its utterances in one audio file
+            discard = speaker in blacklisted_speakers
+            if discard:
+                print("(discarded)", end=' ')
+            
             print(speaker, end=' ')
             
             utterances = [utt for utt in data if utt[0] == speaker]
             
             # Filter out gwenedeg from training data
-            if utterances[0][7] == "gwenedeg":
-                print("gwenedeg (skipping)")
-                continue
+            #if utterances[0][7] == "gwenedeg":
+            #    print("gwenedeg (skipping)")
+            #    continue
             
             if speaker in speakers_gender:
                 print(f'[{speakers_gender[speaker]}]', end=' ')
             elif utterances[0][6] in ('female', 'male'):
                 print(f'[{utterances[0][6][0]}]', end=' ')
                 speakers_gender[speaker] = utterances[0][6][0]
-            else:
+            elif not discard:
                 ungendered_speakers.add(speaker)
             
-            speaker_folder = os.path.join(dest_folder, speaker)
+            if discard:
+                speaker_folder = os.path.join("discarded", speaker)
+            else:
+                speaker_folder = os.path.join(dest_folder, speaker)
+            
             if not os.path.exists(speaker_folder):
                 os.mkdir(speaker_folder)
             else:
@@ -134,6 +155,7 @@ if __name__ == "__main__":
                     parsed_audiofiles.add(utt[1])
                 
                 if utt[2] in blacklisted_utt:
+                    print("\nskipped:", utt[2])
                     continue
                 
                 wav = utt[1].replace('.mp3', '.wav')
@@ -141,7 +163,7 @@ if __name__ == "__main__":
                 dst = os.path.join(speaker_folder, wav)
                 # Convert to wav
                 if not os.path.exists(dst):
-                    libMySTT.convert_to_wav(src, dst)
+                    libMySTT.convert_to_wav(src, dst, verbose=False)
                 #os.remove(src)
                 nt = t + libMySTT.get_audiofile_length(dst)*1000
                 segments.append((floor(t), ceil(nt) + 200)) # Offset end of segment by a 0.2 second
@@ -150,7 +172,9 @@ if __name__ == "__main__":
                 text.append(utt[2])
                 print('.', end='')
                 sys.stdout.flush()
-            cumul_time += t
+            
+            if not discard:
+                cumul_time += t
             
             # Text file
             with open(os.path.join(speaker_folder, speaker+".txt"), "w") as f:
@@ -176,6 +200,8 @@ if __name__ == "__main__":
         print(f"total clip time kept : {hours}h {minutes}' {seconds}''")
     
     
+    # Categorise speakers of unknown gender
+    # (this will help us measure the gender bias more precisely later)
     for speaker in ungendered_speakers:
         speaker_folder = os.path.join(dest_folder, speaker)
         split_file = os.path.join(speaker_folder, speaker+".split")
@@ -186,7 +212,7 @@ if __name__ == "__main__":
         i = 0
         while gender not in ('m', 'f'):
             libMySTT.play_segment(i, song, segments, 1.0)
-            gender = input(f"{speaker} Male or Female ? ").lower()
+            gender = input(f"{speaker} Male or Female ? (press any other key to listen) ").lower()
             i = (i+1) % len(segments)
         speakers_gender[speaker] = gender
         

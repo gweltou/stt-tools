@@ -1,6 +1,7 @@
 abalamour B L AN M
 aet E D
 amezeg A M E Z OH K
+anavezout AN N E V
 anezhañ N EN
 anezhi N EH I
 anezho N E
@@ -14,10 +15,12 @@ betra B E R
 bezañ B E H AN
 bezañ B EY OE
 bez B E
+bihan B I N
 bloavezhioù B L O A V E CH OU
 buhez B U H E
-c'hoadoù X O A J OU
+chistr CH I S T
 chomont CH O M A I N T
+c'hoadoù X O A J OU
 c'hwec'h F EH X
 debret D R E B E T
 deoc'h D OH X
@@ -27,9 +30,11 @@ devezhioù D EH R V E CH OU
 digarez D I G A R E
 d'ober D OH R
 d'oe D O E
+ebet B E T
 emañ M A
 emañ M AN
-emaoc'h M A O X
+emaoc'h M A OH X
+emaoc'h M OH X
 emaomp M A ON M P
 emaon M A ON N
 emaout M A OU T
@@ -48,10 +53,15 @@ gouezet G OU I E T
 gouzout G OU T
 gwenodennoù G W E N O J EH N OU
 gwin V I N
+hanter H AN N T EH R
 heiz H EH I
 hentoù E N CH OU
 hiziv H I R I E
 hiziv H I R I O
+hemañ H E M
+houmañ H OU M
+hennezh H EN Z
+hounnezh H OU Z
 ivez I V E
 ivez U W EH
 krampouezh K R AN M P OU Z
@@ -76,6 +86,7 @@ nevez N E V E
 oa O E
 ober H O R
 ouzont O A R ON N T
+paotr P O T
 pelec'h P L EH X
 petra P E R
 petra P E R A
@@ -107,6 +118,7 @@ vioù EU I OU
 vuhez V U H E
 walc'h W A L A X
 war V A R
+warc'hoazh V A R X O A Z
 welet V E L E T
 wenodenn W E N O J EH N
 wirionez V I R I ON E

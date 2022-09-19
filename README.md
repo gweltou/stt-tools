@@ -18,10 +18,10 @@ Split files .split should be in the same folder as its related audio file and te
 Numerals should be written in all letters \
 (E.g. "1942" --> "mil nav c'hant daou ha daou ugent")
 
-Acronyms should be written in capital letters with no dots or dashes \
+Acronyms should be written in capital letters without dots or dashes \
 (E.g. UNESCO, COP21)
 
-Regional forms should be kept if their pronouciation is far from the "standard" form (but that's open to awkward an unending debates) \
+Regional forms should be kept if their pronouciation isn't too far from the "standard" form (according to personnal taste or political views...) \
 (E.g. "meump bet/on eus bet", "nege/an hini eo", "lâret/lavaret")
  
 ## Workflow
@@ -68,6 +68,7 @@ Enjoy !
  * Try reducing the size of the model (number of hidden layer) as well as the number of epochs
  * Phonemes "YE N", "YOU" for plural markers rather than "I E N", "I OU" ?
  * Phoneme "GW" rather than "G OU" ?
+ * Add breton sentences with https://commonvoice.mozilla.org/sentence-collector/
 
 ## Acknowledgement
 

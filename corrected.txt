@@ -106,6 +106,9 @@ kaondaonet	kondaonet
 unnan	unan
 c'houzhout	c'houzout
 Outlook dija	*Outlook dija
+a-bernn	a-benn
+dd'ar	d'ar
+e plis ar	e plij ar
 
 
 # Anvioù
