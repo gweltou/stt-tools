@@ -18,7 +18,7 @@ from pydub import AudioSegment
 from pydub.utils import get_player_name
 from tempfile import NamedTemporaryFile
 import subprocess
-import hunspell # https://www.systutorials.com/docs/linux/man/4-hunspell/
+#import hunspell # https://www.systutorials.com/docs/linux/man/4-hunspell/
 from colorama import Fore
 
 
@@ -73,8 +73,10 @@ w2f = {
     'd'     :   'D',
     'ch'    :   'CH',       # CHomm
     "c'h"   :   'X',        # 
+    'c'     :   'K',        # xxx GALLEG XXX
     'e'     :   'E',        # spErEd
     'ê'     :   'E',        # gÊr
+    'é'     :   'E',        # xxx GALLEG XXX
     "ec'h"  :   'EH X',     # nec'h
     'ei'    :   'EY',       # kEIn      # could replace with (EH I) maybe ?
     'eiñ'   :   'EY',       # savetEIÑ
@@ -118,6 +120,7 @@ w2f = {
     'orr'   :   'O R',      # gORRe
     'p'     :   'P',
     ".p'h"  :   'P',        # P'He
+    'qu'    :   'K',        # xxx GALLEG XXX
     'r'     :   'R',
     'rr'    :   'R',
     's'     :   'S',
@@ -229,7 +232,7 @@ def get_hunspell_dict():
         hs.add(w)
     return hs
 
-hs_dict = get_hunspell_dict()
+#hs_dict = get_hunspell_dict()
 
 
 

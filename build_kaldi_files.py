@@ -21,7 +21,8 @@ from math import floor, ceil
 from libMySTT import *
 
 
-
+ADD_EXTERNAL_CORPUS = False
+SENTENCE_MIN_WORDS = 0
 
 spk2gender_files = ["spk2gender.txt", "common_voice/spk2gender"]
 
@@ -121,10 +122,11 @@ def parse_data(split_filename):
                     if bl_score > 0.2:
                         #correction, _ = get_correction(sentence)
                         #print(f"rejected ({bl_score}): {correction}")
+                        print("rejectd", cleaned)
                         continue
                     
                     # Ignore of sentence is too short
-                    if cleaned.count(' ') < 3:
+                    if cleaned.count(' ') < SENTENCE_MIN_WORDS - 1:
                         print("corpus skip:", cleaned)
                         continue
                     
@@ -219,21 +221,22 @@ if __name__ == "__main__":
         os.mkdir(os.path.join('data', 'local'))
         
         # First time running this script so external text corpus will be added
-        print("parsing and copying external corpus")
-        with open('data/local/corpus.txt', 'w') as fw:
-            with open('corpus/wiki_corpus.txt', 'r') as fr:
-                for sentence in fr.readlines():
-                    cleaned = get_cleaned_sentence(sentence)[0]
-                    for word in cleaned.split():
-                        if word.lower() in regular_words:
-                            pass
-                        elif word.lower() in capitalized:
-                            pass
-                        elif is_acronym(word) and word in acronyms:
-                            pass
-                        else:
-                            regular_words.add(word)
-                    fw.write(cleaned + '\n')
+        if ADD_EXTERNAL_CORPUS:
+            print("parsing and copying external corpus")
+            with open('data/local/corpus.txt', 'w') as fw:
+                with open('corpus/wiki_corpus.txt', 'r') as fr:
+                    for sentence in fr.readlines():
+                        cleaned = get_cleaned_sentence(sentence)[0]
+                        for word in cleaned.split():
+                            if word.lower() in regular_words:
+                                pass
+                            elif word.lower() in capitalized:
+                                pass
+                            elif is_acronym(word) and word in acronyms:
+                                pass
+                            else:
+                                regular_words.add(word)
+                        fw.write(cleaned + '\n')
         
     dict_dir = os.path.join('data', 'local', 'dict_nosp')
     if not os.path.exists(dict_dir):
@@ -330,9 +333,10 @@ if __name__ == "__main__":
         f.write('SIL\n')
     
     # Copy text corpus
-    with open('data/local/corpus.txt', 'r') as f_in:
-        for line in f_in.readlines():
-            corpus.add(line.strip())
+    if os.path.exists('data/local/corpus.txt'):
+        with open('data/local/corpus.txt', 'r') as f_in:
+            for line in f_in.readlines():
+                corpus.add(line.strip())
     with open('data/local/corpus.txt', 'w') as f_out:
         for l in corpus:
             f_out.write(f"{l}\n")
