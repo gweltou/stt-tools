@@ -109,6 +109,17 @@ Outlook dija	*Outlook dija
 a-bernn	a-benn
 dd'ar	d'ar
 e plis ar	e plij ar
+diw wech	div wech
+gwaneoc'h	ganeoc'h
+dilhad sa sec'hañ	dilhad da sec'hañ
+kentañ 'r bloaz	kentañ ar bloaz
+hegaziñ	hegasiñ
+hardiz	hardizh
+No vo ket	ne vo ket
+db.	diwar benn
+gt Pzd	gant prezidant
+dilamour	dilabour
+brasenn	blasenn
 
 
 # Anvioù

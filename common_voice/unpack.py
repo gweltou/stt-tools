@@ -23,22 +23,8 @@ import libMySTT
 
 spk2gender_file = "spk2gender"
 blacklisted_speakers_file = "blacklisted_speakers.txt"
+blacklisted_sentences_file = "blacklisted_sentences.txt"
 
-blacklisted_utt = ["Les antiques croyances des peuples amérindiens.",
-                   "Légendes ?",
-                   "L'antique relijion des Celtes.",
-                   "gt.",
-                   "Ur b.",
-                   "Viva Patata !",
-                   "Olofanted.",
-                   "em bureau.",
-                   "Crèche ?",
-                   "Il sera à même de vous le dire.",
-                   "Il sera plus à même de vous le dire.",
-                   "E-men emañ ar Mille-Clubs, ar fest-noz, ar stad ?",
-                   "Ar roadennoù klokañ a gaver evit Breizh eo re an enklask Étude de l’histoire familiale kaset da benn gant an EBSSA* e 1999 (dielfennet pizh eo ar sifroù-se en danevell-mañ).",
-                   "melladoù L.310-2, L.310-5, R.310-8, R.310-9 hag R310-19 eus kod ar c’henwerzh ha melladoù R.321-1 hag R.321-9 eus ar c’hod kastizel.",
-                   ]
 
 
 if __name__ == "__main__":
@@ -69,7 +55,14 @@ if __name__ == "__main__":
         with open(blacklisted_speakers_file, 'r') as f:
             blacklisted_speakers = [l.split()[0] for l in f.readlines() if not l.startswith('#')]
     else:
-        print("Blacklist speaker file not found")
+        print("Blacklisted speakers file not found")
+   
+    blacklisted_sentences = []
+    if os.path.exists(blacklisted_sentences_file):
+        with open(blacklisted_sentences_file, 'r') as f:
+            blacklisted_sentences = [l.strip() for l in f.readlines() if not l.startswith('#')]
+    else:
+        print("Blacklisted sentences file not found")
     
     dest_folder = sys.argv[-1]
     data_files = sys.argv[1:-1]
@@ -108,7 +101,7 @@ if __name__ == "__main__":
         #    if s in speakers:
         #        speakers.discard(s)
         #        print("Discared speaker", s)
-        print(f"{len(speakers)-len(blacklisted_speakers)} speakers found ({len(blacklisted_speakers)} dicarded)...")
+        print(f"{len(speakers)} speakers found...")
         for speaker in speakers:
             # for each speaker, create a folder an concatenate each of its utterances in one audio file
             discard = speaker in blacklisted_speakers
@@ -154,7 +147,7 @@ if __name__ == "__main__":
                 else:
                     parsed_audiofiles.add(utt[1])
                 
-                if utt[2] in blacklisted_utt:
+                if utt[2] in blacklisted_sentences:
                     print("\nskipped:", utt[2])
                     continue
                 
