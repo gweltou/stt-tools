@@ -50,6 +50,9 @@ Rename ``model`` folder to your liking and copy it in vosk ``model`` subfolder.
 
 Enjoy !
 
+## Gender bias testing
+
+
 ## Data files
  * ``corrected.txt`` \
     List of key -> values separated by a tabulation.\

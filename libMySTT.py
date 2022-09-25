@@ -559,7 +559,7 @@ def get_audiofile_info(filename):
 
 def get_audiofile_length(filename):
     """
-        Get audio file length in milliseconds
+        Get audio file length in seconds
     """
     return float(get_audiofile_info(filename)['duration'])
 

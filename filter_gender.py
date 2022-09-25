@@ -125,11 +125,11 @@ if __name__ == "__main__":
                 msong += silence
                 m_audio_length += (seg[1] / 1000) - (seg[0] / 1000)
             
-        fsong.export(os.path.join(output_dir, "fsong.wav"), format="wav")
-        msong.export(os.path.join(output_dir, "msong.wav"), format="wav")
-        with open(os.path.join(output_dir, "ftext.txt"), 'w') as f:
+        fsong.export(os.path.join(output_dir, "audio_f.wav"), format="wav")
+        msong.export(os.path.join(output_dir, "audio_m.wav"), format="wav")
+        with open(os.path.join(output_dir, "text_f.txt"), 'w') as f:
             f.writelines([l + '\n' for l in ftext])
-        with open(os.path.join(output_dir, "mtext.txt"), 'w') as f:
+        with open(os.path.join(output_dir, "text_m.txt"), 'w') as f:
             f.writelines([l + '\n' for l in mtext])
         
         total_audio_length = f_audio_length + m_audio_length

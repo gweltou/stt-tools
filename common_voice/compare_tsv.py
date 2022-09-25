@@ -4,8 +4,7 @@
 """
     Author:        Gweltaz Duval-Guennoc
  
-    Unpack Mozilla's Common Voice dataset and prepare data
-    to be used for Kaldi framework
+    Analyse (or compare) tsv files
  
 """
 
@@ -17,7 +16,7 @@ from math import floor, ceil
 from pydub import AudioSegment
 
 sys.path.append("..")
-import libMySTT
+from libMySTT import get_audiofile_length
 
 
 
@@ -33,6 +32,9 @@ def parse_tsv(filename):
         num_m = 0
         num_f = 0
         num_u = 0
+        dur_m = 0.0
+        dur_f = 0.0
+        dur_u = 0.0
         
         # client_id, path, sentence, up_votes, down_votes, age, gender, accent
         with open(filename, 'r') as f:
@@ -41,17 +43,42 @@ def parse_tsv(filename):
             while l:
                 l = l.split('\t')
                 speaker_id = l[0][:16]    # Shorten speaker-id
-                if not speaker_id in speakers:
-                    speakers.add(speaker_id)
-                    if l[6] == "male":
+                duration = get_audiofile_length( os.path.join(clip_dir, l[1]) )
+                if l[6] == "male":
+                    if not speaker_id in speakers:
                         num_m += 1
-                    elif l[6] == "female":
+                    dur_m += duration
+                elif l[6] == "female":
+                    if not speaker_id in speakers:
                         num_f += 1
-                    else:
+                    dur_f += duration
+                else:
+                    if not speaker_id in speakers:
                         num_u += 1
+                    dur_u += duration
+                speakers.add(speaker_id)
                 sentences.add(l[2])
                 l = f.readline().strip()
-        return speakers, sentences, num_m, num_f, num_u
+        print("Number of speakers:", len(speakers))
+        print("Number of sentences:", len(sentences))
+        total_length = dur_m + dur_f + dur_u
+        minutes, seconds = divmod(round(total_length), 60)
+        hours, minutes = divmod(minutes, 60)
+        print(f"Audio length: {hours} h {minutes}'{seconds}''")
+        print(f"Male speakers: {num_m} ({round(num_m/len(speakers), 2)}%)")
+        minutes, seconds = divmod(round(dur_m), 60)
+        hours, minutes = divmod(minutes, 60)
+        print(f"Male audio length: {hours} h {minutes}'{seconds}'' ({round(dur_m/total_length, 2)}%)")
+        print(f"Female speakers: {num_f} ({round(num_f/len(speakers), 2)}%)")
+        minutes, seconds = divmod(round(dur_f), 60)
+        hours, minutes = divmod(minutes, 60)
+        print(f"Female audio length: {hours} h {minutes}'{seconds}'' ({round(dur_f/total_length, 2)}%)")
+        print(f"Unknown gender: {num_u} ({round(num_u/total_length, 2)}%)")
+        minutes, seconds = divmod(round(dur_u), 60)
+        hours, minutes = divmod(minutes, 60)
+        print(f"Unk gender audio length: {hours} h {minutes}'{seconds}'' ({round(dur_u/total_length, 2)}%)")
+        print()
+        return speakers, sentences
     else:
         print("File not found:", filename)
 
@@ -61,6 +88,8 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         print(f"usage: {sys.argv[0]} data_file.tsv [data_file2.tsv...]")
         sys.exit(1)
+    
+    clip_dir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[1])), "clips")
     
     speakers_gender = dict()
     if os.path.exists(spk2gender_file):
@@ -82,15 +111,10 @@ if __name__ == "__main__":
     sentence_list = []
     files = sys.argv[1:]    
     for file in files:
-        speakers, sentences, nm, nf, nu = parse_tsv(file)
+        speakers, sentences = parse_tsv(file)
         speaker_list.append(speakers)
         sentence_list.append(sentences)
-        print("Number of speakers:", len(speakers))
-        print("Number of sentences:", len(sentences))
-        print("Male speakers:", nm)
-        print("Female speakers:", nf)
-        print("Unknown gender:", nu)
-        print()
+        
     
     print("Common speakers:", len(speaker_list[0].intersection(*speaker_list[1:])))
     print("Common sentences:", len(sentence_list[0].intersection(*sentence_list[1:])))
