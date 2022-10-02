@@ -7,8 +7,7 @@
  
  Author:  Gweltaz Duval-Guennoc
  
- Notes: data from lexicon_add.txt must be added manually to lexicon after executing
-        this script on train and test datasets.
+ Notes: 
  
 """
 
@@ -21,7 +20,9 @@ from math import floor, ceil
 from libMySTT import *
 
 
-ADD_EXTERNAL_CORPUS = False
+BUILD_CORPUS = False
+ADD_EXTERNAL_CORPUS = False     # Add a corpus from wikipedia
+MERGE_CORPUSES = False          # Merge train and test corpuses
 SENTENCE_MIN_WORDS = 0
 
 spk2gender_files = ["spk2gender.txt", "common_voice/spk2gender"]
@@ -220,8 +221,8 @@ if __name__ == "__main__":
     if not os.path.exists(os.path.join('data', 'local')):
         os.mkdir(os.path.join('data', 'local'))
         
-        # First time running this script so external text corpus will be added
-        if ADD_EXTERNAL_CORPUS:
+        # First time running this script so external text corpus will be added now
+        if BUILD_CORPUS and ADD_EXTERNAL_CORPUS:
             print("parsing and copying external corpus")
             with open('data/local/corpus.txt', 'w') as fw:
                 with open('corpus/wiki_corpus.txt', 'r') as fr:
@@ -282,6 +283,10 @@ if __name__ == "__main__":
             f.write(f"{rec_id}\t{wav_filename}\n")
     
     # Lexicon.txt
+    # If a lexicon is already present in folder (i.e. this script has already been
+    # run on anoter set), it will be merged with the current lexicon.
+    # The lexicons of the train and test sets are thus merged together.
+    # Right now the lexicon is build irrespective of the corpus, which is not optimal
     lexicon_path = os.path.join(dict_dir, 'lexicon.txt')
     if os.path.exists(lexicon_path):
         print('lexicon.txt file already exists')
@@ -333,13 +338,16 @@ if __name__ == "__main__":
         f.write('SIL\n')
     
     # Copy text corpus
-    if os.path.exists('data/local/corpus.txt'):
-        with open('data/local/corpus.txt', 'r') as f_in:
-            for line in f_in.readlines():
-                corpus.add(line.strip())
-    with open('data/local/corpus.txt', 'w') as f_out:
-        for l in corpus:
-            f_out.write(f"{l}\n")
+    # The text from the train and test datasets are merged together in the same corpus
+    # which is not fair for scoring the test set.
+    if BUILD_CORPUS:
+        if MERGE_CORPUSES and os.path.exists('data/local/corpus.txt'):
+            with open('data/local/corpus.txt', 'r') as f_in:
+                for line in f_in.readlines():
+                    corpus.add(line.strip())
+        with open('data/local/corpus.txt', 'w') as f_out:
+            for l in corpus:
+                f_out.write(f"{l}\n")
     
     print()
     print("==== STATS ====")

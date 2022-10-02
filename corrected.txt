@@ -7,7 +7,6 @@ diàr	diwar
 
 
 # Unvaniañ
-nebeud	nebeut
 yaouankik	yaouankig
 kantvet	kantved
 hanterkantved	hanterkantvet
@@ -130,10 +129,12 @@ philippe	Filip
 christian	Kristian
 helen	Elen
 hélène	Elen
+helena	Elena
 huelgoat	Uhelgoad
 kambodjia	Kambodja
 émile	Emil
 maría	Maria
+yannick	Yannig
 
 
 télégramme	telegram
@@ -174,6 +175,7 @@ dishenvel	disheñvel
 adkemmeret	adkemeret
 gwann	gwan
 laret	lâret
+brezoneg	brezhoneg
 
 arru	erru
 be'h	bec'h
@@ -280,6 +282,7 @@ XXvet	ugentvet
 1910	mil nav c'hant dek
 1912	mil nav c'hant daouzek
 1913	mil nav c'hant trizek
+1915	mil nav c'hant pemzek
 1916	mil nav c'hant c'hwezek
 1917	mil nav c'hant seitek
 1920	mil nav c'hant ugent
@@ -305,7 +308,9 @@ XXvet	ugentvet
 1999	mil nav c'hant naontek ha pevar ugent
 2000	daou vil
 2001	daou vil unan
+2002	daou vil daou
 2003	daou vil tri
+2004	daou vil pevar
 2005	daou vil pemp
 2006	daou vil c'hwec'h
 2007	daou vil seizh
@@ -314,6 +319,8 @@ XXvet	ugentvet
 2010	daou vil dek
 2011	daou vil unnek
 2012	daou vil daouzek
+2013	daou vil trizek
+2014	daou vil pevarzek
 2015	daou vil pemzek
 2016	daou vil c'hwezek
 2017	daou vil seitek
@@ -321,4 +328,5 @@ XXvet	ugentvet
 2019	daou vil naontek
 2020	daou vil ugent
 2021	daou vil un warn ugent
+2022	daou vil daou warn ugent
 2024	daou vil pevar warn ugent

@@ -4,6 +4,7 @@ agav
 alemañ
 anatomiezh
 arkitektour
+artifisiel
 atersadennoù
 atmosfer
 azoniad
@@ -11,7 +12,7 @@ azonoù
 balbouzerezh
 bandemiezh
 bazhigoù
-blini
+blini 
 boellgomzerioù
 botiron
 bourrapl

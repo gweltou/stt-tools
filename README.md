@@ -50,6 +50,19 @@ Rename ``model`` folder to your liking and copy it in vosk ``model`` subfolder.
 
 Enjoy !
 
+## Wikipedia corpus
+
+Tool used to extract corpus from wikipedia:
+https://github.com/attardi/wikiextractor
+
+Wikipedia dumps:
+https://dumps.wikimedia.org/brwiki/
+https://dumps.wikimedia.org/brwikiquote/
+
+```
+WikiExtractor.py -o dumps --json brwiki-20220920-pages-articles-multistream.xml 
+```
+
 ## Gender bias testing
 
 

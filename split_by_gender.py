@@ -15,11 +15,10 @@ from math import floor, ceil
 
 
 
-#split_files = ["sae/b26/b26.split"]
 gender = 'f'
 output_dir = "gender_filtered"
 
-speakers_gender = {}
+MAKE_GLOBAL_AUDIO_AND_TEXT_FILE = True
 
 
 
@@ -84,6 +83,7 @@ def parse_file(split_filename):
 
 if __name__ == "__main__":
     # Add external speakers gender
+    speakers_gender = {}
     for fname in ["spk2gender.txt", "common_voice/spk2gender"]:
         if os.path.exists(fname):
             print(f"Adding speakers from '{fname}'")
@@ -127,6 +127,14 @@ if __name__ == "__main__":
             
         fsong.export(os.path.join(output_dir, "audio_f.wav"), format="wav")
         msong.export(os.path.join(output_dir, "audio_m.wav"), format="wav")
+        
+        if MAKE_GLOBAL_AUDIO_AND_TEXT_FILE:
+            all_audio = fsong + msong
+            all_audio.export(os.path.join(output_dir, "audio_all.wav"), format="wav")
+            all_text = ftext + mtext
+            with open(os.path.join(output_dir, "text_all.txt"), 'w') as f:
+                f.writelines([l + '\n' for l in all_text])
+        
         with open(os.path.join(output_dir, "text_f.txt"), 'w') as f:
             f.writelines([l + '\n' for l in ftext])
         with open(os.path.join(output_dir, "text_m.txt"), 'w') as f:
@@ -143,6 +151,5 @@ if __name__ == "__main__":
         print(f"- Male speakers:\t{hours} h {minutes}'{seconds}''\t{pc}%")
         
     else:
-        print(len(sys.argv))
         print("folder name missing")
 
