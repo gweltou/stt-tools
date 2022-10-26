@@ -5,7 +5,12 @@
     Author:        Gweltaz Duval-Guennoc
  
     Unpack Mozilla's Common Voice dataset and prepare data
-    to be used for Kaldi framework
+    to be used for Kaldi framework.
+    
+    
+    usage:
+        $ python3 unpack.py train.tsv train
+        $ python3 unpack.py test.tsv test
  
 """
 
@@ -29,13 +34,12 @@ blacklisted_sentences_file = "blacklisted_sentences.txt"
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
-        print(f"usage: {sys.argv[0]} data_file.tsv [data_file2.tsv...] FOLDER")
+        print(f"usage: {sys.argv[0]} data_file.tsv [data_file2.tsv...] SAVE_FOLDER")
         sys.exit(1)
     
     tar_file = [f for f in os.listdir() if f.endswith(".tar.gz")][0]
     with tarfile.open(tar_file, 'r') as tar:
         data_folder = tar.getnames()[0]
-        
         if not os.path.exists(data_folder):
             # Untar archive
             tar.extractall()
@@ -81,6 +85,7 @@ if __name__ == "__main__":
         data = []
         cumul_time = 0
         
+        data_file = os.path.join(data_folder, data_file)
         print(data_file)
         if os.path.exists(data_file):
             # client_id, path, sentence, up_votes, down_votes, age, gender, accent
@@ -97,11 +102,8 @@ if __name__ == "__main__":
             continue
         
         speakers = set([l[0] for l in data])
-        #for s in blacklisted_speakers:
-        #    if s in speakers:
-        #        speakers.discard(s)
-        #        print("Discared speaker", s)
         print(f"{len(speakers)} speakers found...")
+        
         for speaker in speakers:
             # for each speaker, create a folder an concatenate each of its utterances in one audio file
             discard = speaker in blacklisted_speakers
@@ -203,11 +205,16 @@ if __name__ == "__main__":
         song = AudioSegment.from_wav(wav_filename)
         gender = ''
         i = 0
-        while gender not in ('m', 'f'):
+        while gender not in ('m', 'f', 'u', 'x'):
             libMySTT.play_segment(i, song, segments, 1.0)
-            gender = input(f"{speaker} Male or Female ? (press any other key to listen) ").lower()
+            print("(Press 'u' for unknown, 'x' to skip this process or any other key to listen again)")
+            gender = input(f"{speaker} Male or Female (m/f) ? ").lower()
             i = (i+1) % len(segments)
-        speakers_gender[speaker] = gender
+            if gender in ('m', 'f'):
+                speakers_gender[speaker] = gender
+        
+        if gender == 'x':
+            break
         
     
     # spk2gender file

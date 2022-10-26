@@ -6,11 +6,11 @@ Split files .split should be in the same folder as its related audio file and te
 ## Python packages dependency
 
  * numpy \
-   ``pip3 install numpy``
+   `pip3 install numpy`
  * [Librosa](https://librosa.org/)
  * Pydub
  * Hunspell \
-   ``pip3 install cyhunspell``
+   `pip3 install cyhunspell`
  * Colorama
 
 ## Transcription rules
@@ -26,27 +26,27 @@ Regional forms should be kept if their pronouciation isn't too far from the "sta
  
 ## Workflow
 
-Run script ``unpack.py`` found in each dataset folder.
+Run script `unpack.py` found in each dataset folder.
 
-Run script ``wavesplit.py audiofile.wav`` on each audiofile in datasets to generate ``.split`` file and manually align text (in ``.txt`` file) with audio utterances.
+Run script `wavesplit.py audiofile.wav` on each audiofile in datasets to generate `.split` file and manually align text (in `.txt` file) with audio utterances.
 
-Run script ``verify_text_files.py dataset/`` on each dataset folder to quickly check spelling mistakes and register acronyms.
+Run script `verify_text_files.py dataset/` on each dataset folder to quickly check spelling mistakes and register acronyms.
 
 Those three first step need to be done only once per audio file. The following steps can be done every time you train a new model.
 
-Create a ``corpus`` folder and inside it, divide datasets in ``train`` and ``test`` sets in their respective folders.
+Create a `corpus` folder and inside it, divide datasets in `train` and `test` sets in their respective folders.
 
-Run script ``build_kaldi_files.py folder/`` on ``train`` and ``test`` folders.
+Run script `build_kaldi_files.py folder/` on `train` and `test` folders.
 
-Copy generated ``data`` folder in your Kaldi recipe folder.
+Copy generated `data` folder in your Kaldi recipe folder.
 
-Run ``run.sh`` script in kaldi recipe folder.
+Run `run.sh` script in kaldi recipe folder.
 
 Cry, wishing you had a GPU, while waiting for the model to finish its training (more than a hundred hours in my case).
 
-When training is finally done, run script ``copy_final_result.sh`` to copy necessary files in ``model`` folder.
+When training is finally done, run script `copy_final_result.sh` to copy necessary files in `model` folder.
 
-Rename ``model`` folder to your liking and copy it in vosk ``model`` subfolder.
+Rename `model` folder to your liking and copy it in vosk `model` subfolder.
 
 Enjoy !
 
@@ -60,7 +60,7 @@ https://dumps.wikimedia.org/brwiki/
 https://dumps.wikimedia.org/brwikiquote/
 
 ```
-WikiExtractor.py -o dumps --json brwiki-20220920-pages-articles-multistream.xml 
+python3 WikiExtractor.py -o dumps --json brwiki-20220920-pages-articles-multistream.xml.bz2
 ```
 
 ## Gender bias testing
@@ -88,4 +88,4 @@ WikiExtractor.py -o dumps --json brwiki-20220920-pages-articles-multistream.xml
 
 ## Acknowledgement
 
-``br_FR.dic`` and ``br_FR.aff`` in ``hunspell-dictionary`` folder, from [An Drouizig](http://www.drouizig.org/index.php/br/) hunspell dictionary.
+``br_FR.dic`` and ``br_FR.aff`` in ``hunspell-dictionary`` folder, from [An Drouizig](http://www.drouizig.org/index.php/br/) [hunspell dictionary](https://github.com/Drouizig/hunspell-br).

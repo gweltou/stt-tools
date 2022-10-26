@@ -4,7 +4,7 @@
 """
     Build a text file and a wave audio file from a list of split files and a specified gender
     
-    Usage : ./filter_gender.py folder
+    Usage : ./split_by_gender.py folder
 """
 
 import sys
@@ -15,10 +15,10 @@ from math import floor, ceil
 
 
 
-gender = 'f'
-output_dir = "gender_filtered"
+#gender = 'f'
+output_dir = "gender_splitted"
 
-MAKE_GLOBAL_AUDIO_AND_TEXT_FILE = True
+MAKE_GLOBAL_AUDIO_AND_TEXT_FILE = False
 
 
 

@@ -20,9 +20,9 @@ from math import floor, ceil
 from libMySTT import *
 
 
-BUILD_CORPUS = False
-ADD_EXTERNAL_CORPUS = False     # Add a corpus from wikipedia
-MERGE_CORPUSES = False          # Merge train and test corpuses
+BUILD_ML_CORPUS = True
+ADD_EXTERNAL_CORPUS_TO_ML = 'corpus/wiki_corpus_big.txt'     # Add a corpus from wikipedia
+
 SENTENCE_MIN_WORDS = 0
 
 spk2gender_files = ["spk2gender.txt", "common_voice/spk2gender"]
@@ -221,11 +221,11 @@ if __name__ == "__main__":
     if not os.path.exists(os.path.join('data', 'local')):
         os.mkdir(os.path.join('data', 'local'))
         
-        # First time running this script so external text corpus will be added now
-        if BUILD_CORPUS and ADD_EXTERNAL_CORPUS:
+        # External text corpus will be added now
+        if BUILD_ML_CORPUS and ADD_EXTERNAL_CORPUS_TO_ML and os.path.exists(ADD_EXTERNAL_CORPUS_TO_ML):
             print("parsing and copying external corpus")
             with open('data/local/corpus.txt', 'w') as fw:
-                with open('corpus/wiki_corpus.txt', 'r') as fr:
+                with open(ADD_EXTERNAL_CORPUS_TO_ML, 'r') as fr:
                     for sentence in fr.readlines():
                         cleaned = get_cleaned_sentence(sentence)[0]
                         for word in cleaned.split():
@@ -338,14 +338,8 @@ if __name__ == "__main__":
         f.write('SIL\n')
     
     # Copy text corpus
-    # The text from the train and test datasets are merged together in the same corpus
-    # which is not fair for scoring the test set.
-    if BUILD_CORPUS:
-        if MERGE_CORPUSES and os.path.exists('data/local/corpus.txt'):
-            with open('data/local/corpus.txt', 'r') as f_in:
-                for line in f_in.readlines():
-                    corpus.add(line.strip())
-        with open('data/local/corpus.txt', 'w') as f_out:
+    if BUILD_ML_CORPUS:
+        with open('data/local/corpus.txt', 'a') as f_out:
             for l in corpus:
                 f_out.write(f"{l}\n")
     

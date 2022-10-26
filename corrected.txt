@@ -23,6 +23,7 @@ evid	evit
 # Fr to Br
 office	ofis
 musique	muzik
+télégramme	telegram
 
 
 # Fazioù Common voice
@@ -137,7 +138,6 @@ maría	Maria
 yannick	Yannig
 
 
-télégramme	telegram
 nozvat	noz vat
 aotroù	aotrou
 jug	chug
@@ -176,6 +176,8 @@ adkemmeret	adkemeret
 gwann	gwan
 laret	lâret
 brezoneg	brezhoneg
+vousc'hoarz	vousc'hoarzh
+vousc'hoarzin	vousc'hoarzhin
 
 arru	erru
 be'h	bec'h
@@ -210,6 +212,7 @@ VII	seizh
 VIII	eizh
 IX	nav
 XVII	seizh
+XIII	trizek
 
 1añ	kentañ
 IVe	pevare
@@ -282,15 +285,20 @@ XXvet	ugentvet
 1910	mil nav c'hant dek
 1912	mil nav c'hant daouzek
 1913	mil nav c'hant trizek
+1914	mil nav c'hant pevarzek
 1915	mil nav c'hant pemzek
 1916	mil nav c'hant c'hwezek
 1917	mil nav c'hant seitek
+1918	mil nav c'hant triwec'h
 1920	mil nav c'hant ugent
 1930	mil nav c'hant tregont
+1932	mil nav c'hant daou ha tregont
 1936	mil nav c'hant c'hwec'h ha tregont
 1940	mil nav c'hant daou ugent
 1943	mil nav c'hant tri ha daou ugent
 1945	mil nav c'hant pemp ha daou ugent
+1946	mil nav c'hant c'hwec'h ha daou ugent
+1947	mil nav c'hant seizh ha daou ugent
 1950	mil nav c'hant hanter kant
 1956	mil nav c'hant c'hwec'h hag hanter kant
 1960	mil nav c'hant tri ugent
@@ -298,13 +306,16 @@ XXvet	ugentvet
 1970	mil nav c'hant dek ha tri ugent
 1975	mil nav c'hant pemzek ha tri ugent
 1976	mil nav c'hant c'hwezek ha tri ugent
+1977	mil nav c'hant seitek ha tri ugent
 1980	mil nav c'hant pevar ugent
+1983	mil nav c'hant tri ha pevar ugent
 1984	mil nav c'hant pevar ha pevar ugent
 1990	mil nav c'hant dek ha pevar ugent
 1991	mil nav c'hant unnek ha pevar ugent
 1994	mil nav c'hant pevarzek ha pevar ugent
 1995	mil nav c'hant pemzek ha pevar ugent
 1996	mil nav c'hant c'hwezek ha pevar ugent
+1997	mil nav c'hant seitek ha pevar ugent
 1999	mil nav c'hant naontek ha pevar ugent
 2000	daou vil
 2001	daou vil unan

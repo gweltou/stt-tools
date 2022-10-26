@@ -11,6 +11,7 @@ Afrikaned
 Afrikaniz
 Agapit
 Akitania
+Alabama
 Alain A L EN
 Alamagn
 Alan
@@ -32,6 +33,7 @@ Alpoù
 Alre
 Altai
 Alvarez
+Amazonia
 Ambre AN B R
 Amerika
 Amerikaned
@@ -230,6 +232,7 @@ Ejipt
 Elegoed
 Elen E L EH N
 Elena
+Elia
 Eligius
 Elzas
 Emile E M I L
@@ -350,6 +353,7 @@ Herve
 Hilton H I L T OH N
 Himalaya
 Hirrien
+Hitler  H I T L EH R
 Hollsent
 Hong ON G
 Hugues U G
@@ -541,6 +545,7 @@ Maodez
 Maran
 Marcel M A R S EH L
 Marchand M A R CH AN
+Marco M A R K O
 Mari
 Maria
 Mariana
@@ -638,6 +643,7 @@ Penelope P E N E L OH P
 Pêr
 Perou
 Persia
+Peugeot P EU J O
 Philadelphia F I L A D EH L F I A
 Pichon
 Pierre P I EH R
@@ -719,6 +725,7 @@ Poulidor
 Poullann
 Poullaouen
 Poulloger
+Pourlet
 Praha
 Pretoria
 Prigent P R I J AN
@@ -873,6 +880,7 @@ Vazhev
 Vega
 Venezia
 Verc'her
+Verdun V EH R D EN
 Veurzh
 Viami
 Vichel V I CH EH L

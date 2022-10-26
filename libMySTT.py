@@ -69,6 +69,7 @@ w2f = {
     'â'     :   'A',        # lÂret
     'añ'    :   'AN',
     'an'    :   'AN N',
+    'añv.'  :   'AN',       # klAÑV {gouzañv ?}
     'b'     :   'B',
     'd'     :   'D',
     'ch'    :   'CH',       # CHomm
@@ -85,7 +86,9 @@ w2f = {
     'em'    :   'EH M',     # lEMm
     'eñ'    :   'EN',       # chEÑch
     'en.'   :   'EH N',     # meriEN
-    'enn'   :   'EH N',     # lENN
+    'enn.'  :   'EH N',     # lENN
+    'enn'   :   'E N',      # c'helENNer
+    'eñv.'  :   'EN',       # adreñv {leñv ?}
     'er.'   :   'EH R',     # hantER
     'eu'    :   'EU',       # lEUn
     'eü'    :   'E U',      # EÜrus
@@ -98,6 +101,7 @@ w2f = {
     'hag.'  :   'A G',
     'i'     :   'I',
     'iñ'    :   'I N',      # bIÑs
+    'iñv'   :   'I V',      # fIÑV {gwiñver ?}
     'iñ.'   :   'I',        # debrIÑ
     'j'     :   'J',        # BeaJiñ
     'k'     :   'K',
