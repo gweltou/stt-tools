@@ -23,6 +23,10 @@ Acronyms should be written in capital letters without dots or dashes \
 
 Regional forms should be kept if their pronouciation isn't too far from the "standard" form (according to personnal taste or political views...) \
 (E.g. "meump bet/on eus bet", "nege/an hini eo", "lâret/lavaret")
+
+### Usage of the '*' marker
+
+In the transcription files, a `*` can be added if front of words you want remove from the corpus and the lexicon (foreign words, repetitions...). The market words will still be used for training the acoustic model.
  
 ## Workflow
 

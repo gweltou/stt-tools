@@ -352,7 +352,7 @@ def tokenize(sentence):
 
 
 
-def get_cleaned_sentence(sentence, rm_bl_marker=False, rm_verbal_ticks=False):
+def get_cleaned_sentence(sentence, rm_bl=False, rm_verbal_ticks=False):
     """
         Return a cleaned sentence, proper to put in text files or corpus
                and a quality score (ratio of black-listed words, the lower the better)
@@ -371,10 +371,8 @@ def get_cleaned_sentence(sentence, rm_bl_marker=False, rm_verbal_ticks=False):
         lowered_token = token.lower()
         # Ignore black listed words
         if token.startswith('*'):
-            if rm_bl_marker:
+            if not rm_bl:
                 tokens.append(token[1:])
-            else:
-                tokens.append(token)
             num_blacklisted += 1
         elif rm_verbal_ticks and lowered_token in verbal_tics:
             pass

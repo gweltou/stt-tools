@@ -7,7 +7,8 @@
  
  Author:  Gweltaz Duval-Guennoc
  
- Notes: 
+ TODO:
+    * Check for whitespaces in data file pathnames (create bugs at chain training stage) 
  
 """
 
@@ -23,7 +24,7 @@ from libMySTT import *
 BUILD_ML_CORPUS = True
 ADD_EXTERNAL_CORPUS_TO_ML = 'corpus/wiki_corpus_big.txt'     # Add a corpus from wikipedia
 
-SENTENCE_MIN_WORDS = 0
+SENTENCE_MIN_WORDS = 3
 
 spk2gender_files = ["spk2gender.txt", "common_voice/spk2gender"]
 
@@ -93,7 +94,7 @@ def parse_data(split_filename):
                 l = l[:start] + l[end:]
                 l = l.strip()
             
-            cleaned = get_cleaned_sentence(l)[0]      
+            cleaned, _ = get_cleaned_sentence(l)     
             if cleaned:
                 speaker_ids.append(speaker_id)
                 text.append(cleaned.replace('*', ''))
@@ -116,14 +117,14 @@ def parse_data(split_filename):
                 for sentence in l.split('.'):
                     if not sentence:
                         continue
-                    cleaned, bl_score = get_cleaned_sentence(sentence, rm_bl_marker=True, rm_verbal_ticks=True)
+                    cleaned, bl_score = get_cleaned_sentence(sentence, rm_bl=True, rm_verbal_ticks=True)
                     if not cleaned:
                         continue
                     # Ignore if to many black-listed words in sentence
                     if bl_score > 0.2:
                         #correction, _ = get_correction(sentence)
                         #print(f"rejected ({bl_score}): {correction}")
-                        print("rejectd", cleaned)
+                        print("rejected", sentence)
                         continue
                     
                     # Ignore of sentence is too short
@@ -227,7 +228,7 @@ if __name__ == "__main__":
             with open('data/local/corpus.txt', 'w') as fw:
                 with open(ADD_EXTERNAL_CORPUS_TO_ML, 'r') as fr:
                     for sentence in fr.readlines():
-                        cleaned = get_cleaned_sentence(sentence)[0]
+                        cleaned, _ = get_cleaned_sentence(sentence)
                         for word in cleaned.split():
                             if word.lower() in regular_words:
                                 pass
