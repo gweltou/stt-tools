@@ -7,9 +7,6 @@
  
  Author:  Gweltaz Duval-Guennoc
  
- TODO:
-    * Check for whitespaces in data file pathnames (create bugs at chain training stage) 
- 
 """
 
 
@@ -122,14 +119,12 @@ def parse_data(split_filename):
                         continue
                     # Ignore if to many black-listed words in sentence
                     if bl_score > 0.2:
-                        #correction, _ = get_correction(sentence)
-                        #print(f"rejected ({bl_score}): {correction}")
-                        print("rejected", sentence)
+                        #print("rejected", sentence)
                         continue
                     
                     # Ignore of sentence is too short
                     if cleaned.count(' ') < SENTENCE_MIN_WORDS - 1:
-                        print("corpus skip:", cleaned)
+                        #print("corpus skip:", cleaned)
                         continue
                     
                     corpus.add(cleaned)
@@ -198,6 +193,10 @@ if __name__ == "__main__":
         rep = sys.argv[1]
         for filename in os.listdir(rep):
             filename = os.path.join(rep, filename)
+            if ' ' in filename:
+                print("ERROR: whitespaces in path", filename)
+                sys.exit(1)
+            
             if os.path.isdir(filename):
                 wavscp_data, text_data, segments_data, utt2spk_data = parse_rep(filename)
                 wavscp.extend(wavscp_data)
@@ -234,7 +233,7 @@ if __name__ == "__main__":
                                 pass
                             elif word.lower() in capitalized:
                                 pass
-                            elif is_acronym(word) and word in acronyms:
+                            elif is_acronym(word.upper()) and word.upper() in acronyms:
                                 pass
                             else:
                                 regular_words.add(word)
@@ -291,14 +290,16 @@ if __name__ == "__main__":
     lexicon_path = os.path.join(dict_dir, 'lexicon.txt')
     if os.path.exists(lexicon_path):
         print('lexicon.txt file already exists')
-        old_lexicon = set()
-        with open(lexicon_path, 'r') as f:
-            for l in f.readlines()[3:]:
-                old_lexicon.add(l.split()[0])
-        with open(lexicon_path, 'a') as f:
-            for w in sorted(regular_words):
-                if not w in old_lexicon:
-                    f.write(f"{w} {' '.join(word2phonetic(w))}\n")
+        print('Skipping...')
+        
+        #old_lexicon = set()
+        #with open(lexicon_path, 'r') as f:
+        #    for l in f.readlines()[3:]:
+        #        old_lexicon.add(l.split()[0])
+        #with open(lexicon_path, 'a') as f:
+        #    for w in sorted(regular_words):
+        #        if not w in old_lexicon:
+        #            f.write(f"{w} {' '.join(word2phonetic(w))}\n")
     else:    
         print(f"building file {lexicon_path}")
         lexicon = []

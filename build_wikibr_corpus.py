@@ -130,6 +130,10 @@ if __name__ == "__main__":
                 if len(words) <= 3:
                     continue
                 
+                # Filter out sentences with only single letters or short words (ex: "v i v i a n a v i v i a n a")
+                if len(sentence)/len(words) < 2.0:
+                    continue
+                
                 first_word = True
                 sant = False
                 for w in words:

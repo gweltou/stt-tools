@@ -129,8 +129,9 @@ w2f = {
     'rr'    :   'R',
     's'     :   'S',
     't'     :   'T',
-    'û'     :   'U',        # Ûioù (kerneveg)
     'u'     :   'U',        # tUd
+    'û'     :   'U',        # Ûioù (kerneveg)
+    'ü'     :   'U',        # emrOÜs
     'uñ'    :   'UN',       # pUÑs
     '.un.'  :   'OE N',     # UN dra
     '.ul.'  :   'OE L',     # UL labous
@@ -289,7 +290,7 @@ def get_acronyms_dict():
         Acronyms are stored in UPPERCASE in dictionary
     """
     acronyms = dict()
-    for l in "BDFGHIJKLMPQRSTUVWXZ":
+    for l in "BCDFGHIJKLMPQRSTUVWXZ":
         acronyms[l] = [acr2f[l]]
     
     if os.path.exists(ACRONYM_PATH):
@@ -319,6 +320,9 @@ def filter_out(text, symbols):
 
 
 def is_acronym(word):
+    if len(word) == 1 and word in "BCDFGHIJKLPQRSTVXYZ":
+        return True
+
     if len(word) < 2:
         return False
     valid = False
@@ -372,7 +376,7 @@ def get_cleaned_sentence(sentence, rm_bl=False, rm_verbal_ticks=False):
         # Ignore black listed words
         if token.startswith('*'):
             if not rm_bl:
-                tokens.append(token[1:])
+                tokens.append(token)
             num_blacklisted += 1
         elif rm_verbal_ticks and lowered_token in verbal_tics:
             pass

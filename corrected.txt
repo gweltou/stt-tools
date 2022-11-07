@@ -203,6 +203,8 @@ cl	santilitr
 ml	mililitr
 cm	santimetr
 km	kilometr
+kant g	kant gramm
+c'hant g	c'hant gramm
 
 II	daou
 III	tri
