@@ -7,15 +7,17 @@ diàr	diwar
 
 
 # Unvaniañ
-yaouankik	yaouankig
+#yaouankik	yaouankig
 kantvet	kantved
 hanterkantved	hanterkantvet
 ugentved	ugentvet
 ty	ti
-moutik	moutig
+#moutik	moutig
 stokholm	Stockholm
 anezhe	anezho
 hirie	hiriv
+hiziv	hiriv
+plastek	plastik
 goût	gouzout
 evid	evit
 
@@ -24,6 +26,7 @@ evid	evit
 office	ofis
 musique	muzik
 télégramme	telegram
+saint	sant
 
 
 # Fazioù Common voice
@@ -160,7 +163,7 @@ araok	a-raok
 marmoused	marmouzed
 diagnostics	diagnostiks
 marc'hatmatoc'h	marc'hadmatoc'h
-chigago	chicago
+chigago	Chicago
 toud	tout
 siezhvet	seizhvet
 c'homlec'h	chomlec'h
@@ -178,6 +181,7 @@ laret	lâret
 brezoneg	brezhoneg
 vousc'hoarz	vousc'hoarzh
 vousc'hoarzin	vousc'hoarzhin
+ d' ar 	 d'ar 
 
 arru	erru
 be'h	bec'h
@@ -203,8 +207,8 @@ cl	santilitr
 ml	mililitr
 cm	santimetr
 km	kilometr
-kant g	kant gramm
-c'hant g	c'hant gramm
+kant g 	kant gramm 
+c'hant g 	c'hant gramm 
 
 II	daou
 III	tri
@@ -342,4 +346,5 @@ XXvet	ugentvet
 2020	daou vil ugent
 2021	daou vil un warn ugent
 2022	daou vil daou warn ugent
+2023	daou vil tri warn ugent
 2024	daou vil pevar warn ugent

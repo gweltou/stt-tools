@@ -10,9 +10,6 @@ After read-proofing every text file in dataset, run ``rename_speakers.py`` to ad
 - Male speakers:	2 h 52'20''	67%
 - Female speakers:	1 h 25'53''	33%
 
-## Notes
-
-B13 has no text file (only sound)
 
 ## Da wiriekañ
 

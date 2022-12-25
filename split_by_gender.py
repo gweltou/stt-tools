@@ -18,7 +18,7 @@ from math import floor, ceil
 #gender = 'f'
 output_dir = "gender_splitted"
 
-MAKE_GLOBAL_AUDIO_AND_TEXT_FILE = False
+MAKE_GLOBAL_AUDIO_AND_TEXT_FILE = True
 
 
 

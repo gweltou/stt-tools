@@ -150,6 +150,8 @@ Caroline K A R O L I N
 Casterman K A S T EH R M A N
 Celsius	S EH L S I U S
 C'hallaoued
+C'hanada
+Chann CH AN N
 Charleston CH A R L E S T OH N
 Charlez
 Charlie CH A R L I
@@ -375,6 +377,8 @@ Iwan
 Iwerzhon
 Iwerzhoniz
 Iwi
+Izabel
+Izelvroioù
 Izold
 Jack D J A K
 Jakez
@@ -442,6 +446,7 @@ Kerne
 Kerouac K E R OU A K
 Kervella
 Kerzu
+Kiev
 Kipling
 Kleopatra
 Klet
@@ -484,6 +489,7 @@ Lanniliz
 Lanninon
 Lanniron
 Lannuon
+Laorañs
 Laponia
 Larruen
 Larvol
@@ -751,8 +757,11 @@ Roma
 Romaned
 Ronan
 Ropars
+Rosette R O Z EH T
 Rosetta R O Z E T A
+Rosko
 Rostren
+Rumengol R U M EN G OH L
 Rusia
 Sadorn
 Saint S EN
@@ -789,6 +798,7 @@ Skosiz
 Skrigneg
 Skrigneg S K R I GN A K
 Smith S M I S
+Soaz
 Soudan
 Spagn
 Spotify	S P O T I F A I
@@ -938,5 +948,6 @@ Yuna
 Yves I V
 Yvette I V EH T
 Zavier Z A V I E
+Zeland
 Zola
 Zoue

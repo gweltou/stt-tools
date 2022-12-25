@@ -37,6 +37,7 @@ LEXICON_ADD_PATH = os.path.join(ROOT, "lexicon_add.txt")
 LEXICON_REPLACE_PATH = os.path.join(ROOT, "lexicon_replace.txt")
 
 SPEAKER_ID_PATTERN = re.compile(r'{([-\w]+):*([mf])*}')
+METADATA_PATTERN = re.compile(r'{(.+?)}')
 
 
 verbal_tics = {
@@ -58,8 +59,8 @@ verbal_tics = {
 }
 
 
-#punctuation = (',', '.', ';', '?', '!', ':', '«', '»', '"', '”', '“', '(', ')', '…', '–', '‚')
-punctuation = ',.;?!:«»"”“()…–‚'
+
+punctuation = ',.;?!:«»"”“()…–‚{}[]'
 
 valid_chars = "aâbcdeêfghijklmnñoprstuüùûvwyz'- "
 
@@ -512,11 +513,11 @@ def extract_acronyms_from_file(text_filename):
             
             l, _ = get_cleaned_sentence(l)
             
-            speaker_id_match = SPEAKER_ID_PATTERN.search(l)
-            if speaker_id_match:
-                #current_speaker = speaker_id_match[1]
-                start, end = speaker_id_match.span()
+            # Remove metadata
+            for match in METADATA_PATTERN.finditer(l):
+                start, end = match.span()
                 l = l[:start] + l[end:]
+            
             l = l.strip()
             if not l:   # In case the speaker pattern is the only text on the line
                 continue
@@ -575,9 +576,11 @@ def play_with_ffplay(seg, speed=1.0):
     with NamedTemporaryFile("w+b", suffix=".wav") as f:
         seg.export(f.name, "wav")
         player = get_player_name()
-        subprocess.call(
-            [player, "-nodisp", "-autoexit", "-loglevel", "quiet", "-af", f"atempo={speed}", f.name]
+        p = subprocess.Popen(
+            [player, "-nodisp", "-autoexit", "-loglevel", "quiet", "-af", f"atempo={speed}", f.name],
         )
+        print(p)
+        p.wait()
 
 
 

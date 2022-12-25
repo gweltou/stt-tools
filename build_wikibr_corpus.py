@@ -30,6 +30,7 @@ VOCAB_SIZE = 10000
 
 dumps_dir = os.path.join("wikipedia_corpus", "dumps")
 
+KEMADUR_PATTERN = re.compile(r" (g|b|d|w|v|c'h){1}/[a-zñ']{3,}" ,re.IGNORECASE)
 
 PARENTHESIS_PATTERN = re.compile(r"\([^\(]+\)")
 

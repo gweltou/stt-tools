@@ -24,9 +24,16 @@ Acronyms should be written in capital letters without dots or dashes \
 Regional forms should be kept if their pronouciation isn't too far from the "standard" form (according to personnal taste or political views...) \
 (E.g. "meump bet/on eus bet", "nege/an hini eo", "lâret/lavaret")
 
-### Usage of the '*' marker
 
-In the transcription files, a `*` can be added if front of words you want remove from the corpus and the lexicon (foreign words, repetitions...). The market words will still be used for training the acoustic model.
+## Data format
+
+Each piece of data is made of 3 files : a wave file (16b, 16 KHz sample rate), a split file and a text file containing the transcription.
+
+In the transcription files empty lines and lines starting with the character `#` should be ignored. Line comments can thus be embedded in the transcription files by using the `#` character.
+
+Inline metadata can also by found anywhere between the characters `{` and `}` and should be removed before the training process.
+
+The `*` character can be added if front of words you want remove from the corpus and the lexicon (foreign words, repetitions...). Marked words will still be used for training the acoustic model.
  
 ## Workflow
 

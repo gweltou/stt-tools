@@ -2,27 +2,23 @@
 
 spk2gender.txt
 notes.txt
+.wavsplitGui.py
 
 __pycache__/
 venv-hunspell/
 data/
-test_set/
-various/
 todo/
 training_data/
 
-common_voice/cv-corpus*
-common_voice/train
-common_voice/test
+aligned/
+corpus/
 
-dizale/
+corpus_common_voice/cv-corpus*
+corpus_common_voice/train
+corpus_common_voice/test
 
-rkb/
-
-sae/b*/
-sae/xxx*/
-sae/*.zip
-
-dastum/
+corpus_sae/*.zip
 
 wikipedia_corpus/
+
+test_set/

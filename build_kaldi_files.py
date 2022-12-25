@@ -18,7 +18,7 @@ from math import floor, ceil
 from libMySTT import *
 
 
-BUILD_ML_CORPUS = True
+BUILD_LM_CORPUS = False
 ADD_EXTERNAL_CORPUS_TO_ML = 'corpus/wiki_corpus_big.txt'     # Add a corpus from wikipedia
 
 SENTENCE_MIN_WORDS = 3
@@ -70,8 +70,10 @@ def parse_data(split_filename):
             if not l or l.startswith('#'):
                 continue
             
-            # Extract speaker id
+            # Extract speaker id and other metadata
+            metadata_match = METADATA_PATTERN.finditer(l)
             speaker_id_match = SPEAKER_ID_PATTERN.search(l)
+            
             if speaker_id_match:
                 speaker_id = speaker_id_match[1].lower()
                 speaker_gen = speaker_id_match[2]
@@ -87,9 +89,10 @@ def parse_data(split_filename):
                         speakers_gender[speaker_id] = speaker_gen.lower()
                 
                 speakers.add(speaker_id)
-                start, end = speaker_id_match.span()
+                
+            for match in metadata_match:
+                start, end = match.span()
                 l = l[:start] + l[end:]
-                l = l.strip()
             
             cleaned, _ = get_cleaned_sentence(l)     
             if cleaned:
@@ -122,7 +125,7 @@ def parse_data(split_filename):
                         #print("rejected", sentence)
                         continue
                     
-                    # Ignore of sentence is too short
+                    # Ignore if sentence is too short
                     if cleaned.count(' ') < SENTENCE_MIN_WORDS - 1:
                         #print("corpus skip:", cleaned)
                         continue
@@ -222,7 +225,7 @@ if __name__ == "__main__":
         os.mkdir(os.path.join('data', 'local'))
         
         # External text corpus will be added now
-        if BUILD_ML_CORPUS and ADD_EXTERNAL_CORPUS_TO_ML and os.path.exists(ADD_EXTERNAL_CORPUS_TO_ML):
+        if BUILD_LM_CORPUS and ADD_EXTERNAL_CORPUS_TO_ML and os.path.exists(ADD_EXTERNAL_CORPUS_TO_ML):
             print("parsing and copying external corpus")
             with open('data/local/corpus.txt', 'w') as fw:
                 with open(ADD_EXTERNAL_CORPUS_TO_ML, 'r') as fr:
@@ -340,7 +343,7 @@ if __name__ == "__main__":
         f.write('SIL\n')
     
     # Copy text corpus
-    if BUILD_ML_CORPUS:
+    if BUILD_LM_CORPUS:
         with open('data/local/corpus.txt', 'a') as f_out:
             for l in corpus:
                 f_out.write(f"{l}\n")
