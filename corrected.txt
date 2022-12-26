@@ -299,6 +299,7 @@ XXvet	ugentvet
 1920	mil nav c'hant ugent
 1930	mil nav c'hant tregont
 1932	mil nav c'hant daou ha tregont
+1935	mil nav c'hant pemp ha tregont
 1936	mil nav c'hant c'hwec'h ha tregont
 1940	mil nav c'hant daou ugent
 1943	mil nav c'hant tri ha daou ugent

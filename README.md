@@ -29,7 +29,9 @@ Regional forms should be kept if their pronouciation isn't too far from the "sta
 
 Each piece of data is made of 3 files : a wave file (16b, 16 KHz sample rate), a split file and a text file containing the transcription.
 
-In the transcription files empty lines and lines starting with the character `#` should be ignored. Line comments can thus be embedded in the transcription files by using the `#` character.
+In the transcription files, empty lines and lines starting with the character `#` should be ignored. Line comments can thus be embedded in the transcription files by using the `#` character.
+
+The first line of split files can include a header with the arguments given to `wavsplit`. The header line must start with the character `#`.
 
 Inline metadata can also by found anywhere between the characters `{` and `}` and should be removed before the training process.
 

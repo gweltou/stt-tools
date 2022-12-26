@@ -13,7 +13,6 @@
     Dependencies:
         * pydub
         * simpleaudio
-        * librosa
         * pyrubberband
 """
 
@@ -28,7 +27,7 @@ from pydub import AudioSegment
 from pydub.silence import detect_nonsilent
 from pydub.playback import _play_with_simpleaudio
 from pyrubberband import time_stretch
-import librosa
+#import librosa
 from libMySTT import *
 
 
@@ -37,9 +36,10 @@ SPLIT_PATTERN = re.compile(r"c([0-9\.]+)")
 
 
 play_process = None
-
-
 vosk_loaded = False
+
+
+
 def load_vosk():
     from vosk import Model, KaldiRecognizer, SetLogLevel
     SetLogLevel(-1)
@@ -74,9 +74,11 @@ def play_segment_text(idx, song, segments, text, speed):
 
 
 
-def save_segments(segments, filename):
+def save_segments(segments, header, filename):
     with open(filename, 'w') as f:
-        for i, s in enumerate(segments):
+        if header:
+            f.write(header + '\n')
+        for _, s in enumerate(segments):
             start = int(s[0])
             stop =  int(s[1])
             f.write(f"{start} {stop}\n")
@@ -124,6 +126,7 @@ if __name__ == "__main__":
     PLAYER = get_player_name()
     
     rep, filename = os.path.split(os.path.abspath(args.filename))
+    # Removing special characters from filename
     recording_id = filename.split(os.path.extsep)[0]
     recording_id = recording_id.replace('&', '_')
     recording_id = recording_id.replace(' ', '_')
@@ -143,22 +146,35 @@ if __name__ == "__main__":
     textfile_mtime = os.path.getmtime(text_filename)
     
     fileinfo = get_audiofile_info(sys.argv[1])
-    # Convert to 16kHz mono wav if needed
+    # Converting sound file to 16kHz mono wav if needed
     if fileinfo["channels"] != 1 or fileinfo["sample_rate"] != "16000" or fileinfo["bits_per_sample"] != 16:
-        #print(f"converting {sys.argv[1]}...")
-        convert_to_wav(sys.argv[1], wav_filename);
-        print("conversion done")
+        src = sys.argv[1]
+        if os.path.samefile(src, wav_filename):
+            rep, filename = os.path.split(src)
+            basename, ext = os.path.splitext(filename)
+            new_name = basename + "_orig" + ext
+            new_src = os.path.join(rep, new_name)
+            print(f"WARNING: renaming {filename} to {new_name}")
+            os.rename(src, new_src)
+            src = new_src
+        ret = convert_to_wav(src, wav_filename)
+        if ret == -1:
+            print("Could not convert audio file")
+            sys.exit(1)
+        else:
+            print("Conversion done")
     
     song = AudioSegment.from_wav(wav_filename)
     
     segments = []
+    header = ""
     if os.path.exists(split_filename) and not args.overwrite:
         print("split file exists")
-        segments = load_segments(split_filename)
+        segments, header = load_segments(split_filename)
     else:
         print("spliting wave file")
-        y, sr = librosa.load(wav_filename)
-        print("file loaded")
+        #y, sr = librosa.load(wav_filename)
+        #print("file loaded")
         #silence_min_len = 400
         # We need to forward a bit after stop
         # Librosa.effects.split returns start and stop in samples number
@@ -175,7 +191,8 @@ if __name__ == "__main__":
             for i in range(1, len(segments)-1):
                 segments[i] = (segments[i][0] - args.dur, segments[i][1] + args.dur)
         
-        save_segments(segments, split_filename)
+        header = f"# -t {args.thresh} -d {args.dur}"
+        save_segments(segments, header, split_filename)
     
     
     short_utterances = []
@@ -221,6 +238,11 @@ if __name__ == "__main__":
             segments = segments[:idx] + [(start, ceil(cut)), (floor(cut), stop)] + segments[idx+1:]
             modified = True
             print(f"Segment split at {pc}% of its length")
+        elif x == 'cc': # Automatic split
+            segments_undo = segments[:]
+            seg = song[segments[idx][0]:segments[idx][1]]
+            print(header)
+            #subsegments = detect_nonsilent(seg, min_silence_len=args.dur, silence_thresh=args.thresh)
         elif x.isnumeric():
             idx = (int(x)-1) % len(segments)
             play_segment_text(idx, song, segments, text, speed)
@@ -296,7 +318,7 @@ if __name__ == "__main__":
             segments = segments_undo
             modified = True
         elif x == 's':  # Save split data to disk
-            save_segments(segments, split_filename) 
+            save_segments(segments, header, split_filename) 
             modified = False
         elif x == 'h' or x == '?':  # Help
             print("'h' or '?'\tShow this help")

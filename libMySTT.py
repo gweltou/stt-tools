@@ -258,7 +258,7 @@ def get_corrected_dict():
             if ' ' in k:
                 corrected_sentences[k] = v
             else:
-                corrected[k.lower()] = v
+                corrected[k] = v
     return corrected, corrected_sentences
 
 corrected, corrected_sentences = get_corrected_dict()
@@ -360,7 +360,7 @@ def tokenize(sentence):
 def get_cleaned_sentence(sentence, rm_bl=False, rm_verbal_ticks=False):
     """
         Return a cleaned sentence, proper to put in text files or corpus
-               and a quality score (ratio of black-listed words, the lower the better)
+        and a quality score (ratio of black-listed words, the lower the better)
     """
     if not sentence:
         return '', 0
@@ -383,6 +383,8 @@ def get_cleaned_sentence(sentence, rm_bl=False, rm_verbal_ticks=False):
             pass
         elif lowered_token in corrected:
             tokens.append(corrected[lowered_token])
+        elif token in corrected:
+            tokens.append(corrected[token])
         elif lowered_token in capitalized:
             tokens.append(token.capitalize())
         elif is_acronym(token):
@@ -394,6 +396,26 @@ def get_cleaned_sentence(sentence, rm_bl=False, rm_verbal_ticks=False):
     if not tokens:
         return '', 1
     return ' '.join(tokens), float(num_blacklisted)/len(tokens)
+
+
+
+def test_get_cleaned_sentence():
+    sentences = [
+        "ar bloavezh 1935 a zo en XXvet kantved",
+        "o gwelet Charlez VI e vi warc'hoazh",
+        "Oh ve ket {?} oh den yaouank amañ ne vi ket lojet, {?} noz an eured",
+        ]
+    expected = [
+        "ar bloavezh mil nav c'hant pemp ha tregont a zo en ugentvet kantved",
+        "o gwelet Charlez c'hwec'h e vi warc'hoazh",
+        "",
+        ]
+    
+    for s in sentences:
+        cleaned, _ = get_cleaned_sentence(s)
+        correction, _ = get_correction(s)
+        print(cleaned)
+        print(correction)
 
 
 
@@ -424,6 +446,8 @@ def get_correction(sentence):
             tokens.append(Fore.YELLOW + token + Fore.RESET)
         elif lowered_token in corrected:
             tokens.append(Fore.GREEN + corrected[lowered_token] + Fore.RESET)
+        elif token in corrected:
+            tokens.append(Fore.GREEN + corrected[token] + Fore.RESET)
         elif token.isdigit():
             spell_error = True
             tokens.append(Fore.RED + token + Fore.RESET)
@@ -537,15 +561,21 @@ def extract_acronyms_from_file(text_filename):
 
 def load_segments(filename):
     segments = []
+    header = ""
+    first = True
     with open(filename, 'r') as f:
         for l in f.readlines():
             l = l.strip()
             if l:
-                t = l.split()
-                start = int(t[0])
-                stop = int(t[1])
-                segments.append((start, stop))
-    return segments
+                if first and l.startswith('#'):
+                    header = l
+                else:
+                    t = l.split()
+                    start = int(t[0])
+                    stop = int(t[1])
+                    segments.append((start, stop))
+                first = False
+    return segments, header
 
 
 
@@ -591,6 +621,9 @@ def convert_to_wav(src, dst, verbose=True):
     """
     if verbose:
         print(f"converting {src} to {dst}...")
+    if os.path.abspath(src) == os.path.abspath(dst):
+        print("ERROR: source and destination are the same, skipping")
+        return -1
     rep, filename = os.path.split(dst)
     dst = os.path.join(rep, filename)
     subprocess.call(['ffmpeg', '-v', 'panic',
