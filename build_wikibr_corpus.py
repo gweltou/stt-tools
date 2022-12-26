@@ -20,87 +20,17 @@ import os
 import json
 import re
 from colorama import Fore
-from libMySTT import filter_out, punctuation, valid_chars, hs_dict, capitalized, is_acronym, acronyms, get_cleaned_sentence, get_correction
+from libMySTT import split_line, filter_out, punctuation, capitalized, is_acronym, acronyms, get_correction, get_cleaned_sentence
+
 
 
 LIMIT_VOCAB = False
 VOCAB_SIZE = 10000
 
 
-
 dumps_dir = os.path.join("wikipedia_corpus", "dumps")
 
 KEMADUR_PATTERN = re.compile(r" (g|b|d|w|v|c'h){1}/[a-zñ']{3,}" ,re.IGNORECASE)
-
-PARENTHESIS_PATTERN = re.compile(r"\([^\(]+\)")
-
-def extract_parenthesis(sentence):
-    # Extract text between parenthesis
-    in_parenthesis = []
-    match = PARENTHESIS_PATTERN.search(sentence)
-    while match:
-        start, end = match.span()
-        sentence = sentence[:start] + sentence[end:]
-        in_parenthesis.append(match.group())
-        match = PARENTHESIS_PATTERN.search(sentence)
-        
-    return [sentence] + in_parenthesis
-
-
-
-def _split_line(s, splitter = '. '):
-    length = len(splitter)
-    if splitter in s:
-        i = s.index(splitter)
-        if len(s) > i + length and \
-           (s[i+length].isupper() or not s[i+length].isalnum()) and \
-           i > length and \
-           s[i-length] != ' ':          
-            # Ignore last occurence
-            # Next letter must be upper case
-            # Ignore if at begining of sentence
-            # Previous word must not be a single letter (filter out acronyms)
-            return [s[:i]] + _split_line(s[i+2:], splitter)
-    return [s]
-
-
-
-def split_line(sentence):
-    sub = extract_parenthesis(sentence)
-    splitters = ['. ', ': ', '! ', '? ', ';']
-    
-    for splitter in splitters:
-        new_sub = []
-        for s in sub:
-            new_sub.extend(_split_line(s, splitter))
-        sub = new_sub
-    
-    # filter out sub-sentences shorter than 2 tokens
-    return [s for s in sub if len(s.split()) > 2]
-
-
-
-def test_split_lines():
-    sentences = [
-        "Un tan-gwall a voe d'ar 1añ a viz Gouhere 2011 el leti. Ne voe den ebet gloazet pe lazhet. Un nebeud estajoù nemetken a oa bet tizhet.",
-        "E 1938 e voe he gwaz harzet ha lazhet en U. R. S. S., ar pezh na viras ket ouzh Ana Pauker a chom feal d'ar gomunouriezh, d'an U. R. S. S. ha da Jozef Stalin.",
-        "Ur maen-koun zo war lein, da bevar barzh eus ar vro : T. Hughes Jones, B.T. Hopkins, J. M. Edwards hag Edward Prosser Rhys.",
-        """C'hoariet en deus evit Stade Rennais Football Club etre 1973 ha 1977 hag e 1978-1979. Unan eus ar c'hoarierien wellañ bet gwelet e klub Roazhon e oa. Pelé en deus lavaret diwar e benn : « "Kavet 'm eus an hini a dapo ma flas. Laurent Pokou e anv." ».""",
-        """Hervez Levr ar C'heneliezh ec'h eo Yafet eil mab Noah. Hervez ar Bibl e tiskouezas doujañs e-kenver e dad mezv-dall. Benniget e voe gantañ evel Shem : "Frankiz ra roio Doue da Yafet ! Ha ra chomo e tinelloù Shem !" """,
-        "Tout an dud en em soñj. Piv int ar skrivagnerien-se ? Eus pelec'h emaint o tont... ?",
-        ]
-    lengths = [3, 1, 2, 5, 5, 3]
-    for i, s in enumerate(sentences):
-        splits = split_line(s)
-        print(s)
-        print(len(splits))
-        if len(splits) == lengths[i]:
-            print(Fore.GREEN + "OK" + Fore.RESET)
-        else :
-            print(splits)
-            print(Fore.RED + "FAIL" + Fore.RESET)
-        print()
-
 
 
 
