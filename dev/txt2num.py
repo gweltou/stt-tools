@@ -70,11 +70,8 @@ def build_bigrams(filename):
                 continue
             sentences = split_line(line)
             for sentence in sentences:
-                sentence = pre_process(sentence)
-                sentence = filter_out(sentence, punctuation+'*')
-                print(sentence)
-                #print(tokenize(sentence))
-            print()
+                tokens = tokenize(sentence)
+                print(' '.join(tokens))
 
 
 

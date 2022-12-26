@@ -312,49 +312,35 @@ acronyms = get_acronyms_dict()
 
 
 
+
+
+################################################################################
+################################################################################
+##
+##                         TEXT PROCESSING FUNCTIONS
+##
+################################################################################
+################################################################################
+
+
 def filter_out(text, symbols):
     new_text = ""
     for l in text:
         if not l in symbols: new_text += l
-    return ' '.join(new_text.split()) # Prevent multi spaces
-
-
-
-def is_acronym(word):
-    if len(word) == 1 and word in "BCDFGHIJKLPQRSTVXYZ":
-        return True
-
-    if len(word) < 2:
-        return False
-    valid = False
-    for l in word:
-        if l in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
-            valid = True
-            continue
-        if l not in "-0123456789":
-            return False
-    return valid
+    return new_text
 
 
 
 def pre_process(sentence):
-    """ Substitude parts of the sentence
-        according to 'corrected_sentences' dictionary
+    """ Substitude parts of the sentence according to 'corrected_sentences' dictionary
+        Clean punctuation
     """
     lowered_sentence = sentence.lower()
     for mistake in corrected_sentences.keys():
         if mistake in sentence or mistake in lowered_sentence:
              # Won't work if mistake is capitalized in original sentence
             sentence = sentence.replace(mistake, corrected_sentences[mistake])
-    return sentence
-
-
-
-def tokenize(sentence):
-    """ Return a list of token from a sentence (str)
-        The special character '*' will be kept
-    """
-
+    
     sentence = filter_out(sentence, punctuation)
     sentence = sentence.replace('‘', "'")
     sentence = sentence.replace('’', "'")
@@ -362,6 +348,18 @@ def tokenize(sentence):
     sentence = sentence.replace('-', ' ')   # Split words like "sav-heol"
     sentence = sentence.replace('/', ' ')
     sentence = sentence.replace('|', ' ')
+
+    return sentence
+
+
+
+def tokenize(sentence, post_proc=True):
+    """ Return a list of token from a sentence (str)
+        The special character '*' will be kept
+    """
+
+    sentence = pre_process(sentence)
+
     tokens = []
     for t in sentence.split():
         if t.startswith("'"):
@@ -370,12 +368,26 @@ def tokenize(sentence):
             tokens.append(t[:-1])
         else:
             tokens.append(t) 
+    
+    if post_proc:
+        new_tokens = []
+        for t in tokens:
+            lowered = t.lower()
+            if lowered in corrected:
+                new_tokens.append(corrected[lowered])
+            elif t in corrected:
+                new_tokens.append(corrected[t])
+            elif lowered in capitalized:
+                new_tokens.append(t.capitalize())
+            else:
+                new_tokens.append(lowered)
+        tokens = new_tokens
+
     return tokens
 
 
 
 PARENTHESIS_PATTERN = re.compile(r"\([^\(]+\)")
-
 def extract_parenthesis(sentence):
     """ Extract text between parenthesis """
     in_parenthesis = []
@@ -395,24 +407,25 @@ def _split_line(s, splitter = '. '):
     if splitter in s:
         i = s.index(splitter)
         if len(s) > i + length and \
-           (s[i+length].isupper() or not s[i+length].isalnum()) and \
-           i > length and \
-           s[i-length] != ' ':          
-            # Ignore last occurence
-            # Next letter must be upper case
-            # Ignore if at begining of sentence
-            # Previous word must not be a single letter (filter out acronyms)
-            return [s[:i]] + _split_line(s[i+2:], splitter)
+            i > length and \
+            s[i-length] != ' ':          
+            #(s[i+length].isupper() or not s[i+length].isalnum()) and \
+                # Ignore last occurence
+                # Next letter must be upper case
+                # Ignore if at begining of sentence
+                # Previous word must not be a single letter (to filter out acronyms)
+                return [s[:i+length]] + _split_line(s[i+2:], splitter)
     return [s]
 
 
 
 def split_line(sentence):
     """ Split line according to punctuation
+        Keep punctuation
         Return a list of sentence
     """
     sub = extract_parenthesis(sentence)
-    splitters = ['. ', ': ', '! ', '? ', ';']
+    splitters = ['. ', ': ', '! ', '? ', '; ']
     
     for splitter in splitters:
         new_sub = []
@@ -421,7 +434,8 @@ def split_line(sentence):
         sub = new_sub
     
     # filter out sub-sentences shorter than 2 tokens
-    return [s for s in sub if len(s.split()) > 2]
+    return [s for s in sub if len(s.split()) > 1]
+    #return sub
 
 
 def test_split_lines():
@@ -432,8 +446,10 @@ def test_split_lines():
         """C'hoariet en deus evit Stade Rennais Football Club etre 1973 ha 1977 hag e 1978-1979. Unan eus ar c'hoarierien wellañ bet gwelet e klub Roazhon e oa. Pelé en deus lavaret diwar e benn : « "Kavet 'm eus an hini a dapo ma flas. Laurent Pokou e anv." ».""",
         """Hervez Levr ar C'heneliezh ec'h eo Yafet eil mab Noah. Hervez ar Bibl e tiskouezas doujañs e-kenver e dad mezv-dall. Benniget e voe gantañ evel Shem : "Frankiz ra roio Doue da Yafet ! Ha ra chomo e tinelloù Shem !" """,
         "Tout an dud en em soñj. Piv int ar skrivagnerien-se ? Eus pelec'h emaint o tont... ?",
+        "Tamm ebet. Klasket em boa e-pad 5 miz ha n’on ket bet plijet ; un afer a bublik eo.",
+        "unan daou tri : pevar pemp c'hwec'h",
         ]
-    lengths = [3, 1, 2, 5, 5, 3]
+    lengths = [3, 1, 2, 5, 5, 3, 3, 2]
     for i, s in enumerate(sentences):
         splits = split_line(s)
         print(s)
@@ -455,7 +471,7 @@ def get_cleaned_sentence(sentence, rm_bl=False, rm_verbal_ticks=False):
     if not sentence:
         return '', 0
     
-    sentence = pre_process(sentence)
+    #sentence = pre_process(sentence)
     
     tokens = []
     num_blacklisted = 0
@@ -516,7 +532,7 @@ def get_correction(sentence):
     if not sentence:
         return ''
     
-    sentence = pre_process(sentence)
+    #sentence = pre_process(sentence)
     
     num_errors = 0
     tokens = []
@@ -556,6 +572,23 @@ def get_correction(sentence):
             num_errors += 1
         
     return ' '.join(tokens), num_errors
+
+
+
+def is_acronym(word):
+    if len(word) == 1 and word in "BCDFGHIJKLPQRSTVXYZ":
+        return True
+
+    if len(word) < 2:
+        return False
+    valid = False
+    for l in word:
+        if l in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+            valid = True
+            continue
+        if l not in "-0123456789":
+            return False
+    return valid
 
 
 
@@ -641,6 +674,17 @@ def extract_acronyms_from_file(text_filename):
     
     return extracted_acronyms
 
+
+
+
+
+################################################################################
+################################################################################
+##
+##                PYDUB AUDIO SEGMENT MANIPULATION FUNCTIONS
+##
+################################################################################
+################################################################################
 
 
 def load_segments(filename):
