@@ -207,6 +207,7 @@ cl	santilitr
 ml	mililitr
 cm	santimetr
 km	kilometr
+kg	kilogramm
 kant g 	kant gramm 
 c'hant g 	c'hant gramm 
 

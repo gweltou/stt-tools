@@ -247,10 +247,7 @@ if __name__ == "__main__":
             idx = (int(x)-1) % len(segments)
             play_segment_text(idx, song, segments, text, speed)
         elif x == '.' or x == 'r':
-            if play_process and play_process.is_playing():
-                play_process.stop()
-            else:
-                play_segment_text(max(0, idx), song, segments, text, speed)
+            play_segment_text(max(0, idx), song, segments, text, speed)
         elif x == '+' or x == 'n':
             idx = (idx+1) % len(segments)
             play_segment_text(idx, song, segments, text, speed)
@@ -273,11 +270,12 @@ if __name__ == "__main__":
             print("speed=", speed)
         elif x == 'd':  # Delete segment
             segments_undo = segments[:]
+            if play_process and play_process.is_playing():
+                play_process.stop()
             del segments[idx]
             idx = max(0, idx-1)
             modified = True
             print("segment deleted")
-            #play_segment_text(idx, song, segments, text, speed)
         elif x == 'j' and idx > 0:  # Join this segment with previous segment
             segments_undo = segments[:]
             start = segments[idx-1][0]
