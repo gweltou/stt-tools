@@ -2,6 +2,9 @@ import sys
 sys.path.append("..")
 from libMySTT import split_line, pre_process, tokenize, filter_out, punctuation
 from math import inf
+from pprint import pprint
+
+from mkchain import mkchain
 
 
 numerical_tokens = [
@@ -75,6 +78,46 @@ chain = {
     "hanter" :  ["kant"],
     "warn" :    ["ugent"],
 }
+
+
+chain2 = {
+    "un" :      ["ha", "hag", "warn"],
+    "ur" :      ["c'hant", "milion", "miliard"],
+    "unan" :    ["ha", "hag", "warn"],
+    "daou" :    ["ha", "hag", "warn", "ugent", "c'hant", "vil", "vilion", "viliard"],
+    "div" :     ["ha", "hag", "warn"],
+    "tri" :     ["ha", "hag", "warn", "ugent", "c'hant", "mil", "milion", "miliard"],
+    "teir" :    ["ha", "hag", "warn"],
+    "pevar" :   ["ha", "hag", "warn", "ugent", "c'hant", "mil", "milion", "miliard"],
+    "peder" :   ["ha", "hag", "warn"],
+    "pemp" :    ["ha", "hag", "warn", "kant", "mil", "milion", "miliard"],
+    "c'hwec'h": ["ha", "hag", "warn", "kant", "mil", "milion", "miliard"],
+    "seizh" :   ["ha", "hag", "warn", "kant", "mil", "milion", "miliard"],
+    "eizh" :    ["ha", "hag", "warn", "kant", "mil", "milion", "miliard"],
+    "nav" :     ["ha", "hag", "warn", "c'hant", "mil", "milion", "miliard"],
+    "dek" :     ["ha", "mil", "milion", "miliard"],
+    "unnek" :   ["ha", "kant", "mil", "milion", "miliard"],
+    "daouzek" : ["ha", "kant", "mil", "milion", "miliard"],
+    "trizek" :  ["ha", "kant", "mil", "milion", "miliard"],
+    "pevarzek": ["ha", "kant", "mil", "milion", "miliard"],
+    "pemzek" :  ["ha", "kant", "mil", "milion", "miliard"],
+    "c'hwezek": ["ha", "kant", "mil", "milion", "miliard"],
+    "seitek" :  ["ha", "kant", "mil", "milion", "miliard"],
+    "triwec'h": ["ha", "kant", "mil", "milion", "miliard"],
+    "naontek" : ["ha", "kant", "mil", "milion", "miliard"],
+    "ugent" :   ["mil", "milion", "miliard"],
+    "tregont" : ["mil", "milion", "miliard"],
+    "mil" :     ["un", "unan", "daou", "tri", "pevar", "pemp", "c'hwec'h", "seizh", "eizh", "nav", "dek", "unnek", "daouzek", "trizek", "pevarzek", "pemzek", "c'hwezek", "seitek", "triwec'h", "naontek", "ugent", "tregont", "hanter", "miliard"],
+    "vil" :     ["un", "unan", "daou", "tri", "pevar", "pemp", "c'hwec'h", "seizh", "eizh", "nav", "dek", "unnek", "daouzek", "trizek", "pevarzek", "pemzek", "c'hwezek", "seitek", "triwec'h", "naontek", "ugent", "tregont", "hanter", "miliard"],
+    "kant" :    ["un", "unan", "daou", "tri", "pevar", "pemp", "c'hwec'h", "seizh", "eizh", "nav", "dek", "unnek", "daouzek", "trizek", "pevarzek", "pemzek", "c'hwezek", "seitek", "triwec'h", "naontek", "ugent", "tregont", "hanter", "mil", "milion", "miliard"],
+    "c'hant" :  ["un", "unan", "daou", "tri", "pevar", "pemp", "c'hwec'h", "seizh", "eizh", "nav", "dek", "unnek", "daouzek", "trizek", "pevarzek", "pemzek", "c'hwezek", "seitek", "triwec'h", "naontek", "ugent", "tregont", "hanter", "mil", "milion", "miliard"],
+    "ha" :      ["daou", "tri", "pevar", "tregont"],
+    "hag" :     ["hanter"],
+    "hanter" :  ["kant"],
+    "warn" :    ["ugent"],
+}
+
+starters = ["zero", "mann", "un", "ur", "unan", "daou", "div", "tri", "teir", "pevar", "peder", "pemp", "c'hwec'h", "seizh", "eizh", "nav", "dek", "unnek", "daouzek", "trizek", "pevarzek", "pemzek", "c'hwezek", "seitek", "triwec'h", "naontek", "ugent", "tregont", "hanter", "kant", "mil"]
 
 
 
@@ -155,6 +198,52 @@ def translate(sentence):
     return int(solve(tokens))
 
 
+def translate_numbers(sentence):
+    sentence = sentence.replace('-', ' ')
+    tokens = sentence.split()
+
+    ai, bi = 0, 1
+    extracted = []
+    current = []
+    embedded = []
+    while ai < len(tokens):
+        a = tokens[ai]
+        b = tokens[bi]
+        if current:
+            last = current[-1]
+            if a in chain2[last]:
+                if b in chain2[a]:
+                    # Follow
+                    current.append(a)
+                    ai += 1
+                    bi += 1
+                elif b in starters:
+                    # New number
+                    current.append(a)
+                    extracted.append(current)
+                    current = []
+                    ai += 1
+                    bi += 1
+                else:
+                    # Could be an embedded name
+                    pass
+        else:
+            if a in starters:
+                if b in chain2[a]:
+                    # Follow
+                    current.append(a)
+                    ai += 1
+                    bi += 1
+                elif b in starters:
+                    # New number
+                    current.append(a)
+                    extracted.append(current)
+                    current = []
+                    ai += 1
+                    bi += 1
+                else:
+                    # Other word, check for stride
+                    pass
 
 
 def validate_bigram(a, b):
@@ -162,32 +251,19 @@ def validate_bigram(a, b):
     return a in chain and b in chain[a]
 
 
-def parse_tokens(token_list):
-    """
-        [
-            [3, 4, 5],
-            [8, 10, 11]
-        ]
-    """
-    l = len(token_list)
-    i = 0
-    validated = []
-    current = []
-    while i < l:
-        if i + 1 < l:
-            a, b = token_list[i: i+2]
+def analyse(tokens):
+    mapping = []
+    for i in range(len(tokens)):
+        t = tokens[i]
+        if t in ("hag", "ha", "warn"):
+            mapping.append('+')
+        elif i>0 and tokens[i-1] in chain2 and t in chain2[tokens[i-1]]:
+            mapping.append(2)
+        elif t in starters:
+            mapping.append(1)
         else:
-            a = token_list[i]
-            b = '*'
-        if validate_bigram(a, b):
-            current.append(i)
-        elif current:
-            validated.append(current)
-            current = []
-        i += 1
-    if current:
-        validated.append(current)
-    return validated
+            mapping.append(0)
+    return mapping
 
 
 
@@ -205,7 +281,6 @@ def parse_file(filename):
                     print(sentence)
                     for val in validated:
                         print("  ", [tokens[i] for i in val])
-
 
 
 def build_bigrams(filename):
@@ -243,6 +318,29 @@ def build_bigrams(filename):
                         print("  ", nt)
 
 
+def build_mkchain_2ndeg():
+    mkchain = dict()
+
+    with open("numbers.txt", 'r') as f:
+        for line in f.readlines():
+            line = line.strip()
+            if not line:
+                continue
+            _, txt = line.split(" = ")
+            txt = txt.replace('-', ' ')
+            tokens = txt.split()
+            tokens = ['['] + tokens + [']']
+            # print(tokens)
+            # print(txt)
+            for i in range(len(tokens)-2):
+                k, v = (tokens[i], tokens[i+1]), tokens[i+2]
+                if k in mkchain:
+                    if not v in mkchain[k]: mkchain[k].append(v)
+                else:
+                    mkchain[k] = [v]
+        pprint(mkchain)
+
+
 def test_file():
     with open("numbers.txt", 'r') as f:
         for line in f.readlines():
@@ -251,8 +349,7 @@ def test_file():
                 continue
             num, txt = line.split(" = ")
             num = int(num)
-            txt = txt.replace('-', ' ')
-            rep = translate(txt.split())
+            rep = translate(txt)
             if rep != num:
                 print(num, txt, rep)
 
@@ -265,13 +362,14 @@ def test():
         ("mil daou", "1002"),
         ("mil nav c'hant pevar ha pevar-ugent", "1984"),
         ("naontek kant c'hwec'h ha tregont", "1936"),
-        ("daou vil tri warn-ugent", "2023"),
-        ("kant den hag hanter-kant", "150 den"),
+        ("er bloavez daou vil tri warn-ugent", "er bloavez 2023"),
+        ("kant den hag hanter-kant a oa", "150 den a oa"),
         ("kant daou vil pevarzek", "102014"),
         ("tri kazh ha daou besk", "3 kazh ha 2 besk"),
         ("unan daou tri, staget mat ar c'hi", "1 2 3, staget mat ar c'hi"),
         ("div blac'h kozh ha daou-ugent", "42 blac'h kozh"),
         ("div blac'h kozh ha daou-ugent kazh du", "2 blac'h kozh ha 42 kazh du"),
+        ("kant tri patatezenn hag hanter-kant em eus debret", "153 patatezenn am eus debret")
     ]
 
     """
@@ -285,11 +383,12 @@ def test():
 
     for sentence in [s[0] for s in test_cases]:
         tokens = tokenize(sentence)
-        validated = parse_tokens(tokens)
         print(sentence)
-        for val in validated:
-            print("  ", [tokens[i] for i in val])
-            #print("    ", translate(tokens))
+        print(analyse(tokens))
+        print()
+        # for val in validated:
+        #     # print("  ", [tokens[i] for i in val])
+        #     print("    ", translate(sentence))
 
 
 if __name__ == "__main__":
@@ -297,3 +396,4 @@ if __name__ == "__main__":
     #parse_file("../corpus/wiki_corpus.txt")
     test()
     # test_file()
+    # build_mkchain_2ndeg()

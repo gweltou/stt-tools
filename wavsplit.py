@@ -36,20 +36,7 @@ SPLIT_PATTERN = re.compile(r"c([0-9\.]+)")
 
 
 play_process = None
-vosk_loaded = False
 
-
-
-def load_vosk():
-    from vosk import Model, KaldiRecognizer, SetLogLevel
-    SetLogLevel(-1)
-    model = Model("../models/bzg6")
-    global rec
-    rec = KaldiRecognizer(model, 16000)
-    rec.SetWords(True)
-    global vosk_loaded
-    vosk_loaded = True
-    
 
 
 def play_segment_text(idx, song, segments, text, speed):
@@ -301,16 +288,8 @@ if __name__ == "__main__":
                     with open(ACRONYM_PATH, 'a') as f:
                             f.write(f"{acr} {phon}\n")
         elif x == 't':  # Transcribe with vosk
-            if not vosk_loaded:
-                load_vosk()
             seg = song[segments[idx][0]:segments[idx][1]]
-            seg = seg.get_array_of_samples().tobytes()
-            i = 0
-            while i + 4000 < len(seg):
-                rec.AcceptWaveform(seg[i:i+4000])
-                i += 4000
-            rec.AcceptWaveform(seg[i:])
-            print(eval(rec.FinalResult())["text"])
+            print(transcribe_segment(seg))
         elif x == 'z':  # Undo
             print("Undone")
             segments = segments_undo

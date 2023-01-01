@@ -470,9 +470,7 @@ def get_cleaned_sentence(sentence, rm_bl=False, rm_verbal_ticks=False):
     """
     if not sentence:
         return '', 0
-    
-    #sentence = pre_process(sentence)
-    
+        
     tokens = []
     num_blacklisted = 0
     for token in tokenize(sentence):
@@ -511,14 +509,20 @@ def test_get_cleaned_sentence():
     expected = [
         "ar bloavezh mil nav c'hant pemp ha tregont a zo en ugentvet kantved",
         "o gwelet Charlez c'hwec'h e vi warc'hoazh",
-        "",
+        "oh ve ket oh den yaouank amañ ne vi ket lojet noz an eured",
         ]
     
-    for s in sentences:
+    for i, s in enumerate(sentences):
         cleaned, _ = get_cleaned_sentence(s)
         correction, _ = get_correction(s)
-        print(cleaned)
-        print(correction)
+        error = False
+        if cleaned != expected[i]:
+            error = True
+            print(s)
+            print(cleaned)
+            print(correction)
+        if error:
+            print("Error found")
 
 
 
@@ -531,9 +535,7 @@ def get_correction(sentence):
     sentence = sentence.strip()
     if not sentence:
         return ''
-    
-    #sentence = pre_process(sentence)
-    
+        
     num_errors = 0
     tokens = []
     for token in tokenize(sentence):
@@ -715,6 +717,41 @@ def play_segment(i, song, segments, speed):
 
 
 
+vosk_loaded = False
+
+def load_vosk():
+    from vosk import Model, KaldiRecognizer, SetLogLevel
+    SetLogLevel(-1)
+    model = Model("../models/bzg6")
+    global rec
+    rec = KaldiRecognizer(model, 16000)
+    rec.SetWords(True)
+    global vosk_loaded
+    vosk_loaded = True
+
+
+def transcribe_segment(segment):
+    if not vosk_loaded:
+        load_vosk()
+    # seg = song[segments[idx][0]:segments[idx][1]]
+    segment = segment.get_array_of_samples().tobytes()
+    i = 0
+    while i + 4000 < len(segment):
+        rec.AcceptWaveform(segment[i:i+4000])
+        i += 4000
+    rec.AcceptWaveform(segment[i:])
+    return eval(rec.FinalResult())["text"]
+
+
+################################################################################
+################################################################################
+##
+##                   AUDIO FILE MANIPULATION FUNCTIONS
+##
+################################################################################
+################################################################################
+
+
 def get_audiofile_info(filename):
     r = subprocess.check_output(['ffprobe', '-hide_banner', '-v', 'panic', '-show_streams', '-of', 'json', filename])
     r = json.loads(r)
@@ -779,6 +816,16 @@ def concatenate_audiofiles(file_list, out_filename, remove=True):
         for fname in file_list:
             os.remove(fname)
 
+
+
+
+################################################################################
+################################################################################
+##
+##                        FILE MANIPULATION FUNCTIONS
+##
+################################################################################
+################################################################################
 
 
 def list_files_with_extension(ext, rep, recursive=True):
