@@ -14,12 +14,14 @@ ugentved	ugentvet
 ty	ti
 #moutik	moutig
 stokholm	Stockholm
-anezhe	anezho
+#anezhe	anezho
 hirie	hiriv
 hiziv	hiriv
 plastek	plastik
-goût	gouzout
+#goût	gouzout
 evid	evit
+warlerc'h	war lerc'h
+formaj	fourmaj
 
 
 # Fr to Br
@@ -139,6 +141,7 @@ kambodjia	Kambodja
 émile	Emil
 maría	Maria
 yannick	Yannig
+frederig	Frederik
 
 
 nozvat	noz vat
@@ -182,6 +185,7 @@ brezoneg	brezhoneg
 vousc'hoarz	vousc'hoarzh
 vousc'hoarzin	vousc'hoarzhin
  d' ar 	 d'ar 
+milliadou	miliadoù
 
 arru	erru
 be'h	bec'h

@@ -1,24 +1,28 @@
 #.gitignore
 
 spk2gender.txt
-notes.txt
 .wavsplitGui.py
 
 __pycache__/
 venv-hunspell/
+dev/
 data/
 todo/
 training_data/
 
 aligned/
 corpus/
+generated_corpus/
+corpus_skrid/
+
+corpus_ya/
+
+corpus_wikipedia/
 
 corpus_common_voice/cv-corpus*
 corpus_common_voice/train
 corpus_common_voice/test
 
 corpus_sae/*.zip
-
-wikipedia_corpus/
 
 test_set/

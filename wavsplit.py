@@ -28,7 +28,8 @@ from pydub.silence import detect_nonsilent
 from pydub.playback import _play_with_simpleaudio
 from pyrubberband import time_stretch
 #import librosa
-from libMySTT import *
+from libMySTT import load_segments, load_textfile, get_correction, get_player_name, get_audiofile_info, convert_to_wav
+from libMySTT import transcribe_segment, acronyms, prompt_acronym_phon, extract_acronyms, ACRONYM_PATH
 
 
 RESIZE_PATTERN = re.compile(r"([s|e])([-|\+])(\d+)")
@@ -46,9 +47,7 @@ def play_segment_text(idx, song, segments, text, speed):
     
     if idx < len(text):
         correction, _ = get_correction(text[idx])
-        start = round(segments[idx][0] / 1000.0, 1)
-        stop = round(segments[idx][1] / 1000.0, 1)
-        print(f"[{start}:{stop}] {{{speakers[idx]}}} {correction}")
+        print(f"{{{speakers[idx]}}} {correction}")
     #print(f"[{text[idx]}]")
     seg = song[segments[idx][0]:segments[idx][1]]
     if speed != 1.0:
@@ -70,31 +69,6 @@ def save_segments(segments, header, filename):
             stop =  int(s[1])
             f.write(f"{start} {stop}\n")
     print('segment file saved')
-
-
-
-def load_textfile(filename):
-    text = []
-    speakers = []
-    current_speaker = "unknown"
-    with open(filename, 'r') as f:
-        for l in f.readlines():
-            l = l.strip()
-            if l and not l.startswith('#'):
-                # Extract speaker id and other metadata
-                metadata_match = METADATA_PATTERN.finditer(l)
-                speaker_id_match = SPEAKER_ID_PATTERN.search(l)
-                if speaker_id_match:
-                    current_speaker = speaker_id_match[1]
-                for match in metadata_match:
-                    start, end = match.span()
-                    l = l[:start] + l[end:]
-                
-                l = l.strip()
-                if l :
-                    text.append(l)
-                    speakers.append(current_speaker)
-    return text, speakers
 
 
 
@@ -158,6 +132,8 @@ if __name__ == "__main__":
     if os.path.exists(split_filename) and not args.overwrite:
         print("split file exists")
         segments, header = load_segments(split_filename)
+        if header:
+            print(f'Header found: "{header}"')
     else:
         print("spliting wave file")
         #y, sr = librosa.load(wav_filename)
@@ -183,10 +159,14 @@ if __name__ == "__main__":
     
     
     short_utterances = []
+    total_length = 0
     for i, (start, stop) in enumerate(segments):
-        l = round((stop-start)/1000.0, 1)
+        l = (stop-start)/1000.0
+        total_length += l
         if l < 1.3:
             short_utterances.append(i+1)
+    minute, sec = divmod(round(total_length), 60)
+    print(f"Segments total length: {minute}'{sec}\"")
     if short_utterances:
         print("Short utterances:", short_utterances)
     
@@ -197,8 +177,10 @@ if __name__ == "__main__":
     modified = False
     segments_undo = []
     while running:
-        length = round((segments[idx][1] - segments[idx][0]) / 1000.0, 1)
-        x = input(f"{idx+1}/{len(segments)} {length}s> ")
+        start, stop = segments[idx]
+        length = round((stop - start) / 1000.0, 1)
+        #length = round((segments[idx][1] - segments[idx][0]) / 1000.0, 1)
+        x = input(f"{idx+1}/{len(segments)} [{round(start/1000.0,1)}:{round(stop/1000.0,1)}] {length}s> ").strip()
         resize_match = RESIZE_PATTERN.match(x)
         split_match = SPLIT_PATTERN.match(x)
         
@@ -210,7 +192,7 @@ if __name__ == "__main__":
         if resize_match:
             segments_undo = segments[:]
             pos = resize_match.groups()[0]
-            start, stop = segments[idx]
+            #start, stop = segments[idx]
             delay = int(resize_match.groups()[1] + resize_match.groups()[2])
             if pos == 's':
                 segments[idx] = (start + delay, stop)
@@ -220,21 +202,31 @@ if __name__ == "__main__":
         elif split_match:
             segments_undo = segments[:]
             pc = float(split_match.groups()[0])
-            start, stop = segments[idx]
+            #start, stop = segments[idx]
             cut = start + (stop-start) * pc/100.0
             segments = segments[:idx] + [(start, ceil(cut)), (floor(cut), stop)] + segments[idx+1:]
             modified = True
             print(f"Segment split at {pc}% of its length")
-        elif x == 'cc': # Automatic split
+        elif x.startswith('cc'): # Automatic split
             segments_undo = segments[:]
             seg = song[segments[idx][0]:segments[idx][1]]
-            print(header)
-            #subsegments = detect_nonsilent(seg, min_silence_len=args.dur, silence_thresh=args.thresh)
+            if header:
+                split_args = x.split()
+                new_args = parser.parse_args(split_args)
+                #new_args.thresh = min(new_args.thresh, args.thresh)
+                print(new_args)
+                subsegments = detect_nonsilent(seg, min_silence_len=new_args.dur, silence_thresh=new_args.thresh)
+                if len(subsegments) > 1:
+                    subsegments = [(s + start, e + start) for s, e in subsegments]
+                    segments = segments[:idx] + subsegments + segments[idx+1:]
+                    modified = True
+                else:
+                    print("No subsegments found...")
+        elif x == 'r':
+            play_segment_text(max(0, idx), song, segments, text, speed)
         elif x.isnumeric():
             idx = (int(x)-1) % len(segments)
             play_segment_text(idx, song, segments, text, speed)
-        elif x == '.' or x == 'r':
-            play_segment_text(max(0, idx), song, segments, text, speed)
         elif x == '+' or x == 'n':
             idx = (idx+1) % len(segments)
             play_segment_text(idx, song, segments, text, speed)
@@ -266,10 +258,10 @@ if __name__ == "__main__":
         elif x == 'j' and idx > 0:  # Join this segment with previous segment
             segments_undo = segments[:]
             start = segments[idx-1][0]
-            end = segments[idx][1]
+            stop = segments[idx][1]
             del segments[idx]
             idx = max(0, idx-1)
-            segments[idx] = (start, end)
+            segments[idx] = (start, stop)
             modified = True
             print("segments joined")
         elif x == 'a':  # Acronym extraction
@@ -294,12 +286,16 @@ if __name__ == "__main__":
             print("Undone")
             segments = segments_undo
             modified = True
+        elif x == 'e':  # Export segment
+            seg = song[segments[idx][0]:segments[idx][1]]
+            print(dir(seg))
+            print("Segment exported")
         elif x == 's':  # Save split data to disk
             save_segments(segments, header, split_filename) 
             modified = False
         elif x == 'h' or x == '?':  # Help
-            print("'h' or '?'\tShow this help")
-            print(". or 'r'\tPlay current segment or stop playback")
+            print("Press <Enter> to play or stop current segment")
+            print("r\t\tRepeat current segment")
             print("+ or 'n'\tGo to next segment and play")
             print("- or 'p'\tGo back to previous segment and play")
             print("-[n] or +[n]\tGo backward/forward n positions")
@@ -313,8 +309,15 @@ if __name__ == "__main__":
             print("'a'\tRegister acronym")
             print("'t'\tAutomatic transcription")
             print("'q'\tQuit")
+            print("'h' or '?'\tShow this help")
+        elif not x:
+            # Play / Stop playback
+            if play_process and play_process.is_playing():
+                play_process.stop()
+            else:
+                play_segment_text(max(0, idx), song, segments, text, speed)
         elif x == 'q':
             if modified:
                 r = input("Save before quitting (y|n) ? ")
-                if r == 'y': save_segments(segments, split_filename) 
+                if r == 'y': save_segments(segments, header, split_filename) 
             running = False

@@ -323,6 +323,42 @@ acronyms = get_acronyms_dict()
 ################################################################################
 
 
+def load_textfile(filename):
+    """ return list of sentences and corresponding list of speakers
+        Return
+        ------
+            list of text sentences, list of speakers (tuple)
+    """
+    text = []
+    speakers = []
+    current_speaker = "unknown"
+    with open(filename, 'r') as f:
+        for l in f.readlines():
+            l = l.strip()
+            if l and not l.startswith('#'):
+                # Extract speaker id and other metadata
+                metadata_match = METADATA_PATTERN.finditer(l)
+                speaker_id_match = SPEAKER_ID_PATTERN.search(l)
+                if speaker_id_match:
+                    current_speaker = speaker_id_match[1]
+                stripped = ""
+                head = 0
+                for match in metadata_match:
+                    start, end = match.span()
+                    stripped += l[head:start]
+                    head = end
+                if head > 0:
+                    stripped += l[head:]
+                    l = stripped
+                
+                l = l.strip()
+                if l :
+                    text.append(l)
+                    speakers.append(current_speaker)
+    return text, speakers
+
+
+
 def filter_out(text, symbols):
     new_text = ""
     for l in text:
@@ -504,12 +540,10 @@ def test_get_cleaned_sentence():
     sentences = [
         "ar bloavezh 1935 a zo en XXvet kantved",
         "o gwelet Charlez VI e vi warc'hoazh",
-        "Oh ve ket {?} oh den yaouank amañ ne vi ket lojet, {?} noz an eured",
         ]
     expected = [
         "ar bloavezh mil nav c'hant pemp ha tregont a zo en ugentvet kantved",
         "o gwelet Charlez c'hwec'h e vi warc'hoazh",
-        "oh ve ket oh den yaouank amañ ne vi ket lojet noz an eured",
         ]
     
     for i, s in enumerate(sentences):
@@ -709,11 +743,16 @@ def load_segments(filename):
 
 
 
-def play_segment(i, song, segments, speed):
+def get_segment(i, song, segments):
     start = int(segments[i][0])
     stop = int(segments[i][1])
-    utterance = song[start: stop]
-    play_with_ffplay(utterance, speed)
+    seg = song[start: stop]
+    return seg
+
+
+
+def play_segment(i, song, segments, speed):
+    play_with_ffplay(get_segment(i, song, segments), speed)
 
 
 
@@ -728,6 +767,7 @@ def load_vosk():
     rec.SetWords(True)
     global vosk_loaded
     vosk_loaded = True
+
 
 
 def transcribe_segment(segment):
@@ -838,3 +878,4 @@ def list_files_with_extension(ext, rep, recursive=True):
             elif os.path.splitext(filename)[1] == ext:
                 file_list.append(filename)
     return file_list
+

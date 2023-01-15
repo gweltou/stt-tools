@@ -39,11 +39,13 @@ Amerika
 Amerikaned
 Amerikanez
 Amerindian
+Ameli
 Amily
 Amman A M A N
 Amy
 Ananda
 Andalouzia
+Radiohead R A D I O EH D
 Andrew	AN N D R OU
 Android AN D R O I D
 Angela	AN N J E L A
@@ -111,6 +113,7 @@ Beuzeg
 Bieuzi
 Bikenig
 Birmaned
+Burkina
 Birmania
 Blanchet B L AN CH EH
 Bleaz
@@ -136,6 +139,7 @@ Brendan
 Breselien
 Brest
 Bretoned
+Breizhad
 Brezhoweb B R E Z O W EH B
 Briag
 Brieg
@@ -155,6 +159,7 @@ Chann CH AN N
 Charleston CH A R L E S T OH N
 Charlez
 Charlie CH A R L I
+Channig
 Chennai
 C'henyanad
 C'henyaniz
@@ -255,6 +260,7 @@ Eugénie EU J E N I
 Europa
 Europiz
 Eusa
+Elorn
 Evelyne E V EU L I N
 Facebook F EY S B OU K
 Fañch
@@ -275,6 +281,7 @@ Follan
 Fragan
 Francine F R AN S I N
 Francisco F R AN S I S K O
+Lebrun L EU B R EN
 Françoise F R AN S O A Z
 François F R AN S O A
 Frank
@@ -318,6 +325,7 @@ Goulven
 Goulwena
 Gourenez
 Gourin
+Goff
 Grall
 Greta
 Groñvel
@@ -360,6 +368,7 @@ Hitler  H I T L EH R
 Hollsent
 Hong ON G
 Hugues U G
+Hugo U G O
 Icare I K A R
 Ifig
 Indez
@@ -410,6 +419,7 @@ Julien J U L I EN
 Jura
 Kabilia
 Kaero
+Kaledonia
 Kaledoniz
 Kalifornia
 Kambodja
@@ -453,7 +463,9 @@ Klet
 Kmer
 Kolombia
 Komborn
+Konan
 Kong K ON G
+Konk
 Kongo
 Korbell K OH R B EH L
 Korea
@@ -582,6 +594,7 @@ Meneham
 Merc'her
 Meurzh
 Mezheven
+Mikael
 Michel	M I CH EH L
 Microsoft M I K R O S OH F T
 Minnesota
@@ -624,6 +637,7 @@ Okitania
 Olier
 Oliver O L I V EU R
 Ollivier O L I V I E
+Olivier O L I V I E
 Onyx O N I K S
 Oregon O R E G ON
 Oriant
@@ -716,6 +730,7 @@ Ploveilh
 Ploveren
 Ploveur
 Plozeved
+Lambada
 Plufur
 Pluguen
 Pluhernin
@@ -799,6 +814,7 @@ Skrigneg
 Skrigneg S K R I GN A K
 Smith S M I S
 Soaz
+Soazig
 Soudan
 Spagn
 Spotify	S P O T I F A I
@@ -809,10 +825,12 @@ Stefan S T E F A N
 Stefan S T E F AN
 Stéphanie S T E F A N I
 Stephen S T I V OE N
+Steven
 Stevenson S T I V EH N S OH N
 Stockholm S T O K OH L M
 Stonewall S T O N W OH L
 Strasbourg S T R A S B OU R
+Suafrika
 Stumdi
 Suamerika
 Suamerikan
@@ -934,13 +952,18 @@ Xavier	G Z A V I E
 Xi CH I
 Yann
 Yannig
+Viking
 Yaou
 Yerom
 Yezel
+Senegal
 Yoran
+Vrezhonegerien
 York I OH R K
 Youenn
+Wong
 Youna
+Sant
 Youtube I OU T U B
 Yud
 Yudikael

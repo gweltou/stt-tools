@@ -137,7 +137,7 @@ def parse_data(split_filename):
             for l in f.readlines():
                 corpus.add(l.strip())
      
-    segments = load_segments(split_filename)
+    segments, _ = load_segments(split_filename)
     assert len(text) == len(segments), \
         f"number of utterances in text file ({len(text)}) doesn't match number of segments in split file ({len(segments)})"
 
