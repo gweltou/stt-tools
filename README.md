@@ -5,13 +5,10 @@ Split files .split should be in the same folder as its related audio file and te
 
 ## Python packages dependency
 
- * numpy \
-   `pip3 install numpy`
- * [Librosa](https://librosa.org/)
- * Pydub
- * Hunspell \
-   `pip3 install cyhunspell`
- * Colorama
+Install required python modules with
+```
+pip install -r requirements.txt
+```
 
 ## Transcription rules
 
