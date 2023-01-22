@@ -30,11 +30,11 @@ from pyrubberband import time_stretch
 #import librosa
 from libMySTT import load_segments, load_textfile, get_correction, get_player_name, get_audiofile_info, convert_to_wav
 from libMySTT import transcribe_segment, acronyms, prompt_acronym_phon, extract_acronyms, ACRONYM_PATH
+from libMySTT import splitToEafFile
 
 
 RESIZE_PATTERN = re.compile(r"([s|e])([-|\+])(\d+)")
 SPLIT_PATTERN = re.compile(r"c([0-9\.]+)")
-
 
 play_process = None
 
@@ -68,7 +68,7 @@ def save_segments(segments, header, filename):
             start = int(s[0])
             stop =  int(s[1])
             f.write(f"{start} {stop}\n")
-    print('segment file saved')
+    print('split file saved')
 
 
 
@@ -287,13 +287,17 @@ if __name__ == "__main__":
             print("Undone")
             segments = segments_undo
             modified = True
-        elif x == 'e':  # Export segment
+        elif x == 'x':  # Export segment
             seg = song[segments[idx][0]:segments[idx][1]]
             print(dir(seg))
             print("Segment exported")
         elif x == 's':  # Save split data to disk
-            save_segments(segments, header, split_filename) 
-            modified = False
+            if modified:
+                save_segments(segments, header, split_filename)
+                modified = False
+        elif x == 'eaf': # Export to Elan format
+            splitToEafFile(split_filename)
+            print('EAF file saved')
         elif x == 'h' or x == '?':  # Help
             print("Press <Enter> to play or stop current segment")
             print("r\t\tRepeat current segment")
@@ -309,6 +313,9 @@ if __name__ == "__main__":
             print("'z'\tUndo previous segment modification")
             print("'a'\tRegister acronym")
             print("'t'\tAutomatic transcription")
+            print("'s'\tSave")
+            print("'x'\Export audio segment")
+            print("'eaf'\tExport to Elan format (.eaf)")
             print("'q'\tQuit")
             print("'h' or '?'\tShow this help")
         elif not x:

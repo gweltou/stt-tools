@@ -1,0 +1,16 @@
+1. Aller dans le dossier ~/STT/stt-tools et ouvrir un terminal avec la touche "F4"
+
+2. Ouvrir l'éditeur wavsplit en tappant "./wavsplit" suivi du nom du fichier audio (au format .wav) sur lequel travailler.
+
+3. Ouvrir également le fichier texte du même nom que le fichier audio.
+
+Utiliser le raccourci clavier ALT + TAB pour passer d'une application à l'autre.
+
+4. Utilisation de l'éditeur "Wavsplit" :
+
+ <ENTER> pour lire le segment actuel
+ n <ENTER> pour lire le segment suivant
+ j <ENTER> pour joindre le segment actuel avec le segment précédent
+ z <ENTER> pour annuler la dernière modification
+ s <ENTER> pour sauvegarder les modifications
+ h <ENTER> pour afficher l'aide

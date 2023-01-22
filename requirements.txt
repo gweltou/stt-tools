@@ -1,3 +1,4 @@
+simpleaudio
 pyrubberband
 colorama
 cyhunspell
