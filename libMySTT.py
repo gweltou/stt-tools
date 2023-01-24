@@ -6,7 +6,6 @@
  Common functions for audio file playback and data parsing
  
  Author:  Gweltaz Duval-Guennoc
-
 """
 
 
@@ -64,7 +63,7 @@ verbal_tics = {
 
 
 
-punctuation = ',.;?!:«»"”“()…–‚{}[]'
+punctuation = ',.;?!:«»"”“()…–—‚{}[]'
 
 valid_chars = "aâbcdeêfghijklmnñoprstuüùûvwyz'- "
 
@@ -329,6 +328,7 @@ acronyms = get_acronyms_dict()
 
 def load_textfile(filename):
     """ return list of sentences and corresponding list of speakers
+
         Return
         ------
             list of text sentences, list of speakers (tuple)
@@ -371,9 +371,9 @@ def filter_out(text, symbols):
 
 
 
-def pre_process(sentence):
+def pre_process(sentence, keep_dash=False, keep_punct=False):
     """ Substitude parts of the sentence according to 'corrected_sentences' dictionary
-        Clean punctuation
+        Clean punctuation by default
     """
     lowered_sentence = sentence.lower()
     for mistake in corrected_sentences.keys():
@@ -381,11 +381,13 @@ def pre_process(sentence):
              # Won't work if mistake is capitalized in original sentence
             sentence = sentence.replace(mistake, corrected_sentences[mistake])
     
-    sentence = filter_out(sentence, punctuation)
+    if not keep_punct:
+        sentence = filter_out(sentence, punctuation)
     sentence = sentence.replace('‘', "'")
     sentence = sentence.replace('’', "'")
     sentence = sentence.replace('ʼ', "'")
-    sentence = sentence.replace('-', ' ')   # Split words like "sav-heol"
+    if not keep_dash:
+        sentence = sentence.replace('-', ' ')   # Split words like "sav-heol"
     sentence = sentence.replace('/', ' ')
     sentence = sentence.replace('|', ' ')
 
@@ -393,12 +395,21 @@ def pre_process(sentence):
 
 
 
-def tokenize(sentence, post_proc=True):
+def tokenize(sentence, post_proc=True, keep_dash=False, keep_punct=False):
     """ Return a list of token from a sentence (str)
         The special character '*' will be kept
+        
+        Parameters
+        ----------
+            post_proc (Boolean):
+                Apply corrections and capitalisation
+            keep_dash (Boolean):
+                Dashed words (like "sav-heol") won't be splitted
+            keep_punct (Boolean):
+                Keep punctuation
     """
 
-    sentence = pre_process(sentence)
+    sentence = pre_process(sentence, keep_dash=keep_dash, keep_punct=keep_punct)
 
     tokens = []
     for t in sentence.split():
@@ -503,17 +514,28 @@ def test_split_lines():
 
 
 
-def get_cleaned_sentence(sentence, rm_bl=False, rm_verbal_ticks=False):
+def get_cleaned_sentence(sentence, rm_bl=False, rm_verbal_ticks=False, keep_dash=False, keep_punct=False):
     """
         Return a cleaned sentence, proper to put in text files or corpus
         and a quality score (ratio of black-listed words, the lower the better)
+
+        Parameters
+        ----------
+            rm_bl (Boolean):
+                remove black-list markers
+            rm_verbal_ticks (Boolean):
+                remove verbal ticks
+            keep_dash (Boolean):
+                Dashed words (like "sav-heol") will be preserved
+            keep_punct (Boolean):
+                Keep punctuation
     """
     if not sentence:
         return '', 0
         
     tokens = []
     num_blacklisted = 0
-    for token in tokenize(sentence):
+    for token in tokenize(sentence, keep_dash=keep_dash, keep_punct=keep_punct):
         lowered_token = token.lower()
         # Ignore black listed words
         if token.startswith('*'):
@@ -764,7 +786,7 @@ vosk_loaded = False
 def load_vosk():
     from vosk import Model, KaldiRecognizer, SetLogLevel
     SetLogLevel(-1)
-    model = Model("../models/bzg6")
+    model = Model(os.path.normpath(os.path.join(ROOT, "../models/bzg6")))
     global rec
     rec = KaldiRecognizer(model, 16000)
     rec.SetWords(True)
@@ -940,7 +962,8 @@ def splitToEafFile(split_filename):
         alignable_annotation.setAttribute('TIME_SLOT_REF1', f'ts{2*i+1}')
         alignable_annotation.setAttribute('TIME_SLOT_REF2', f'ts{2*i+2}')
         annotation_value = doc.createElement('ANNOTATION_VALUE')
-        text = doc.createTextNode(sentence)
+        #text = doc.createTextNode(get_cleaned_sentence(sentence, rm_bl=True, keep_dash=True, keep_punct=True)[0])
+        text = doc.createTextNode(sentence.replace('*', ''))
         annotation_value.appendChild(text)
         alignable_annotation.appendChild(annotation_value)
         annotation.appendChild(alignable_annotation)
@@ -952,6 +975,11 @@ def splitToEafFile(split_filename):
     linguistic_type.setAttribute('LINGUISTIC_TYPE_ID', 'transcript')
     linguistic_type.setAttribute('TIME_ALIGNABLE', 'true')
     root.appendChild(linguistic_type)
+
+    language = doc.createElement('LANGUAGE')
+    language.setAttribute("LANG_ID", "bre")
+    language.setAttribute("LANG_LABEL", "Breton (bre)")
+    root.appendChild(language)
 
     constraint_list = [
         ("Time_Subdivision", "Time subdivision of parent annotation's time interval, no time gaps allowed within this interval"),

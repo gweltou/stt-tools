@@ -88,9 +88,10 @@ if __name__ == "__main__":
     
     rep, filename = os.path.split(os.path.abspath(args.filename))
     # Removing special characters from filename
-    recording_id = filename.split(os.path.extsep)[0]
+    recording_id = '_'.join(filename.split(os.path.extsep)[:-1])
     recording_id = recording_id.replace('&', '_')
     recording_id = recording_id.replace(' ', '_')
+    #recording_id = recording_id.replace('.', '_')
     recording_id = recording_id.replace("'", '')
     print(recording_id)
     
@@ -148,7 +149,7 @@ if __name__ == "__main__":
         # Using pydub instead
         segments = detect_nonsilent(song, min_silence_len=args.dur, silence_thresh=args.thresh)
         
-        # Including silences in segments
+        # Including silences at head and tail of segments
         if len(segments) >= 2:
             segments[0] = (segments[0][0], segments[0][1] + args.dur)
             segments[-1] = (segments[-1][0] - args.dur, segments[-1][1])
@@ -161,13 +162,20 @@ if __name__ == "__main__":
     
     short_utterances = []
     total_length = 0
+    smallest_seg = (None, 9999)
+    longest_seg = (None, 0)
     for i, (start, stop) in enumerate(segments):
         l = (stop-start)/1000.0
+        if l < smallest_seg[1]:
+            smallest_seg = (i+1, l)
+        if l > longest_seg[1]:
+            longest_seg = (i+1, l)
         total_length += l
         if l < 1.3:
             short_utterances.append(i+1)
     minute, sec = divmod(round(total_length), 60)
     print(f"Segments total length: {minute}'{sec}\"")
+    print(f"Shortest segment: {smallest_seg[1]}s [{smallest_seg[0]}], longest segment: {longest_seg[1]}s [{longest_seg[0]}]")
     if short_utterances:
         print("Short utterances:", short_utterances)
     
@@ -289,7 +297,8 @@ if __name__ == "__main__":
             modified = True
         elif x == 'x':  # Export segment
             seg = song[segments[idx][0]:segments[idx][1]]
-            print(dir(seg))
+            seg_name = os.path.join(rep, os.path.extsep.join((recording_id + f"_seg{idx:03d}", 'wav')))
+            seg.export(seg_name, format="wav")
             print("Segment exported")
         elif x == 's':  # Save split data to disk
             if modified:
@@ -300,24 +309,24 @@ if __name__ == "__main__":
             print('EAF file saved')
         elif x == 'h' or x == '?':  # Help
             print("Press <Enter> to play or stop current segment")
-            print("r\t\tRepeat current segment")
-            print("+ or 'n'\tGo to next segment and play")
-            print("- or 'p'\tGo back to previous segment and play")
-            print("-[n] or +[n]\tGo backward/forward n positions")
-            print("*\tSpeed playback up")
-            print("/\tSlow playback down")
-            print("'d'\tDelete current segment")
-            print("'j'\tJoin current segment with previous one")
+            print("'r'\t\tRepeat current segment")
+            print("'+' or 'n'\tGo to next segment and play")
+            print("'-' or 'p'\tGo back to previous segment and play")
+            print("'-[n]' or '+[n]'\tGo backward/forward n positions")
+            print("'*'\t\tSpeed playback up")
+            print("'/'\t\tSlow playback down")
+            print("'d'\t\tDelete current segment")
+            print("'j'\t\tJoin current segment with previous one")
             print("[s/e][+/-]millisecs\tedit segment (ex: e+500, add 500ms to end)")
-            print("'c[PC]' split current segment at PC percent of its length (ex: c66.6)")
-            print("'z'\tUndo previous segment modification")
-            print("'a'\tRegister acronym")
-            print("'t'\tAutomatic transcription")
-            print("'s'\tSave")
-            print("'x'\Export audio segment")
-            print("'eaf'\tExport to Elan format (.eaf)")
-            print("'q'\tQuit")
-            print("'h' or '?'\tShow this help")
+            print("'c[PC]'\t\tsplit current segment at PC percent of its length (ex: c66.6)")
+            print("'z'\t\tUndo previous segment modification")
+            print("'a'\t\tRegister acronym")
+            print("'t'\t\tAutomatic transcription")
+            print("'s'\t\tSave")
+            print("'x'\t\tExport audio segment")
+            print("'eaf'\t\tExport to Elan format (.eaf)")
+            print("'q'\t\tQuit")
+            print("'h' or '?'\t\tShow this help")
         elif not x:
             # Play / Stop playback
             if play_process and play_process.is_playing():

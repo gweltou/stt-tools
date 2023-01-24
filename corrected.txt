@@ -7,21 +7,17 @@ diàr	diwar
 
 
 # Unvaniañ
-#yaouankik	yaouankig
-kantvet	kantved
-hanterkantved	hanterkantvet
-ugentved	ugentvet
-ty	ti
-#moutik	moutig
-stokholm	Stockholm
 #anezhe	anezho
+#goût	gouzout
+ty	ti
+stokholm	Stockholm
 hirie	hiriv
 hiziv	hiriv
 plastek	plastik
-#goût	gouzout
 evid	evit
 warlerc'h	war lerc'h
 formaj	fourmaj
+koa	kwa
 
 
 # Fr to Br

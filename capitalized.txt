@@ -390,6 +390,7 @@ Izabel
 Izelvroioù
 Izold
 Jack D J A K
+Jacq J A K
 Jakez
 James D J EY M S
 Janedig
@@ -568,6 +569,7 @@ Marco M A R K O
 Mari
 Maria
 Mariana
+Marilou
 Marilyn M A R I L I N
 Mark
 Marsilha
@@ -592,6 +594,7 @@ Meksik
 Melioneg
 Meneham
 Merc'her
+Metig
 Meurzh
 Mezheven
 Mikael
@@ -608,6 +611,7 @@ Montego
 Montroulez
 Morgan M OH R G AN N
 Morvan M OH R V AN
+Moreau M O R O
 Morwenna
 Mozambik
 Mumbai	M OU M B A I
@@ -626,6 +630,7 @@ Nedeleg
 Nelson	N EH L S OH N
 Netflix	N EH T F L I K S
 Nicolas	N I K O L A
+Nikolaz
 Nobel
 Nolwenn
 Normandi
@@ -768,6 +773,7 @@ Robert R O B EH R
 Robert R O B OE R T
 Robotics R O B O T I K S
 Roger R O J E
+Rom
 Roma
 Romaned
 Ronan
