@@ -6,7 +6,9 @@ Autoaligner using vosk model
 
 Author:  Gweltaz Duval-Guennoc
 
-TODO : tretañ ar c'hemadurioù : vMickaël, dTouène
+TODO :
+    * tretañ ar c'hemadurioù : vMickaël, dTouène
+    * Niverennoù -> stumm skrid
 """
 
 
@@ -33,7 +35,7 @@ if __name__ == "__main__":
     recording_id = filename.split(os.path.extsep)[0]
     wav_filename = os.path.join(rep, os.path.extsep.join((recording_id, 'wav')))
     text_filename = os.path.join(rep, os.path.extsep.join((recording_id, 'txt')))
-    # gt_filename = os.path.join(rep, os.path.extsep.join((recording_id + "_raw", 'txt')))
+    gt_filename = os.path.join(rep, os.path.extsep.join((recording_id + "_raw", 'txt')))
     # transcript_filename = os.path.join(rep, os.path.extsep.join((recording_id + "_transcript", 'txt')))
 
     segments, _ = load_segments(split_filename)
@@ -42,7 +44,7 @@ if __name__ == "__main__":
     # Read ground-truth file and
     # concatenate all lines as a single line.
     # header = []
-    with open(text_filename, 'r') as f:
+    with open(gt_filename, 'r') as f:
         lines = f.readlines()
     ground_truth = " ".join([line.strip() for line in lines])
     ground_truth = ground_truth.replace('- ', '-')
@@ -50,14 +52,6 @@ if __name__ == "__main__":
 
     # for match in KEMMADUR_PATTERN.finditer(ground_truth):
     #     print(match)
-
-    # Transcription with Vosk model
-    # transcription = []
-    # for s, e in segments:
-    #     t = transcribe_segment(song[s:e])
-    #     transcription.append(t)
-        # print(t)
-        # f.write(t + '\n')
 
     # Automatic alignment
     aligned = []
@@ -90,7 +84,7 @@ if __name__ == "__main__":
         
         # Check if CER score can still be lowered by truncating the beggining
         # of the matched ground-truth
-        while True:
+        while True and len(gt_lookup_tokens) > 1:
             gt_lookup_tokens = gt_lookup_tokens[1:]
             gt_cleaned = get_cleaned_sentence(' '.join(gt_lookup_tokens))[0]
             cer_score = jiwer.cer(gt_cleaned, hyp_sentence)
@@ -106,5 +100,5 @@ if __name__ == "__main__":
             print("HYP:", hyp_sentence)
             print()
 
-    with open(text_filename + 'al', 'w') as f:
+    with open(text_filename, 'w') as f:
         f.writelines(aligned)

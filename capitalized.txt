@@ -9,7 +9,9 @@ Afrika
 Afrikan
 Afrikaned
 Afrikaniz
+AirBnb EH R B I EH N B I
 Agapit
+Agathe A G A T
 Akitania
 Alabama
 Alain A L EN
@@ -59,6 +61,7 @@ Aostralia
 Aostria
 Aostrian
 Apple A P OE L
+Argoad
 Arc'hantina
 Are
 Armenia
@@ -72,6 +75,7 @@ Asperger
 Astor
 Atlantel
 Auguste O G U S T
+Aurélien O R E L I EN
 Avatar
 Avran
 Azia
@@ -160,17 +164,20 @@ Charleston CH A R L E S T OH N
 Charlez
 Charlie CH A R L I
 Channig
+Chesnais CH EU N EH
 Chennai
 C'henyanad
 C'henyaniz
 Chicago	CH I K A G O
 Chili
+C'hall
 C'hireg
 Chitra
 C'hlaoda
 C'hrist
 Chuck T CH OE K
 C'hwevrer
+Cadou K A D OU
 Colyne K O L I N
 Conanec K O N AN N E K
 Conan K O N AN
@@ -226,6 +233,7 @@ Drezouarn
 Duaod
 Dudwal
 Duval
+Eckmülh E K M U L
 Ebrel
 Edern
 Edouarzh
@@ -263,6 +271,7 @@ Eusa
 Elorn
 Evelyne E V EU L I N
 Facebook F EY S B OU K
+Fabris
 Fañch
 Faoued
 Fezwezhen
@@ -315,6 +324,7 @@ Girolamo
 Giza
 Glenmor
 Goater
+Goelo
 Gonidec G O N I D EH K
 Google G OU G EU L
 Gorsika
@@ -430,6 +440,8 @@ Kankaven
 Kaon
 Kaou
 Karaez
+Karnag
+Kiberen
 Karl
 Karnoed
 Kastellin
@@ -527,7 +539,7 @@ Lizig
 Loaek
 Loeiz
 Lohieg
-Loig
+Loïg L O I G
 Loiret L O A R EH
 Lokournan
 Londrez
@@ -555,9 +567,11 @@ Mahama
 Mahomet
 Maiwenn
 Mala
+Manon M A N ON
 Malawi
 Malgeneg
 Malo
+Maloù
 Manche M AN CH
 Mandalay M AN N D A L EH
 Mandela
@@ -667,12 +681,14 @@ Pellen P E L EH N
 Pempoull
 Penelope P E N E L OH P
 Pêr
+Penmarc'h
 Perou
 Persia
 Peugeot P EU J O
 Philadelphia F I L A D EH L F I A
 Pichon
 Pierre P I EH R
+Pleiber P L E B EH R
 Plerin
 Plevin
 Pleskob
@@ -792,6 +808,7 @@ Sarkozy S A R K O Z I
 São S A O
 Saoz
 Saozon
+Sarzhav S A R Z O
 Sapiens S A P I EN S
 Sarah S A R A
 Sardinia
@@ -916,6 +933,7 @@ Vega
 Venezia
 Verc'her
 Verdun V EH R D EN
+Velgia
 Veurzh
 Viami
 Vichel V I CH EH L

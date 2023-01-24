@@ -373,11 +373,11 @@ def filter_out(text, symbols):
 
 def pre_process(sentence, keep_dash=False, keep_punct=False):
     """ Substitude parts of the sentence according to 'corrected_sentences' dictionary
+        Preserve letter case
         Clean punctuation by default
     """
-    lowered_sentence = sentence.lower()
     for mistake in corrected_sentences.keys():
-        if mistake in sentence or mistake in lowered_sentence:
+        if mistake in sentence or mistake in sentence.lower():
              # Won't work if mistake is capitalized in original sentence
             sentence = sentence.replace(mistake, corrected_sentences[mistake])
     
@@ -397,6 +397,7 @@ def pre_process(sentence, keep_dash=False, keep_punct=False):
 
 def tokenize(sentence, post_proc=True, keep_dash=False, keep_punct=False):
     """ Return a list of token from a sentence (str)
+        Preserve letter case
         The special character '*' will be kept
         
         Parameters
@@ -595,10 +596,10 @@ def get_correction(sentence):
     sentence = sentence.strip()
     if not sentence:
         return ''
-        
+    
     num_errors = 0
     tokens = []
-    for token in tokenize(sentence):
+    for token in tokenize(sentence, post_proc=False):
         spell_error = False
         lowered_token = token.lower()
         # Ignore black listed words
@@ -620,7 +621,7 @@ def get_correction(sentence):
             if token in acronyms:
                 tokens.append(Fore.BLUE + token + Fore.RESET)
             else:
-                tokens.append(Fore.RED + token + Fore.RESET)
+                tokens.append(Fore.MAGENTA + token + Fore.RESET)
                 spell_error = True
         elif lowered_token in capitalized:
             tokens.append(token.capitalize())
@@ -685,7 +686,7 @@ def prompt_acronym_phon(w, song, segments, idx):
 
 def extract_acronyms(text):
     extracted = set()
-    for w in tokenize(text):
+    for w in tokenize(text, post_proc=False):
         # Remove black-listed words (beggining with '*')
         if w.startswith('*'):
             continue

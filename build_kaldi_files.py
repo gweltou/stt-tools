@@ -6,7 +6,14 @@
  Build necessary kaldi files to train an ASR model from audio an textual data
  
  Author:  Gweltaz Duval-Guennoc
- 
+
+ TODO:
+    * pyplot pie chart with each train sub-dataset contribution in whole training data
+        pyplot.figure(figsize = (8, 8))
+        x = [1, 2, 3, 4, 10]
+        pyplot.pie(x, labels = ['A', 'B', 'C', 'D', 'E'], normalize = True)
+        pyplot.legend()
+        pyplot.savefig('PieChart01.png')
 """
 
 

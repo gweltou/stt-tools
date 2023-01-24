@@ -138,6 +138,10 @@ kambodjia	Kambodja
 maría	Maria
 yannick	Yannig
 frederig	Frederik
+maël	Mael
+loïc	Loïg
+fabrice	Fabris
+argoat	Argoad
 
 
 nozvat	noz vat
@@ -267,6 +271,7 @@ XXvet	ugentvet
 200	daou c'hant
 250	daou c'hant hanter kant
 300	tri c'hant
+307	tri c'hant seizh
 400	pevar c'hant
 500	pemp kant
 600	c'hwec'h kant

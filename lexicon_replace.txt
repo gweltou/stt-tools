@@ -5,6 +5,7 @@ basketball B A S K EH T B O L
 beach B I T CH
 c'hamembert X A M AN B EH R
 c'hluster X L OE S T OE R
+center S EH N T OE R
 cookie K OU K I
 cookies K OU K I Z
 cool K OU L
@@ -55,3 +56,4 @@ tiny T A I N I
 top T OH P
 volley V O L E
 web W EH B
+world W OE R L D
