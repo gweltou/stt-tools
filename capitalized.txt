@@ -9,9 +9,9 @@ Afrika
 Afrikan
 Afrikaned
 Afrikaniz
-AirBnb EH R B I EH N B I
 Agapit
 Agathe A G A T
+AirBnb EH R B I EH N B I
 Akitania
 Alabama
 Alain A L EN
@@ -37,17 +37,16 @@ Altai
 Alvarez
 Amazonia
 Ambre AN B R
+Ameli
 Amerika
 Amerikaned
 Amerikanez
 Amerindian
-Ameli
 Amily
 Amman A M A N
 Amy
 Ananda
 Andalouzia
-Radiohead R A D I O EH D
 Andrew	AN N D R OU
 Android AN D R O I D
 Angela	AN N J E L A
@@ -61,9 +60,9 @@ Aostralia
 Aostria
 Aostrian
 Apple A P OE L
-Argoad
 Arc'hantina
 Are
+Argoad
 Armenia
 Arno
 Arnold A R N OH L D
@@ -117,7 +116,6 @@ Beuzeg
 Bieuzi
 Bikenig
 Birmaned
-Burkina
 Birmania
 Blanchet B L AN CH EH
 Bleaz
@@ -137,13 +135,13 @@ Bourdel
 Brasparzh
 Brazil
 Breizh
+Breizhad
 Breizhiz
 Brelidi
 Brendan
 Breselien
 Brest
 Bretoned
-Breizhad
 Brezhoweb B R E Z O W EH B
 Briag
 Brieg
@@ -153,31 +151,32 @@ Bruno
 Brusel B R U S EH L
 Bulgaria
 Buriana
+Burkina
+Cadou K A D OU
 Carolina K A R O L I N A
 Caroline K A R O L I N
 Casterman K A S T EH R M A N
 Celsius	S EH L S I U S
+C'hall
 C'hallaoued
 C'hanada
 Chann CH AN N
+Channig
 Charleston CH A R L E S T OH N
 Charlez
 Charlie CH A R L I
-Channig
-Chesnais CH EU N EH
 Chennai
 C'henyanad
 C'henyaniz
+Chesnais CH EU N EH
 Chicago	CH I K A G O
 Chili
-C'hall
 C'hireg
 Chitra
 C'hlaoda
 C'hrist
 Chuck T CH OE K
 C'hwevrer
-Cadou K A D OU
 Colyne K O L I N
 Conanec K O N AN N E K
 Conan K O N AN
@@ -233,8 +232,8 @@ Drezouarn
 Duaod
 Dudwal
 Duval
-Eckmülh E K M U L
 Ebrel
+Eckmülh E K M U L
 Edern
 Edouarzh
 Efesos
@@ -246,10 +245,11 @@ Eiffel E F EH L
 Einstein
 Ejipt
 Elegoed
-Elen E L EH N
 Elena
+Elen E L EH N
 Elia
 Eligius
+Elorn
 Elzas
 Emile E M I L
 Emilie E M I L I
@@ -268,10 +268,9 @@ Eugénie EU J E N I
 Europa
 Europiz
 Eusa
-Elorn
 Evelyne E V EU L I N
-Facebook F EY S B OU K
 Fabris
+Facebook F EY S B OU K
 Fañch
 Faoued
 Fezwezhen
@@ -290,7 +289,6 @@ Follan
 Fragan
 Francine F R AN S I N
 Francisco F R AN S I S K O
-Lebrun L EU B R EN
 Françoise F R AN S O A Z
 François F R AN S O A
 Frank
@@ -325,6 +323,7 @@ Giza
 Glenmor
 Goater
 Goelo
+Goff
 Gonidec G O N I D EH K
 Google G OU G EU L
 Gorsika
@@ -335,7 +334,6 @@ Goulven
 Goulwena
 Gourenez
 Gourin
-Goff
 Grall
 Greta
 Groñvel
@@ -377,8 +375,8 @@ Hirrien
 Hitler  H I T L EH R
 Hollsent
 Hong ON G
-Hugues U G
 Hugo U G O
+Hugues U G
 Icare I K A R
 Ifig
 Indez
@@ -440,9 +438,8 @@ Kankaven
 Kaon
 Kaou
 Karaez
-Karnag
-Kiberen
 Karl
+Karnag
 Karnoed
 Kastellin
 Katalonia
@@ -469,6 +466,7 @@ Kerne
 Kerouac K E R OU A K
 Kervella
 Kerzu
+Kiberen
 Kiev
 Kipling
 Kleopatra
@@ -478,8 +476,8 @@ Kolombia
 Komborn
 Konan
 Kong K ON G
-Konk
 Kongo
+Konk
 Korbell K OH R B EH L
 Korea
 Korsika
@@ -489,6 +487,7 @@ Kristian K R I S T I AN
 Kubrick K U B R I K
 Kuiper
 Kyoto
+Lambada
 Lampedusa L AN M P E D OU S A
 Lancelot L AN S L O
 Landelo
@@ -522,6 +521,7 @@ Latvia
 Laure L OH R
 Laurence L O R AN S
 Leborgne L EU B OH R GN
+Lebrun L EU B R EN
 Leclerc L EU K L EH R
 Lege
 Lena
@@ -567,7 +567,6 @@ Mahama
 Mahomet
 Maiwenn
 Mala
-Manon M A N ON
 Malawi
 Malgeneg
 Malo
@@ -575,6 +574,7 @@ Maloù
 Manche M AN CH
 Mandalay M AN N D A L EH
 Mandela
+Manon M A N ON
 Maodez
 Maran
 Marcel M A R S EH L
@@ -611,9 +611,9 @@ Merc'her
 Metig
 Meurzh
 Mezheven
-Mikael
 Michel	M I CH EH L
 Microsoft M I K R O S OH F T
+Mikael
 Minnesota
 Miossec M I O S EH K
 Missouri M I S OU R I
@@ -623,9 +623,9 @@ Monique M O N I K
 Montargis M ON T A R J I S
 Montego
 Montroulez
+Moreau M O R O
 Morgan M OH R G AN N
 Morvan M OH R V AN
-Moreau M O R O
 Morwenna
 Mozambik
 Mumbai	M OU M B A I
@@ -655,8 +655,8 @@ Obama
 Okitania
 Olier
 Oliver O L I V EU R
-Ollivier O L I V I E
 Olivier O L I V I E
+Ollivier O L I V I E
 Onyx O N I K S
 Oregon O R E G ON
 Oriant
@@ -680,8 +680,8 @@ Paul P OH L
 Pellen P E L EH N
 Pempoull
 Penelope P E N E L OH P
-Pêr
 Penmarc'h
+Pêr
 Perou
 Persia
 Peugeot P EU J O
@@ -690,14 +690,14 @@ Pichon
 Pierre P I EH R
 Pleiber P L E B EH R
 Plerin
-Plevin
 Pleskob
 Pleuwigner
+Plevin
 Plistin
-Ploneiz
-Plonevez
 Plogastell
 Plogoneg
+Ploneiz
+Plonevez
 Plouan
 Plouared
 Plouarzhel
@@ -751,7 +751,6 @@ Ploveilh
 Ploveren
 Ploveur
 Plozeved
-Lambada
 Plufur
 Pluguen
 Pluhernin
@@ -776,6 +775,7 @@ Priya
 Prod P R OH D
 Provañs
 Qigong CH I K ON G
+Radiohead R A D I O EH D
 Ramses
 Ravi
 Reblochon R EU B L O CH ON
@@ -794,8 +794,8 @@ Roma
 Romaned
 Ronan
 Ropars
-Rosette R O Z EH T
 Rosetta R O Z E T A
+Rosette R O Z EH T
 Rosko
 Rostren
 Rumengol R U M EN G OH L
@@ -804,20 +804,22 @@ Sadorn
 Saint S EN
 Salem
 Sandra
-Sarkozy S A R K O Z I
+Sant
 São S A O
 Saoz
 Saozon
-Sarzhav S A R Z O
 Sapiens S A P I EN S
 Sarah S A R A
 Sardinia
+Sarkozy S A R K O Z I
+Sarzhav S A R Z O
 Saturn
 Schwarzenegger CH W A R Z E N E G EH R
 Seattle S I A T OE L
 Sebastian
 Segway S EH G OU EH
 Semmelweis Z E M EH L V A I S
+Senegal
 Sevilla S E V I LH A
 Shakespeare CH EY K S P I R
 Sheila	CH EH I L A
@@ -853,8 +855,8 @@ Stevenson S T I V EH N S OH N
 Stockholm S T O K OH L M
 Stonewall S T O N W OH L
 Strasbourg S T R A S B OU R
-Suafrika
 Stumdi
+Suafrika
 Suamerika
 Suamerikan
 Suez
@@ -930,16 +932,17 @@ Varzhin
 Vaxime	V A K S I M
 Vazhev
 Vega
+Velgia
 Venezia
 Verc'her
 Verdun V EH R D EN
-Velgia
 Veurzh
 Viami
 Vichel V I CH EH L
 Victor V I K T OH R
 Vienna
 Vikael
+Viking
 Vincent	V EN S AN
 Vio
 Virmaned
@@ -959,6 +962,7 @@ Voynet V O A N EH
 Vreizh
 Vrest
 Vretoned
+Vrezhonegerien
 Walfridus
 Walter
 Wangari
@@ -971,23 +975,19 @@ Wenvael
 Whanganui W AN N G A N OU I
 Winog
 Wisconsin W I S K ON N S I N
+Wong
 Woodstock W OU D S T OH K
 Xavier	G Z A V I E
 Xi CH I
 Yann
 Yannig
-Viking
 Yaou
 Yerom
 Yezel
-Senegal
 Yoran
-Vrezhonegerien
 York I OH R K
 Youenn
-Wong
 Youna
-Sant
 Youtube I OU T U B
 Yud
 Yudikael
