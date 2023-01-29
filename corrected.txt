@@ -18,6 +18,8 @@ evid	evit
 warlerc'h	war lerc'h
 formaj	fourmaj
 koa	kwa
+breiz	Breizh
+egipt	Ejipt
 
 
 # Fr to Br
@@ -142,6 +144,8 @@ maël	Mael
 loïc	Loïg
 fabrice	Fabris
 argoat	Argoad
+victoria	Viktoria
+victor	Viktor
 
 
 nozvat	noz vat

@@ -1,5 +1,7 @@
 # stt-tools
 
+Personal tool kit to build a breton speech-to-text model with Kaldi.
+
 Split files .split should be in the same folder as its related audio file and text file.
 
 
@@ -10,7 +12,7 @@ Install required python modules with
 pip install -r requirements.txt
 ```
 
-## Transcription rules
+## Text normalization and transcription rules
 
 Numerals should be written in all letters \
 (E.g. "1942" --> "mil nav c'hant daou ha daou ugent")
@@ -94,7 +96,7 @@ python3 WikiExtractor.py -o dumps --json brwiki-20220920-pages-articles-multistr
  * Try reducing the size of the model (number of hidden layer) as well as the number of epochs
  * Phonemes "YE N", "YOU" for plural markers rather than "I E N", "I OU" ?
  * Phoneme "GW" rather than "G OU" ?
- * Add breton sentences with https://commonvoice.mozilla.org/sentence-collector/
+ * Add breton sentences to https://commonvoice.mozilla.org/sentence-collector/
 
 ## Acknowledgement
 

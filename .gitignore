@@ -13,7 +13,7 @@ training_data/
 aligned/
 corpus/
 generated_corpus/
-corpus_skrid/
+text_corpus/
 
 corpus_ya/
 

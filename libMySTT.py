@@ -39,9 +39,6 @@ ACRONYM_PATH = os.path.join(ROOT, "acronyms.txt")
 LEXICON_ADD_PATH = os.path.join(ROOT, "lexicon_add.txt")
 LEXICON_REPLACE_PATH = os.path.join(ROOT, "lexicon_replace.txt")
 
-SPEAKER_ID_PATTERN = re.compile(r'{([-\w]+):*([mf])*}')
-METADATA_PATTERN = re.compile(r'{(.+?)}')
-
 
 verbal_tics = {
     'euh'   :   'OE',
@@ -54,9 +51,11 @@ verbal_tics = {
     'boñ'   :   'B ON',
     'bah'   :   'B A',
     'feñ'   :   'F EN',
+    'añfeñ' :   'AN F EN',
     'tieñ'  :   'T I EN',
     'alors' :   'A L OH R',
     'allez' :   'A L E',
+    'pff'   :   'P F'
     #'oh'    :   'O',
     #'ah'    :   'A',
 }
@@ -147,6 +146,7 @@ w2f = {
     'v.'    :   'O',        # beV
     'vr.'   :   'OH R',     # kaVR, loVR
     'w'     :   'W',
+    'x'     :   'K S',      # Axel
     'y'     :   'I',        # pennsYlvania
     'ya'    :   'IA',       # YAouank
     'ye'    :   'IE',       # YEzh
@@ -341,25 +341,47 @@ def load_textfile(filename):
             l = l.strip()
             if l and not l.startswith('#'):
                 # Extract speaker id and other metadata
-                metadata_match = METADATA_PATTERN.finditer(l)
-                speaker_id_match = SPEAKER_ID_PATTERN.search(l)
-                if speaker_id_match:
-                    current_speaker = speaker_id_match[1]
-                stripped = ""
-                head = 0
-                for match in metadata_match:
-                    start, end = match.span()
-                    stripped += l[head:start]
-                    head = end
-                if head > 0:
-                    stripped += l[head:]
-                    l = stripped
+                l, metadata = extract_metadata(l)
+                if "speaker" in metadata:
+                    current_speaker = metadata["speaker"]
                 
                 l = l.strip()
                 if l :
                     text.append(l)
                     speakers.append(current_speaker)
     return text, speakers
+
+
+
+SPEAKER_ID_PATTERN = re.compile(r'{([-\'\w]+):*([mf])*}')
+METADATA_PATTERN = re.compile(r'{(.+?)}')
+
+def extract_metadata(sentence: str):
+    """ Returns the sentence stripped of its metadata (if any)
+        and a dictionary of metadata
+    """
+    metadata = dict()
+    metadata_match = METADATA_PATTERN.finditer(sentence)
+    speaker_id_match = SPEAKER_ID_PATTERN.search(sentence)
+    if speaker_id_match:
+        name = speaker_id_match[1].lower()
+        metadata["speaker"] = name
+        gender = speaker_id_match[2]
+        if gender: metadata["gender"] = gender.lower()
+        elif "paotr" in name: metadata["gender"] = 'm'
+        elif "plach" in name or "plac'h" in name: metadata["gender"] = 'f'
+    
+    stripped = ""
+    head = 0
+    for match in metadata_match:
+        start, end = match.span()
+        stripped += sentence[head:start]
+        head = end
+    if head > 0:
+        stripped += sentence[head:]
+        sentence = stripped
+    
+    return sentence, metadata
 
 
 
@@ -435,11 +457,12 @@ def tokenize(sentence, post_proc=True, keep_dash=False, keep_punct=False):
                 new_tokens.append(lowered)
         tokens = new_tokens
 
-    return tokens
+    return list(filter(bool, tokens))
 
 
 
 PARENTHESIS_PATTERN = re.compile(r"\([^\(]+\)")
+
 def extract_parenthesis(sentence):
     """ Extract text between parenthesis """
     in_parenthesis = []
@@ -486,44 +509,20 @@ def split_line(sentence):
         sub = new_sub
     
     # filter out sub-sentences shorter than 2 tokens
-    return [s for s in sub if len(s.split()) > 1]
+    return [s.strip() for s in sub if len(s.split()) > 1]
     #return sub
-
-
-def test_split_lines():
-    sentences = [
-        "Un tan-gwall a voe d'ar 1añ a viz Gouhere 2011 el leti. Ne voe den ebet gloazet pe lazhet. Un nebeud estajoù nemetken a oa bet tizhet.",
-        "E 1938 e voe he gwaz harzet ha lazhet en U. R. S. S., ar pezh na viras ket ouzh Ana Pauker a chom feal d'ar gomunouriezh, d'an U. R. S. S. ha da Jozef Stalin.",
-        "Ur maen-koun zo war lein, da bevar barzh eus ar vro : T. Hughes Jones, B.T. Hopkins, J. M. Edwards hag Edward Prosser Rhys.",
-        """C'hoariet en deus evit Stade Rennais Football Club etre 1973 ha 1977 hag e 1978-1979. Unan eus ar c'hoarierien wellañ bet gwelet e klub Roazhon e oa. Pelé en deus lavaret diwar e benn : « "Kavet 'm eus an hini a dapo ma flas. Laurent Pokou e anv." ».""",
-        """Hervez Levr ar C'heneliezh ec'h eo Yafet eil mab Noah. Hervez ar Bibl e tiskouezas doujañs e-kenver e dad mezv-dall. Benniget e voe gantañ evel Shem : "Frankiz ra roio Doue da Yafet ! Ha ra chomo e tinelloù Shem !" """,
-        "Tout an dud en em soñj. Piv int ar skrivagnerien-se ? Eus pelec'h emaint o tont... ?",
-        "Tamm ebet. Klasket em boa e-pad 5 miz ha n’on ket bet plijet ; un afer a bublik eo.",
-        "unan daou tri : pevar pemp c'hwec'h",
-        ]
-    lengths = [3, 1, 2, 5, 5, 3, 3, 2]
-    for i, s in enumerate(sentences):
-        splits = split_line(s)
-        print(s)
-        print(len(splits))
-        if len(splits) == lengths[i]:
-            print(Fore.GREEN + "OK" + Fore.RESET)
-        else :
-            print(splits)
-            print(Fore.RED + "FAIL" + Fore.RESET)
-        print()
 
 
 
 def get_cleaned_sentence(sentence, rm_bl=False, rm_verbal_ticks=False, keep_dash=False, keep_punct=False):
     """
-        Return a cleaned sentence, proper to put in text files or corpus
+        Return a cleaned and corrected sentence, proper to put in text files or corpus
         and a quality score (ratio of black-listed words, the lower the better)
 
         Parameters
         ----------
             rm_bl (Boolean):
-                remove black-list markers
+                remove marked words
             rm_verbal_ticks (Boolean):
                 remove verbal ticks
             keep_dash (Boolean):
@@ -538,7 +537,7 @@ def get_cleaned_sentence(sentence, rm_bl=False, rm_verbal_ticks=False, keep_dash
     num_blacklisted = 0
     for token in tokenize(sentence, keep_dash=keep_dash, keep_punct=keep_punct):
         lowered_token = token.lower()
-        # Ignore black listed words
+        # Skip black listed words
         if token.startswith('*'):
             if not rm_bl:
                 tokens.append(token)
@@ -560,30 +559,6 @@ def get_cleaned_sentence(sentence, rm_bl=False, rm_verbal_ticks=False, keep_dash
     if not tokens:
         return '', 1
     return ' '.join(tokens), float(num_blacklisted)/len(tokens)
-
-
-
-def test_get_cleaned_sentence():
-    sentences = [
-        "ar bloavezh 1935 a zo en XXvet kantved",
-        "o gwelet Charlez VI e vi warc'hoazh",
-        ]
-    expected = [
-        "ar bloavezh mil nav c'hant pemp ha tregont a zo en ugentvet kantved",
-        "o gwelet Charlez c'hwec'h e vi warc'hoazh",
-        ]
-    
-    for i, s in enumerate(sentences):
-        cleaned, _ = get_cleaned_sentence(s)
-        correction, _ = get_correction(s)
-        error = False
-        if cleaned != expected[i]:
-            error = True
-            print(s)
-            print(cleaned)
-            print(correction)
-        if error:
-            print("Error found")
 
 
 
@@ -644,6 +619,7 @@ def is_acronym(word):
 
     if len(word) < 2:
         return False
+    
     valid = False
     for l in word:
         if l in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":

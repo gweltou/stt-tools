@@ -2,6 +2,14 @@
 # -*- coding: utf-8 -*-
 
 
+"""
+    Extract the vocabulary from an tsv file
+    and write all the words, along with the number of occurences
+    in `mcv_vocab.txt` file
+
+"""
+
+
 import sys
 import os
 sys.path.append("..")

@@ -1,8 +1,13 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+"""
+    Score every utterance of every data item in a giver folder
+"""
+
 
 import sys
+import argparse
 import os
 from pydub import AudioSegment
 from libMySTT import list_files_with_extension, load_segments, load_textfile, get_segment, transcribe_segment, get_cleaned_sentence
@@ -11,9 +16,12 @@ from jiwer import wer, cer
 
 
 if __name__ == "__main__":
-    rep = sys.argv[1]
-    print(rep)
-    split_files = list_files_with_extension('.split', rep)
+    parser = argparse.ArgumentParser(description="Score every utterance of every data item in a giver folder")
+    parser.add_argument("data_folder", metavar='FOLDER', help="Folder containing data files")
+    args = parser.parse_args()
+
+    print(args.data_folder)
+    split_files = list_files_with_extension('.split', args.data_folder)
     for split_file in split_files:
         basename, _ = os.path.splitext(split_file)
         wav_file = basename + os.path.extsep + "wav"

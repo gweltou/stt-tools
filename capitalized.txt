@@ -1,3 +1,44 @@
+Twitch
+Nintendo
+Mario
+Zelda Z EH L D A
+Celeste S E L EH S T
+Antony AN T O N I
+Orly
+Rungis R EN J I S
+Fresnes F R EH N
+Kirby
+Axel
+Maroko
+Sahara
+Dakar
+Portugal
+Felipe  
+Pelem
+Vatikan
+Jaouen
+Euskadi
+Miranda
+Maïna M A I N A
+Galia
+Kazakstan
+Prusia
+Sparta
+Tunizia
+Arkadia
+Sahel
+Hungaria
+Montana
+Ouzbekistan
+Slovakia
+Yougoslavia
+Libia
+Virginia V I R J I N I A
+Pakistan
+Bangkok
+Venezuela
+Jordania
+Amañdin
 Aaron A R OH N
 Abel
 Abraham A B R A H A M
@@ -20,6 +61,7 @@ Alan
 Alar
 Alaska
 Alban A L B AN
+Albania
 Albert A L B EH R
 Albin A L B EN
 Albus
@@ -57,6 +99,9 @@ Anna
 Annaig
 Antoine AN T O A N
 Aostralia
+Andromeda
+Afganistan
+Cadiou K A D I OU
 Aostria
 Aostrian
 Apple A P OE L
@@ -161,14 +206,23 @@ C'hall
 C'hallaoued
 C'hanada
 Chann CH AN N
+Arabia
 Channig
 Charleston CH A R L E S T OH N
 Charlez
+Estonia
+Mikronezia
+Indonezia
+Alice A L I S
 Charlie CH A R L I
 Chennai
 C'henyanad
 C'henyaniz
 Chesnais CH EU N EH
+Unix
+Molac
+Lokmaria
+Lola
 Chicago	CH I K A G O
 Chili
 C'hireg
@@ -256,6 +310,7 @@ Emilie E M I L I
 Emma
 Emmanuel E M A N U EH L
 Enora
+Malta
 Eost E S T
 Erell
 Eric E R I K
@@ -349,6 +404,7 @@ Gwaien
 Gwegan
 Gweltaz	G W EH L T A S
 Gwenc'hlan
+Gwendal
 Gwened
 Gwener
 Gwengamp
@@ -395,6 +451,7 @@ Iwerzhon
 Iwerzhoniz
 Iwi
 Izabel
+Lanniskad
 Izelvroioù
 Izold
 Jack D J A K
@@ -423,6 +480,8 @@ Johnny D J OH N I
 Jones D J O OU N S
 Jorjia
 Josephine J O Z E F I N
+Jozef
+Mustafa M OU S T A F A
 Jouin J OU EN
 Julien J U L I EN
 Jura
@@ -430,6 +489,7 @@ Kabilia
 Kaero
 Kaledonia
 Kaledoniz
+Thierry T I E R I
 Kalifornia
 Kambodja
 Kanada
@@ -532,6 +592,7 @@ Lestevennog
 Liberia
 Liger
 Lilo
+Linux
 Lisbon
 Lituania
 Liza
@@ -598,11 +659,24 @@ Master M A S T OE R
 Mathias M A T I A S
 Mathieu M A T I EU
 Mathilde M A T I L D
+Matilda
 Matignon
+Melusina M E L U Z I N A
+Lorenzo
+Johanna
+Melania
+Luksembourg
+Angola
+Otoman
+Holland
+Nevenoe
+Amsterdam A M S T EH R D A M
+Josilin
 Maxime	M A K S I M
 Max M A K S
 Maya M A IA
 Mec'hiko
+Vec'hiko
 Mediterane
 Meksik
 Melioneg
@@ -669,8 +743,12 @@ Palestina
 Paol
 Paolig
 Paraguay P A R A G OU EH
+Guatelala G OU A T E M A L A
 Parantoen
 Pariz
+Leningrad
+Vietnam V I EH T N A M
+Lombardia
 Pascale	P A S K A L
 Pascal P A S K A L
 Paskal
@@ -768,6 +846,7 @@ Poullann
 Poullaouen
 Poulloger
 Pourlet
+Windsor
 Praha
 Pretoria
 Prigent P R I J AN
@@ -792,6 +871,7 @@ Roger R O J E
 Rom
 Roma
 Romaned
+Roumania
 Ronan
 Ropars
 Rosetta R O Z E T A
@@ -943,6 +1023,8 @@ Victor V I K T OH R
 Vienna
 Vikael
 Viking
+Viktor
+Viktoria
 Vincent	V EN S AN
 Vio
 Virmaned
@@ -998,3 +1080,4 @@ Zavier Z A V I E
 Zeland
 Zola
 Zoue
+Zimbabwe

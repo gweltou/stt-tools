@@ -1,11 +1,11 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-"""
-    Author:        Gweltaz Duval-Guennoc
- 
+
+""" 
     Analyse (or compare) tsv files
  
+    Author: Gweltaz Duval-Guennoc
 """
 
 

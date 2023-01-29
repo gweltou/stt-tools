@@ -3,3 +3,4 @@ pyrubberband
 colorama
 cyhunspell
 pydub
+matplotlib
