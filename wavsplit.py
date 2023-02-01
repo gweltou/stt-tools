@@ -101,7 +101,8 @@ if __name__ == "__main__":
     
     # Create text file if it doesn't exist
     if not os.path.exists(text_filename):
-        open(text_filename, 'a').close()
+        with open(text_filename, 'w') as fw:
+            fw.write('#\n' * 4 + '\n' * 6)  # Text file header
     text = []
     speakers = []
     text, speakers = load_textfile(text_filename)
@@ -219,18 +220,18 @@ if __name__ == "__main__":
         elif x.startswith('cc'): # Automatic split
             segments_undo = segments[:]
             seg = song[segments[idx][0]:segments[idx][1]]
-            if header:
-                split_args = x.split()
-                new_args = parser.parse_args(split_args)
-                #new_args.thresh = min(new_args.thresh, args.thresh)
-                print(new_args)
-                subsegments = detect_nonsilent(seg, min_silence_len=new_args.dur, silence_thresh=new_args.thresh)
-                if len(subsegments) > 1:
-                    subsegments = [(s + start, e + start) for s, e in subsegments]
-                    segments = segments[:idx] + subsegments + segments[idx+1:]
-                    modified = True
-                else:
-                    print("No subsegments found...")
+            # if header:
+            split_args = x.split()
+            new_args = parser.parse_args(split_args)
+            #new_args.thresh = min(new_args.thresh, args.thresh)
+            print(new_args)
+            subsegments = detect_nonsilent(seg, min_silence_len=new_args.dur, silence_thresh=new_args.thresh)
+            if len(subsegments) > 1:
+                subsegments = [(s + start, e + start) for s, e in subsegments]
+                segments = segments[:idx] + subsegments + segments[idx+1:]
+                modified = True
+            else:
+                print("No subsegments found...")
         elif x == 'r':
             play_segment_text(max(0, idx), song, segments, text, speed)
         elif x.isnumeric():

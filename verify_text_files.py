@@ -2,13 +2,14 @@
 # -*- coding: utf-8 -*-
 
 """
-    File:       verify_text_files.py
+    File: verify_text_files.py
     
     Check spelling in every text file in folder and subfolders
     Prompt for new found acronyms
     
+    Usage: ./verify_text_files.py DIRECTORY
     
-    Author:     Gweltaz Duval-Guennoc
+    Author: Gweltaz Duval-Guennoc
  
 """
 
@@ -42,7 +43,7 @@ if __name__ == "__main__":
         if not os.path.exists(split_filename):
             continue
         with open(file, 'r') as f:
-            print(file)
+            print('\n' + file)
             num_line = 0
             for line in f.readlines():
                 num_line += 1

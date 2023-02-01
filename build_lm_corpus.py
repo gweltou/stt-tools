@@ -3,15 +3,17 @@
 
 
 """
- Build a text corpus from wikipedia br dumps
- Outputs text files:
-    * "corpus/wiki_corpus.txt", the main corpus of sentences
-    * "wikipedia_corpus/wiki_acronyms.txt", a list of possible acronyms
-    * "wikipedia_corpus/wiki_capitalized.txt", a list of capitalized words
-    * "wikipedia_corpus/wiki_sant.txt", a list of saints, convenient to retrieve first names
-    * "wikipedia_corpus/wiki_vocab.txt", the vocabulary of the corpus
+    Build a text corpus from wikipedia br dumps
+    Outputs text files:
+        * "corpus/wiki_corpus.txt", the main corpus of sentences
+        * "wikipedia_corpus/wiki_acronyms.txt", a list of possible acronyms
+        * "wikipedia_corpus/wiki_capitalized.txt", a list of capitalized words
+        * "wikipedia_corpus/wiki_sant.txt", a list of saints, convenient to retrieve first names
+        * "wikipedia_corpus/wiki_vocab.txt", the vocabulary of the corpus
  
- Author:  Gweltaz Duval-Guennoc
+    Usage: python3 build_lm_corpus.py 
+
+    Author:  Gweltaz Duval-Guennoc
   
 """
 
@@ -19,6 +21,7 @@
 import os
 import json
 import re
+import argparse
 from colorama import Fore
 from libMySTT import split_line, filter_out, punctuation, capitalized, is_acronym, acronyms, get_correction, get_cleaned_sentence
 
@@ -26,7 +29,7 @@ from libMySTT import split_line, filter_out, punctuation, capitalized, is_acrony
 
 LIMIT_VOCAB = False
 VOCAB_SIZE = 10000
-MIN_TOKENS_PER_SENTENCE = 4
+# MIN_TOKENS_PER_SENTENCE = 4
 
 OUTPUT_DIR = "generated_corpus"
 
@@ -46,13 +49,26 @@ KEMMADUR_PATTERN = re.compile(r" (g|b|d|w|v|c'h){1}/[a-zñ']{3,}", re.IGNORECASE
 
 
 if __name__ == "__main__":
-    articles = []
+    parser = argparse.ArgumentParser(description="Generate a clean corpus text from dumps (wikiedia) or other")
+    parser.add_argument("source", help="Source dir of raw corpus data (wikipedia dumps or other)", metavar="DIR", nargs='+')
+    parser.add_argument("-o", "--output", help="Output directory")
+    parser.add_argument("-t", "--min-tokens", help="Minimum number of valid tokens per sentence", type=int, default=4)
+    # parser.add_argument("--test", help="train dataset directory", required=True)
+    # parser.add_argument("-d", "--dry-run", help="run script without actualy writting files to disk", action="store_true")
+    # parser.add_argument("-f", "--draw-figure", help="draw a pie chart showing data repartition", action="store_true")
+    args = parser.parse_args()
+    print(args)
 
+    articles = []
     filenames = []
 
-    for d in dumps_dirs:
-        for filename in os.listdir(d):
-            filenames.append(os.path.join(d, filename))
+    # for d in dumps_dirs:
+    for d in args.source:
+        if os.path.isfile(d) and d.endswith(".txt"):
+            filenames.append(d)
+        elif os.path.isdir(d):
+            for filename in os.listdir(d):
+                filenames.append(os.path.join(d, filename))
     
     for filename in filenames:
         if "wiki" in filename:
@@ -149,7 +165,7 @@ if __name__ == "__main__":
             words = sentence.split()
             
             # Filter out short sentences
-            if len(words) < MIN_TOKENS_PER_SENTENCE:
+            if len(words) < args.min_tokens:
                 continue
 
             # Keep sentences with common words only

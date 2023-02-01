@@ -981,7 +981,9 @@ def eafToSplitFile(eaf_filename):
     abs_path = os.path.abspath(eaf_filename)
     rep, eaf_filename = os.path.split(abs_path)
     
-    doc = minidom.parse(eaf_filename)
+    print(rep, eaf_filename)
+    print(abs_path)
+    doc = minidom.parse(abs_path)
     root = doc.firstChild
 
     segments = []
@@ -1003,10 +1005,16 @@ def eafToSplitFile(eaf_filename):
     split_filename = os.path.extsep.join((record_id, 'split'))
     
     if os.path.exists(split_filename):
-        print("Split file already exists. Aborting...")
-        return
-    if not os.path.exists(wav_rel_path):
-        print(f"Couldn't find '{wav_rel_path}'. Aborting...")
+        print("Split file already exists.")
+        while True:
+            r = input("Replace (y/n)? ")
+            if r.startswith('n'):
+                print("Aborting...")
+                return
+            elif r.startswith('y'):
+                break
+    if not os.path.exists(wav_filename):
+        print(f"Couldn't find '{wav_filename}'. Aborting...")
         return
 
     print("rep", rep)
@@ -1021,7 +1029,7 @@ def eafToSplitFile(eaf_filename):
 
     tiers = root.getElementsByTagName("TIER")
     for tier in tiers:
-        if tier.getAttribute("TIER_ID").lower() == "transcription":
+        if tier.getAttribute("TIER_ID").lower() in ("transcription", "default") :
             annotations = tier.getElementsByTagName("ANNOTATION")
             for annotation in annotations:
                 aa = annotation.getElementsByTagName("ALIGNABLE_ANNOTATION")[0]
@@ -1030,6 +1038,7 @@ def eafToSplitFile(eaf_filename):
                 time_seg = (time_slot_dict[ts1], time_slot_dict[ts2])
                 text = getText(aa.getElementsByTagName("ANNOTATION_VALUE")[0].childNodes)
                 segments.append((time_seg, text))
+                print(f"SEG: {time_seg} {text}")
 
     with open(text_filename, 'w') as f:
         for _, sentence in segments:

@@ -189,7 +189,7 @@ def sec2hms(seconds):
     """ Return a string of hours, minutes, seconds from a given number of seconds """
     minutes, seconds = divmod(round(seconds), 60)
     hours, minutes = divmod(minutes, 60)
-    return f"{hours}h {minutes}'{seconds}''"
+    return f"{hours}h {minutes}' {seconds}''"
 
 
 
@@ -202,15 +202,16 @@ def sec2hms(seconds):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate Kaldi data files")
     parser.add_argument("--train", help="train dataset directory", required=True)
-    parser.add_argument("--test", help="train dataset directory", required=True)
+    parser.add_argument("--test", help="train dataset directory")
     parser.add_argument("-d", "--dry-run", help="run script without actualy writting files to disk", action="store_true")
     parser.add_argument("-f", "--draw-figure", help="draw a pie chart showing data repartition", action="store_true")
     args = parser.parse_args()
+    # print(args)
 
     if not os.path.isdir(args.train):
         print("`train` argument should be a directory containing aligned audio, text and split files")
         sys.exit(1)
-    if not os.path.isdir(args.test):
+    if args.test and not os.path.isdir(args.test):
         print("`test` argument should be a directory containing aligned audio, text and split files")
         sys.exit(1)
     
@@ -225,10 +226,8 @@ if __name__ == "__main__":
                     speakers_gender[spk] = gender
     
     print("\n==== PARSING DATA ITEMS ====")
-    corpora = {
-        "train": parse_dataset(args.train),
-        "test": parse_dataset(args.test)
-        }
+    corpora = { "train": parse_dataset(args.train) }
+    if args.test: corpora["test"] = parse_dataset(args.test)
 
 
     if not args.dry_run:
