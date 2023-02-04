@@ -9,16 +9,13 @@ anatomiezh
 arkitektour
 artifisiel
 atersadennoù
-binarel
 atmosfer
-ruilhañ
-vitaminoù
 azoniad
 azonoù
 balbouzerezh
 bandemiezh
-temperadur
 bazhigoù
+binarel
 blam
 blini 
 boellgomzerioù
@@ -135,6 +132,7 @@ program
 roeñviñ
 rondigennoù
 rubrikenn
+ruilhañ
 santilitr
 santilitrad
 seurf
@@ -148,6 +146,7 @@ strategiezhioù
 strikt
 stummadurezh
 tabletennoù
+temperadur
 tempo
 termenaduriñ
 termeniñ
@@ -159,6 +158,7 @@ trug
 vejetarian
 vengleuzerien
 vestronia
+vitaminoù
 vitaminoù
 vousfentiñ
 youc'hou

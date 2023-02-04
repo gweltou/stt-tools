@@ -131,6 +131,7 @@ stéphan	Stefan
 catherine	Katrin
 philippe	Filip
 christian	Kristian
+christophe	Kristof
 helen	Elen
 hélène	Elen
 helena	Elena
@@ -146,6 +147,16 @@ fabrice	Fabris
 argoat	Argoad
 victoria	Viktoria
 victor	Viktor
+amélie	Ameli
+dominique	Dominig
+eric	Erik
+normandie	Normandi
+isabelle	Izabel
+justine	Justin
+plougastel	Plougastell
+plouescat	Ploueskad
+marcel	Marsel
+mélanie	Melani
 
 
 nozvat	noz vat

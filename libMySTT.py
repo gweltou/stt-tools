@@ -47,6 +47,7 @@ verbal_tics = {
     'eba'   :   'E B A',
     'ebeñ'  :   'E B EN',
     'kwa'   :   'K W A',
+    'hañ'   :   'H AN',
     'heñ'   :   'EN',
     'boñ'   :   'B ON',
     'bah'   :   'B A',
@@ -394,9 +395,9 @@ def filter_out(text, symbols):
 
 
 def pre_process(sentence, keep_dash=False, keep_punct=False):
-    """ Substitude parts of the sentence according to 'corrected_sentences' dictionary
-        Preserve letter case
-        Clean punctuation by default
+    """ Substitude parts of the sentence according to 'corrected_sentences' dictionary.
+        Preserve letter case.
+        Clean punctuation by default.
     """
     for mistake in corrected_sentences.keys():
         if mistake in sentence or mistake in sentence.lower():
@@ -565,12 +566,12 @@ def get_cleaned_sentence(sentence, rm_bl=False, rm_verbal_ticks=False, keep_dash
 def get_correction(sentence):
     """
         Return a string which is a colored correction of the sentence
-        and the number of spelling mistakes in sentence
+        and the number of spelling mistakes in sentence (after correction)
     """
     
     sentence = sentence.strip()
     if not sentence:
-        return ''
+        return '', 0
     
     num_errors = 0
     tokens = []
@@ -1041,6 +1042,7 @@ def eafToSplitFile(eaf_filename):
                 print(f"SEG: {time_seg} {text}")
 
     with open(text_filename, 'w') as f:
+        f.write('#\n' * 4 + '\n' * 6)
         for _, sentence in segments:
             f.write(sentence + '\n')
     with open(split_filename, 'w') as f:

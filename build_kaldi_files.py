@@ -24,11 +24,9 @@ from libMySTT import capitalized, acronyms, verbal_tics, phonemes, LEXICON_ADD_P
 
 
 SAVE_DIR = "data"
-ADD_EXTERNAL_CORPUS_TO_ML = True
-LM_TEXT_CORPUS_DIR = "text_corpus"
 LM_SENTENCE_MIN_WORDS = 3
 
-spk2gender_files = ["spk2gender.txt", "common_voice/spk2gender"]
+spk2gender_files = ["spk2gender.txt", "corpus_common_voice/spk2gender"]
 
 
 
@@ -203,10 +201,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate Kaldi data files")
     parser.add_argument("--train", help="train dataset directory", required=True)
     parser.add_argument("--test", help="train dataset directory")
+    parser.add_argument("--lm-corpus", help="path of a text file to build the language model")
     parser.add_argument("-d", "--dry-run", help="run script without actualy writting files to disk", action="store_true")
     parser.add_argument("-f", "--draw-figure", help="draw a pie chart showing data repartition", action="store_true")
     args = parser.parse_args()
-    # print(args)
+    print(args)
 
     if not os.path.isdir(args.train):
         print("`train` argument should be a directory containing aligned audio, text and split files")
@@ -224,6 +223,8 @@ if __name__ == "__main__":
                 for l in f.readlines():
                     spk, gender = l.strip().split()
                     speakers_gender[spk] = gender
+        else:
+            print(f"Couldn't find file '{fname}'")
     
     print("\n==== PARSING DATA ITEMS ====")
     corpora = { "train": parse_dataset(args.train) }
@@ -248,23 +249,23 @@ if __name__ == "__main__":
                 fout.write(f"{l}\n")
         
         # External text corpus will be added now
-        if ADD_EXTERNAL_CORPUS_TO_ML:
+        if args.lm_corpus:
             print("parsing and copying external corpus\n")
             with open(os.path.join(dir_kaldi_local, "corpus.txt"), 'a') as fout:
-                for text_file in list_files_with_extension(".txt", LM_TEXT_CORPUS_DIR):
-                    with open(text_file, 'r') as fr:
-                        for sentence in fr.readlines():
-                            cleaned, _ = get_cleaned_sentence(sentence)
-                            for word in cleaned.split():
-                                if word.lower() in corpora["train"]["lexicon"]:
-                                    pass
-                                elif word.lower() in capitalized:
-                                    pass
-                                elif is_acronym(word.upper()) and word.upper() in acronyms:
-                                    pass
-                                else:
-                                    corpora["train"]["lexicon"].add(word)
-                            fout.write(cleaned + '\n')
+                # for text_file in list_files_with_extension(".txt", LM_TEXT_CORPUS_DIR):
+                with open(args.lm_corpus, 'r') as fr:
+                    for sentence in fr.readlines():
+                        cleaned, _ = get_cleaned_sentence(sentence)
+                        for word in cleaned.split():
+                            if word.lower() in corpora["train"]["lexicon"]:
+                                pass
+                            elif word.lower() in capitalized:
+                                pass
+                            elif is_acronym(word.upper()) and word.upper() in acronyms:
+                                pass
+                            else:
+                                corpora["train"]["lexicon"].add(word)
+                        fout.write(cleaned + '\n')
         
 
         dir_dict_nosp = os.path.join(dir_kaldi_local, 'dict_nosp')
@@ -394,6 +395,6 @@ if __name__ == "__main__":
                 return f"{sec2hms(total_audio_length*pct/100)}"
         plt.pie(val, labels=keys, normalize=True, autopct=labelfn)
         plt.title(f"Dasparzh ar roadennoù, {sec2hms(total_audio_length)} en holl")
-        plt.savefig(os.path.join(corpora["train"]["path"], f"dataset_subset_division_{datetime.datetime.now().strftime('%Y-%m-%d')}.png"))
+        plt.savefig(os.path.join(corpora["train"]["path"], f"subset_division_{datetime.datetime.now().strftime('%Y-%m-%d')}.png"))
         print(f"\nFigure saved to \'{corpora['train']['path']}\'")
         # plt.show()

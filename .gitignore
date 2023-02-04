@@ -12,7 +12,7 @@ training_data/
 
 aligned/
 corpus/
-generated_corpus/
+generated/
 text_corpus/
 
 corpus_ya/

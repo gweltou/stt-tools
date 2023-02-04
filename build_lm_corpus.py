@@ -29,10 +29,6 @@ from libMySTT import split_line, filter_out, punctuation, capitalized, is_acrony
 
 LIMIT_VOCAB = False
 VOCAB_SIZE = 10000
-# MIN_TOKENS_PER_SENTENCE = 4
-
-OUTPUT_DIR = "generated_corpus"
-
 
 dumps_dirs = [
     os.path.join("corpus_wikipedia", "dumps"),
@@ -50,26 +46,24 @@ KEMMADUR_PATTERN = re.compile(r" (g|b|d|w|v|c'h){1}/[a-zñ']{3,}", re.IGNORECASE
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate a clean corpus text from dumps (wikiedia) or other")
-    parser.add_argument("source", help="Source dir of raw corpus data (wikipedia dumps or other)", metavar="DIR", nargs='+')
-    parser.add_argument("-o", "--output", help="Output directory")
+    parser.add_argument("source", help="Source of raw corpus data (directory of wikipedia dumps or text files)", metavar="DIR_OR_FILE", nargs='+')
+    parser.add_argument("-o", "--output", help="Output directory", default="generated")
     parser.add_argument("-t", "--min-tokens", help="Minimum number of valid tokens per sentence", type=int, default=4)
-    # parser.add_argument("--test", help="train dataset directory", required=True)
-    # parser.add_argument("-d", "--dry-run", help="run script without actualy writting files to disk", action="store_true")
-    # parser.add_argument("-f", "--draw-figure", help="draw a pie chart showing data repartition", action="store_true")
+    parser.add_argument("--rem-punct", help="Remove punctuation", action="store_true")
     args = parser.parse_args()
     print(args)
 
-    articles = []
-    filenames = []
 
-    # for d in dumps_dirs:
+    filenames = []
     for d in args.source:
         if os.path.isfile(d) and d.endswith(".txt"):
             filenames.append(d)
         elif os.path.isdir(d):
             for filename in os.listdir(d):
+                # if filename.endswith(".txt"):
                 filenames.append(os.path.join(d, filename))
     
+    articles = []
     for filename in filenames:
         if "wiki" in filename:
             with open(filename, 'r') as f:
@@ -83,7 +77,7 @@ if __name__ == "__main__":
                 articles.append(a)
     
     keepers = set()
-    punct_keepers = set()
+    keepers_nopunct = set()
     acronym_words = set()
     capitalized_words = set()
     santou = set()
@@ -98,20 +92,20 @@ if __name__ == "__main__":
                 print(line)
                 continue
             for sentence in split_line(line):
-                #sentence = filter_out(sentence, punctuation + '*')
                 words = sentence.split()
                 
                 # Filter out short sentences
                 if len(sentence) < 10:
                     continue
 
-                # Filter out sentences with only single letters or short words (ex: excludes "v i v i a n a v i v i a n a")
+                # Filter out sentences with only single letters or short words (ex: "v i v i a n a v i v i a n a")
                 if len(sentence)/len(words) < 2.0:
                     continue
                 
                 first_word = True
                 sant = False
                 for w in words:
+                    w = filter_out(w, punctuation)
                     if sant:
                         if w.lower() not in capitalized:
                             santou.add(w)
@@ -125,26 +119,27 @@ if __name__ == "__main__":
                         capitalized_words.add(w)
                     first_word = False
                 
-                sub_sentences = [get_cleaned_sentence(sub, keep_punct=True)[0] for sub in sentence.split(', ')]
-                # nopunct_sentence, _ = get_cleaned_sentence(sentence)
+                sub_sentences = sentence.split(', ')
                 sub_keepers = []
-                for s in sub_sentences:
-                    if not s: continue
+                for sub in sub_sentences:
+                    if not sub.strip(): continue
 
-                    correction, num_errors = get_correction(s)
-                    if num_errors == 0:
-                        sub_keepers.append(s)
-                        for w in s.split():
-                            if w in vocabulary:
-                                vocabulary[w] += 1
-                            else:
-                                vocabulary[w] = 1
+                    correction, num_errors = get_correction(sub)
+
+                    if num_errors == 0 and len(correction) > 1:
+                        sub_keepers.append(get_cleaned_sentence(sub, rm_bl=True, keep_punct=args.rem_punct)[0])
                     elif num_errors == 1:
-                        if num_outed % 200 == 0:
-                           print(correction)
+                        # if num_outed % 200 == 0:
+                        #    print(correction)
                         num_outed += 1
-                punct_keepers.add(', '.join(sub_keepers))
-                keepers.add(' '.join(sub_keepers))
+                keepers.add(', '.join(sub_keepers))
+                sentence_nopunct = ' '.join(filter_out(' '.join(sub_keepers), punctuation).split()) # Remove multi white-spaces
+                keepers_nopunct.add(sentence_nopunct)
+                for w in sentence_nopunct.split():
+                    if w in vocabulary:
+                        vocabulary[w] += 1
+                    else:
+                        vocabulary[w] = 1
 
     #print(f"{num_outed} discarded sentences with 1 error")
     
@@ -157,11 +152,12 @@ if __name__ == "__main__":
     
     kept = 0
 
+    OUTPUT_DIR = args.output
     if not os.path.exists(OUTPUT_DIR):
         os.mkdir(OUTPUT_DIR)
     
     with open(os.path.join(OUTPUT_DIR, "corpus.txt"), 'w') as f:
-        for sentence in punct_keepers:
+        for sentence in keepers_nopunct if args.rem_punct else keepers:
             words = sentence.split()
             
             # Filter out short sentences

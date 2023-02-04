@@ -93,6 +93,8 @@ python3 WikiExtractor.py -o dumps --json brwiki-20220920-pages-articles-multistr
     Replace phonetics for words in lexicon (foreign words for instance)
 
 ## TODO
+ * Build a better tokenizer
+ * Text normalization
  * Try reducing the size of the model (number of hidden layer) as well as the number of epochs
  * Phonemes "YE N", "YOU" for plural markers rather than "I E N", "I OU" ?
  * Phoneme "GW" rather than "G OU" ?

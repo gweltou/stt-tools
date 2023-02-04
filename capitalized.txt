@@ -1,44 +1,3 @@
-Twitch
-Nintendo
-Mario
-Zelda Z EH L D A
-Celeste S E L EH S T
-Antony AN T O N I
-Orly
-Rungis R EN J I S
-Fresnes F R EH N
-Kirby
-Axel
-Maroko
-Sahara
-Dakar
-Portugal
-Felipe  
-Pelem
-Vatikan
-Jaouen
-Euskadi
-Miranda
-Maïna M A I N A
-Galia
-Kazakstan
-Prusia
-Sparta
-Tunizia
-Arkadia
-Sahel
-Hungaria
-Montana
-Ouzbekistan
-Slovakia
-Yougoslavia
-Libia
-Virginia V I R J I N I A
-Pakistan
-Bangkok
-Venezuela
-Jordania
-Amañdin
 Aaron A R OH N
 Abel
 Abraham A B R A H A M
@@ -46,10 +5,12 @@ Ada
 Adamnan
 Adrian
 Adrien A D R I EN
+Afganistan
 Afrika
 Afrikan
 Afrikaned
-Afrikaniz
+Afrikanez
+Afrikanezed
 Agapit
 Agathe A G A T
 AirBnb EH R B I EH N B I
@@ -57,6 +18,7 @@ Akitania
 Alabama
 Alain A L EN
 Alamagn
+Alambra
 Alan
 Alar
 Alaska
@@ -68,6 +30,7 @@ Albus
 Alexandra	A L EH K S AN D R A
 Alexandre	A L EH K S AN N D R
 Algam
+Alice A L I S
 Alix A L I K S
 Aljeri
 Aljeria
@@ -77,6 +40,7 @@ Alpoù
 Alre
 Altai
 Alvarez
+Amañdin
 Amazonia
 Ambre AN B R
 Ameli
@@ -86,28 +50,31 @@ Amerikanez
 Amerindian
 Amily
 Amman A M A N
+Amsterdam A M S T EH R D A M
 Amy
 Ananda
 Andalouzia
 Andrew	AN N D R OU
 Android AN D R O I D
+Andromeda
 Angela	AN N J E L A
 Angeles AN N J EU L EH S
 Angkor
+Angola
 Anjela
 Anna
 Annaig
 Antoine AN T O A N
+Antony AN T O N I
 Aostralia
-Andromeda
-Afganistan
-Cadiou K A D I OU
 Aostria
 Aostrian
 Apple A P OE L
+Arabia
 Arc'hantina
 Are
 Argoad
+Arkadia
 Armenia
 Arno
 Arnold A R N OH L D
@@ -122,6 +89,7 @@ Auguste O G U S T
 Aurélien O R E L I EN
 Avatar
 Avran
+Axel
 Azia
 Bagan
 Baglan
@@ -130,6 +98,8 @@ Balestina
 Bali
 Balp
 Baltimore B A L T I M OH R
+Banaleg
+Bangkok
 Baptiste B A T I S T
 Barbara
 Barcelona B A R S E L O N A
@@ -150,12 +120,14 @@ Bempont
 Benead
 Benean
 Bennsylvania
+Berc'hed
 Berin
 Berlin
 Bernez
 Berry B E R I
 Berteleme
 Bethleem B E T L E EH M
+Betleem B E T L E EH M
 Beuno
 Beuzeg
 Bieuzi
@@ -173,6 +145,7 @@ Bollore B O L O R E
 Bolonia
 Bolsonaro
 Borgn
+Bortugal
 Boston B OH S T OH N
 Bouda
 Boudaoù
@@ -197,32 +170,25 @@ Brusel B R U S EH L
 Bulgaria
 Buriana
 Burkina
+Cadiou K A D I OU
 Cadou K A D OU
 Carolina K A R O L I N A
 Caroline K A R O L I N
 Casterman K A S T EH R M A N
+Celeste S E L EH S T
 Celsius	S EH L S I U S
 C'hall
 C'hallaoued
 C'hanada
 Chann CH AN N
-Arabia
 Channig
 Charleston CH A R L E S T OH N
 Charlez
-Estonia
-Mikronezia
-Indonezia
-Alice A L I S
 Charlie CH A R L I
 Chennai
 C'henyanad
 C'henyaniz
 Chesnais CH EU N EH
-Unix
-Molac
-Lokmaria
-Lola
 Chicago	CH I K A G O
 Chili
 C'hireg
@@ -240,9 +206,11 @@ Corre K OH R
 Cuba K U B A
 Dagan
 Dailymotion	D EY L I M O CH EU N
+Dakar
 Dalton
 Dana
 Daniel D A N I EH L
+Danielloù
 Danmark
 Dastumedia
 David D A V I D
@@ -310,24 +278,27 @@ Emilie E M I L I
 Emma
 Emmanuel E M A N U EH L
 Enora
-Malta
 Eost E S T
 Erell
 Eric E R I K
+Erik
 Erle EH R L E
 Ernest EH R N EH S T
 Erwan EH R W AN N
+Estonia
 Etien
 Etiopia
 Eugénie EU J E N I
 Europa
 Europiz
 Eusa
+Euskadi
 Evelyne E V EU L I N
 Fabris
 Facebook F EY S B OU K
 Fañch
 Faoued
+Felipe  
 Fezwezhen
 Filiber
 Filiberzh
@@ -351,9 +322,11 @@ Frañs
 Frañsez
 Frañsis
 Frederik
+Fresnes F R EH N
 Fulup
 Fustec F U S T EH K
 Gabriel
+Galia
 Gall
 Gangnam
 Gaoter
@@ -390,8 +363,10 @@ Goulwena
 Gourenez
 Gourin
 Grall
+Granada
 Greta
 Groñvel
+Guatelala G OU A T E M A L A
 Guegan G E G AN N
 Guérin G E R EN
 Guidecca G U I D E K A
@@ -429,16 +404,19 @@ Hilton H I L T OH N
 Himalaya
 Hirrien
 Hitler  H I T L EH R
+Holland
 Hollsent
 Hong ON G
 Hugo U G O
 Hugues U G
+Hungaria
 Icare I K A R
 Ifig
 Indez
 India
 Indianez
 Indiz
+Indonezia
 Irak
 Iran
 Isabelle I Z A B EH L
@@ -450,8 +428,7 @@ Iwan
 Iwerzhon
 Iwerzhoniz
 Iwi
-Izabel
-Lanniskad
+Izabel I Z A B EH L
 Izelvroioù
 Izold
 Jack D J A K
@@ -461,6 +438,7 @@ James D J EY M S
 Janedig
 Janeiro D J A N E R O
 Jan	J AN
+Jaouen
 Japan
 Japaned
 Jaurès J O R EH S
@@ -475,24 +453,35 @@ Jezuz
 Jezuz J E Z U
 Jinping J I N P I N G
 Jodhpur J O D P OU R
+Johanna
 John D J OH N
 Johnny D J OH N I
 Jones D J O OU N S
+Jordania
 Jorjia
 Josephine J O Z E F I N
-Jozef
-Mustafa M OU S T A F A
+Josilin
 Jouin J OU EN
+Jozeb
+Jozef
 Julien J U L I EN
 Jura
+Justin
+Justina
 Kabilia
 Kaero
 Kaledonia
 Kaledoniz
-Thierry T I E R I
 Kalifornia
 Kambodja
 Kanada
+Koneg
+Kouloum
+Kristol
+Marius
+Marzhin
+Marsel
+Melani
 Kanariez
 Kankaven
 Kaon
@@ -505,6 +494,7 @@ Kastellin
 Katalonia
 Katell
 Katrin
+Kazakstan
 Kembre
 Kembreiz
 Kemerovo
@@ -529,6 +519,7 @@ Kerzu
 Kiberen
 Kiev
 Kipling
+Kirby
 Kleopatra
 Klet
 Kmer
@@ -544,6 +535,7 @@ Korsika
 Kraozon
 Krist
 Kristian K R I S T I AN
+Kristof
 Kubrick K U B R I K
 Kuiper
 Kyoto
@@ -572,6 +564,7 @@ Lannildud
 Lanniliz
 Lanninon
 Lanniron
+Lanniskad
 Lannuon
 Laorañs
 Laponia
@@ -586,10 +579,12 @@ Leclerc L EU K L EH R
 Lege
 Lena
 Lenin
+Leningrad
 Leninsk
 Leonardo L E O N A R D O
 Lestevennog
 Liberia
+Libia
 Liger
 Lilo
 Linux
@@ -602,16 +597,22 @@ Loeiz
 Lohieg
 Loïg L O I G
 Loiret L O A R EH
+Lokmaria
 Lokournan
+Lola
+Lombardia
 Londrez
+Lorenzo
 Lorenzoni
 Los L O S
+Loto
 Lou
 Louis	L OU I
 Loula
 Lucky L U K I
 Luis	L OU I S
 Luke L U K
+Luksembourg
 Lula L OU L A
 Lun
 Luzon
@@ -626,12 +627,15 @@ Maeleg
 Magalli M A G A L I
 Mahama
 Mahomet
+Maïna M A I N A
 Maiwenn
 Mala
 Malawi
 Malgeneg
+Mali
 Malo
 Maloù
+Malta
 Manche M AN CH
 Mandalay M AN N D A L EH
 Mandela
@@ -646,7 +650,9 @@ Maria
 Mariana
 Marilou
 Marilyn M A R I L I N
+Mario
 Mark
+Maroko
 Marsilha
 Marthe M A R T
 Martin M A R T EN
@@ -659,27 +665,17 @@ Master M A S T OE R
 Mathias M A T I A S
 Mathieu M A T I EU
 Mathilde M A T I L D
-Matilda
 Matignon
-Melusina M E L U Z I N A
-Lorenzo
-Johanna
-Melania
-Luksembourg
-Angola
-Otoman
-Holland
-Nevenoe
-Amsterdam A M S T EH R D A M
-Josilin
+Matilda
 Maxime	M A K S I M
 Max M A K S
 Maya M A IA
 Mec'hiko
-Vec'hiko
 Mediterane
 Meksik
+Melania
 Melioneg
+Melusina M E L U Z I N A
 Meneham
 Merc'her
 Metig
@@ -688,12 +684,20 @@ Mezheven
 Michel	M I CH EH L
 Microsoft M I K R O S OH F T
 Mikael
+Tual
+Tudual
+Turiav
+Mikronezia
+Milano
 Minnesota
 Miossec M I O S EH K
+Miranda
 Missouri M I S OU R I
+Molac
 Molenez
 Monaco M O N A K O
 Monique M O N I K
+Montana
 Montargis M ON T A R J I S
 Montego
 Montroulez
@@ -704,10 +708,13 @@ Morwenna
 Mozambik
 Mumbai	M OU M B A I
 Murthy M OE R T I
+Mustafa M OU S T A F A
 Myriam
 Myrtille
 Nairobi
+Namibia
 Nancy N AN S I
+Naomi
 Naoned
 Napoleon
 Natacha
@@ -717,8 +724,10 @@ Neandertal
 Nedeleg
 Nelson	N EH L S OH N
 Netflix	N EH T F L I K S
+Nevenoe
 Nicolas	N I K O L A
 Nikolaz
+Nintendo
 Nobel
 Nolwenn
 Normandi
@@ -726,6 +735,7 @@ Norvegadez
 Noumea
 Nubia N OU B I A
 Obama
+Okeania
 Okitania
 Olier
 Oliver O L I V EU R
@@ -735,26 +745,27 @@ Onyx O N I K S
 Oregon O R E G ON
 Oriant
 Orion O R I ON
+Orly
 Osiris O Z I R I S
+Otoman
 Oural
+Ouzbekistan
 Owen O W EH N
+Pakistan
 Palestin
 Palestina
 Paol
 Paolig
 Paraguay P A R A G OU EH
-Guatelala G OU A T E M A L A
 Parantoen
 Pariz
-Leningrad
-Vietnam V I EH T N A M
-Lombardia
 Pascale	P A S K A L
 Pascal P A S K A L
 Paskal
 Pasteur P A S T EU R
 Paulo P O L O
 Paul P OH L
+Pelem
 Pellen P E L EH N
 Pempoull
 Penelope P E N E L OH P
@@ -762,6 +773,7 @@ Penmarc'h
 Pêr
 Perou
 Persia
+Petersbourg P E T EH R S B OU R G
 Peugeot P EU J O
 Philadelphia F I L A D EH L F I A
 Pichon
@@ -840,19 +852,20 @@ Polonia
 Pompei
 Poñvel
 Portland P OH R T L AN N
+Portugal
 Potter P O T OE R
 Poulidor
 Poullann
 Poullaouen
 Poulloger
 Pourlet
-Windsor
 Praha
 Pretoria
 Prigent P R I J AN
 Priya
 Prod P R OH D
 Provañs
+Prusia
 Qigong CH I K ON G
 Radiohead R A D I O EH D
 Ramses
@@ -871,16 +884,19 @@ Roger R O J E
 Rom
 Roma
 Romaned
-Roumania
 Ronan
 Ropars
 Rosetta R O Z E T A
 Rosette R O Z EH T
 Rosko
 Rostren
+Roumania
 Rumengol R U M EN G OH L
+Rungis R EN J I S
 Rusia
 Sadorn
+Sahara
+Sahel
 Saint S EN
 Salem
 Sandra
@@ -917,11 +933,13 @@ Skos
 Skosiz
 Skrigneg
 Skrigneg S K R I GN A K
+Slovakia
 Smith S M I S
 Soaz
 Soazig
 Soudan
 Spagn
+Sparta
 Spotify	S P O T I F A I
 Stanley S T A N L EH
 Stefani
@@ -959,6 +977,7 @@ Tewdrig
 Texas T E K S A S
 Thailand T A I L AN N D
 Thelo T E L O
+Thierry T I E R I
 Thomas	T O M A
 Thorgal T OH R G A L
 Thunberg S EU N B EH R G
@@ -972,6 +991,7 @@ Titanic T I T A N I K
 Titeuf
 Titus
 Tobias
+Togo
 Tokyo
 Tolosa
 Tolstoy	T OH L S T OH I
@@ -979,7 +999,6 @@ Tomaz
 Tomos
 Toronto T O R ON T O
 Toulon	T OU L ON
-Tremen
 Trevare
 Treveur
 Trewineg
@@ -990,14 +1009,18 @@ Trump T R OE M P
 Tudu
 Tudwal
 Tugdual
+Tunizia
 Turio
 Turkia
+Twitch
 Uhelgoad
 Ukraina
+Unix
 Urfol
 Urlo
 Vadeg
 Vadezour
+Daoulaz
 Valerian
 Valérie	V A L E R I
 Valo
@@ -1009,11 +1032,14 @@ Vaodez
 Vari
 Varia
 Varzhin
+Vatikan
 Vaxime	V A K S I M
 Vazhev
+Vec'hiko
 Vega
 Velgia
 Venezia
+Venezuela
 Verc'her
 Verdun V EH R D EN
 Veurzh
@@ -1021,12 +1047,14 @@ Viami
 Vichel V I CH EH L
 Victor V I K T OH R
 Vienna
+Vietnam V I EH T N A M
 Vikael
 Viking
 Viktor
 Viktoria
 Vincent	V EN S AN
 Vio
+Virginia V I R J I N I A
 Virmaned
 Virmanez
 Virmania
@@ -1055,6 +1083,7 @@ Wengamp
 Wenole
 Wenvael
 Whanganui W AN N G A N OU I
+Windsor
 Winog
 Wisconsin W I S K ON N S I N
 Wong
@@ -1069,6 +1098,7 @@ Yezel
 Yoran
 York I OH R K
 Youenn
+Yougoslavia
 Youna
 Youtube I OU T U B
 Yud
@@ -1078,6 +1108,7 @@ Yves I V
 Yvette I V EH T
 Zavier Z A V I E
 Zeland
+Zelda Z EH L D A
+Zimbabwe
 Zola
 Zoue
-Zimbabwe
