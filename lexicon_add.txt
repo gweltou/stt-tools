@@ -79,6 +79,7 @@ ma M EU
 marteze M A R S EH
 marteze M A T R EH X
 marteze M A T R OE N
+marteze M A T R EN
 menez M E N E
 mennozh M E N O
 nemetken M E K E N

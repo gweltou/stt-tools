@@ -400,6 +400,11 @@ def pre_process(sentence, keep_dash=False, keep_punct=False):
         Preserve letter case.
         Clean punctuation by default.
     """
+
+    sentence = sentence.replace('‘', "'")
+    sentence = sentence.replace('’', "'")
+    sentence = sentence.replace('ʼ', "'")
+
     for mistake in corrected_sentences.keys():
         if mistake in sentence or mistake in sentence.lower():
              # Won't work if mistake is capitalized in original sentence
@@ -407,9 +412,6 @@ def pre_process(sentence, keep_dash=False, keep_punct=False):
     
     if not keep_punct:
         sentence = filter_out(sentence, punctuation)
-    sentence = sentence.replace('‘', "'")
-    sentence = sentence.replace('’', "'")
-    sentence = sentence.replace('ʼ', "'")
     if not keep_dash:
         sentence = sentence.replace('-', ' ')   # Split words like "sav-heol"
     sentence = sentence.replace('/', ' ')
@@ -767,7 +769,7 @@ vosk_loaded = False
 def load_vosk():
     from vosk import Model, KaldiRecognizer, SetLogLevel
     SetLogLevel(-1)
-    model = Model(os.path.normpath(os.path.join(ROOT, "../models/bzg6")))
+    model = Model(os.path.normpath(os.path.join(ROOT, "../models/current")))
     global rec
     rec = KaldiRecognizer(model, 16000)
     rec.SetWords(True)

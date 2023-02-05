@@ -2,7 +2,7 @@ Aaron A R OH N
 Abel
 Abraham A B R A H A M
 Ada
-Adamnan
+Adolf
 Adrian
 Adrien A D R I EN
 Afganistan
@@ -90,7 +90,9 @@ Aurélien O R E L I EN
 Avatar
 Avran
 Axel
+Azenor
 Azia
+Aziliz
 Bagan
 Baglan
 Balestin
@@ -212,6 +214,7 @@ Dana
 Daniel D A N I EH L
 Danielloù
 Danmark
+Daoulaz
 Dastumedia
 David D A V I D
 David D EY V I D
@@ -381,6 +384,7 @@ Guy G I
 Gwaien
 Gwegan
 Gweltaz	G W EH L T A S
+Gwenael
 Gwenc'hlan
 Gwendal
 Gwened
@@ -478,23 +482,18 @@ Kaledoniz
 Kalifornia
 Kambodja
 Kanada
-Koneg
-Kouloum
-Kristol
-Marius
-Marzhin
-Marsel
-Melani
 Kanariez
 Kankaven
 Kaon
 Kaou
+Kaourintin
 Karaez
 Karl
 Karnag
 Karnoed
 Kastellin
 Katalonia
+Katarina
 Katell
 Katrin
 Kazakstan
@@ -523,22 +522,29 @@ Kiberen
 Kiev
 Kipling
 Kirby
+Klemañs
 Kleopatra
+Klervi
 Klet
 Kmer
 Kolombia
 Komborn
 Konan
+Koneg
 Kong K ON G
 Kongo
 Konk
 Korbell K OH R B EH L
 Korea
 Korsika
+Kouloum
 Kraozon
 Krist
+Kristen
 Kristian K R I S T I AN
+Kristina
 Kristof
+Kristol
 Kubrick K U B R I K
 Kuiper
 Kyoto
@@ -614,6 +620,7 @@ Louis	L OU I
 Loula
 Lucky L U K I
 Luis	L OU I S
+Lukaz
 Luke L U K
 Luksembourg
 Lula L OU L A
@@ -621,6 +628,7 @@ Lun
 Luzon
 Lyon L I ON
 Macron M A K R ON
+Madalen
 Madiran
 Madrid
 Mae
@@ -647,6 +655,7 @@ Maodez
 Maran
 Marcel M A R S EH L
 Marchand M A R CH AN
+Marc'harid
 Marco M A R K O
 Mari
 Maria
@@ -654,14 +663,18 @@ Mariana
 Marilou
 Marilyn M A R I L I N
 Mario
+Marius
 Mark
 Maroko
+Marsel
+Marselin
 Marsilha
 Marthe M A R T
 Martin M A R T EN
 Martin M A R T I N
 Marty
 Mary
+Marzhin
 Massachussets M A S A CH U S EH T S
 Mass M A S
 Master M A S T OE R
@@ -676,6 +689,7 @@ Maya M A IA
 Mec'hiko
 Mediterane
 Meksik
+Melani
 Melania
 Melioneg
 Melusina M E L U Z I N A
@@ -687,9 +701,6 @@ Mezheven
 Michel	M I CH EH L
 Microsoft M I K R O S OH F T
 Mikael
-Tual
-Tudual
-Turiav
 Mikronezia
 Milano
 Minnesota
@@ -698,6 +709,7 @@ Miranda
 Missouri M I S OU R I
 Molac
 Molenez
+Mona
 Monaco M O N A K O
 Monique M O N I K
 Montana
@@ -738,6 +750,7 @@ Norvegadez
 Noumea
 Nubia N OU B I A
 Obama
+Odil
 Okeania
 Okitania
 Olier
@@ -754,6 +767,7 @@ Otoman
 Oural
 Ouzbekistan
 Owen O W EH N
+Padrig
 Pakistan
 Palestin
 Palestina
@@ -872,6 +886,7 @@ Prusia
 Qigong CH I K ON G
 Radiohead R A D I O EH D
 Ramses
+Raoul
 Ravi
 Reblochon R EU B L O CH ON
 Riksdag
@@ -923,7 +938,9 @@ Sevilla S E V I LH A
 Shakespeare CH EY K S P I R
 Sheila	CH EH I L A
 Siberia
+Sidwell
 Silva
+Silvestr
 Simone	S I M OH N
 Simon S I M ON
 Sina
@@ -1005,14 +1022,19 @@ Toulon	T OU L ON
 Trevare
 Treveur
 Trewineg
+Trifin
+Trifina
 Tristan
 Troadec T R O A D E K
 Tropetz
 Trump T R OE M P
+Tual
 Tudu
+Tudual
 Tudwal
 Tugdual
 Tunizia
+Turiav
 Turio
 Turkia
 Twitch
@@ -1020,10 +1042,11 @@ Uhelgoad
 Ukraina
 Unix
 Urfol
+Uriell
 Urlo
+Ursula
 Vadeg
 Vadezour
-Daoulaz
 Valerian
 Valérie	V A L E R I
 Valo
@@ -1034,7 +1057,9 @@ Vandenberg
 Vaodez
 Vari
 Varia
+Vark
 Varzhin
+Vastian
 Vatikan
 Vaxime	V A K S I M
 Vazhev

@@ -97,9 +97,10 @@ if __name__ == "__main__":
                 # Filter out short sentences
                 if len(sentence) < 10:
                     continue
-
+                
                 # Filter out sentences with only single letters or short words (ex: "v i v i a n a v i v i a n a")
-                if len(sentence)/len(words) < 2.0:
+                if len(sentence)/len(words) < 2.5:
+                    print(f"skipped {len(sentence)/len(words):.2}: {sentence}")
                     continue
                 
                 first_word = True
@@ -110,7 +111,7 @@ if __name__ == "__main__":
                         if w.lower() not in capitalized:
                             santou.add(w)
                         sant = False
-                    elif w == "Sant":
+                    elif w == "Sant" or w == "Santez":
                         sant = True
                     
                     if is_acronym(w) and w not in acronyms:

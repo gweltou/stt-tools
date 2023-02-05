@@ -1,7 +1,3 @@
-ev E V
-klev K L E V
-glev G L E V
-kenvev K EH N V E V
 agenda A J EN D A
 alors A L OH R
 ball B O L
@@ -16,10 +12,12 @@ cool K OU L
 covid K O V I D
 dvdoù D E V E D E OU
 elixir E L I K S I R
+ev E V
 expo E K S P O
 fashion F A CH OE N
 forum F O R OH M
 friendly F R EH N D L I
+glev G L E V
 gmail J E M EH I L
 guñv G U
 hacker A K OE R
@@ -32,6 +30,8 @@ hoverboard O V OE R B OH R D
 hoverboard O V OE R B OH R D
 iphone A I F OH N
 kamembert K A M AN B EH R
+kenvev K EH N V E V
+klev K L E V
 kluster K L OE S T OE R
 kuñv K U
 leader L I D OE R

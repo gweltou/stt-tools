@@ -199,9 +199,15 @@ laret	lâret
 brezoneg	brezhoneg
 vousc'hoarz	vousc'hoarzh
 vousc'hoarzin	vousc'hoarzhin
- d' ar 	 d'ar 
 milliadou	miliadoù
 
+ d' ar 	 d'ar 
+ d' an 	 d'an 
+ d' al 	 d'al 
+ d' ur 	 d'ur 
+ d' un 	 d'un 
+ d' he 	 d'he 
+ d' en 	 d'en 
 arru	erru
 be'h	bec'h
 pa'z	p'az
