@@ -108,12 +108,14 @@ if __name__ == "__main__":
     text, speakers = load_textfile(text_filename)
     textfile_mtime = os.path.getmtime(text_filename)
     
-    fileinfo = get_audiofile_info(sys.argv[1])
+    fileinfo = get_audiofile_info(args.filename)
     # Converting sound file to 16kHz mono wav if needed
-    if fileinfo["channels"] != 1 or fileinfo["sample_rate"] != "16000" or fileinfo["bits_per_sample"] != 16:
-        src = sys.argv[1]
+    if not args.filename.endswith('.wav') \
+            or fileinfo["channels"] != 1 \
+            or fileinfo["sample_rate"] != "16000" \
+            or fileinfo["bits_per_sample"] != 16:
+        src = args.filename
         if os.path.abspath(src) == os.path.abspath(wav_filename):
-        # if os.path.samefile(src, wav_filename):
             rep, filename = os.path.split(src)
             basename, ext = os.path.splitext(filename)
             new_name = basename + "_orig" + ext
