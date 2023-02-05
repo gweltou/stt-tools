@@ -29,7 +29,7 @@ import datetime, pytz
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 HS_DIC_PATH = os.path.join(ROOT, os.path.join("hunspell-dictionary", "br_FR"))
-#HS_AFF_PATH = os.path.join(ROOT, os.path.join("hunspell-dictionary", "br_FR.aff"))
+HS_AFF_PATH = os.path.join(ROOT, os.path.join("hunspell-dictionary", "br_FR.aff"))
 HS_ADD_PATH= os.path.join(ROOT, os.path.join("hunspell-dictionary", "add.txt"))
 
 CORRECTED_PATH = os.path.join(ROOT, "corrected.txt")

@@ -11,7 +11,7 @@
         * "wikipedia_corpus/wiki_sant.txt", a list of saints, convenient to retrieve first names
         * "wikipedia_corpus/wiki_vocab.txt", the vocabulary of the corpus
  
-    Usage: python3 build_lm_corpus.py 
+    Usage: python3 build_lm_corpus.py DIR_OR_FILE
 
     Author:  Gweltaz Duval-Guennoc
   

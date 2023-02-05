@@ -275,24 +275,24 @@ if __name__ == "__main__":
         # Lexicon.txt
         lexicon_path = os.path.join(dir_dict_nosp, 'lexicon.txt')
         print(f"building file \'{lexicon_path}\'")
-        lexicon_phon = []
+        lexicon_phon = set()
         for w in sorted(corpora["train"]["lexicon"]):
-            lexicon_phon.append(f"{w} {' '.join(word2phonetic(w))}")
+            lexicon_phon.add(f"{w} {' '.join(word2phonetic(w))}")
         with open(LEXICON_ADD_PATH, 'r') as f_in:
             for l in f_in.readlines():
-                lexicon_phon.append(l.strip())
+                lexicon_phon.add(l.strip())
         for w in acronyms:
             for pron in acronyms[w]:
-                lexicon_phon.append(f"{w} {pron}")
+                lexicon_phon.add(f"{w} {pron}")
         for w in capitalized:
             for pron in capitalized[w]:
-                lexicon_phon.append(f"{w.capitalize()} {pron}")
+                lexicon_phon.add(f"{w.capitalize()} {pron}")
         for w in verbal_tics:
-            lexicon_phon.append(f"{w} {verbal_tics[w]}")
+            lexicon_phon.add(f"{w} {verbal_tics[w]}")
         
         with open(lexicon_path, 'w') as f_out:
             f_out.write(f"!SIL SIL\n<SPOKEN_NOISE> SPN\n<UNK> SPN\n")
-            for line in lexicon_phon:
+            for line in sorted(lexicon_phon):
                 f_out.write(line + '\n')
                 
         
