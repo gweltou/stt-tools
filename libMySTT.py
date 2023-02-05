@@ -73,6 +73,7 @@ w2f = {
     'â'     :   'A',        # lÂret
     'añ'    :   'AN',
     'an'    :   'AN N',
+    'amm'   :   'AN M',     # liAMM
     'añv.'  :   'AN',       # klAÑV {gouzañv ?}
     'b'     :   'B',
     'd'     :   'D',
@@ -454,6 +455,8 @@ def tokenize(sentence, post_proc=True, keep_dash=False, keep_punct=False):
                 new_tokens.append(corrected[t])
             elif lowered in capitalized:
                 new_tokens.append(t.capitalize())
+            elif t in acronyms:
+                new_tokens.append(t)
             else:
                 new_tokens.append(lowered)
         tokens = new_tokens
