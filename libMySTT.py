@@ -232,7 +232,7 @@ def word2phonetic(word):
 
 
 def get_hunspell_dict():
-    #hs = hunspell.HunSpell(HS_DIC_PATH, HS_AFF_PATH)
+    #hs = hunspell.HunSpell(HS_DIC_PATH+".dic", HS_AFF_PATH)
     hs = hunspell.Hunspell(HS_DIC_PATH) # for cyhunspell
     with open(HS_ADD_PATH, 'r') as f:
         for w in f.readlines():
