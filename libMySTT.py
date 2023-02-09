@@ -984,6 +984,8 @@ def splitToEafFile(split_filename):
 
 
 def eafToSplitFile(eaf_filename):
+    """ Write a split file and a text file from an eaf file """
+    
     abs_path = os.path.abspath(eaf_filename)
     rep, eaf_filename = os.path.split(abs_path)
     

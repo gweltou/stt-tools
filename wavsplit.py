@@ -3,9 +3,6 @@
 
 
 """
-    File : wavesplit.py
-    Author: Gweltaz Duval-Guennoc 
-    
     Create a split file (time segments) from an audio file
     Convert audio file to correct format (wav mono 16kHz) if needed
     UI to listen and align audio segments with sentences in text file
@@ -14,6 +11,8 @@
         * pydub
         * simpleaudio
         * pyrubberband
+    
+    Author: Gweltaz Duval-Guennoc 
 """
 
 
@@ -30,7 +29,7 @@ from pyrubberband import time_stretch
 #import librosa
 from libMySTT import load_segments, load_textfile, get_correction, get_player_name, get_audiofile_info, convert_to_wav
 from libMySTT import transcribe_segment, acronyms, prompt_acronym_phon, extract_acronyms, ACRONYM_PATH
-from libMySTT import splitToEafFile
+from libMySTT import splitToEafFile, eafToSplitFile
 
 
 RESIZE_PATTERN = re.compile(r"([s|e])([-|\+])(\d+)")
@@ -80,8 +79,12 @@ if __name__ == "__main__":
     parser.add_argument('-o', '--overwrite', action='store_true', help="Overwrite split file (if present)")
     parser.add_argument('-t', '--thresh', type=float, default=-62, metavar="DB", help="Silence intensity threshold (in decibels)")      # option that takes a value
     parser.add_argument('-d', '--dur', type=int, default=400, metavar="MS", help="Silence minimum duration (in millisecs)")
+
     args = parser.parse_args()
     print(args)
+
+    if args.filename.endswith(".eaf"):
+        eafToSplitFile(args.filename)
 
 
     PLAYER = get_player_name()
@@ -108,7 +111,7 @@ if __name__ == "__main__":
     text, speakers = load_textfile(text_filename)
     textfile_mtime = os.path.getmtime(text_filename)
     
-    fileinfo = get_audiofile_info(args.filename)
+    fileinfo = get_audiofile_info(wav_filename)
     # Converting sound file to 16kHz mono wav if needed
     if not args.filename.endswith('.wav') \
             or fileinfo["channels"] != 1 \
@@ -294,7 +297,7 @@ if __name__ == "__main__":
         elif x == 't':  # Transcribe with vosk
             seg = song[segments[idx][0]:segments[idx][1]]
             print(transcribe_segment(seg))
-        elif x == 'z':  # Undo
+        elif x == 'z' and segments_undo:  # Undo
             print("Undone")
             segments = segments_undo
             modified = True
