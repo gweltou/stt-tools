@@ -79,7 +79,7 @@ if __name__ == "__main__":
     parser.add_argument('-o', '--overwrite', action='store_true', help="Overwrite split file (if present)")
     parser.add_argument('-t', '--thresh', type=float, default=-62, metavar="DB", help="Silence intensity threshold (in decibels)")      # option that takes a value
     parser.add_argument('-d', '--dur', type=int, default=400, metavar="MS", help="Silence minimum duration (in millisecs)")
-
+    parser.add_argument('-s', '--transcribe', action='store_true', help="Overwrite split file (if present)")
     args = parser.parse_args()
     print(args)
 
@@ -102,15 +102,6 @@ if __name__ == "__main__":
     split_filename = os.path.join(rep, os.path.extsep.join((recording_id, 'split')))
     text_filename = os.path.join(rep, os.path.extsep.join((recording_id, 'txt')))
     
-    # Create text file if it doesn't exist
-    if not os.path.exists(text_filename):
-        with open(text_filename, 'w') as fw:
-            fw.write('#\n' * 4 + '\n' * 6)  # Text file header
-    text = []
-    speakers = []
-    text, speakers = load_textfile(text_filename)
-    textfile_mtime = os.path.getmtime(text_filename)
-    
     fileinfo = get_audiofile_info(wav_filename)
     # Converting sound file to 16kHz mono wav if needed
     if not args.filename.endswith('.wav') \
@@ -132,16 +123,16 @@ if __name__ == "__main__":
             sys.exit(1)
         else:
             print("Conversion done")
-    
     song = AudioSegment.from_wav(wav_filename)
     
+
     segments = []
-    header = ""
+    split_header = ""
     if os.path.exists(split_filename) and not args.overwrite:
         print("split file exists")
-        segments, header = load_segments(split_filename)
-        if header:
-            print(f'Header found: "{header}"')
+        segments, split_header = load_segments(split_filename)
+        if split_header:
+            print(f'Header found: "{split_header}"')
     else:
         print("spliting wave file")
         #y, sr = librosa.load(wav_filename)
@@ -162,9 +153,40 @@ if __name__ == "__main__":
             for i in range(1, len(segments)-1):
                 segments[i] = (segments[i][0] - args.dur, segments[i][1] + args.dur)
         
-        header = f"# -t {args.thresh} -d {args.dur}"
-        save_segments(segments, header, split_filename)
+        split_header = f"# -t {args.thresh} -d {args.dur}"
+        save_segments(segments, split_header, split_filename)
     
+
+    overwrite_textfile = False
+    if args.transcribe:
+        print("Automatic transcription")
+        if os.path.exists(text_filename):
+            print("Text file already exists.")
+            while True:
+                a = input("Overwrite (y/n)? ")
+                if a == 'y':
+                    overwrite_textfile = True
+                    break
+                if a == 'n':
+                    break
+        print("Transcribing...")
+        text = [transcribe_segment(song[seg[0]:seg[1]]) for seg in segments]
+        speakers = ['' for _ in segments]
+        if overwrite_textfile:
+            with open(text_filename, 'w') as fw:
+                fw.write('#\n' * 4 + '\n' * 6)  # Text file split_header
+                for line in text: fw.write(line + '\n')
+
+    else:
+        # Create text file if it doesn't exist
+        if not os.path.exists(text_filename):
+            with open(text_filename, 'w') as fw:
+                fw.write('#\n' * 4 + '\n' * 6)  # Text file split_header
+        else:
+            text, speakers = load_textfile(text_filename)
+    
+    
+    textfile_mtime = os.path.getmtime(text_filename)
     
     short_utterances = []
     total_length = 0
@@ -203,6 +225,7 @@ if __name__ == "__main__":
         mtime = os.path.getmtime(text_filename)
         if mtime > textfile_mtime:
             text, speakers = load_textfile(text_filename)
+            print("textfile reloaded")
         
         if resize_match:
             segments_undo = segments[:]
@@ -225,7 +248,7 @@ if __name__ == "__main__":
         elif x.startswith('cc'): # Automatic split
             segments_undo = segments[:]
             seg = song[segments[idx][0]:segments[idx][1]]
-            # if header:
+            # if split_header:
             split_args = x.split()
             new_args = parser.parse_args(split_args)
             #new_args.thresh = min(new_args.thresh, args.thresh)
@@ -308,7 +331,7 @@ if __name__ == "__main__":
             print("Segment exported")
         elif x == 's':  # Save split data to disk
             if modified:
-                save_segments(segments, header, split_filename)
+                save_segments(segments, split_header, split_filename)
                 modified = False
         elif x == 'eaf': # Export to Elan format
             splitToEafFile(split_filename)
@@ -342,5 +365,5 @@ if __name__ == "__main__":
         elif x == 'q':
             if modified:
                 r = input("Save before quitting (y|n) ? ")
-                if r == 'y': save_segments(segments, header, split_filename) 
+                if r == 'y': save_segments(segments, split_header, split_filename) 
             running = False
