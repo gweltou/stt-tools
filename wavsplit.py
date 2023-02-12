@@ -101,35 +101,43 @@ if __name__ == "__main__":
     wav_filename = os.path.join(rep, os.path.extsep.join((recording_id, 'wav')))
     split_filename = os.path.join(rep, os.path.extsep.join((recording_id, 'split')))
     text_filename = os.path.join(rep, os.path.extsep.join((recording_id, 'txt')))
-    
-    fileinfo = get_audiofile_info(wav_filename)
+
     # Converting sound file to 16kHz mono wav if needed
-    if not args.filename.endswith('.wav') \
-            or fileinfo["channels"] != 1 \
+    if args.filename.endswith('.wav'):
+        fileinfo = get_audiofile_info(wav_filename)
+        if fileinfo["channels"] != 1 \
             or fileinfo["sample_rate"] != "16000" \
             or fileinfo["bits_per_sample"] != 16:
-        src = args.filename
-        if os.path.abspath(src) == os.path.abspath(wav_filename):
-            rep, filename = os.path.split(src)
-            basename, ext = os.path.splitext(filename)
-            new_name = basename + "_orig" + ext
-            new_src = os.path.join(rep, new_name)
-            print(f"WARNING: renaming {filename} to {new_name}")
-            os.rename(src, new_src)
-            src = new_src
-        ret = convert_to_wav(src, wav_filename)
-        if ret == -1:
+
+            src = args.filename
+            if os.path.abspath(src) == os.path.abspath(wav_filename):
+                # Rename existing audio file
+                rep, filename = os.path.split(src)
+                basename, ext = os.path.splitext(filename)
+                new_name = basename + "_orig" + ext
+                new_src = os.path.join(rep, new_name)
+                print(f"WARNING: renaming {filename} to {new_name}")
+                os.rename(src, new_src)
+                src = new_src
+            if convert_to_wav(src, wav_filename) != -1:
+                print("Conversion done")
+            else:
+                print("Could not convert audio file")
+                sys.exit(1)
+    else:
+        # Audio file is not PCM
+        if convert_to_wav(args.filename, wav_filename) != -1:
+            print("Conversion done")
+        else:
             print("Could not convert audio file")
             sys.exit(1)
-        else:
-            print("Conversion done")
-    song = AudioSegment.from_wav(wav_filename)
     
+    song = AudioSegment.from_wav(wav_filename)
 
     segments = []
     split_header = ""
     if os.path.exists(split_filename) and not args.overwrite:
-        print("split file exists")
+        print("Split file exists.")
         segments, split_header = load_segments(split_filename)
         if split_header:
             print(f'Header found: "{split_header}"')
@@ -182,8 +190,7 @@ if __name__ == "__main__":
         if not os.path.exists(text_filename):
             with open(text_filename, 'w') as fw:
                 fw.write('#\n' * 4 + '\n' * 6)  # Text file split_header
-        else:
-            text, speakers = load_textfile(text_filename)
+        text, speakers = load_textfile(text_filename)
     
     
     textfile_mtime = os.path.getmtime(text_filename)
@@ -217,16 +224,14 @@ if __name__ == "__main__":
         start, stop = segments[idx]
         length = round((stop - start) / 1000.0, 1)
         #length = round((segments[idx][1] - segments[idx][0]) / 1000.0, 1)
-        x = input(f"{idx+1}/{len(segments)} [{round(start/1000.0,1)}:{round(stop/1000.0,1)}] {length}s> ").strip()
+        x = input(f"{'*' if modified else ''}{idx+1}/{len(segments)} [{round(start/1000.0,1)}:{round(stop/1000.0,1)}] {length}s> ").strip()
         resize_match = RESIZE_PATTERN.match(x)
         split_match = SPLIT_PATTERN.match(x)
         
         # Reload text file if it's been modified
         mtime = os.path.getmtime(text_filename)
         if mtime > textfile_mtime:
-            text, speakers = load_textfile(text_filename)
-            print("textfile reloaded")
-        
+            text, speakers = load_textfile(text_filename)        
         if resize_match:
             segments_undo = segments[:]
             pos = resize_match.groups()[0]
