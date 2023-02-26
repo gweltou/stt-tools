@@ -27,12 +27,12 @@ if __name__ == "__main__":
         wav_file = basename + os.path.extsep + "wav"
         text_file = basename + os.path.extsep + "txt"
         segments, _ = load_segments(split_file)
-        text, _ = load_textfile(text_file)
+        utterances = load_textfile(text_file)
         song = AudioSegment.from_file(wav_file)
         _, basename = os.path.split(basename)
         print("==== " + basename + " ====")
         for i in range(len(segments)):
-            sentence, _ = get_cleaned_sentence(text[i])
+            sentence, _ = get_cleaned_sentence(utterances[i][0])
             transcription = transcribe_segment(get_segment(i, song, segments))
             score_wer = wer(sentence, transcription)
             score_cer = cer(sentence, transcription)

@@ -39,15 +39,14 @@ play_process = None
 
 
 
-def play_segment_text(idx, song, segments, text, speed):
+def play_segment_text(idx, song, segments, utterances, speed):
     global play_process
     if play_process and play_process.is_playing():
         play_process.stop()
     
-    if idx < len(text):
-        correction, _ = get_correction(text[idx])
-        print(f"{{{speakers[idx]}}} {correction}")
-    #print(f"[{text[idx]}]")
+    if idx < len(utterances):
+        correction, _ = get_correction(utterances[idx][0])
+        print(f'{{{utterances[idx][1].get("speaker", "unkwnown")}}} {correction}')
     seg = song[segments[idx][0]:segments[idx][1]]
     if speed != 1.0:
         y = np.array(seg.get_array_of_samples())
@@ -76,7 +75,7 @@ if __name__ == "__main__":
                     prog = 'Wavesplit',
                     description = 'Audio file converter, splitter and text alignment')
     parser.add_argument('filename')
-    parser.add_argument('-o', '--overwrite', action='store_true', help="Overwrite split file (if present)")
+    # parser.add_argument('-o', '--overwrite', action='store_true', help="Overwrite split file (if present)")
     parser.add_argument('-t', '--thresh', type=float, default=-62, metavar="DB", help="Silence intensity threshold (in decibels)")      # option that takes a value
     parser.add_argument('-d', '--dur', type=int, default=400, metavar="MS", help="Silence minimum duration (in millisecs)")
     parser.add_argument('-s', '--transcribe', action='store_true', help="Overwrite split file (if present)")
@@ -136,12 +135,29 @@ if __name__ == "__main__":
 
     segments = []
     split_header = ""
-    if os.path.exists(split_filename) and not args.overwrite:
-        print("Split file exists.")
-        segments, split_header = load_segments(split_filename)
-        if split_header:
-            print(f'Header found: "{split_header}"')
-    else:
+    do_split = True
+
+    if os.path.exists(split_filename):
+        print("Split file already exists.")
+        if args.thresh != -62 or args.dur != 400:
+            # Split args present
+            while True:
+                a = input("Overwrite (y/n)? ")
+                if a == 'y':
+                    break
+                if a == 'n':
+                    segments, split_header = load_segments(split_filename)
+                    do_split = False
+                    break
+        else:
+            # Load split file
+            segments, split_header = load_segments(split_filename)
+            do_split = False
+
+    if split_header:
+                print(f'Header found: "{split_header}"')
+
+    if do_split:
         print("spliting wave file")
         #y, sr = librosa.load(wav_filename)
         #print("file loaded")
@@ -165,36 +181,32 @@ if __name__ == "__main__":
         save_segments(segments, split_header, split_filename)
     
 
-    overwrite_textfile = False
     if args.transcribe:
         print("Automatic transcription")
+        do_transcribe = True
         if os.path.exists(text_filename):
             print("Text file already exists.")
             while True:
                 a = input("Overwrite (y/n)? ")
                 if a == 'y':
-                    overwrite_textfile = True
                     break
                 if a == 'n':
+                    do_transcribe = False
                     break
-        print("Transcribing...")
-        text = [transcribe_segment(song[seg[0]:seg[1]]) for seg in segments]
-        speakers = ['' for _ in segments]
-        if overwrite_textfile:
+        if do_transcribe:
+            print("Transcribing...")
+            sentences = [transcribe_segment(song[seg[0]:seg[1]]) for seg in segments]
             with open(text_filename, 'w') as fw:
                 fw.write('#\n' * 4 + '\n' * 6)  # Text file split_header
-                for line in text: fw.write(line + '\n')
-
+                for s in sentences: fw.write(f"{s if s else '-'}\n")
     else:
-        # Create text file if it doesn't exist
+        # Create empty text file if it doesn't exist
         if not os.path.exists(text_filename):
             with open(text_filename, 'w') as fw:
                 fw.write('#\n' * 4 + '\n' * 6)  # Text file split_header
-        text, speakers = load_textfile(text_filename)
-    
-    
-    textfile_mtime = os.path.getmtime(text_filename)
-    
+    utterances = load_textfile(text_filename)
+
+
     short_utterances = []
     total_length = 0
     smallest_seg = (None, 9999)
@@ -220,10 +232,10 @@ if __name__ == "__main__":
     speed = 1
     modified = False
     segments_undo = []
+    textfile_mtime = os.path.getmtime(text_filename)
     while running:
         start, stop = segments[idx]
         length = round((stop - start) / 1000.0, 1)
-        #length = round((segments[idx][1] - segments[idx][0]) / 1000.0, 1)
         x = input(f"{'*' if modified else ''}{idx+1}/{len(segments)} [{round(start/1000.0,1)}:{round(stop/1000.0,1)}] {length}s> ").strip()
         resize_match = RESIZE_PATTERN.match(x)
         split_match = SPLIT_PATTERN.match(x)
@@ -231,11 +243,11 @@ if __name__ == "__main__":
         # Reload text file if it's been modified
         mtime = os.path.getmtime(text_filename)
         if mtime > textfile_mtime:
-            text, speakers = load_textfile(text_filename)        
+            print("reload")
+            utterances = load_textfile(text_filename)     
         if resize_match:
             segments_undo = segments[:]
             pos = resize_match.groups()[0]
-            #start, stop = segments[idx]
             delay = int(resize_match.groups()[1] + resize_match.groups()[2])
             if pos == 's':
                 segments[idx] = (start + delay, stop)
@@ -245,7 +257,6 @@ if __name__ == "__main__":
         elif split_match:
             segments_undo = segments[:]
             pc = float(split_match.groups()[0])
-            #start, stop = segments[idx]
             cut = start + (stop-start) * pc/100.0
             segments = segments[:idx] + [(start, ceil(cut)), (floor(cut), stop)] + segments[idx+1:]
             modified = True
@@ -266,24 +277,24 @@ if __name__ == "__main__":
             else:
                 print("No subsegments found...")
         elif x == 'r':
-            play_segment_text(max(0, idx), song, segments, text, speed)
+            play_segment_text(max(0, idx), song, segments, utterances, speed)
         elif x.isnumeric():
             idx = (int(x)-1) % len(segments)
-            play_segment_text(idx, song, segments, text, speed)
+            play_segment_text(idx, song, segments, utterances, speed)
         elif x == '+' or x == 'n':
             idx = (idx+1) % len(segments)
-            play_segment_text(idx, song, segments, text, speed)
+            play_segment_text(idx, song, segments, utterances, speed)
         elif x.startswith('+') and x[1:].isdigit():
             n = int(x[1:])
             idx = (idx+n) % len(segments)
-            play_segment_text(idx, song, segments, text, speed)
+            play_segment_text(idx, song, segments, utterances, speed)
         elif x == '-' or x == 'p':
             idx = (idx-1) % len(segments)
-            play_segment_text(idx, song, segments, text, speed)
+            play_segment_text(idx, song, segments, utterances, speed)
         elif x.startswith('-') and x[1:].isdigit():
             n = int(x[1:])
             idx = (idx-n) % len(segments)
-            play_segment_text(idx, song, segments, text, speed)
+            play_segment_text(idx, song, segments, utterances, speed)
         elif x == '*':
             speed *= 1.15
             print("speed=", speed)
@@ -308,7 +319,7 @@ if __name__ == "__main__":
             modified = True
             print("segments joined")
         elif x == 'a':  # Acronym extraction
-            for acr in extract_acronyms(text[idx]):
+            for acr in extract_acronyms(utterances[idx][0]):
                 add_pron = ""
                 if acr in acronyms:
                     while not add_pron in ('a', 'k'):
@@ -366,7 +377,7 @@ if __name__ == "__main__":
             if play_process and play_process.is_playing():
                 play_process.stop()
             else:
-                play_segment_text(max(0, idx), song, segments, text, speed)
+                play_segment_text(max(0, idx), song, segments, utterances, speed)
         elif x == 'q':
             if modified:
                 r = input("Save before quitting (y|n) ? ")
