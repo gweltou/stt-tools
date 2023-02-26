@@ -26,3 +26,5 @@ corpus_common_voice/test
 corpus_sae/*.zip
 
 test_set/
+
+docs/
