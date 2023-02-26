@@ -20,8 +20,9 @@ def test_extract_metadata():
     ]
 
     for s in sentences:
+        print(s)
         cleaned, metadata = extract_metadata(s)
-        print(cleaned, metadata)
+        print(cleaned, metadata, end="\n\n")
     
 
 
@@ -78,6 +79,6 @@ def test_get_cleaned_sentence():
 
 if __name__ == "__main__":
 
-    # test_extract_metadata()
-    test_split_lines()
+    test_extract_metadata()
+    # test_split_lines()
     # test_get_cleaned_sentence()

@@ -329,29 +329,22 @@ acronyms = get_acronyms_dict()
 
 
 def load_textfile(filename):
-    """ return list of sentences and corresponding list of speakers
+    """ return list of sentences with metadata
 
         Return
         ------
-            list of text sentences, list of speakers (tuple)
+            list of tuple (text sentences, metadata)
     """
-    text = []
-    speakers = []
-    current_speaker = "unknown"
+    utterances = []
     with open(filename, 'r') as f:
         for l in f.readlines():
             l = l.strip()
             if l and not l.startswith('#'):
                 # Extract speaker id and other metadata
                 l, metadata = extract_metadata(l)
-                if "speaker" in metadata:
-                    current_speaker = metadata["speaker"]
-                
-                l = l.strip()
-                if l :
-                    text.append(l)
-                    speakers.append(current_speaker)
-    return text, speakers
+                if l or metadata:
+                    utterances.append((l, metadata))
+    return utterances
 
 
 
@@ -361,29 +354,36 @@ METADATA_PATTERN = re.compile(r'{(.+?)}')
 def extract_metadata(sentence: str):
     """ Returns the sentence stripped of its metadata (if any)
         and a dictionary of metadata
+        Keeps unknown word marker '{?}'
     """
     metadata = dict()
-    metadata_match = METADATA_PATTERN.finditer(sentence)
-    speaker_id_match = SPEAKER_ID_PATTERN.search(sentence)
-    if speaker_id_match:
-        name = speaker_id_match[1].lower()
-        metadata["speaker"] = name
-        gender = speaker_id_match[2]
-        if gender: metadata["gender"] = gender.lower()
-        elif "paotr" in name: metadata["gender"] = 'm'
-        elif "plach" in name or "plac'h" in name: metadata["gender"] = 'f'
+
+    if METADATA_PATTERN.search(sentence):
+        stripped = ""
+        head = 0
+        for match in METADATA_PATTERN.finditer(sentence):
+            param = match.group(1)
+            if param == '?':
+                metadata["unknown_words"] = True
+            else:
+                speaker_id_match = SPEAKER_ID_PATTERN.fullmatch(match.group(0))
+                if speaker_id_match:
+                    name = speaker_id_match[1].lower()
+                    metadata["speaker"] = name
+                    gender = speaker_id_match[2]
+                    if gender: metadata["gender"] = gender.lower()
+                    elif "paotr" in name: metadata["gender"] = 'm'
+                    elif "plach" in name or "plac'h" in name: metadata["gender"] = 'f'
+
+                    start, end = match.span()
+                    stripped += sentence[head:start]
+                    head = end
+
+        if head > 0:
+            stripped += sentence[head:]
+            sentence = stripped
     
-    stripped = ""
-    head = 0
-    for match in metadata_match:
-        start, end = match.span()
-        stripped += sentence[head:start]
-        head = end
-    if head > 0:
-        stripped += sentence[head:]
-        sentence = stripped
-    
-    return sentence, metadata
+    return sentence.strip(), metadata
 
 
 
@@ -898,7 +898,7 @@ def splitToEafFile(split_filename):
     eaf_filename = os.path.extsep.join((record_id, 'eaf'))
 
     segments, _ = load_segments(split_filename)
-    text, speakers = load_textfile(text_filename)
+    utterances = load_textfile(text_filename)
 
     doc = minidom.Document()
 
@@ -938,7 +938,7 @@ def splitToEafFile(split_filename):
     tier_trans.setAttribute('LINGUISTIC_TYPE_REF', 'transcript')
     tier_trans.setAttribute('TIER_ID', 'Transcription')
 
-    for i, sentence in enumerate(text):
+    for i, (sentence, _) in enumerate(utterances):
         annotation = doc.createElement('ANNOTATION')
         alignable_annotation = doc.createElement('ALIGNABLE_ANNOTATION')
         alignable_annotation.setAttribute('ANNOTATION_ID', f'a{i+1}')
