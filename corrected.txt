@@ -11,8 +11,9 @@ diàr	diwar
 #goût	gouzout
 ty	ti
 stokholm	Stockholm
-hirie	hiriv
-hiziv	hiriv
+hirie	hiziv
+hiriv	hiziv
+hounnezh	honnezh
 plastek	plastik
 evid	evit
 warlerc'h	war lerc'h

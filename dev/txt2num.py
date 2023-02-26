@@ -1,3 +1,8 @@
+#! /usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+
+
 import sys
 sys.path.append("..")
 from libMySTT import split_line, pre_process, tokenize, filter_out, punctuation
@@ -5,6 +10,7 @@ from math import inf
 from pprint import pprint
 
 from mkchain import mkchain
+
 
 
 numerical_tokens = [
@@ -369,6 +375,7 @@ def test():
         ("unan daou tri, staget mat ar c'hi", "1 2 3, staget mat ar c'hi"),
         ("div blac'h kozh ha daou-ugent", "42 blac'h kozh"),
         ("div blac'h kozh ha daou-ugent kazh du", "2 blac'h kozh ha 42 kazh du"),
+        ("div blac'h kozh ha daou-ugent aet d'an anaon", "42 blac'h kozh aet d'an anaon"),
         ("kant tri patatezenn hag hanter-kant em eus debret", "153 patatezenn am eus debret")
     ]
 

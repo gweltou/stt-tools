@@ -2,7 +2,7 @@
 
 
 """
-    Build a text file and a wave audio file from a list of split files and a specified gender
+    Build a text file and a wave audio file from a list of split files for both genders
     
     Usage : ./split_by_gender.py folder
 """
@@ -10,7 +10,7 @@
 import sys
 import os
 from pydub import AudioSegment
-from libMySTT import load_segments, get_cleaned_sentence, list_files_with_extension, SPEAKER_ID_PATTERN
+from libMySTT import load_segments, get_cleaned_sentence, list_files_with_extension, extract_metadata
 from math import floor, ceil
 
 
@@ -33,9 +33,9 @@ def parse_file(split_filename):
     m_segments = []
     m_text = []
 
-    segments = load_segments(split_filename)
+    segments = load_segments(split_filename)[0]
     
-    speaker_id = "unnamed"
+    # speaker_id = "unnamed"
     with open(text_filename, 'r') as f:
         idx = 0
         for l in f.readlines():
@@ -43,26 +43,13 @@ def parse_file(split_filename):
             if not l or l.startswith('#'):
                 continue
             
-            # Extract speaker id
-            speaker_id_match = SPEAKER_ID_PATTERN.search(l)
-            if speaker_id_match:
-                speaker_id = speaker_id_match[1].lower()
-                speaker_gen = speaker_id_match[2]
-                if speaker_id not in speakers_gender:
-                    if "paotr" in speaker_id:
-                        speakers_gender[speaker_id] = 'm'
-                    elif "plach" in speaker_id:
-                        speakers_gender[speaker_id] = 'f'
-                    else:
-                        speakers_gender[speaker_id] = speaker_gen
-                else:
-                    if not speakers_gender[speaker_id] and speaker_gen:
-                        speakers_gender[speaker_id] = speaker_gen.lower()
-                
-                start, end = speaker_id_match.span()
-                l = l[:start] + l[end:]
-                l = l.strip()
-            
+            l, metadata = extract_metadata(l)
+            if "speaker" in metadata:
+                speaker_id = metadata["speaker"]
+                if "gender" in metadata:
+                    if speaker_id not in speakers_gender:
+                        speakers_gender[speaker_id] = metadata["gender"]
+
             cleaned = get_cleaned_sentence(l)[0]      
             if cleaned:
                 cleaned = cleaned.replace('*', '')
@@ -84,7 +71,7 @@ def parse_file(split_filename):
 if __name__ == "__main__":
     # Add external speakers gender
     speakers_gender = {}
-    for fname in ["spk2gender.txt", "common_voice/spk2gender"]:
+    for fname in ["spk2gender.txt", "corpus_common_voice/spk2gender"]:
         if os.path.exists(fname):
             print(f"Adding speakers from '{fname}'")
             with open(fname, 'r') as f:

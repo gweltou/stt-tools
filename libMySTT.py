@@ -52,8 +52,8 @@ verbal_tics = {
     'boñ'   :   'B ON',
     'bah'   :   'B A',
     'feñ'   :   'F EN',
-    'añfeñ' :   'AN F EN',
-    'tieñ'  :   'T I EN',
+    'enfin' :   'AN F EN',
+    'tiens' :   'AN F EN',
     'alors' :   'A L OH R',
     'allez' :   'A L E',
     'pff'   :   'P F'
@@ -1027,7 +1027,6 @@ def eafToSplitFile(eaf_filename):
 
     print("rep", rep)
     print("path", text_filename)
-    print(split_filename)
 
     time_order = root.getElementsByTagName("TIME_ORDER")[0]
     time_slots = time_order.getElementsByTagName("TIME_SLOT")
@@ -1046,7 +1045,7 @@ def eafToSplitFile(eaf_filename):
                 time_seg = (time_slot_dict[ts1], time_slot_dict[ts2])
                 text = getText(aa.getElementsByTagName("ANNOTATION_VALUE")[0].childNodes)
                 segments.append((time_seg, text))
-                print(f"SEG: {time_seg} {text}")
+                #print(f"SEG: {time_seg} {text}")
 
     with open(text_filename, 'w') as f:
         f.write('#\n' * 4 + '\n' * 6)
