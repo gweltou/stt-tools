@@ -340,7 +340,7 @@ if __name__ == "__main__":
             print("Undone")
             segments = segments_undo
             modified = True
-        elif x == 'x':  # Export segment
+        elif x == 'x' or x == 'e':  # Export segment
             seg = song[segments[idx][0]:segments[idx][1]]
             seg_name = os.path.join(rep, os.path.extsep.join((recording_id + f"_seg{idx:03d}", 'wav')))
             seg.export(seg_name, format="wav")
@@ -368,7 +368,7 @@ if __name__ == "__main__":
             print("'a'\t\tRegister acronym")
             print("'t'\t\tAutomatic transcription")
             print("'s'\t\tSave")
-            print("'x'\t\tExport audio segment")
+            print("'x/e'\t\tExport audio segment")
             print("'eaf'\t\tExport to Elan format (.eaf)")
             print("'q'\t\tQuit")
             print("'h' or '?'\t\tShow this help")
