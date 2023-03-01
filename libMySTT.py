@@ -829,7 +829,7 @@ def play_with_ffplay(seg, speed=1.0):
 
 def convert_to_wav(src, dst, verbose=True):
     """
-        Convert 16kHz wav
+        Convert to 16kHz mono pcm
         Validate filename
     """
     if verbose:
@@ -842,6 +842,23 @@ def convert_to_wav(src, dst, verbose=True):
     subprocess.call(['ffmpeg', '-v', 'panic',
                      '-i', src, '-acodec', 'pcm_s16le',
                      '-ac', '1', '-ar', '16000', dst])
+
+
+def convert_to_mp3(src, dst, verbose=True):
+    """
+        Convert to mp3
+        Validate filename
+    """
+    if verbose:
+        print(f"converting {src} to {dst}...")
+    if os.path.abspath(src) == os.path.abspath(dst):
+        print("ERROR: source and destination are the same, skipping")
+        return -1
+    rep, filename = os.path.split(dst)
+    dst = os.path.join(rep, filename)
+    subprocess.call(['ffmpeg', '-v', 'panic',
+                     '-i', src,
+                     '-ac', '1', dst])
 
 
 
@@ -889,11 +906,18 @@ def list_files_with_extension(ext, rep, recursive=True):
 
 
 
-def splitToEafFile(split_filename):
+def splitToEafFile(split_filename, type="wav"):
     """ Convert wav + txt + split files to a eaf (Elan) file """
 
-    record_id = split_filename.split(os.path.extsep)[0]
-    wav_filename = os.path.extsep.join((record_id, 'wav'))
+    record_id = os.path.abspath(split_filename).split(os.path.extsep)[0]
+    print(f"{split_filename=}{record_id=}")
+    audio_filename = os.path.extsep.join((record_id, 'wav'))
+    if type == "mp3":
+        mp3_file = os.path.extsep.join((record_id, 'mp3'))
+        if not os.path.exists(mp3_file):
+            convert_to_mp3(audio_filename, mp3_file)
+        audio_filename = mp3_file
+
     text_filename = os.path.extsep.join((record_id, 'txt'))
     eaf_filename = os.path.extsep.join((record_id, 'eaf'))
 
@@ -917,9 +941,12 @@ def splitToEafFile(split_filename):
     root.appendChild(header)
 
     media_descriptor = doc.createElement('MEDIA_DESCRIPTOR')
-    media_descriptor.setAttribute('MEDIA_URL', 'file://' + os.path.abspath(wav_filename))
-    media_descriptor.setAttribute('MIME_TYPE', 'audio/x-wav')
-    media_descriptor.setAttribute('RELATIVE_MEDIA_URL', './' + os.path.basename(wav_filename))
+    media_descriptor.setAttribute('MEDIA_URL', 'file://' + os.path.abspath(audio_filename))
+    if type == "mp3":
+        media_descriptor.setAttribute('MIME_TYPE', 'audio/mpeg')
+    else:
+        media_descriptor.setAttribute('MIME_TYPE', 'audio/x-wav')
+    media_descriptor.setAttribute('RELATIVE_MEDIA_URL', './' + os.path.basename(audio_filename))
     header.appendChild(media_descriptor)
 
     time_order = doc.createElement('TIME_ORDER')
