@@ -15,9 +15,12 @@ Agapit
 Agathe A G A T
 AirBnb EH R B I EH N B I
 Akitania
+Jamaika
+Surinam
 Alabama
 Alain A L EN
 Alamagn
+Landeda
 Alambra
 Alan
 Alar
@@ -78,6 +81,7 @@ Argoad
 Arkadia
 Armenia
 Arno
+Plabenneg
 Arnold A R N OH L D
 Artika
 Arvorig
@@ -1027,6 +1031,7 @@ Toulon	T OU L ON
 Trevare
 Treveur
 Trewineg
+Tremargad
 Trifin
 Trifina
 Tristan

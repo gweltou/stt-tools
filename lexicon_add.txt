@@ -1,12 +1,17 @@
 abalamour B L AN M
 aet E D
+arri A I
 amezeg A M E Z OH K
 anavezout AN N E V
 anezhañ N EN
+anezhañ N AN
 anezhi N EH I
 anezhe N E
 anezhe N EH
 anezhe N EU
+avat H A T
+bepred B O P R EH T
+bepred B A P R EH T
 arc'hant A R G A N T
 aze A E
 aze A H E
@@ -54,7 +59,8 @@ evito V I T E
 evito V I T O
 evit V I T
 ezhomm E M
-gallout G A L
+gallout G A L 
+goare O A R E
 gouezet G OU I E T
 gouzout G OU T
 gwenodennoù G W E N O J EH N OU
@@ -90,8 +96,12 @@ marteze M A T R EN
 menez M E N E
 mennozh M E N O
 nemetken M E K E N
+mont M ON N
+dont D ON N
+hont H ON N
 n'eo N E
 netra N I T R A
+emezi M EH I
 neuze N EN N
 neuze N OE H E
 neuze N OE N
