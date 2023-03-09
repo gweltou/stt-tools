@@ -56,7 +56,8 @@ verbal_tics = {
     'tiens' :   'AN F EN',
     'alors' :   'A L OH R',
     'allez' :   'A L E',
-    'pff'   :   'P F'
+    'voilà' :   'V O A L A',
+    'pff'   :   'P F',
     #'oh'    :   'O',
     #'ah'    :   'A',
 }
@@ -65,7 +66,7 @@ verbal_tics = {
 
 punctuation = ',.;?!:«»"”“()…–—‚{}[]'
 
-valid_chars = "aâbcdeêfghijklmnñoprstuüùûvwyz'- "
+valid_chars = "aâàbcdeêfghijklmnñoprstuüùûvwyz'- "
 
 
 w2f = {
@@ -337,12 +338,18 @@ def load_textfile(filename):
     """
     utterances = []
     with open(filename, 'r') as f:
+        current_speaker = 'unknown'
         for l in f.readlines():
             l = l.strip()
             if l and not l.startswith('#'):
                 # Extract speaker id and other metadata
                 l, metadata = extract_metadata(l)
                 if l or metadata:
+                    if "speaker" in metadata:
+                        current_speaker = metadata["speaker"]
+                    else:
+                        metadata["speaker"] = current_speaker
+
                     utterances.append((l, metadata))
     return utterances
 
@@ -470,7 +477,9 @@ def tokenize(sentence, post_proc=True, keep_dash=False, keep_punct=False):
 PARENTHESIS_PATTERN = re.compile(r"\([^\(]+\)")
 
 def extract_parenthesis(sentence):
-    """ Extract text between parenthesis """
+    """ Extract text between parenthesis
+        TODO: refactor so it returns (sentence_wo_parenthesis, list_or_sentences_in_parenthesis)
+    """
     in_parenthesis = []
     match = PARENTHESIS_PATTERN.search(sentence)
     while match:
@@ -502,10 +511,12 @@ def _split_line(s, splitter = '. '):
 
 def split_line(sentence):
     """ Split line according to punctuation
+        Put text between parenthesis at the end
         Keep punctuation
         Return a list of sentence
     """
-    sub = extract_parenthesis(sentence)
+    # sub = extract_parenthesis(sentence)
+    sub = [sentence]
     splitters = ['. ', ': ', '! ', '? ', '; ']
     
     for splitter in splitters:

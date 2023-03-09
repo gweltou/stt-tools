@@ -7,11 +7,6 @@
     Convert audio file to correct format (wav mono 16kHz) if needed
     UI to listen and align audio segments with sentences in text file
     
-    Dependencies:
-        * pydub
-        * simpleaudio
-        * pyrubberband
-    
     Author: Gweltaz Duval-Guennoc 
 """
 
@@ -78,7 +73,7 @@ if __name__ == "__main__":
     # parser.add_argument('-o', '--overwrite', action='store_true', help="Overwrite split file (if present)")
     parser.add_argument('-t', '--thresh', type=float, default=-62, metavar="DB", help="Silence intensity threshold (in decibels)")      # option that takes a value
     parser.add_argument('-d', '--dur', type=int, default=400, metavar="MS", help="Silence minimum duration (in millisecs)")
-    parser.add_argument('-s', '--transcribe', action='store_true', help="Overwrite split file (if present)")
+    parser.add_argument('-s', '--transcribe', action='store_true', help="Automatic transcription")
     args = parser.parse_args()
     print(args)
 
@@ -243,7 +238,6 @@ if __name__ == "__main__":
         # Reload text file if it's been modified
         mtime = os.path.getmtime(text_filename)
         if mtime > textfile_mtime:
-            print("reload")
             utterances = load_textfile(text_filename)     
         if resize_match:
             segments_undo = segments[:]
