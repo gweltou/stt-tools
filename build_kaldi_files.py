@@ -198,7 +198,8 @@ def sec2hms(seconds):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Generate Kaldi data files")
+    desc = f"Generate Kaldi data files in directory '{os.path.join(os.getcwd(), SAVE_DIR)}'"
+    parser = argparse.ArgumentParser(description=desc)
     parser.add_argument("--train", help="train dataset directory", required=True)
     parser.add_argument("--test", help="train dataset directory")
     parser.add_argument("--lm-corpus", help="path of a text file to build the language model")
@@ -387,7 +388,7 @@ if __name__ == "__main__":
         plt.figure(figsize = (8, 8))
 
         keys, val = zip(*corpora["train"]["subdir_audiolen"].items())
-        keys = list(map(lambda x: x.replace('_', ' ').title(), keys))
+        keys = list(map(lambda x: x.replace('_', ' '), keys))
         total_audio_length = corpora["train"]["audio_length"]["f"] + corpora["train"]["audio_length"]["m"]
 
         def labelfn(pct):

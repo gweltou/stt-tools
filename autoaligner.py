@@ -6,6 +6,8 @@ Autoaligner using vosk model
 
 Author:  Gweltaz Duval-Guennoc
 
+Usage: ./autoaligner split_file
+
 TODO :
     * tretañ ar c'hemadurioù : vMickaël, dTouène
     * Niverennoù -> stumm skrid
@@ -41,8 +43,7 @@ if __name__ == "__main__":
     segments, _ = load_segments(split_filename)
     song = AudioSegment.from_wav(wav_filename)
 
-    # Read ground-truth file and
-    # concatenate all lines as a single line.
+    # Read ground-truth file and concatenate all lines as a single line.
     # header = []
     with open(gt_filename, 'r') as f:
         lines = f.readlines()

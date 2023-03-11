@@ -98,33 +98,35 @@ if __name__ == "__main__":
 
     # Converting sound file to 16kHz mono wav if needed
     if args.filename.endswith('.wav'):
-        fileinfo = get_audiofile_info(wav_filename)
+        fileinfo = get_audiofile_info(args.filename)
         if fileinfo["channels"] != 1 \
             or fileinfo["sample_rate"] != "16000" \
             or fileinfo["bits_per_sample"] != 16:
 
-            src = args.filename
-            if os.path.abspath(src) == os.path.abspath(wav_filename):
-                # Rename existing audio file
-                rep, filename = os.path.split(src)
-                basename, ext = os.path.splitext(filename)
-                new_name = basename + "_orig" + ext
-                new_src = os.path.join(rep, new_name)
-                print(f"WARNING: renaming {filename} to {new_name}")
-                os.rename(src, new_src)
-                src = new_src
-            if convert_to_wav(src, wav_filename) != -1:
-                print("Conversion done")
-            else:
-                print("Could not convert audio file")
-                sys.exit(1)
+            convert_to_wav(args.filename, wav_filename)
+            # src = args.filename
+            # if os.path.abspath(src) == os.path.abspath(wav_filename):
+            #     # Rename existing audio file
+            #     rep, filename = os.path.split(src)
+            #     basename, ext = os.path.splitext(filename)
+            #     new_name = basename + "_orig" + ext
+            #     new_src = os.path.join(rep, new_name)
+            #     print(f"WARNING: renaming {filename} to {new_name}")
+            #     os.rename(src, new_src)
+            #     src = new_src
+            # if convert_to_wav(src, wav_filename) != -1:
+            #     print("Conversion done")
+            # else:
+            #     print("Could not convert audio file")
+            #     sys.exit(1)
     else:
         # Audio file is not PCM
-        if convert_to_wav(args.filename, wav_filename) != -1:
-            print("Conversion done")
-        else:
-            print("Could not convert audio file")
-            sys.exit(1)
+        convert_to_wav(args.filename, wav_filename)
+        # if convert_to_wav(args.filename, wav_filename) != -1:
+        #     print("Conversion done")
+        # else:
+        #     print("Could not convert audio file")
+        #     sys.exit(1)
     
     song = AudioSegment.from_wav(wav_filename)
 

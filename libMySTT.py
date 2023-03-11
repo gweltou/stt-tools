@@ -838,21 +838,42 @@ def play_with_ffplay(seg, speed=1.0):
 
 
 
-def convert_to_wav(src, dst, verbose=True):
+def convert_to_wav(src, dst, verbose=True, keep_orig=True):
     """
         Convert to 16kHz mono pcm
         Validate filename
+
+        Parameters
+        ----------
+            verbose (bool):
+                Info text to stdout
+            keep_orig (bool):
+                keep  original file (or rename if src and dst are the same)
     """
+    src = os.path.abspath(src)
+    dst = os.path.abspath(dst)
+    if src == dst:
+        # Rename existing audio file
+        rep, filename = os.path.split(src)
+        basename, ext = os.path.splitext(filename)
+        new_name = basename + "_orig" + ext
+        new_src = os.path.join(rep, new_name)
+        if verbose: print(f"AUDIO_CONV: renaming {filename} to {new_name}")
+        os.rename(src, new_src)
+        src = new_src
+
     if verbose:
-        print(f"converting {src} to {dst}...")
-    if os.path.abspath(src) == os.path.abspath(dst):
-        print("ERROR: source and destination are the same, skipping")
-        return -1
+        print(f"AUDIO_CONV: converting {src} to {dst}...")
     rep, filename = os.path.split(dst)
     dst = os.path.join(rep, filename)
     subprocess.call(['ffmpeg', '-v', 'panic',
                      '-i', src, '-acodec', 'pcm_s16le',
                      '-ac', '1', '-ar', '16000', dst])
+
+    if not keep_orig:
+        if verbose:
+            print(f"AUDIO_CONV: Removing {src}")
+        os.remove(src)
 
 
 def convert_to_mp3(src, dst, verbose=True):
@@ -873,7 +894,15 @@ def convert_to_mp3(src, dst, verbose=True):
 
 
 
-def concatenate_audiofiles(file_list, out_filename, remove=True):
+def concatenate_audiofiles(file_list, out_filename, remove=False):
+    """ Concatenate a list of audio files to a single audio file
+
+        Parameters
+        ----------
+            remove (bool):
+                remove original files
+    """
+
     if len(file_list) <= 1:
         return
     
