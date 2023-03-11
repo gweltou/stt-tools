@@ -80,8 +80,8 @@ def parse_data_file(split_filename):
     wav_filename = split_filename.replace('.split', '.wav')
     assert os.path.exists(wav_filename), f"ERROR: no wave file found for {recording_id}"
     
-    substitute_corpus_filename = os.path.abspath(os.path.join(SAVE_DIR, recording_id + '.cor'))
-    replace_corpus = True if os.path.exists(substitute_corpus_filename) else False
+    substitute_corpus_filename = split_filename.replace('.split', '.cor')
+    replace_corpus = os.path.exists(substitute_corpus_filename)
     
     data = {
         "wavscp": [],       # Wave filenames
@@ -151,7 +151,12 @@ def parse_data_file(split_filename):
     if replace_corpus:
         with open(substitute_corpus_filename, 'r') as f:
             for sentence in f.readlines():
-                data["corpus"].add(sentence.strip())
+                sentence = sentence.strip()
+                if not sentence or sentence.startswith('#'):
+                    continue
+                sentence, _ = extract_metadata(sentence)
+                sentence, _ = get_cleaned_sentence(sentence, rm_bl=True)
+                data["corpus"].add(sentence)
     
 
     ## PARSE SPLIT FILE
