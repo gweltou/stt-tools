@@ -341,6 +341,8 @@ def load_textfile(filename):
     utterances = []
     with open(filename, 'r') as f:
         current_speaker = 'unknown'
+        current_gender = 'unknown'
+        no_lm = False
         for l in f.readlines():
             l = l.strip()
             if l and not l.startswith('#'):
@@ -350,6 +352,18 @@ def load_textfile(filename):
                     current_speaker = metadata["speaker"]
                 else:
                     metadata["speaker"] = current_speaker
+                
+                if "gender" in metadata:
+                    current_gender = metadata["gender"]
+                else:
+                    metadata["gender"] = current_gender
+                
+                if "parser" in metadata:
+                    if "no-lm" in metadata["parser"]: no_lm = True
+                    elif "add-lm" in metadata["parser"]: no_lm = False
+                else:
+                    if no_lm:
+                        metadata["parser"] = ["no-lm"]
                 if l:
                     utterances.append((l, metadata))
     return utterances
@@ -373,8 +387,8 @@ def extract_metadata(sentence: str):
             param = match.group(1)
             if param == '?':
                 metadata["unknown_words"] = True
-            elif param == 'parser:no-lm':   # Dirty hack until next version
-                metadata["parser"] = ['no-lm']
+            elif param in ('parser:no-lm', 'parser:add-lm'):   # Dirty hack until next version
+                metadata["parser"] = param.split(':')[1]
                 start, end = match.span()
                 stripped += sentence[head:start]
                 head = end
@@ -384,7 +398,8 @@ def extract_metadata(sentence: str):
                     name = speaker_id_match[1].lower()
                     metadata["speaker"] = name
                     gender = speaker_id_match[2]
-                    if gender: metadata["gender"] = gender.lower()
+                    if gender:
+                        metadata["gender"] = gender.lower()
                     elif "paotr" in name: metadata["gender"] = 'm'
                     elif "plach" in name or "plac'h" in name: metadata["gender"] = 'f'
 

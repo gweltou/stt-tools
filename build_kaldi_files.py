@@ -20,7 +20,7 @@ import numpy as np
 import re
 from math import floor, ceil
 from libMySTT import extract_metadata, get_cleaned_sentence, is_acronym, load_segments, word2phonetic, split_line, list_files_with_extension
-from libMySTT import capitalized, acronyms, verbal_tics, phonemes, LEXICON_ADD_PATH
+from libMySTT import capitalized, acronyms, verbal_tics, phonemes, LEXICON_ADD_PATH, load_textfile
 
 
 SAVE_DIR = "data"
@@ -96,63 +96,59 @@ def parse_data_file(split_filename):
     
     ## PARSE TEXT FILE
     speaker_ids = []
-    speaker_id = "unnamed"
+    speaker_id = "unknown"
     sentences = []
-    with open(text_filename, 'r') as f:
+
+    for sentence, metadata in load_textfile(text_filename):
         add_to_corpus = True
-        for sentence in f.readlines():
-            sentence = sentence.strip()
-            if not sentence or sentence.startswith('#'):
-                continue
+        if "parser" in metadata:
+            if "no-lm" in metadata["parser"]:
+                add_to_corpus = False
+            elif "add-lm" in metadata["parser"]:
+                add_to_corpus = True
             
-            # Extract speaker id and other metadata
-            sentence, metadata = extract_metadata(sentence)
-            if "parser" in metadata:
-                if "no-lm" in metadata["parser"]:
-                    add_to_corpus = False
-                elif "add-lm" in metadata["parser"]:
-                    add_to_corpus = True
-            if "speaker" in metadata:
-                speaker_id = metadata["speaker"]
-                data["speakers"].add(speaker_id)
-                if "gender" in metadata:
-                    if speaker_id not in speakers_gender:
-                        # speakers_gender is a global variable
-                        speakers_gender[speaker_id] = metadata["gender"]
+        if "speaker" in metadata:
+            speaker_id = metadata["speaker"]
+            data["speakers"].add(speaker_id)
+        
+        if "gender" in metadata and speaker_id != "unknown":
+            if speaker_id not in speakers_gender:
+                # speakers_gender is a global variable
+                speakers_gender[speaker_id] = metadata["gender"]
             
-            cleaned_sentence, _ = get_cleaned_sentence(sentence)     
-            if cleaned_sentence:
-                speaker_ids.append(speaker_id)
-                sentences.append(cleaned_sentence.replace('*', ''))
-                
-                # Add words to lexicon
-                for word in cleaned_sentence.split():
-                    # Remove black-listed words (beggining with '*')
-                    if word.startswith('*'):
-                        pass
-                    elif word in verbal_tics:
-                        pass
-                    elif is_acronym(word):
-                        pass
-                    elif word.lower() in capitalized:
-                        pass
-                    else: data["lexicon"].add(word)
+        cleaned_sentence, _ = get_cleaned_sentence(sentence)     
+        if cleaned_sentence:
+            speaker_ids.append(speaker_id)
+            sentences.append(cleaned_sentence.replace('*', ''))
             
-            # Add sentence to language model corpus
-            if add_to_corpus and not replace_corpus:
-                for sentence in split_line(sentence):
-                    cleaned_sentence, bl_score = get_cleaned_sentence(sentence, rm_bl=True, rm_verbal_ticks=True)
-                    if not cleaned_sentence:
-                        continue
-                    # Ignore if to many black-listed words in sentence
-                    if bl_score > 0.2:
-                        #print("rejected", sentence)
-                        continue
-                    # Ignore if sentence is too short
-                    if cleaned_sentence.count(' ') < LM_SENTENCE_MIN_WORDS - 1:
-                        #print("corpus skip:", cleaned)
-                        continue
-                    data["corpus"].add(cleaned_sentence)
+            # Add words to lexicon
+            for word in cleaned_sentence.split():
+                # Remove black-listed words (beggining with '*')
+                if word.startswith('*'):
+                    pass
+                elif word in verbal_tics:
+                    pass
+                elif is_acronym(word):
+                    pass
+                elif word.lower() in capitalized:
+                    pass
+                else: data["lexicon"].add(word)
+        
+        # Add sentence to language model corpus
+        if add_to_corpus and not replace_corpus:
+            for sub in split_line(sentence):
+                cleaned_sub, bl_score = get_cleaned_sentence(sub, rm_bl=True, rm_verbal_ticks=True)
+                if not cleaned_sub:
+                    continue
+                # Ignore if to many black-listed words in sentence
+                if bl_score > 0.2:
+                    print("rejected", sub)
+                    continue
+                # Ignore if sentence is too short
+                if cleaned_sub.count(' ') < LM_SENTENCE_MIN_WORDS - 1:
+                    # print("corpus skip:", cleaned_sentence)
+                    continue
+                data["corpus"].add(cleaned_sub)
     
     if replace_corpus:
         with open(substitute_corpus_filename, 'r') as f:
