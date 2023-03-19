@@ -24,6 +24,8 @@ from colorama import Fore
 from xml.dom import minidom
 import datetime, pytz
 
+from stt import sentence_post_process
+
 
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -344,12 +346,11 @@ def load_textfile(filename):
             if l and not l.startswith('#'):
                 # Extract speaker id and other metadata
                 l, metadata = extract_metadata(l)
-                if l or metadata:
-                    if "speaker" in metadata:
-                        current_speaker = metadata["speaker"]
-                    else:
-                        metadata["speaker"] = current_speaker
-
+                if "speaker" in metadata:
+                    current_speaker = metadata["speaker"]
+                else:
+                    metadata["speaker"] = current_speaker
+                if l:
                     utterances.append((l, metadata))
     return utterances
 
@@ -372,6 +373,11 @@ def extract_metadata(sentence: str):
             param = match.group(1)
             if param == '?':
                 metadata["unknown_words"] = True
+            elif param == 'parser:no-lm':   # Dirty hack until next version
+                metadata["parser"] = ['no-lm']
+                start, end = match.span()
+                stripped += sentence[head:start]
+                head = end
             else:
                 speaker_id_match = SPEAKER_ID_PATTERN.fullmatch(match.group(0))
                 if speaker_id_match:
@@ -779,12 +785,14 @@ vosk_loaded = False
 
 def load_vosk():
     from vosk import Model, KaldiRecognizer, SetLogLevel
+    
+    global recognizer
+    global vosk_loaded
+
     SetLogLevel(-1)
     model = Model(os.path.normpath(os.path.join(ROOT, "../models/current")))
-    global rec
-    rec = KaldiRecognizer(model, 16000)
-    rec.SetWords(True)
-    global vosk_loaded
+    recognizer = KaldiRecognizer(model, 16000)
+    recognizer.SetWords(True)
     vosk_loaded = True
 
 
@@ -796,10 +804,11 @@ def transcribe_segment(segment):
     segment = segment.get_array_of_samples().tobytes()
     i = 0
     while i + 4000 < len(segment):
-        rec.AcceptWaveform(segment[i:i+4000])
+        recognizer.AcceptWaveform(segment[i:i+4000])
         i += 4000
-    rec.AcceptWaveform(segment[i:])
-    return eval(rec.FinalResult())["text"]
+    recognizer.AcceptWaveform(segment[i:])
+    text = eval(recognizer.FinalResult())["text"]
+    return sentence_post_process.post_proc(text)
 
 
 ################################################################################

@@ -1,22 +1,23 @@
 abalamour B L AN M
 aet E D
-arri A I
 amezeg A M E Z OH K
 anavezout AN N E V
-anezhañ N EN
 anezhañ N AN
-anezhi N EH I
+anezhañ N EN
 anezhe N E
 anezhe N EH
 anezhe N EU
-avat H A T
-bepred B O P R EH T
-bepred B A P R EH T
+anezhi N EH I
 arc'hant A R G A N T
+arri A I
+avat H A T
 aze A E
 aze A H E
 barradoù B A R A J OU
 bemdez B EH M D E
+bepred B A P R EH T
+bepred B O P R EH T
+betek B E K OE T
 betra B E R
 bezañ B E H AN
 bezañ B EY OE
@@ -24,11 +25,12 @@ bez B E
 bihan B I N
 bleuñv B L EU N
 bloavezhioù B L O A V E CH OU
-buhez B U H E
 bravoc'h B R A W OH X
+buhez B U H E
 chistr CH I S T
 c'hoadoù X O A J OU
 chomont CH O M A I N T
+c'houlenn X OU L
 c'hwec'h F EH X
 c'hwi F I
 da D OE
@@ -41,6 +43,7 @@ digarez D I G A R E
 diouzh D A X
 d'ober D OH R
 d'oe D O E
+dont D ON N
 ebet B E T
 emañ M A
 emañ M AN
@@ -49,6 +52,7 @@ emaoc'h M OH X
 emaomp M A ON M P
 emaon M A ON N
 emaout M A OU T
+emezi M EH I
 eñ E ON
 eo E
 evel V EH L
@@ -59,28 +63,32 @@ evito V I T E
 evito V I T O
 evit V I T
 ezhomm E M
-gallout G A L 
+gant G AN N
+digant D I G AN N
+gallout G A L
 goare O A R E
 gouezet G OU I E T
+goulenn G OU L 
 gouzout G OU T
-gwenodennoù G W E N O J EH N OU
 gwelet G W EH L
+gwenodennoù G W E N O J EH N OU
 gwin V I N
 hanter AN N T EH R
 heiz H EH I
 hemañ H E M
 hennezh H EN Z
 hentoù E N CH OU
+hiziv H I OU
 hiziv H I R I E
 hiziv H I R I O
 hiziv U D U
-hiziv H I OU
-houmañ H OU M
-honnezh H OU Z
 honnezh H ON Z
+honnezh H OU Z
+hont H ON N
+houmañ H OU M
 ivez I V E
-ivez U W EH
 ivez OE
+ivez U W EH
 krampouezh K R AN M P OU Z
 kreñv K R EN ON
 lazhañ L A X AN
@@ -91,27 +99,26 @@ maezioù M E CH OU
 ma M EU
 marteze M A R S EH
 marteze M A T R EH X
-marteze M A T R OE N
 marteze M A T R EN
+marteze M A T R OE N
 menez M E N E
 mennozh M E N O
-nemetken M E K E N
 mont M ON N
-dont D ON N
-hont H ON N
+nemetken M E K E N
+nemet M E T
 n'eo N E
 netra N I T R A
-emezi M EH I
 neuze N EN N
 neuze N OE H E
 neuze N OE N
 nevez N E V E
-nemet M E T
 oa O E
 ober H OH R
+ouezomp OU I ON M P
 ouzont O A R ON N T
 paotr P O T
 pelec'h P L EH X
+peogwir P E G W I R
 petra P E R
 petra P E R A
 pradoù P R A J OU
@@ -128,12 +135,16 @@ serrit S A R I T
 sizhunvezh S U N V E Z
 soñjoù CH ON J OU
 straedoù S T R E J OU
+gwrizienn G R I EH N
+gwrizioù G R I OU
 sukr CH U K R
 the Z EU
 the Z OE
 to T OU
-unan OE N
 unan EU N
+unan OE N
+kriz K R I
+kachimant K A I M AN N
 vaksin V A K S EN
 venez V E N E
 verenn V EH R N

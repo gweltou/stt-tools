@@ -78,6 +78,7 @@ if __name__ == "__main__":
     
     keepers = set()
     keepers_nopunct = set()
+    raw_sentences = []
     acronym_words = set()
     capitalized_words = set()
     santou = set()
@@ -89,7 +90,6 @@ if __name__ == "__main__":
         for line in a["text"].split('\n'):
             line = line.strip()
             if line.startswith("#"):
-                print(line)
                 continue
             for sentence in split_line(line):
                 words = sentence.split()
@@ -102,6 +102,9 @@ if __name__ == "__main__":
                 if len(sentence)/len(words) < 2.5:
                     print(f"skipped {len(sentence)/len(words):.2}: {sentence}")
                     continue
+
+                if get_correction(sentence)[1] <= 0:
+                    raw_sentences.append(sentence)
                 
                 first_word = True
                 sant = False
@@ -156,6 +159,11 @@ if __name__ == "__main__":
     OUTPUT_DIR = args.output
     if not os.path.exists(OUTPUT_DIR):
         os.mkdir(OUTPUT_DIR)
+
+
+    with open(os.path.join(OUTPUT_DIR, "raw_sentences.txt"), 'w') as f:
+        for sentence in raw_sentences:
+            f.write(sentence + '\n')
     
     with open(os.path.join(OUTPUT_DIR, "corpus.txt"), 'w') as f:
         for sentence in keepers_nopunct if args.rem_punct else keepers:

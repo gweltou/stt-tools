@@ -99,6 +99,7 @@ def parse_data_file(split_filename):
     speaker_id = "unnamed"
     sentences = []
     with open(text_filename, 'r') as f:
+        add_to_corpus = True
         for sentence in f.readlines():
             sentence = sentence.strip()
             if not sentence or sentence.startswith('#'):
@@ -106,6 +107,11 @@ def parse_data_file(split_filename):
             
             # Extract speaker id and other metadata
             sentence, metadata = extract_metadata(sentence)
+            if "parser" in metadata:
+                if "no-lm" in metadata["parser"]:
+                    add_to_corpus = False
+                elif "add-lm" in metadata["parser"]:
+                    add_to_corpus = True
             if "speaker" in metadata:
                 speaker_id = metadata["speaker"]
                 data["speakers"].add(speaker_id)
@@ -133,7 +139,7 @@ def parse_data_file(split_filename):
                     else: data["lexicon"].add(word)
             
             # Add sentence to language model corpus
-            if not replace_corpus:
+            if add_to_corpus and not replace_corpus:
                 for sentence in split_line(sentence):
                     cleaned_sentence, bl_score = get_cleaned_sentence(sentence, rm_bl=True, rm_verbal_ticks=True)
                     if not cleaned_sentence:

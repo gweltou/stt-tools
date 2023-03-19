@@ -16,7 +16,8 @@ def test_extract_metadata():
         "Ya met moaien a zo met ret e vez paeañ anezho. {lors_jouin}",
         "test gant un anv dianv {plac'h12}",
         "ur paotr o komz {paotr}",
-        "kar ni meump bet labouret {?} pa oamp yaouank heñ … bet meump bet graet {?}bep seurt heñ,"
+        "kar ni meump bet labouret {?} pa oamp yaouank heñ … bet meump bet graet {?}bep seurt heñ,",
+        "{parser:no-lm}\noh la la"
     ]
 
     for s in sentences:

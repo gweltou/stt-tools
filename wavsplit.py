@@ -27,6 +27,10 @@ from libMySTT import transcribe_segment, acronyms, prompt_acronym_phon, extract_
 from libMySTT import splitToEafFile, eafToSplitFile
 
 
+
+DELETE_SILENT_UTTERANCES = True
+
+
 RESIZE_PATTERN = re.compile(r"([s|e])([-|\+])(\d+)")
 SPLIT_PATTERN = re.compile(r"c([0-9\.]+)")
 
@@ -192,7 +196,19 @@ if __name__ == "__main__":
                     break
         if do_transcribe:
             print("Transcribing...")
-            sentences = [transcribe_segment(song[seg[0]:seg[1]]) for seg in segments]
+            sentences = [transcribe_segment(song[seg[0]-200:seg[1]+200]) for seg in segments]
+            if DELETE_SILENT_UTTERANCES:
+                print("Deleting silent utterances...")
+                seg_keepers = []
+                sent_keepers = []
+                for i, seg in enumerate(segments):
+                    if sentences[i]:
+                        seg_keepers.append(seg)
+                        sent_keepers.append(seg)
+                segments = seg_keepers
+                sententences = sent_keepers
+                save_segments(segments, split_header, split_filename)
+                
             with open(text_filename, 'w') as fw:
                 fw.write('#\n' * 4 + '\n' * 6)  # Text file split_header
                 for s in sentences: fw.write(f"{s if s else '-'}\n")

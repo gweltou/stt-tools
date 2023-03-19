@@ -2,6 +2,7 @@ adlec'hiañ
 agar
 agav
 alemañ
+alemañ
 algoritm
 algoritmoù
 ambision
@@ -33,12 +34,9 @@ c'hoñferañs
 c'hoñferañsoù
 c'horonavirus
 c'hovid
-alemañ
 denien
 didreuzet
 dielfennoù
-espres
-espres-kaer
 difeulz
 dilaoskadennoù
 diñsad
@@ -59,6 +57,8 @@ endalc'hoù
 enepspierezh
 energetek
 epidemiezhioù
+espres
+espres-kaer
 fablab
 fenotip
 figez
@@ -131,6 +131,7 @@ poellgomzoù
 potiron
 pratikourezed
 pretierezh
+probablentez
 program
 roeñviñ
 rondigennoù
@@ -161,7 +162,6 @@ trug
 vejetarian
 vengleuzerien
 vestronia
-vitaminoù
 vitaminoù
 vousfentiñ
 youc'hou

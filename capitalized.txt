@@ -15,12 +15,9 @@ Agapit
 Agathe A G A T
 AirBnb EH R B I EH N B I
 Akitania
-Jamaika
-Surinam
 Alabama
 Alain A L EN
 Alamagn
-Landeda
 Alambra
 Alan
 Alar
@@ -81,7 +78,6 @@ Argoad
 Arkadia
 Armenia
 Arno
-Plabenneg
 Arnold A R N OH L D
 Artika
 Arvorig
@@ -448,6 +444,7 @@ Izold
 Jack D J A K
 Jacq J A K
 Jakez
+Jamaika
 James D J EY M S
 Janedig
 Janeiro D J A N E R O
@@ -559,6 +556,7 @@ Kyoto
 Lambada
 Lampedusa L AN M P E D OU S A
 Lancelot L AN S L O
+Landeda
 Landelo
 Landerne
 Landreger
@@ -804,6 +802,7 @@ Peugeot P EU J O
 Philadelphia F I L A D EH L F I A
 Pichon
 Pierre P I EH R
+Plabenneg
 Pleiber P L E B EH R
 Plerin
 Pleskob
@@ -989,6 +988,7 @@ Suamerikan
 Suez
 Suis
 Sul
+Surinam
 Svedadez
 Sveden
 Tahiti T A I T I
@@ -1028,10 +1028,10 @@ Tomaz
 Tomos
 Toronto T O R ON T O
 Toulon	T OU L ON
+Tremargad
 Trevare
 Treveur
 Trewineg
-Tremargad
 Trifin
 Trifina
 Tristan

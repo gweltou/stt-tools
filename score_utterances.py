@@ -22,7 +22,7 @@ if __name__ == "__main__":
 
     print(args.data_folder)
     split_files = list_files_with_extension('.split', args.data_folder)
-    for split_file in split_files:
+    for split_file in sorted(split_files):
         basename, _ = os.path.splitext(split_file)
         wav_file = basename + os.path.extsep + "wav"
         text_file = basename + os.path.extsep + "txt"
@@ -36,8 +36,9 @@ if __name__ == "__main__":
             transcription = transcribe_segment(get_segment(i, song, segments))
             score_wer = wer(sentence, transcription)
             score_cer = cer(sentence, transcription)
-            if score_cer >= 0.1 or score_wer > 0.3:
+            #if score_cer >= 0.2 or score_wer > 0.4:
+            if score_cer >= 0.4 and score_wer > 0.6:
                 print(i+1, "\twer:", round(score_wer, 2), "cer:", round(score_cer, 2))
                 print("GT", sentence)
                 print("->", transcription)
-                print()
+                print(flush=False)
