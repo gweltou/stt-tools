@@ -25,6 +25,7 @@ from libMySTT import capitalized, acronyms, verbal_tics, phonemes, LEXICON_ADD_P
 
 SAVE_DIR = "data"
 LM_SENTENCE_MIN_WORDS = 3
+UTTERANCES_MIN_LENGTH = 3 # exclude utterances shorter than this length (in seconds)
 
 spk2gender_files = ["spk2gender.txt", "corpus_common_voice/spk2gender"]
 
@@ -169,6 +170,10 @@ def parse_data_file(split_filename):
     for i, s in enumerate(segments):
         start = s[0] / 1000
         stop = s[1] / 1000
+        if stop - start < UTTERANCES_MIN_LENGTH:
+            # Skip short utterances
+            continue
+
         if speaker_ids[i] in speakers_gender:
             speaker_gender = speakers_gender[speaker_ids[i]]
         else:
